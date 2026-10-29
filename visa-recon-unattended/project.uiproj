@@ -1,0 +1,6 @@
+{
+  "Name": "visa-recon-unattended",
+  "ProjectType": "Process",
+  "Description": "Reconciles all visa transactions",
+  "MainFile": "Main.xaml"
+}

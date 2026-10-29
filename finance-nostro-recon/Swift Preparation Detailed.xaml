@@ -1,0 +1,858 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="dtSwiftDetailed" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="swiftDetailedFolderPath" Type="InArgument(x:String)" />
+    <x:Property Name="swiftWorkingsFilePath" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1112.8,3786.4</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.Text.Encoding.CodePages</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="851.6,2454.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="outputSwift" />
+      <Variable x:TypeArguments="x:String" Name="tempSwift" />
+      <Variable x:TypeArguments="x:String" Name="outputO202" />
+      <Variable x:TypeArguments="x:String" Name="outputI103" />
+      <Variable x:TypeArguments="x:String" Name="outputI900" />
+      <Variable x:TypeArguments="x:String" Name="outputUNCAT" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftI900" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftO202" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftI103" />
+      <Variable x:TypeArguments="x:String" Name="outputI910" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftI910" />
+      <Variable x:TypeArguments="x:String" Name="outputI300" />
+      <Variable x:TypeArguments="x:String" Name="outputO900" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftO900" />
+      <Variable x:TypeArguments="x:String" Name="outputO910" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftO910" />
+      <Variable x:TypeArguments="x:String" Name="outputO199" />
+      <Variable x:TypeArguments="x:String" Name="outputO999" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftO999" />
+      <Variable x:TypeArguments="x:String" Name="outputI205" />
+      <Variable x:TypeArguments="x:String" Name="outputO205" />
+      <Variable x:TypeArguments="x:String" Name="outputI202" />
+      <Variable x:TypeArguments="x:String" Name="outputI999" />
+      <Variable x:TypeArguments="x:String" Name="outputO103" />
+      <Variable x:TypeArguments="x:String" Name="outputI320" />
+      <Variable x:TypeArguments="x:String" Name="outputO300" />
+      <Variable x:TypeArguments="x:String" Name="outputO320" />
+      <Variable x:TypeArguments="x:String" Name="outputI199" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftI202" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftBlankTemp" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="504,122.4" sap2010:WorkflowViewState.IdRef="ReportStatus_2" StatusText="[&quot;DETAILED SWIFT PREPARATION STARTED&quot;]" />
+    <ui:ForEachFileX DisplayName="For Each File in Folder" Filter="*.txt" Folder="[swiftDetailedFolderPath]" sap:VirtualizedContainerService.HintSize="504,56.8" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
+      <ui:ForEachFileX.Body>
+        <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
+          <ActivityAction.Argument1>
+            <DelegateInArgument x:TypeArguments="si:FileInfo" Name="CurrentFile" />
+          </ActivityAction.Argument1>
+          <ActivityAction.Argument2>
+            <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
+          </ActivityAction.Argument2>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="449.6,24.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ReadTextFile File="{x:Null}" Content="[tempSwift]" DisplayName="Read Text File" FileName="[CurrentFile.ToString]" sap:VirtualizedContainerService.HintSize="416,112.8" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+            <Assign sap:VirtualizedContainerService.HintSize="416,165.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[outputSwift]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[outputSwift+Environment.NewLine+Environment.NewLine+tempSwift]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachFileX.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ForEachFileX>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xA;    ' Input string containing the SWIFT message (which may contain multiple transactions)&#xA;    Dim swiftMessage As String = outputSwift&#xA;&#xA;    ' Split the message into individual transactions using &quot;{1:&quot; as the delimiter&#xA;    Dim transactions() As String = swiftMessage.Split(New String() {&quot;{1:&quot;}, StringSplitOptions.RemoveEmptyEntries)&#xA;&#xA;&#xA;    ' Dictionary to map block types to the corresponding output variable references&#xA;    Dim blockTypeToOutput As New Dictionary(Of String, StringBuilder) From {&#xA;        {&quot;O202&quot;, New StringBuilder(outputO202)}, {&quot;I202&quot;, New StringBuilder(outputI202)},&#xA;        {&quot;O205&quot;, New StringBuilder(outputO205)}, {&quot;I205&quot;, New StringBuilder(outputI205)},&#xA;        {&quot;O103&quot;, New StringBuilder(outputO103)}, {&quot;I103&quot;, New StringBuilder(outputI103)},&#xA;        {&quot;O900&quot;, New StringBuilder(outputO900)}, {&quot;I900&quot;, New StringBuilder(outputI900)},&#xA;        {&quot;O910&quot;, New StringBuilder(outputO910)}, {&quot;I910&quot;, New StringBuilder(outputI910)},&#xA;        {&quot;O199&quot;, New StringBuilder(outputO199)}, {&quot;I199&quot;, New StringBuilder(outputI199)}, 'missing details&#xA;        {&quot;O999&quot;, New StringBuilder(outputO999)}, {&quot;I999&quot;, New StringBuilder(outputI999)}, 'missing details&#xA;        {&quot;O300&quot;, New StringBuilder(outputO300)}, {&quot;I300&quot;, New StringBuilder(outputI300)},&#xA;        {&quot;O320&quot;, New StringBuilder(outputO320)}, {&quot;I320&quot;, New StringBuilder(outputI320)}&#xA;    }&#xA;&#xA;    ' Default category for uncategorized transactions&#xA;    Dim uncategorizedOutput As New StringBuilder(outputUNCAT)&#xA;&#xA;    ' Iterate through each transaction&#xA;    For Each transaction As String In transactions&#xA;        ' Only proceed if the transaction contains a {2: block&#xA;        If transaction.Contains(&quot;{2:&quot;) Then&#xA;            ' Extract the full content of the transaction (prepend {1: to restore the split part)&#xA;            Dim fullTransaction As String = &quot;{1:&quot; &amp; transaction&#xA;&#xA;            ' Find the {2: block within the transaction&#xA;            Dim startIndex As Integer = fullTransaction.IndexOf(&quot;{2:&quot;) + 3&#xA;            Dim endIndex As Integer = fullTransaction.IndexOf(&quot;}&quot;, startIndex)&#xA;            Dim block2Content As String = fullTransaction.Substring(startIndex, endIndex - startIndex)&#xA;&#xA;            ' Identify the matching block type&#xA;            Dim matched As Boolean = False&#xA;            For Each blockType In blockTypeToOutput.Keys&#xA;                If block2Content.Contains(blockType) Then&#xA;                    blockTypeToOutput(blockType).Append(fullTransaction)&#xA;                    matched = True&#xA;                    Exit For&#xA;                End If&#xA;            Next&#xA;&#xA;            ' Handle uncategorized transactions&#xA;            If Not matched Then&#xA;                uncategorizedOutput.Append(fullTransaction)&#xA;            End If&#xA;        End If&#xA;    Next&#xA;&#xA;    ' Assign the results back to the UiPath arguments&#xA;    outputO202 = blockTypeToOutput(&quot;O202&quot;).ToString()&#xA;    outputI202 = blockTypeToOutput(&quot;I202&quot;).ToString()&#xA;    outputO205 = blockTypeToOutput(&quot;O205&quot;).ToString()&#xA;    outputI205 = blockTypeToOutput(&quot;I205&quot;).ToString()&#xA;    outputO103 = blockTypeToOutput(&quot;O103&quot;).ToString()&#xA;    outputI103 = blockTypeToOutput(&quot;I103&quot;).ToString()&#xA;    outputO900 = blockTypeToOutput(&quot;O900&quot;).ToString()&#xA;    outputI900 = blockTypeToOutput(&quot;I900&quot;).ToString()&#xA;    outputO910 = blockTypeToOutput(&quot;O910&quot;).ToString()&#xA;    outputI910 = blockTypeToOutput(&quot;I910&quot;).ToString()&#xA;    outputO199 = blockTypeToOutput(&quot;O199&quot;).ToString()&#xA;    outputI199 = blockTypeToOutput(&quot;I199&quot;).ToString()&#xA;    outputO999 = blockTypeToOutput(&quot;O999&quot;).ToString()&#xA;    outputI999 = blockTypeToOutput(&quot;I999&quot;).ToString()&#xA;    outputO300 = blockTypeToOutput(&quot;O300&quot;).ToString()&#xA;    outputI300 = blockTypeToOutput(&quot;I300&quot;).ToString()&#xA;    outputO320 = blockTypeToOutput(&quot;O320&quot;).ToString()&#xA;    outputI320 = blockTypeToOutput(&quot;I320&quot;).ToString()&#xA;    outputUNCAT = uncategorizedOutput.ToString()&#xA;&#xA;Catch ex As Exception&#xA;    ' Handle the exception (e.g., log the error, output to the console, or rethrow)&#xA;    Console.WriteLine(&quot;An error occurred: &quot; &amp; ex.Message)&#xA;End Try&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="504,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_9">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="outputSwift">[outputSwift]</InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputO202">[outputO202]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputI103">[outputI103]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputI300">[outputI300]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputUNCAT">[outputUNCAT]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputI910">[outputI910]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputI900">[outputI900]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputO900">[outputO900]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputO910">[outputO910]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputO199">[outputO199]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputO999">[outputO999]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputI205">[outputI205]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputO205">[outputO205]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputI202">[outputI202]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputI999">[outputI999]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputO103">[outputO103]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputI320">[outputI320]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputO300">[outputO300]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputO320">[outputO320]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="outputI199">[outputI199]</OutArgument>
+      </ui:InvokeCode.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeCode>
+    <Sequence DisplayName="Initialize blank swift dt" sap:VirtualizedContainerService.HintSize="504,454.4" sap2010:WorkflowViewState.IdRef="Sequence_81">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:InvokeCode ContinueOnError="{x:Null}" Code="&#xD;&#xA;    Dim dtSwiftBlankTemp As New DataTable&#xD;&#xA;&#xD;&#xA;    ' Define columns&#xD;&#xA;&#x9;dtSwiftBlankTemp.Columns.Add(&quot;Message Type&quot;, GetType(String))&#xD;&#xA;    dtSwiftBlankTemp.Columns.Add(&quot;Transaction Reference&quot;, GetType(String))&#xD;&#xA;&#x9;dtSwiftBlankTemp.Columns.Add(&quot;Related Reference (21)&quot;, GetType(String))&#xD;&#xA;    dtSwiftBlankTemp.Columns.Add(&quot;Transaction Date&quot;, GetType(String))&#xD;&#xA;    dtSwiftBlankTemp.Columns.Add(&quot;Currency&quot;, GetType(String))&#xD;&#xA;    dtSwiftBlankTemp.Columns.Add(&quot;Debit&quot;)&#xD;&#xA;    dtSwiftBlankTemp.Columns.Add(&quot;Credit&quot;)&#xD;&#xA;    dtSwiftBlankTemp.Columns.Add(&quot;Ordering Institution&quot;, GetType(String))&#xD;&#xA;    dtSwiftBlankTemp.Columns.Add(&quot;Beneficiary Institution&quot;, GetType(String))&#xD;&#xA;    dtSwiftBlankTemp.Columns.Add(&quot;Narration&quot;, GetType(String))&#xD;&#xA;    dtSwiftBlankTemp.Columns.Add(&quot;Ordering Bank&quot;, GetType(String))        ' New column&#xD;&#xA;    dtSwiftBlankTemp.Columns.Add(&quot;Beneficiary Bank&quot;, GetType(String)) &#xD;&#xA;&#x9; &#xD;&#xA;&#x9; ' New column&#xD;&#xA;&#xD;&#xA;&#x9; dtSwiftBlankTempOut = dtSwiftBlankTemp" DisplayName="Invoke Code I103" sap:VirtualizedContainerService.HintSize="416,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_46">
+        <ui:InvokeCode.Arguments>
+          <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftBlankTempOut">[dtSwiftBlankTemp]</OutArgument>
+        </ui:InvokeCode.Arguments>
+      </ui:InvokeCode>
+      <Assign sap:VirtualizedContainerService.HintSize="416,165.6" sap2010:WorkflowViewState.IdRef="Assign_21">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftBlankTemp]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[dtSwiftBlankTemp.DefaultView.ToTable(False,"Message Type","Transaction Reference","Related Reference (21)","Transaction Date","Currency","Debit","Credit","Ordering Bank","Beneficiary Bank","Ordering Institution","Beneficiary Institution","Narration")]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <If Condition="[not String.IsNullOrEmpty(outputI103 + outputO103)]" DisplayName="If I103" sap:VirtualizedContainerService.HintSize="504,56.8" sap2010:WorkflowViewState.IdRef="If_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="500.8,611.2" sap2010:WorkflowViewState.IdRef="Sequence_29">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Sequence I103" sap:VirtualizedContainerService.HintSize="467.2,551.2" sap2010:WorkflowViewState.IdRef="Sequence_19">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xA;    ' Define input string containing multiple SWIFT messages&#xA;    Dim inputString As String = outputI103 + outputO103&#xA;&#xA;    ' Split input string into individual messages based on the starting delimiter {1:&#xA;    Dim messages() As String = inputString.Split(New String() {&quot;{1:&quot;}, StringSplitOptions.RemoveEmptyEntries)&#xA;&#xA;    ' Create a DataTable to hold the extracted data&#xA;    Dim dtSwiftI103 As New DataTable&#xA;&#xA;    ' Define columns&#xA;    dtSwiftI103.Columns.Add(&quot;Message Type&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Transaction Reference&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Related Reference (21)&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Transaction Date&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Currency&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Debit&quot;)&#xA;    dtSwiftI103.Columns.Add(&quot;Credit&quot;)&#xA;    dtSwiftI103.Columns.Add(&quot;Ordering Bank&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Beneficiary Bank&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Ordering Institution&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Beneficiary Institution&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Narration&quot;, GetType(String))&#xA;&#xA;    ' Loop through each message&#xA;    For Each message As String In messages&#xA;        Try&#xA;            ' Check if message is outgoing (O103) or incoming (I103)&#xA;            Dim isOutgoing As Boolean = message.Contains(&quot;{2:O103&quot;)&#xA;            Dim messageType As String = If(isOutgoing, &quot;O103&quot;, &quot;I103&quot;)&#xA;            &#xA;            Dim relatedRef As String = &quot;&quot;&#xA;&#xA;            ' Extract transaction reference&#xA;            Dim transactionRef As String = Regex.Match(message, &quot;:20:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;&#xA;            ' Extract and separate date, currency, and amount from :32A field&#xA;            Dim dateCurrencyAmount As String = Regex.Match(message, &quot;:32A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            Dim transactionDate As String = dateCurrencyAmount.Substring(0, 6)&#xA;            Dim currency As String = Regex.Match(dateCurrencyAmount, &quot;[A-Z]+&quot;).Value&#xA;            Dim amount = If(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;).length&gt;0, Double.Parse(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;)),0)&#xA;&#x9;&#x9;&#x9;&#xA;            ' Define debit and credit amounts based on message type&#xA;            Dim debitAmount = If(isOutgoing, amount, 0)&#xA;            Dim creditAmount = If(isOutgoing, 0, amount)&#xA;&#xA;            ' Extract ordering institution (all lines after :50K), then replace line breaks with spaces&#xA;            Dim orderingInstitution As String = Regex.Match(message, &quot;:50K:(.+?)(?=:|:\d{2}[A-Z]{1,2}|-\z)&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            orderingInstitution = Regex.Replace(orderingInstitution, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Extract beneficiary institution (all lines after :59:), then replace line breaks with spaces&#xA;            Dim beneficiaryInstitution As String = Regex.Match(message, &quot;:59:(.+?)(?=:|:\d{2}[A-Z]{1,2}|-\z)&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            beneficiaryInstitution = Regex.Replace(beneficiaryInstitution, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Extract narration (all lines after :70:) if exists&#xA;            Dim narration As String = Regex.Match(message, &quot;:70:(.+?)(?=:|:\d{2}[A-Z]{1,2}|-\z)&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            narration = Regex.Replace(narration, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Extract narration from :72: starting from &quot;/&quot; to &quot;-&quot; or &quot;}&quot;&#xA;            Dim narration72 As String = Regex.Match(message, &quot;:72:/(.+?)(?=-|\})&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            narration72 = Regex.Replace(narration72, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Concatenate narrations if both :70: and :72: narrations exist&#xA;            narration = If(narration &lt;&gt; &quot;&quot;, narration &amp; &quot; &quot; &amp; narration72, narration72)&#xA;&#xA;            ' Extract ordering and beneficiary banks based on message type&#xA;            Dim orderingBank As String&#xA;            Dim beneficiaryBank As String&#xA;&#xA;            If isOutgoing Then&#xA;                ' O103: Beneficiary Bank is NMBIB, Ordering Bank is extracted from {2:O103 and contains only letters&#xA;                orderingBank = Regex.Match(message, &quot;\{2:O103.*?([A-Za-z]+)&quot;).Groups(1).Value.Trim()&#xA;                beneficiaryBank = &quot;NMBIB&quot;&#xA;            Else&#xA;                ' I103: Ordering Bank is NMBIB, Beneficiary Bank is extracted from {2:I103 and contains only letters&#xA;                orderingBank = &quot;NMBIB&quot;&#xA;                beneficiaryBank = Regex.Match(message, &quot;\{2:I103.*?([A-Za-z]+)&quot;).Groups(1).Value.Trim()&#xA;            End If&#xA;&#xA;            ' Add a new row to the DataTable&#xA;            dtSwiftI103.Rows.Add(messageType, transactionRef, relatedRef, transactionDate, currency, debitAmount, creditAmount, orderingBank, beneficiaryBank, orderingInstitution, beneficiaryInstitution, narration)&#xA;&#xA;        Catch ex As Exception&#xA;            Console.WriteLine(&quot;Error processing message: &quot; &amp; ex.Message)&#xA;        End Try&#xA;    Next&#xA;&#xA;    ' Output the DataTable&#xA;    dtSwiftI103Out = dtSwiftI103&#xA;&#xA;Catch ex As Exception&#xA;    Console.WriteLine(&quot;An error occurred: &quot; &amp; ex.Message)&#xA;End Try&#xA;" DisplayName="Invoke Code I103" sap:VirtualizedContainerService.HintSize="433.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_24">
+              <ui:InvokeCode.Arguments>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftI103Out">[dtSwiftI103]</OutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="outputI103">[outputI103]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="outputO103">[outputO103]</InArgument>
+              </ui:InvokeCode.Arguments>
+            </ui:InvokeCode>
+            <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_15">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftI103]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dtSwiftI103.DefaultView.ToTable(False,"Message Type","Transaction Reference","Related Reference (21)","Transaction Date","Currency","Debit","Credit","Ordering Bank","Beneficiary Bank","Ordering Institution","Beneficiary Institution","Narration")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:MergeDataTable Destination="[dtSwiftBlankTemp]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="433.6,157.6" sap2010:WorkflowViewState.IdRef="MergeDataTable_1" MissingSchemaAction="Add" Source="[dtSwiftI103]" />
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="500.8,361.6" sap2010:WorkflowViewState.IdRef="Sequence_30">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="&#xA;    Dim dtSwiftI103 As New DataTable&#xA;&#xA;    ' Define columns&#xA;&#x9;dtSwiftI103.Columns.Add(&quot;Message Type&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Transaction Reference&quot;, GetType(String))&#xA;&#x9;dtSwiftI103.Columns.Add(&quot;Related Reference (21)&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Transaction Date&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Currency&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Debit&quot;, GetType(Double))&#xA;    dtSwiftI103.Columns.Add(&quot;Credit&quot;, GetType(Double))&#xA;    dtSwiftI103.Columns.Add(&quot;Ordering Institution&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Beneficiary Institution&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Narration&quot;, GetType(String))&#xA;    dtSwiftI103.Columns.Add(&quot;Ordering Bank&quot;, GetType(String))        ' New column&#xA;    dtSwiftI103.Columns.Add(&quot;Beneficiary Bank&quot;, GetType(String)) &#xA;&#x9; &#xA;&#x9; ' New column&#xA;&#xA;&#x9; dtSwiftI103Out = dtSwiftI103" DisplayName="Invoke Code I103" sap:VirtualizedContainerService.HintSize="467.2,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_21">
+            <ui:InvokeCode.Arguments>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftI103Out">[dtSwiftI103]</OutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="outputI103">[outputI103]</InArgument>
+            </ui:InvokeCode.Arguments>
+          </ui:InvokeCode>
+          <Assign sap:VirtualizedContainerService.HintSize="467.2,104.8" sap2010:WorkflowViewState.IdRef="Assign_12">
+            <Assign.To>
+              <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftI103]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="sd:DataTable">[dtSwiftI103.DefaultView.ToTable(False,"Message Type","Transaction Reference","Related Reference (21)","Transaction Date","Currency","Debit","Credit","Ordering Bank","Beneficiary Bank","Ordering Institution","Beneficiary Institution","Narration")]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </If.Else>
+    </If>
+    <If Condition="[not String.IsNullOrEmpty(outputO900)]" DisplayName="If O900" sap:VirtualizedContainerService.HintSize="504,56.8" sap2010:WorkflowViewState.IdRef="If_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="500.8,668" sap2010:WorkflowViewState.IdRef="Sequence_33">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Sequence O900" sap:VirtualizedContainerService.HintSize="467.2,608" sap2010:WorkflowViewState.IdRef="Sequence_26">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Define input string containing multiple SWIFT messages&#xA;Dim inputString As String = outputO900&#xA;&#xA;Try&#xA;    ' Split input string into individual messages based on the starting delimiter {1:&#xA;    Dim messages() As String = inputString.Split(New String() {&quot;{1:&quot;}, StringSplitOptions.RemoveEmptyEntries)&#xA;&#xA;    ' Create a DataTable to hold the extracted data&#xA;    Dim dtSwiftO900 As New DataTable&#xA;&#xA;    ' Define columns&#xA;    dtSwiftO900.Columns.Add(&quot;Message Type&quot;, GetType(String))&#xA;&#x9;dtSwiftO900.Columns.Add(&quot;Transaction Reference&quot;, GetType(String))&#xA; &#x9;dtSwiftO900.Columns.Add(&quot;Related Reference (21)&quot;, GetType(String))&#xA;    dtSwiftO900.Columns.Add(&quot;Transaction Date&quot;, GetType(String))&#xA;    dtSwiftO900.Columns.Add(&quot;Currency&quot;, GetType(String))&#xA;    dtSwiftO900.Columns.Add(&quot;Debit&quot;)&#xA;    dtSwiftO900.Columns.Add(&quot;Credit&quot;)&#xA;    dtSwiftO900.Columns.Add(&quot;Ordering Bank&quot;, GetType(String))&#xA;    dtSwiftO900.Columns.Add(&quot;Beneficiary Bank&quot;, GetType(String))&#xA;    dtSwiftO900.Columns.Add(&quot;Narration&quot;, GetType(String))&#xA;&#xA;    ' Loop through each message&#xA;    For Each message As String In messages&#xA;        Try&#xA;&#xA;            ' Extract and store each required field&#xA;            Dim transactionRef As String = Regex.Match(message, &quot;:20:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            Dim relatedRef As String = Regex.Match(message, &quot;:21:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            Dim dateCurrencyAmount As String = Regex.Match(message, &quot;:32A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;&#xA;            ' Separate date, currency, and amount from :32A field&#xA;            Dim transactionDate As String = dateCurrencyAmount.Substring(0, 6)&#xA;            Dim currency As String = Regex.Match(dateCurrencyAmount, &quot;[A-Z]+&quot;).Value&#xA;            ' Match either format for amount: with or without decimal digits&#xA;&#x9;&#x9;&#x9;&#xA;            'Dim amount As String = Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value&#xA;&#x9;&#x9;&#x9; Dim amount = If(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;).length&gt;0, Double.Parse(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;)),0)&#xA;&#x9;&#x9;&#xA;&#xA;            ' Set Debit amount and Credit to 0&#xA;            Dim debitAmount  = amount&#xA;            Dim creditAmount  = &quot;0&quot;&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim messageType = &quot;O900&quot;&#xA;&#xA;            ' Check if :53A: is present, otherwise check for :52A:&#xA;            Dim orderingBank As String = String.Empty&#xA;            If Regex.IsMatch(message, &quot;:53A:&quot;) Then&#xA;                orderingBank = Regex.Match(message, &quot;:53A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;                orderingBank = Regex.Replace(orderingBank, &quot;\r?\n&quot;, &quot; &quot;)&#xA;            ElseIf Regex.IsMatch(message, &quot;:52A:&quot;) Then&#xA;                orderingBank = Regex.Match(message, &quot;:52A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;                orderingBank = Regex.Replace(orderingBank, &quot;\r?\n&quot;, &quot; &quot;)&#xA;            End If&#xA;&#x9;&#x9;&#x9;&#xA;  &#x9;&#x9;&#x9;' Extract beneficiary institution&#xA;            Dim beneficiaryBank As String = Regex.Match(message, &quot;:58A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            beneficiaryBank = Regex.Replace(beneficiaryBank, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#x9;&#x9;&#x9;&#xA;            ' If ordering bank is still not found, look for all alphabetic characters in the {2: block&#xA;            If String.IsNullOrEmpty(beneficiaryBank) Then&#xA;                Dim beneficiaryBankMatches As MatchCollection = Regex.Matches(message, &quot;\{2:O[^\{]*[A-Za-z]+&quot;)&#xA;                Dim bankChars As New Text.StringBuilder()&#xA;&#xA;                For Each match As Match In beneficiaryBankMatches&#xA;                    bankChars.Append(match.Value)&#xA;                Next&#xA;&#xA;                ' Remove all non-letter characters and join all the alphabetic parts&#xA;                beneficiaryBank = Regex.Replace(bankChars.ToString(), &quot;[^\p{L}]&quot;, &quot;&quot;)&#xA;            End If&#xA;&#xA;          &#xA;&#xA;            ' Extract narration&#xA;           ' Dim narration As String = Regex.Match(message, &quot;:72:(.+?)(?=-|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            'narration = Regex.Replace(narration, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim narration As String = Regex.Match(message, &quot;:72:/(.+?)(?=-|\})&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            narration = Regex.Replace(narration, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;    &#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#xA;&#xA;&#x9;&#xA;            ' Add a new row to the DataTable&#xA;            dtSwiftO900.Rows.Add(messageType, transactionRef, relatedRef, transactionDate, currency, debitAmount, creditAmount, orderingBank, beneficiaryBank, narration)&#xA;&#xA;        Catch ex As Exception&#xA;            Console.WriteLine(&quot;Error processing this message: &quot; &amp; ex.Message)&#xA;        End Try&#xA;    Next&#xA;&#xA;    ' Output the DataTable&#xA;    dtSwiftO900Out = dtSwiftO900&#xA;&#x9;dtSwiftO900Out.Columns.Add(&quot;Ordering Institution&quot;)&#xA;&#x9;dtSwiftO900Out.Columns.Add(&quot;Beneficiary Institution&quot;)&#xA;&#x9;&#xA;&#xA;Catch ex As Exception&#xA;    Console.WriteLine(&quot;An error occurred: &quot; &amp; ex.Message)&#xA;End Try&#xA;" DisplayName="Invoke Code O900" sap:VirtualizedContainerService.HintSize="433.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_18">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="outputO900">[outputO900]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="workingsFilePath">[swiftWorkingsFilePath]</InArgument>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftO900Out">[dtSwiftO900]</OutArgument>
+              </ui:InvokeCode.Arguments>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InvokeCode>
+            <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_9">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftO900]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dtSwiftO900.DefaultView.ToTable(False,"Message Type","Transaction Reference","Related Reference (21)","Transaction Date","Currency","Debit","Credit","Ordering Bank","Beneficiary Bank","Ordering Institution","Beneficiary Institution","Narration")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:MergeDataTable Destination="[dtSwiftBlankTemp]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="433.6,166.4" sap2010:WorkflowViewState.IdRef="MergeDataTable_2" MissingSchemaAction="Add" Source="[dtSwiftO900]" />
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="433.6,48" sap2010:WorkflowViewState.IdRef="CommentOut_24">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="Sequence_83">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:AppendRange WorkbookPathResource="{x:Null}" DataTable="[dtSwiftO900]" DisplayName="Append Range Workbook" sap:VirtualizedContainerService.HintSize="382.4,139.2" sap2010:WorkflowViewState.IdRef="AppendRange_7" SheetName="Swift Detailed" WorkbookPath="[swiftWorkingsFilePath]" />
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_34">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <If Condition="[not String.IsNullOrEmpty(outputO320 + outputI320)]" DisplayName="If I320 and O320" sap:VirtualizedContainerService.HintSize="504,56.8" sap2010:WorkflowViewState.IdRef="If_8">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="500.8,668" sap2010:WorkflowViewState.IdRef="Sequence_57">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Sequence 320" sap:VirtualizedContainerService.HintSize="467.2,608" sap2010:WorkflowViewState.IdRef="Sequence_55">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftO320" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xA;    ' Define input string containing multiple SWIFT messages&#xA;    Dim inputString As String = outputI320 + outputO320&#xA;&#xA;    ' Split input string into individual messages based on the starting delimiter {1:&#xA;    Dim messages() As String = inputString.Split(New String() {&quot;{1:&quot;}, StringSplitOptions.RemoveEmptyEntries)&#xA;&#xA;    ' Create a DataTable to hold the extracted data&#xA;    Dim dtSwift As New DataTable&#xA;&#xA;    ' Define columns&#xA;    dtSwift.Columns.Add(&quot;Message Type&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Transaction Reference&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Related Reference (21)&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Transaction Date&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Currency&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Debit&quot;)&#xA;    dtSwift.Columns.Add(&quot;Credit&quot;)&#xA;    dtSwift.Columns.Add(&quot;Ordering Bank&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Beneficiary Bank&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Ordering Institution&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Beneficiary Institution&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Narration&quot;, GetType(String))&#xA;&#xA;    ' Loop through each message&#xA;    For Each message As String In messages&#xA;        Try&#xA;            ' Check if message is outgoing (O320) or incoming (I320)&#xA;            Dim isOutgoing As Boolean = message.Contains(&quot;{2:O320&quot;)&#xA;            Dim messageType As String = If(isOutgoing, &quot;O320&quot;, &quot;I320&quot;)&#xA;            &#xA;            ' Extract transaction reference from :20:&#xA;            Dim transactionRef As String = Regex.Match(message, &quot;:20:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;&#xA;            ' Extract related reference from :21:&#xA;            Dim relatedRef As String = Regex.Match(message, &quot;:21:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;&#xA;            ' Extract transaction date from :30T: (or another appropriate field)&#xA;            Dim transactionDate As String = Regex.Match(message, &quot;:30T:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;&#xA;            ' Extract currency and amount from :32B: field&#xA;            Dim currencyAmount As String = Regex.Match(message, &quot;:32B:([A-Z]+)(\d+,\d{0,2})&quot;).Groups(0).Value.Trim()&#xA;            Dim currency As String = Regex.Match(currencyAmount, &quot;[A-Z]+&quot;).Value&#xA;         '   Dim amount As String = Regex.Match(currencyAmount, &quot;\d+,\d{0,2}&quot;).Value&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim amount = If(Regex.Match(currencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;).length&gt;0, Double.Parse(Regex.Match(currencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;)),0)&#xA;&#x9;&#x9;&#xA;&#xA;&#xA;            ' Define debit and credit amounts based on message type&#xA;            Dim debitAmount = If(isOutgoing, amount, 0)&#xA;            Dim creditAmount  = If(isOutgoing, 0, amount)&#xA;&#xA;            ' Extract ordering institution from :82A:&#xA;            Dim orderingInstitution As String = Regex.Match(message, &quot;:82A:(.+?)(?=:|:\d{2}[A-Z]{1,2}|-\z)&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            orderingInstitution = Regex.Replace(orderingInstitution, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Extract beneficiary institution from :87A:&#xA;            Dim beneficiaryInstitution As String = Regex.Match(message, &quot;:87A:(.+?)(?=:|:\d{2}[A-Z]{1,2}|-\z)&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            beneficiaryInstitution = Regex.Replace(beneficiaryInstitution, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Extract narration from :72: or :70: depending on the format&#xA;            'Dim narration As String = Regex.Match(message, &quot;:72:(.+?)(?=:|:\d{2}[A-Z]{1,2}|-\z)&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            'narration = Regex.Replace(narration, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim narration As String = Regex.Match(message, &quot;:72:/(.+?)(?=-|\})&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            narration = Regex.Replace(narration, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Extract ordering and beneficiary banks based on message type&#xA;            Dim orderingBank As String&#xA;            Dim beneficiaryBank As String&#xA;&#xA;            'If isOutgoing Then&#xA;                ' O320: Beneficiary Bank is NMBIB, Ordering Bank is extracted from {2:O320 and contains only letters&#xA;                'orderingBank = Regex.Match(message, &quot;\{2:O320.*?([A-Za-z]+)&quot;).Groups(1).Value.Trim()&#xA;              '  beneficiaryBank = &quot;NMBIB&quot;&#xA;            'Else&#xA;                ' I320: Ordering Bank is NMBIB, Beneficiary Bank is extracted from {2:I320 and contains only letters&#xA;                'orderingBank = &quot;NMBIB&quot;&#xA;                'beneficiaryBank = Regex.Match(message, &quot;\{2:I320.*?([A-Za-z]+)&quot;).Groups(1).Value.Trim()&#xA;           ' End If&#xA;&#xA;            ' Add a new row to the DataTable&#xA;            dtSwift.Rows.Add(messageType, transactionRef, relatedRef, transactionDate, currency, debitAmount, creditAmount, orderingBank, beneficiaryBank, orderingInstitution, beneficiaryInstitution, narration)&#xA;&#xA;        Catch ex As Exception&#xA;            Console.WriteLine(&quot;Error processing message: &quot; &amp; ex.Message)&#xA;        End Try&#xA;    Next&#xA;&#xA;    ' Output the DataTable&#xA;    dtSwiftO320Out = dtSwift&#xA;&#xA;Catch ex As Exception&#xA;    Console.WriteLine(&quot;An error occurred: &quot; &amp; ex.Message)&#xA;End Try&#xA;" DisplayName="Invoke Code 320" sap:VirtualizedContainerService.HintSize="433.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_33">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="outputO300">[outputO300]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="workingsFilePath">[swiftWorkingsFilePath]</InArgument>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftO320Out">[dtSwiftO320]</OutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="outputO320">[outputO320]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="outputI300">[outputI300]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="outputI320">[outputI320]</InArgument>
+              </ui:InvokeCode.Arguments>
+            </ui:InvokeCode>
+            <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_16">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftO320]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dtSwiftO320.DefaultView.ToTable(False,"Message Type","Transaction Reference","Related Reference (21)","Transaction Date","Currency","Debit","Credit","Ordering Institution","Beneficiary Institution","Ordering Bank","Beneficiary Bank","Narration")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:MergeDataTable Destination="[dtSwiftBlankTemp]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="433.6,166.4" sap2010:WorkflowViewState.IdRef="MergeDataTable_3" MissingSchemaAction="Add" Source="[dtSwiftO320]" />
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="433.6,48" sap2010:WorkflowViewState.IdRef="CommentOut_25">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="Sequence_84">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:AppendRange WorkbookPathResource="{x:Null}" DataTable="[dtSwiftO320]" DisplayName="Append Range Workbook" sap:VirtualizedContainerService.HintSize="382.4,139.2" sap2010:WorkflowViewState.IdRef="AppendRange_11" SheetName="Swift Detailed" WorkbookPath="[swiftWorkingsFilePath]" />
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_58">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <If Condition="[not String.IsNullOrEmpty(outputO300 + outputI300)]" DisplayName="If I300, O300" sap:VirtualizedContainerService.HintSize="504,56.8" sap2010:WorkflowViewState.IdRef="If_9">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="500.8,611.2" sap2010:WorkflowViewState.IdRef="Sequence_61">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Sequence O300" sap:VirtualizedContainerService.HintSize="467.2,551.2" sap2010:WorkflowViewState.IdRef="Sequence_59">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftO300" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xA;    ' Define input string containing multiple SWIFT messages&#xA;    Dim inputString As String = outputI300 + outputO300&#xA;&#xA;    ' Split input string into individual messages based on the starting delimiter {1:&#xA;    Dim messages() As String = inputString.Split(New String() {&quot;{1:&quot;}, StringSplitOptions.RemoveEmptyEntries)&#xA;&#xA;    ' Create a DataTable to hold the extracted data&#xA;    Dim dtSwift As New DataTable&#xA;&#xA;    ' Define columns&#xA;    dtSwift.Columns.Add(&quot;Message Type&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Transaction Reference&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Related Reference (21)&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Transaction Date&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Currency&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Debit&quot;)&#xA;    dtSwift.Columns.Add(&quot;Credit&quot;)&#xA;    dtSwift.Columns.Add(&quot;Ordering Bank&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Beneficiary Bank&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Ordering Institution&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Beneficiary Institution&quot;, GetType(String))&#xA;    dtSwift.Columns.Add(&quot;Narration&quot;, GetType(String))&#xA;&#xA;    ' Loop through each message&#xA;    For Each message As String In messages&#xA;        Try&#xA;            ' Check if message is outgoing (O320) or incoming (I320)&#xA;            Dim isOutgoing As Boolean = message.Contains(&quot;{2:O300&quot;)&#xA;            Dim messageType As String = If(isOutgoing, &quot;O300&quot;, &quot;I300&quot;)&#xA;            &#xA;            ' Extract transaction reference from :20:&#xA;            Dim transactionRef As String = Regex.Match(message, &quot;:20:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;&#xA;            ' Extract related reference from :21:&#xA;            Dim relatedRef As String = Regex.Match(message, &quot;:21:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;&#xA;            ' Extract transaction date from :30T: (or another appropriate field)&#xA;            Dim transactionDate As String = Regex.Match(message, &quot;:30T:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;&#xA;            ' Extract currency and amount from :32B: field&#xA;            Dim currencyAmount As String = Regex.Match(message, &quot;:32B:([A-Z]+)(\d+,\d{0,2})&quot;).Groups(0).Value.Trim()&#xA;            Dim currency As String = Regex.Match(currencyAmount, &quot;[A-Z]+&quot;).Value&#xA;           ' Dim amount As String = Regex.Match(currencyAmount, &quot;\d+,\d{0,2}&quot;).Value&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim amount = If(Regex.Match(currencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;).length&gt;0, Double.Parse(Regex.Match(currencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;)),0)&#xA;&#x9;&#x9;&#xA;&#xA;            ' Define debit and credit amounts based on message type&#xA;            Dim debitAmount = If(isOutgoing, amount, 0)&#xA;            Dim creditAmount = If(isOutgoing, 0, amount)&#xA;&#xA;            ' Extract ordering institution from :82A:&#xA;            Dim orderingInstitution As String = Regex.Match(message, &quot;:82A:(.+?)(?=:|:\d{2}[A-Z]{1,2}|-\z)&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            orderingInstitution = Regex.Replace(orderingInstitution, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Extract beneficiary institution from :87A:&#xA;            Dim beneficiaryInstitution As String = Regex.Match(message, &quot;:87A:(.+?)(?=:|:\d{2}[A-Z]{1,2}|-\z)&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            beneficiaryInstitution = Regex.Replace(beneficiaryInstitution, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Extract narration from :72: or :70: depending on the format&#xA;           ' Dim narration As String = Regex.Match(message, &quot;:72:(.+?)(?=:|:\d{2}[A-Z]{1,2}|-\z)&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            'narration = Regex.Replace(narration, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim narration As String = Regex.Match(message, &quot;:72:/(.+?)(?=-|\})&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            narration = Regex.Replace(narration, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Extract ordering and beneficiary banks based on message type&#xA;            Dim orderingBank As String&#xA;            Dim beneficiaryBank As String&#xA;&#xA;            If isOutgoing Then&#xA;                ' O320: Beneficiary Bank is NMBIB, Ordering Bank is extracted from {2:O320 and contains only letters&#xA;                orderingBank = Regex.Match(message, &quot;\{2:O320.*?([A-Za-z]+)&quot;).Groups(1).Value.Trim()&#xA;                beneficiaryBank = &quot;NMBIB&quot;&#xA;            Else&#xA;                ' I320: Ordering Bank is NMBIB, Beneficiary Bank is extracted from {2:I320 and contains only letters&#xA;                orderingBank = &quot;NMBIB&quot;&#xA;                beneficiaryBank = Regex.Match(message, &quot;\{2:I320.*?([A-Za-z]+)&quot;).Groups(1).Value.Trim()&#xA;            End If&#xA;&#xA;            ' Add a new row to the DataTable&#xA;            dtSwift.Rows.Add(messageType, transactionRef, relatedRef, transactionDate, currency, debitAmount, creditAmount, orderingBank, beneficiaryBank, orderingInstitution, beneficiaryInstitution, narration)&#xA;&#xA;        Catch ex As Exception&#xA;            Console.WriteLine(&quot;Error processing message: &quot; &amp; ex.Message)&#xA;        End Try&#xA;    Next&#xA;&#xA;    ' Output the DataTable&#xA;    dtSwiftO300Out = dtSwift&#xA;&#xA;Catch ex As Exception&#xA;    Console.WriteLine(&quot;An error occurred: &quot; &amp; ex.Message)&#xA;End Try&#xA;" DisplayName="Invoke Code O300" sap:VirtualizedContainerService.HintSize="433.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_35">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="outputO300">[outputO300]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="workingsFilePath">[swiftWorkingsFilePath]</InArgument>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftO300Out">[dtSwiftO300]</OutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="outputO320">[outputO320]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="outputI300">[outputI300]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="outputI320">[outputI320]</InArgument>
+              </ui:InvokeCode.Arguments>
+            </ui:InvokeCode>
+            <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_17">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftO300]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dtSwiftO300.DefaultView.ToTable(False,"Message Type","Transaction Reference","Related Reference (21)","Transaction Date","Currency","Debit","Credit","Ordering Institution","Beneficiary Institution","Ordering Bank","Beneficiary Bank","Narration")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:MergeDataTable Destination="[dtSwiftBlankTemp]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="433.6,157.6" sap2010:WorkflowViewState.IdRef="MergeDataTable_4" MissingSchemaAction="Add" Source="[dtSwiftO300]" />
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_62">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <If Condition="[not String.IsNullOrEmpty(outputO202)]" DisplayName="If O202" sap:VirtualizedContainerService.HintSize="504,845.6" sap2010:WorkflowViewState.IdRef="If_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="502.4,616.8" sap2010:WorkflowViewState.IdRef="Sequence_31">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Sequence O202" sap:VirtualizedContainerService.HintSize="468.8,556.8" sap2010:WorkflowViewState.IdRef="Sequence_14">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Define input string containing multiple SWIFT messages&#xA;Dim inputString As String = outputO202&#xA;&#xA;Try&#xA;    ' Split input string into individual messages based on the starting delimiter {1:&#xA;    Dim messages() As String = inputString.Split(New String() {&quot;{1:&quot;}, StringSplitOptions.RemoveEmptyEntries)&#xA;&#xA;    ' Create a DataTable to hold the extracted data&#xA;    Dim dtSwiftO202 As New DataTable&#xA;&#xA;    ' Define columns&#xA;&#x9;dtSwiftO202.Columns.Add(&quot;Message Type&quot;, GetType(String))&#xA;    dtSwiftO202.Columns.Add(&quot;Transaction Reference&quot;, GetType(String))&#xA;    dtSwiftO202.Columns.Add(&quot;Related Reference (21)&quot;, GetType(String))&#xA;    dtSwiftO202.Columns.Add(&quot;Transaction Date&quot;, GetType(String))&#xA;    dtSwiftO202.Columns.Add(&quot;Currency&quot;, GetType(String))&#xA;    dtSwiftO202.Columns.Add(&quot;Debit&quot;)&#xA;    dtSwiftO202.Columns.Add(&quot;Credit&quot;)&#xA;    dtSwiftO202.Columns.Add(&quot;Ordering Bank&quot;, GetType(String))&#xA;    dtSwiftO202.Columns.Add(&quot;Beneficiary Bank&quot;, GetType(String))&#xA;    dtSwiftO202.Columns.Add(&quot;Narration&quot;, GetType(String))&#xA;&#x9;&#xA;&#xA;    ' Loop through each message&#xA;    For Each message As String In messages&#xA;        Try&#xA;&#xA;            ' Extract and store each required field&#xA;            Dim transactionRef As String = Regex.Match(message, &quot;:20:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            Dim relatedRef As String = Regex.Match(message, &quot;:21:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            Dim dateCurrencyAmount As String = Regex.Match(message, &quot;:32A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;&#xA;            ' Separate date, currency, and amount from :32A field&#xA;            Dim transactionDate As String = dateCurrencyAmount.Substring(0, 6)&#xA;            Dim currency As String = Regex.Match(dateCurrencyAmount, &quot;[A-Z]+&quot;).Value&#xA;            ' Match either format for amount: with or without decimal digits&#xA;          '  Dim amount As String = Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim amount = If(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;).length&gt;0, Double.Parse(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;)),0)&#xA;&#x9;&#x9;&#xA;&#xA;            ' Set Debit amount and Credit to 0&#xA;            Dim debitAmount As String = &quot;0&quot;&#xA;            Dim creditAmount = amount&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim messageType As String = &quot;O202&quot;&#xA;&#xA;            ' Check if :53A: is present, otherwise check for :52A:&#xA;            Dim orderingBank As String = String.Empty&#xA;            If Regex.IsMatch(message, &quot;:53A:&quot;) Then&#xA;                orderingBank = Regex.Match(message, &quot;:53A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;                orderingBank = Regex.Replace(orderingBank, &quot;\r?\n&quot;, &quot; &quot;)&#xA;            ElseIf Regex.IsMatch(message, &quot;:52A:&quot;) Then&#xA;                orderingBank = Regex.Match(message, &quot;:52A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;                orderingBank = Regex.Replace(orderingBank, &quot;\r?\n&quot;, &quot; &quot;)&#xA;            End If&#xA;&#xA;            ' If ordering bank is still not found, look for all alphabetic characters in the {2: block&#xA;            If String.IsNullOrEmpty(orderingBank) Then&#xA;                Dim orderingBankMatches As MatchCollection = Regex.Matches(message, &quot;\{2O:[^\{]*[A-Za-z]+&quot;)&#xA;                Dim bankChars As New Text.StringBuilder()&#xA;&#xA;                For Each match As Match In orderingBankMatches&#xA;                    bankChars.Append(match.Value)&#xA;                Next&#xA;&#xA;                ' Remove all non-letter characters and join all the alphabetic parts&#xA;                orderingBank = Regex.Replace(bankChars.ToString(), &quot;[^\p{L}]&quot;, &quot;&quot;)&#xA;            End If&#xA;&#xA;            ' Extract beneficiary institution&#xA;            Dim beneficiaryBank As String = Regex.Match(message, &quot;:58A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            beneficiaryBank = Regex.Replace(beneficiaryBank, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Extract narration&#xA;            'Dim narration As String = Regex.Match(message, &quot;:72:(.+?)(?=-|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            'narration = Regex.Replace(narration, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;    &#x9;Dim narration As String = Regex.Match(message, &quot;:72:/(.+?)(?=-|\})&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            narration = Regex.Replace(narration, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Add a new row to the DataTable&#xA;            dtSwiftO202.Rows.Add(messageType, transactionRef, relatedRef, transactionDate, currency, debitAmount, creditAmount, orderingBank, beneficiaryBank, narration)&#xA;&#xA;        Catch ex As Exception&#xA;            Console.WriteLine(&quot;Error processing this message: &quot; &amp; ex.Message)&#xA;        End Try&#xA;    Next&#xA;&#xA;    ' Output the DataTable&#xA;    dtSwiftO202Out = dtSwiftO202&#xA;&#xA;&#x9;Try&#x9;&#xA;&#x9;&#x9;dtSwiftO202Out.Columns.Add(&quot;Ordering Institution&quot;)&#xA;&#x9;&#x9;dtSwiftO202Out.Columns.Add(&quot;Beneficiary Institution&quot;)&#xA;&#x9;Catch colEx As Exception&#xA;&#x9;End Try&#xA;&#xA;&#xA;Catch ex As Exception&#xA;    Console.WriteLine(&quot;An error occurred: &quot; &amp; ex.Message)&#xA;End Try&#xA;" DisplayName="Invoke Code O202" sap:VirtualizedContainerService.HintSize="433.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_13">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="outputO202">[outputO202]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="workingsFilePath">[swiftWorkingsFilePath]</InArgument>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftO202Out">[dtSwiftO202]</OutArgument>
+              </ui:InvokeCode.Arguments>
+            </ui:InvokeCode>
+            <Assign sap:VirtualizedContainerService.HintSize="434,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_6">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftO202]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dtSwiftO202.DefaultView.ToTable(False,"Message Type","Transaction Reference","Related Reference (21)","Transaction Date","Currency","Debit","Credit","Ordering Bank","Beneficiary Bank","Ordering Institution","Beneficiary Institution","Narration")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:MergeDataTable Destination="[dtSwiftBlankTemp]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="434,159.33333333333334" sap2010:WorkflowViewState.IdRef="MergeDataTable_5" MissingSchemaAction="Add" Source="[dtSwiftO202]" />
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="502,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_32">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <If Condition="[not String.IsNullOrEmpty(outputI202)]" DisplayName="If I202" sap:VirtualizedContainerService.HintSize="504,57.333333333333336" sap2010:WorkflowViewState.IdRef="If_13">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="502,616.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_75">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Sequence I202" sap:VirtualizedContainerService.HintSize="468,556.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_73">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Define input string containing multiple SWIFT messages&#xA;Dim inputString As String = outputI202&#xA;&#xA;Try&#xA;    ' Split input string into individual messages based on the starting delimiter {1:&#xA;    Dim messages() As String = inputString.Split(New String() {&quot;{1:&quot;}, StringSplitOptions.RemoveEmptyEntries)&#xA;&#xA;    ' Create a DataTable to hold the extracted data&#xA;    Dim dtSwiftI202 As New DataTable&#xA;&#xA;    ' Define columns&#xA;&#x9;dtSwiftI202.Columns.Add(&quot;Message Type&quot;, GetType(String))&#xA;    dtSwiftI202.Columns.Add(&quot;Transaction Reference&quot;, GetType(String))&#xA;    dtSwiftI202.Columns.Add(&quot;Related Reference (21)&quot;, GetType(String))&#xA;    dtSwiftI202.Columns.Add(&quot;Transaction Date&quot;, GetType(String))&#xA;    dtSwiftI202.Columns.Add(&quot;Currency&quot;, GetType(String))&#xA;    dtSwiftI202.Columns.Add(&quot;Debit&quot;)&#xA;    dtSwiftI202.Columns.Add(&quot;Credit&quot;)&#xA;    dtSwiftI202.Columns.Add(&quot;Ordering Bank&quot;, GetType(String))&#xA;    dtSwiftI202.Columns.Add(&quot;Beneficiary Bank&quot;, GetType(String))&#xA;    dtSwiftI202.Columns.Add(&quot;Narration&quot;, GetType(String))&#xA;&#x9;&#xA;&#xA;    ' Loop through each message&#xA;    For Each message As String In messages&#xA;        Try&#xA;&#xA;            ' Extract and store each required field&#xA;            Dim transactionRef As String = Regex.Match(message, &quot;:20:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            Dim relatedRef As String = Regex.Match(message, &quot;:21:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            Dim dateCurrencyAmount As String = Regex.Match(message, &quot;:32A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;&#xA;            ' Separate date, currency, and amount from :32A field&#xA;            Dim transactionDate As String = dateCurrencyAmount.Substring(0, 6)&#xA;            Dim currency As String = Regex.Match(dateCurrencyAmount, &quot;[A-Z]+&quot;).Value&#xA;            ' Match either format for amount: with or without decimal digits&#xA;            'Dim amount As String = Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim amount = If(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;).length&gt;0, Double.Parse(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;)),0)&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#xA;&#xA;            ' Set Debit amount and Credit to 0&#xA;            Dim debitAmount = amount&#xA;            Dim creditAmount = 0&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim messageType As String = &quot;I202&quot;&#xA;&#xA;            ' Check if :53A: is present, otherwise check for :52A:&#xA;            Dim orderingBank As String = String.Empty&#xA;            If Regex.IsMatch(message, &quot;:53A:&quot;) Then&#xA;                orderingBank = Regex.Match(message, &quot;:53A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;                orderingBank = Regex.Replace(orderingBank, &quot;\r?\n&quot;, &quot; &quot;)&#xA;            ElseIf Regex.IsMatch(message, &quot;:52A:&quot;) Then&#xA;                orderingBank = Regex.Match(message, &quot;:52A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;                orderingBank = Regex.Replace(orderingBank, &quot;\r?\n&quot;, &quot; &quot;)&#xA;            End If&#xA;&#xA;            ' If ordering bank is still not found, look for all alphabetic characters in the {2: block&#xA;            If String.IsNullOrEmpty(orderingBank) Then&#xA;                Dim orderingBankMatches As MatchCollection = Regex.Matches(message, &quot;\{2I:[^\{]*[A-Za-z]+&quot;)&#xA;                Dim bankChars As New Text.StringBuilder()&#xA;&#xA;                For Each match As Match In orderingBankMatches&#xA;                    bankChars.Append(match.Value)&#xA;                Next&#xA;&#xA;                ' Remove all non-letter characters and join all the alphabetic parts&#xA;                orderingBank = Regex.Replace(bankChars.ToString(), &quot;[^\p{L}]&quot;, &quot;&quot;)&#xA;            End If&#xA;&#xA;            ' Extract beneficiary institution&#xA;            Dim beneficiaryBank As String = Regex.Match(message, &quot;:58A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            beneficiaryBank = Regex.Replace(beneficiaryBank, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Extract narration&#xA;            'Dim narration As String = Regex.Match(message, &quot;:72:(.+?)(?=-|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            'narration = Regex.Replace(narration, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim narration As String = Regex.Match(message, &quot;:72:/(.+?)(?=-|\})&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            narration = Regex.Replace(narration, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Add a new row to the DataTable&#xA;            dtSwiftI202.Rows.Add(messageType, transactionRef, relatedRef, transactionDate, currency, debitAmount, creditAmount, orderingBank, beneficiaryBank, narration)&#xA;&#xA;        Catch ex As Exception&#xA;            Console.WriteLine(&quot;Error processing this message: &quot; &amp; ex.Message)&#xA;        End Try&#xA;    Next&#xA;&#xA;    ' Output the DataTable&#xA;    dtSwiftI202Out = dtSwiftI202&#xA;&#x9;&#xA;&#x9;&#x9;Try&#x9;&#xA;&#x9;&#x9;dtSwiftI202Out.Columns.Add(&quot;Ordering Institution&quot;)&#xA;&#x9;&#x9;dtSwiftI202Out.Columns.Add(&quot;Beneficiary Institution&quot;)&#xA;&#x9;Catch colEx As Exception&#xA;&#x9;End Try&#xA;&#xA;Catch ex As Exception&#xA;    Console.WriteLine(&quot;An error occurred: &quot; &amp; ex.Message)&#xA;End Try&#xA;" DisplayName="Invoke Code I202" sap:VirtualizedContainerService.HintSize="434,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_42">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="outputI202">[outputI202]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="workingsFilePath">[swiftWorkingsFilePath]</InArgument>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftI202Out">[dtSwiftI202]</OutArgument>
+              </ui:InvokeCode.Arguments>
+            </ui:InvokeCode>
+            <Assign sap:VirtualizedContainerService.HintSize="434,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_20">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftI202]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dtSwiftI202.DefaultView.ToTable(False,"Message Type","Transaction Reference","Related Reference (21)","Transaction Date","Currency","Debit","Credit","Ordering Bank","Beneficiary Bank","Ordering Institution","Beneficiary Institution","Narration")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:MergeDataTable Destination="[dtSwiftBlankTemp]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="434,159.33333333333334" sap2010:WorkflowViewState.IdRef="MergeDataTable_7" MissingSchemaAction="Add" Source="[dtSwiftI202]" />
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="502,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_76">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <If Condition="[not String.IsNullOrEmpty(outputI910)]" DisplayName="If I910" sap:VirtualizedContainerService.HintSize="504,57.333333333333336" sap2010:WorkflowViewState.IdRef="If_4">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="518.4,920.8" sap2010:WorkflowViewState.IdRef="Sequence_35">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Sequence I910" sap:VirtualizedContainerService.HintSize="484.8,860.8" sap2010:WorkflowViewState.IdRef="Sequence_21">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Define input string containing multiple SWIFT messages&#xA;Dim inputString As String = outputI910&#xA;&#xA;Try&#xA;    ' Split input string into individual messages based on the starting delimiter {1:&#xA;    Dim messages() As String = inputString.Split(New String() {&quot;{1:&quot;}, StringSplitOptions.RemoveEmptyEntries)&#xA;&#xA;    ' Create a DataTable to hold the extracted data&#xA;    Dim dtSwiftI910 As New DataTable&#xA;&#xA;    ' Define columns&#xA;&#x9;dtSwiftI910.Columns.Add(&quot;Message Type&quot;, GetType(String))&#xA;    dtSwiftI910.Columns.Add(&quot;Transaction Reference&quot;, GetType(String))&#xA;    dtSwiftI910.Columns.Add(&quot;Related Reference (21)&quot;, GetType(String))&#xA;    dtSwiftI910.Columns.Add(&quot;Transaction Date&quot;, GetType(String))&#xA;    dtSwiftI910.Columns.Add(&quot;Currency&quot;, GetType(String))&#xA;    dtSwiftI910.Columns.Add(&quot;Credit&quot;)&#xA;    dtSwiftI910.Columns.Add(&quot;Debit&quot;)&#xA;    dtSwiftI910.Columns.Add(&quot;Narration&quot;, GetType(String))&#xA;    dtSwiftI910.Columns.Add(&quot;Ordering Bank&quot;, GetType(String))&#xA;    dtSwiftI910.Columns.Add(&quot;Beneficiary Bank&quot;, GetType(String))&#xA;&#x9;&#xA;&#xA;    ' Loop through each message&#xA;    For Each message As String In messages&#xA;        Try&#xA;            Dim transactionRef As String = Regex.Match(message, &quot;:20:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            Dim relatedRef As String = Regex.Match(message, &quot;:21:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            Dim dateCurrencyAmount As String = Regex.Match(message, &quot;:32A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            &#xA;            Dim transactionDate As String = &quot;&quot;&#xA;            Dim currency As String = &quot;&quot;&#xA;            Dim credit  = 0.00&#xA;            Dim debit As String = &quot;0&quot;&#xA;            Dim narration As String = Regex.Match(message, &quot;:50K:(.+?)(?=-|\r|\n)&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;&#xA;            ' Extract and assign values only if the corresponding data is present&#xA;            If Not String.IsNullOrEmpty(dateCurrencyAmount) Then&#xA;                transactionDate = dateCurrencyAmount.Substring(0, 6)&#xA;                currency = Regex.Match(dateCurrencyAmount, &quot;[A-Z]+&quot;).Value&#xA;                'credit = Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value&#xA;&#x9;&#x9;&#x9;credit = If(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;).length&gt;0, Double.Parse(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;)),0)&#xA;&#x9;&#x9;&#xA;            End If&#xA;&#xA;            ' Fixed values for Ordering Bank and Beneficiary Bank&#xA;            Dim orderingBank As String = &quot;NMIBTZ&quot;&#xA;            Dim beneficiaryBank As String = &quot;NMIBTZ&quot;&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim messageType = &quot;I910&quot;&#xA;&#xA;            ' Add a new row to the DataTable&#xA;            dtSwiftI910.Rows.Add(messageType, transactionRef, relatedRef, transactionDate, currency, credit, debit, narration, orderingBank, beneficiaryBank)&#xA;            &#xA;        Catch ex As Exception&#xA;            Console.WriteLine(&quot;Error processing this message: &quot; &amp; ex.Message)&#xA;        End Try&#xA;    Next&#xA;&#xA;    ' Output the DataTable&#xA;    dtSwiftI910Out = dtSwiftI910&#xA;&#x9;&#xA;&#x9;Try&#x9;&#xA;&#x9;&#x9;dtSwiftI910Out.Columns.Add(&quot;Ordering Institution&quot;)&#xA;&#x9;&#x9;dtSwiftI910Out.Columns.Add(&quot;Beneficiary Institution&quot;)&#xA;&#x9;Catch colEx As Exception&#xA;&#x9;End Try&#xA;&#xA;Catch ex As Exception&#xA;    Console.WriteLine(&quot;An error occurred: &quot; &amp; ex.Message)&#xA;End Try&#xA;" DisplayName="Invoke Code I910" sap:VirtualizedContainerService.HintSize="451.2,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_16">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="outputI910">[outputI910]</InArgument>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftI910Out">[dtSwiftI910]</OutArgument>
+              </ui:InvokeCode.Arguments>
+            </ui:InvokeCode>
+            <Assign sap:VirtualizedContainerService.HintSize="451.2,113.6" sap2010:WorkflowViewState.IdRef="Assign_7">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftI910]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dtSwiftI910.DefaultView.ToTable(False,"Message Type","Transaction Reference","Related Reference (21)","Transaction Date","Currency","Debit","Credit","Ordering Bank","Beneficiary Bank","Ordering Institution","Beneficiary Institution","Narration")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:MergeDataTable Destination="[dtSwiftBlankTemp]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="451.2,166.4" sap2010:WorkflowViewState.IdRef="MergeDataTable_8" MissingSchemaAction="Add" Source="[dtSwiftI910]" />
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="451.2,300.8" sap2010:WorkflowViewState.IdRef="CommentOut_29">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="Sequence_88">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:AppendRange WorkbookPathResource="{x:Null}" DataTable="[dtSwiftI910]" DisplayName="Append Range Workbook" sap:VirtualizedContainerService.HintSize="382.4,139.2" sap2010:WorkflowViewState.IdRef="AppendRange_4" SheetName="Swift Detailed" WorkbookPath="[swiftWorkingsFilePath]" />
+                </Sequence>
+              </ui:CommentOut.Body>
+            </ui:CommentOut>
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_36">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <If Condition="[not String.IsNullOrEmpty(outputI900)]" DisplayName="If I900" sap:VirtualizedContainerService.HintSize="504,57.333333333333336" sap2010:WorkflowViewState.IdRef="If_11">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="500.8,611.2" sap2010:WorkflowViewState.IdRef="Sequence_70">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Sequence I900" sap:VirtualizedContainerService.HintSize="467.2,551.2" sap2010:WorkflowViewState.IdRef="Sequence_68">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Define input string containing multiple SWIFT messages&#xA;Dim inputString As String = outputI900&#xA;&#xA;Try&#xA;    ' Split input string into individual messages based on the starting delimiter {1:&#xA;    Dim messages() As String = inputString.Split(New String() {&quot;{1:&quot;}, StringSplitOptions.RemoveEmptyEntries)&#xA;&#xA;    ' Create a DataTable to hold the extracted data&#xA;    Dim dtSwiftI900 As New DataTable&#xA;&#xA;    ' Define columns&#xA;&#x9;dtSwiftI900.Columns.Add(&quot;Message Type&quot;, GetType(String))&#xA;    dtSwiftI900.Columns.Add(&quot;Transaction Reference&quot;, GetType(String))&#xA;    dtSwiftI900.Columns.Add(&quot;Related Reference (21)&quot;, GetType(String))&#xA;    dtSwiftI900.Columns.Add(&quot;Transaction Date&quot;, GetType(String))&#xA;    dtSwiftI900.Columns.Add(&quot;Currency&quot;, GetType(String))&#xA;    dtSwiftI900.Columns.Add(&quot;Credit&quot;)&#xA;    dtSwiftI900.Columns.Add(&quot;Debit&quot;)&#xA;    dtSwiftI900.Columns.Add(&quot;Narration&quot;, GetType(String))&#xA;    dtSwiftI900.Columns.Add(&quot;Ordering Bank&quot;, GetType(String))&#xA;    dtSwiftI900.Columns.Add(&quot;Beneficiary Bank&quot;, GetType(String))&#xA;&#x9;&#xA;&#xA;    ' Loop through each message&#xA;    For Each message As String In messages&#xA;        Try&#xA;            Dim transactionRef As String = Regex.Match(message, &quot;:20:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            Dim relatedRef As String = Regex.Match(message, &quot;:21:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            Dim dateCurrencyAmount As String = Regex.Match(message, &quot;:32A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            &#xA;            Dim transactionDate As String = &quot;&quot;&#xA;            Dim currency As String = &quot;&quot;&#xA;            Dim credit = 0.00&#xA;            Dim debit As String = &quot;&quot;&#xA;            Dim narration As String = &quot;&quot;&#xA;&#xA;            ' Extract and assign values only if the corresponding data is present&#xA;            If Not String.IsNullOrEmpty(dateCurrencyAmount) Then&#xA;                transactionDate = dateCurrencyAmount.Substring(0, 6)&#xA;                currency = Regex.Match(dateCurrencyAmount, &quot;[A-Z]+&quot;).Value&#xA;               ' credit = Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value&#xA;&#x9;&#x9;&#x9;&#x9;credit = If(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;).length&gt;0, Double.Parse(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;)),0)&#xA;&#x9;&#xA;&#xA;            End If&#xA;&#xA;            ' Fixed values for Ordering Bank and Beneficiary Bank&#xA;            Dim orderingBank As String = &quot;NMIBTZ&quot;&#xA;            Dim beneficiaryBank As String = &quot;NMIBTZ&quot;&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim messageType = &quot;I900&quot;&#xA;&#xA;            ' Add a new row to the DataTable&#xA;            dtSwiftI900.Rows.Add(messageType, transactionRef, relatedRef, transactionDate, currency, credit, debit, narration, orderingBank, beneficiaryBank)&#xA;            &#xA;        Catch ex As Exception&#xA;            Console.WriteLine(&quot;Error processing this message: &quot; &amp; ex.Message)&#xA;        End Try&#xA;    Next&#xA;&#xA;    ' Output the DataTable&#xA;    dtSwiftI900Out = dtSwiftI900&#xA;&#x9;Try&#x9;&#xA;&#x9;&#x9;dtSwiftI900Out.Columns.Add(&quot;Ordering Institution&quot;)&#xA;&#x9;&#x9;dtSwiftI900Out.Columns.Add(&quot;Beneficiary Institution&quot;)&#xA;&#x9;Catch colEx As Exception&#xA;&#x9;End Try&#xA;&#xA;Catch ex As Exception&#xA;    Console.WriteLine(&quot;An error occurred: &quot; &amp; ex.Message)&#xA;End Try&#xA;" DisplayName="Invoke Code I900" sap:VirtualizedContainerService.HintSize="433.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_40">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="outputI900">[outputI900]</InArgument>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftI900Out">[dtSwiftI900]</OutArgument>
+              </ui:InvokeCode.Arguments>
+            </ui:InvokeCode>
+            <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_19">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftI900]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dtSwiftI900.DefaultView.ToTable(False,"Message Type","Transaction Reference","Related Reference (21)","Transaction Date","Currency","Debit","Credit","Ordering Bank","Beneficiary Bank","Ordering Institution","Beneficiary Institution","Narration")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:MergeDataTable Destination="[dtSwiftBlankTemp]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="433.6,157.6" sap2010:WorkflowViewState.IdRef="MergeDataTable_9" MissingSchemaAction="Add" Source="[dtSwiftI900]" />
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="500.8,89.6" sap2010:WorkflowViewState.IdRef="Sequence_71">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <If Condition="[not String.IsNullOrEmpty(outputO910)]" DisplayName="If O910" sap:VirtualizedContainerService.HintSize="504,57.333333333333336" sap2010:WorkflowViewState.IdRef="If_5">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="500.8,611.2" sap2010:WorkflowViewState.IdRef="Sequence_37">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Sequence O910" sap:VirtualizedContainerService.HintSize="467.2,551.2" sap2010:WorkflowViewState.IdRef="Sequence_27">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Define input string containing multiple SWIFT messages&#xA;Dim inputString As String = outputO910&#xA;&#xA;Try&#xA;    ' Split input string into individual messages based on the starting delimiter {1:&#xA;    Dim messages() As String = inputString.Split(New String() {&quot;{1:&quot;}, StringSplitOptions.RemoveEmptyEntries)&#xA;&#xA;    ' Create a DataTable to hold the extracted data&#xA;    Dim dtSwiftO910 As New DataTable&#xA;&#xA;    ' Define columns&#xA;&#x9;dtSwiftO910.Columns.Add(&quot;Message Type&quot;, GetType(String))&#xA;    dtSwiftO910.Columns.Add(&quot;Transaction Reference&quot;, GetType(String))&#xA;    dtSwiftO910.Columns.Add(&quot;Related Reference (21)&quot;, GetType(String))&#xA;    dtSwiftO910.Columns.Add(&quot;Transaction Date&quot;, GetType(String))&#xA;    dtSwiftO910.Columns.Add(&quot;Currency&quot;, GetType(String))&#xA;    dtSwiftO910.Columns.Add(&quot;Debit&quot;)&#xA;    dtSwiftO910.Columns.Add(&quot;Credit&quot;)&#xA;    dtSwiftO910.Columns.Add(&quot;Ordering Bank&quot;, GetType(String))&#xA;    dtSwiftO910.Columns.Add(&quot;Beneficiary Bank&quot;, GetType(String))&#xA;&#x9;dtSwiftO910.Columns.Add(&quot;Ordering Institution&quot;, GetType(String))&#xA;&#x9;dtSwiftO910.Columns.Add(&quot;Narration&quot;, GetType(String))&#xA;&#x9;&#xA;&#x9;&#xA;    ' Loop through each message&#xA;    For Each message As String In messages&#xA;        Try&#xA;&#xA;            ' Extract and store each required field&#xA;            Dim transactionRef As String = Regex.Match(message, &quot;:20:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            Dim relatedRef As String = Regex.Match(message, &quot;:21:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            Dim dateCurrencyAmount As String = Regex.Match(message, &quot;:32A:(.+?)(?=:|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;&#xA;            ' Separate date, currency, and amount from :32A field&#xA;            Dim transactionDate As String = dateCurrencyAmount.Substring(0, 6)&#xA;            Dim currency As String = Regex.Match(dateCurrencyAmount, &quot;[A-Z]+&quot;).Value&#xA;            ' Match either format for amount: with or without decimal digits&#xA;           ' Dim amount As String = Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value&#xA;&#x9;&#xA;&#x9;Dim&#x9;amount = If(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;).length&gt;0, Double.Parse(Regex.Match(dateCurrencyAmount, &quot;\d+,\d{0,2}&quot;).Value.Replace(&quot;,&quot;,&quot;.&quot;)),0)&#xA;&#x9;&#x9;&#xA;&#xA;            ' Set Debit amount and Credit to 0&#xA;            Dim debitAmount  = amount&#xA;            Dim creditAmount As String = &quot;0&quot;&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim messageType = &quot;O910&quot;&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9; ' Extract ordering institution (all lines after :50K), then replace line breaks with spaces&#xA;            Dim orderingInstitution As String = Regex.Match(message, &quot;:50K:(.+?)(?=:|:\d{2}[A-Z]{1,2}|-\z)&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            orderingInstitution = Regex.Replace(orderingInstitution, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;            ' Now using the previous logic for beneficiary bank extraction for the ordering bank&#xA;            Dim orderingBankMatches As MatchCollection = Regex.Matches(message, &quot;\{2:O[^\{]*[A-Za-z]+&quot;)&#xA;            Dim orderingBankChars As New Text.StringBuilder()&#xA;&#xA;            For Each match As Match In orderingBankMatches&#xA;                orderingBankChars.Append(match.Value)&#xA;            Next&#xA;&#xA;            ' Remove all non-letter characters and join all the alphabetic parts&#xA;            Dim orderingBank As String = Regex.Replace(orderingBankChars.ToString(), &quot;[^\p{L}]&quot;, &quot;&quot;)&#xA;&#xA;            ' Extract beneficiary bank using the previous logic for the ordering bank&#xA;            Dim beneficiaryBank As String = &quot;NMBIB&quot;&#xA;           &#xA;            ' Extract narration&#xA;            'Dim narration As String = Regex.Match(message, &quot;:72:(.+?)(?=-|\r|\n)&quot;).Groups(1).Value.Trim()&#xA;            'narration = Regex.Replace(narration, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim narration As String = Regex.Match(message, &quot;:72:/(.+?)(?=-|\})&quot;, RegexOptions.Singleline).Groups(1).Value.Trim()&#xA;            narration = Regex.Replace(narration, &quot;\r?\n&quot;, &quot; &quot;)&#xA;&#xA;          &#xA;            ' Add a new row to the DataTable&#xA;            dtSwiftO910.Rows.Add(messageType, transactionRef, relatedRef, transactionDate, currency, debitAmount, creditAmount, orderingBank, beneficiaryBank, orderingInstitution, narration)&#xA;&#xA;        Catch ex As Exception&#xA;            Console.WriteLine(&quot;Error processing this message: &quot; &amp; ex.Message)&#xA;        End Try&#xA;    Next&#xA;&#xA;    ' Output the DataTable&#xA;    dtSwiftO910Out = dtSwiftO910&#xA;&#x9;&#xA;&#x9;&#x9;Try&#x9;&#xA;&#x9;&#x9;dtSwiftO910Out.Columns.Add(&quot;Beneficiary Institution&quot;)&#xA;&#x9;Catch colEx As Exception&#xA;&#x9;End Try&#xA;&#xA;&#xA;Catch ex As Exception&#xA;    Console.WriteLine(&quot;An error occurred: &quot; &amp; ex.Message)&#xA;End Try&#xA;" DisplayName="Invoke Code O910" sap:VirtualizedContainerService.HintSize="433.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_19">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="outputO910">[outputO910]</InArgument>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftO910Out">[dtSwiftO910]</OutArgument>
+              </ui:InvokeCode.Arguments>
+            </ui:InvokeCode>
+            <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_10">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftO910]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dtSwiftO910.DefaultView.ToTable(False,"Message Type","Transaction Reference","Related Reference (21)","Transaction Date","Currency","Debit","Credit","Ordering Bank","Beneficiary Bank","Ordering Institution","Beneficiary Institution","Narration")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:MergeDataTable Destination="[dtSwiftBlankTemp]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="433.6,157.6" sap2010:WorkflowViewState.IdRef="MergeDataTable_10" MissingSchemaAction="Add" Source="[dtSwiftO910]" />
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="500.8,89.6" sap2010:WorkflowViewState.IdRef="Sequence_38">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <If sap2010:Annotation.AnnotationText="Relook at the relevancy" Condition="[Not String.IsNullOrEmpty(outputO999 +outputO199 +outputI199 )]" DisplayName="If O999 and O199" sap:VirtualizedContainerService.HintSize="504,88" sap2010:WorkflowViewState.IdRef="If_7">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="500.8,611.2" sap2010:WorkflowViewState.IdRef="Sequence_43">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Sequence O999" sap:VirtualizedContainerService.HintSize="467.2,551.2" sap2010:WorkflowViewState.IdRef="Sequence_42">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Define your DataTable structure&#xA;Dim dt As DataTable = New DataTable()&#xA;dt.Columns.Add(&quot;Message Type&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Transaction Reference&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Related Reference (21)&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Ordering Bank&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Narration&quot;, GetType(String))&#xA;&#xA;Dim inputString As String = outputO999 + outputO199+outputI199&#xA;&#xA;' Split input string into individual messages based on the starting delimiter {1:&#xA;Dim messages() As String = inputString.Split(New String() {&quot;{1:&quot;}, StringSplitOptions.RemoveEmptyEntries)&#xA;&#xA;' Loop through each message and extract the relevant fields&#xA;For Each message As String In messages&#xA;    Dim messageType As String = &quot;&quot;&#xA;    Dim transactionReference As String = &quot;&quot;&#xA;    Dim relatedReference As String = &quot;&quot;&#xA;    Dim narration As String = &quot;&quot;&#xA;    Dim orderingBank As String = &quot;&quot;&#xA;&#xA;    ' Determine the message type based on the content of the {2: block&#xA;    If message.Contains(&quot;{2:O999&quot;) Then&#xA;        messageType = &quot;O999&quot;&#xA;    ElseIf message.Contains(&quot;{2:O199&quot;) Then&#xA;        messageType = &quot;O199&quot;&#xA;&#x9;ElseIf message.Contains(&quot;{2:I199&quot;) Then&#xA;        messageType = &quot;I199&quot;&#xA;    End If&#xA;&#xA;    ' Extract :20: (Transaction Reference)&#xA;    Dim regex20 As New Regex(&quot;:20:(.*?)\r?\n&quot;, RegexOptions.Singleline)&#xA;    Dim match20 As Match = regex20.Match(message)&#xA;    If match20.Success Then&#xA;        transactionReference = match20.Groups(1).Value.Trim()&#xA;    End If&#xA;&#xA;    ' Extract :21: (Related Reference)&#xA;    Dim regex21 As New Regex(&quot;:21:(.*?)\r?\n&quot;, RegexOptions.Singleline)&#xA;    Dim match21 As Match = regex21.Match(message)&#xA;    If match21.Success Then&#xA;        relatedReference = match21.Groups(1).Value.Trim()&#xA;    End If&#xA;&#xA;    ' Extract :79: (Narration)&#xA;    Dim regex79 As New Regex(&quot;:79:(.*?)-\}&quot;, RegexOptions.Singleline)&#xA;    Dim match79 As Match = regex79.Match(message)&#xA;    If match79.Success Then&#xA;        narration = match79.Groups(1).Value.Trim().Replace(Environment.NewLine, &quot; &quot;)&#xA;    End If&#xA;&#xA;    ' Extract Ordering Bank from {2: block&#xA;    Dim regex2 As New Regex(&quot;\{2:O.*?([A-Z]{4}[A-Z]{0,7})&quot;, RegexOptions.Singleline)&#xA;    Dim match2 As Match = regex2.Match(message)&#xA;    If match2.Success Then&#xA;        orderingBank = match2.Groups(1).Value.Trim()&#xA;    End If&#xA;&#xA;    ' Add extracted data to DataTable&#xA;    dt.Rows.Add(messageType, transactionReference, relatedReference, orderingBank, narration)&#xA;Next&#xA;&#xA;dtSwiftO999Out = dt&#xA;&#xA;Try&#xA;    dtSwiftO999Out.Columns.Add(&quot;Transaction Date&quot;, GetType(String))&#xA;    dtSwiftO999Out.Columns.Add(&quot;Currency&quot;, GetType(String))&#xA;    dtSwiftO999Out.Columns.Add(&quot;Debit&quot;, GetType(String))&#xA;    dtSwiftO999Out.Columns.Add(&quot;Credit&quot;, GetType(String))&#xA;    dtSwiftO999Out.Columns.Add(&quot;Beneficiary Bank&quot;, GetType(String))&#xA;    dtSwiftO999Out.Columns.Add(&quot;Ordering Institution&quot;, GetType(String))&#xA;    dtSwiftO999Out.Columns.Add(&quot;Beneficiary Institution&quot;, GetType(String))&#xA;Catch ex As Exception&#xA;End Try&#xA;&#xA;" DisplayName="Invoke Code O999" sap:VirtualizedContainerService.HintSize="433.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_22">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="outputO999">[outputO999]</InArgument>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftO999Out">[dtSwiftO999]</OutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="outputO199">[outputO199]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="outputI199">[outputI199]</InArgument>
+              </ui:InvokeCode.Arguments>
+            </ui:InvokeCode>
+            <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_13">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftO999]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dtSwiftO999.DefaultView.ToTable(False,"Message Type","Transaction Reference","Related Reference (21)","Transaction Date","Currency","Debit","Credit","Ordering Bank","Beneficiary Bank","Ordering Institution","Beneficiary Institution","Narration")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:MergeDataTable Destination="[dtSwiftBlankTemp]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="433.6,157.6" sap2010:WorkflowViewState.IdRef="MergeDataTable_11" MissingSchemaAction="Add" Source="[dtSwiftO999]" />
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="500.8,89.6" sap2010:WorkflowViewState.IdRef="Sequence_44">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <Assign sap:VirtualizedContainerService.HintSize="504,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_22">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftDetailed]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[dtSwiftBlankTemp]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="504,92" sap2010:WorkflowViewState.IdRef="ReportStatus_3" StatusText="[&quot;SWIFT PREPARATION COMPLETED&quot;]" />
+  </Sequence>
+</Activity>

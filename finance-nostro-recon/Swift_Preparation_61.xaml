@@ -1,0 +1,382 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="swiftFolderPath" Type="InArgument(x:String)" />
+    <x:Property Name="swiftWorkingsFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="dtSwiftStatement" Type="OutArgument(sd:DataTable)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1112.8,2072</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>ClosedXML</x:String>
+      <x:String>ClosedXML.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>ClosedXML</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="851.6,1448.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="outputSwift" />
+      <Variable x:TypeArguments="x:String" Name="tempSwift" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftwithoutAcc" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="484.8,56.8" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="518,685.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_8">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ForEachFileX DisplayName="For Each File in Folder" Filter="*.txt" Folder="[swiftFolderPath]" sap:VirtualizedContainerService.HintSize="484,625.3333333333334" sap2010:WorkflowViewState.IdRef="ForEachFileX_2" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
+            <ui:ForEachFileX.Body>
+              <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
+                <ActivityAction.Argument1>
+                  <DelegateInArgument x:TypeArguments="si:FileInfo" Name="CurrentFile" />
+                </ActivityAction.Argument1>
+                <ActivityAction.Argument2>
+                  <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
+                </ActivityAction.Argument2>
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,341.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:ReadTextFile File="{x:Null}" Content="[tempSwift]" DisplayName="Read Text File" FileName="[CurrentFile.ToString]" sap:VirtualizedContainerService.HintSize="416,114" sap2010:WorkflowViewState.IdRef="ReadTextFile_2" />
+                  <Assign sap:VirtualizedContainerService.HintSize="416,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_2">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[outputSwift]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[outputSwift+tempSwift]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEachFileX.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:ForEachFileX>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:ForEachFileX DisplayName="For Each File in Folder" Filter="*.txt" Folder="[swiftFolderPath]" sap:VirtualizedContainerService.HintSize="484.8,56.8" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
+      <ui:ForEachFileX.Body>
+        <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
+          <ActivityAction.Argument1>
+            <DelegateInArgument x:TypeArguments="si:FileInfo" Name="CurrentFile" />
+          </ActivityAction.Argument1>
+          <ActivityAction.Argument2>
+            <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
+          </ActivityAction.Argument2>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="484.8,942.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftStatementTemp" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ReadTextFile File="{x:Null}" Content="[tempSwift]" DisplayName="Read Text File" FileName="[CurrentFile.ToString]" sap:VirtualizedContainerService.HintSize="451.2,112.8" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Initialize the DataTable to store the combined results&#xD;&#xA;Dim dtTrxn As New DataTable()&#xD;&#xA;dtTrxn.Columns.Add(&quot;ValueDate&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;Debit&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;Credit&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;Currency&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;ReferenceCode&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;RelatedReference&quot;) ' New column for Related Reference after ReferenceCode&#xD;&#xA;dtTrxn.Columns.Add(&quot;TransactionDescription&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;AccountNumber&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;FileNumber&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;PageNumber&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;OpeningBalance&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;ClosingBalance&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;Unknown&quot;) ' Column for the unknown value from :20:&#xD;&#xA;&#xD;&#xA;' Input string containing SWIFT messages&#xD;&#xA;Dim input As String = outputSwift ' Replace with your actual input variable&#xD;&#xA;&#xD;&#xA;' Split the input string into batches using &quot;{1:F01&quot; as the delimiter&#xD;&#xA;Dim batches As String() = input.Split(New String() {&quot;{1:F01&quot;}, StringSplitOptions.None)&#xD;&#xA;&#xD;&#xA;' Variable to store the closing balance of the previous batch&#xD;&#xA;Dim previousClosingBalance As Decimal = 0D&#xD;&#xA;&#xD;&#xA;' Loop through each batch&#xD;&#xA;For i As Integer = 0 To batches.Length - 1&#xD;&#xA;    ' Skip empty batches&#xD;&#xA;    If String.IsNullOrWhiteSpace(batches(i)) Then Continue For&#xD;&#xA;&#xD;&#xA;    ' Reconstruct the batch by adding &quot;{1:F01&quot; prefix (which was removed during splitting)&#xD;&#xA;    Dim batch As String = &quot;{1:F01&quot; &amp; batches(i)&#xD;&#xA;&#xD;&#xA;    ' Extract account number, file number, and page number for this batch&#xD;&#xA;    Dim accountNumber As String = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:25:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;     Dim fileNumber As String = fileName 'System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:28C:)[^/\r\n]+&quot;).Value.Trim()&#xD;&#xA;    Dim pageNumber As String = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:28C:[^/]+/)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;&#xD;&#xA;    ' Extract the unknown value from :20:&#xD;&#xA;    Dim unknownValue As String = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:20:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;&#xD;&#xA;    ' Extract the Related Reference from :21: or similar tag if available&#xD;&#xA;    Dim relatedReference As String = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:21:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;&#xD;&#xA;    ' Extract Opening Balance and Currency&#xD;&#xA;    Dim openingBalance As Decimal = 0D&#xD;&#xA;    Dim currency As String = &quot;&quot;&#xD;&#xA;    Dim openingBalanceLine As String = &quot;&quot;&#xD;&#xA;&#xD;&#xA;    ' Check for :60M: or :60F:&#xD;&#xA;    If batch.Contains(&quot;:60M:&quot;) Then&#xD;&#xA;        openingBalanceLine = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:60M:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;    ElseIf batch.Contains(&quot;:60F:&quot;) Then&#xD;&#xA;        openingBalanceLine = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:60F:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;    End If&#xD;&#xA;&#xD;&#xA;    If Not String.IsNullOrEmpty(openingBalanceLine) Then&#xD;&#xA;        ' Skip the first character (C or D) and the second part (date)&#xD;&#xA;        If openingBalanceLine.Length &gt; 10 Then&#xD;&#xA;            currency = openingBalanceLine.Substring(7, 3).Trim()&#xD;&#xA;            Dim balancePart = openingBalanceLine.Substring(10).Trim().Replace(&quot;,&quot;, &quot;.&quot;)&#xD;&#xA;            Decimal.TryParse(balancePart, openingBalance)&#xD;&#xA;        End If&#xD;&#xA;    End If&#xD;&#xA;&#xD;&#xA;    ' Extract Closing Balance from :62F: or :62M:&#xD;&#xA;    Dim closingBalance As Decimal = 0D&#xD;&#xA;    Dim closingBalanceLine As String = &quot;&quot;&#xD;&#xA;&#xD;&#xA;    'If batch.Contains(&quot;:62F:&quot;) Then&#xD;&#xA;       closingBalanceLine = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:62F:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;   ' ElseIf batch.Contains(&quot;:62M:&quot;) Then&#xD;&#xA;       ' closingBalanceLine = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:62M:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;   ' End If&#xD;&#xA;&#xD;&#xA;    If Not String.IsNullOrEmpty(closingBalanceLine) Then&#xD;&#xA;        ' Skip the first character (C or D) and the second part (date)&#xD;&#xA;        If closingBalanceLine.Length &gt; 10 Then&#xD;&#xA;            Dim balancePart = closingBalanceLine.Substring(10).Trim().Replace(&quot;,&quot;, &quot;.&quot;)&#xD;&#xA;            Decimal.TryParse(balancePart, closingBalance)&#xD;&#xA;        End If&#xD;&#xA;    End If&#xD;&#xA;&#xD;&#xA;    ' Update the closing balance for the next batch&#xD;&#xA;    previousClosingBalance = closingBalance&#xD;&#xA;&#xD;&#xA;    ' Split the batch into transactions using &quot;:61:&quot; as the delimiter&#xD;&#xA;    Dim transactionLines = batch.Split(New String() {&quot;:61:&quot;}, StringSplitOptions.RemoveEmptyEntries)&#xD;&#xA;&#xD;&#xA;    If transactionLines.Length &gt; 1 Then&#xD;&#xA;        For Each line In transactionLines.Skip(1)&#xD;&#xA;            Dim parts = line.Split(New String() {vbLf}, 2, StringSplitOptions.None)&#xD;&#xA;            If parts.Length &lt; 2 Then Continue For&#xD;&#xA;&#xD;&#xA;            Dim header = parts(0).Trim()&#xD;&#xA;            Dim description = If(parts.Length &gt; 1, parts(1).Trim().replace(vbLf,&quot;&quot;).Split(&quot;:&quot;)(0), &quot;&quot;)&#xD;&#xA;&#xD;&#xA;            Try&#xD;&#xA;                ' Extract ValueDate and determine Debit/Credit&#xD;&#xA;                Dim ValueDateStr = header.Substring(0, 6)&#xD;&#xA;                Dim typeIndex As Integer = header.IndexOfAny({&quot;D&quot;c, &quot;C&quot;c})&#xD;&#xA;                Dim type As String = &quot;&quot;&#xD;&#xA;                Dim amountStr As String = &quot;&quot;&#xD;&#xA;                Dim amountStartIndex As Integer&#xD;&#xA;                Dim amountEndIndex As Integer&#xD;&#xA;&#xD;&#xA;                If typeIndex &gt;= 0 Then&#xD;&#xA;                    amountStartIndex = typeIndex + 1&#xD;&#xA;                    amountEndIndex = header.IndexOfAny({&quot;A&quot;c, &quot;B&quot;c, &quot;E&quot;c, &quot;F&quot;c, &quot;G&quot;c, &quot;H&quot;c, &quot;I&quot;c, &quot;J&quot;c, &quot;K&quot;c, &quot;L&quot;c, &quot;M&quot;c, &quot;N&quot;c, &quot;O&quot;c, &quot;P&quot;c, &quot;Q&quot;c, &quot;R&quot;c, &quot;S&quot;c, &quot;T&quot;c, &quot;U&quot;c, &quot;V&quot;c, &quot;W&quot;c, &quot;X&quot;c, &quot;Z&quot;c}, amountStartIndex)&#xD;&#xA;&#xD;&#xA;                    If amountEndIndex &gt; 0 Then&#xD;&#xA;                        amountStr = header.Substring(amountStartIndex, amountEndIndex - amountStartIndex).Trim().Replace(&quot;,&quot;, &quot;.&quot;)&#xD;&#xA;                        If header(typeIndex) = &quot;D&quot;c Then&#xD;&#xA;                            type = &quot;D&quot;&#xD;&#xA;                        ElseIf header(typeIndex) = &quot;C&quot;c Then&#xD;&#xA;                            type = &quot;C&quot;&#xD;&#xA;                        End If&#xD;&#xA;                    End If&#xD;&#xA;                End If&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;                Dim debit  As String =&quot;0&quot;&#xD;&#xA;                Dim credit As String = &quot;0&quot;&#xD;&#xA;&#xD;&#xA;                If type = &quot;D&quot; Then&#xD;&#xA;                    debit = amountStr.Replace(&quot;C&quot;,&quot;&quot;).Replace(&quot;D&quot;,&quot;&quot;).Replace(&quot;Y&quot;,&quot;&quot;)&#xD;&#xA;                ElseIf type = &quot;C&quot; Then&#xD;&#xA;                    credit = amountStr.Replace(&quot;C&quot;,&quot;&quot;).Replace(&quot;D&quot;,&quot;&quot;).Replace(&quot;Y&quot;,&quot;&quot;)&#xD;&#xA;                End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#xD;&#xA;                ' Extract ReferenceCode from header&#xD;&#xA;                Dim referenceCode As String = If(amountEndIndex &gt; 0, header.Substring(amountEndIndex), &quot;&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;referenceCode = referenceCode.Substring(4, referenceCode.Length-4)&#xD;&#xA;&#xD;&#xA;                If batch.Contains(&quot;:86:&quot;) Then&#xD;&#xA;                    referenceCode = If(amountEndIndex &gt; 0,   header.Substring(amountEndIndex, header.IndexOf(&quot;//&quot;) - amountEndIndex), &quot;&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;referenceCode = referenceCode.Substring(4, referenceCode.Length-4)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;relatedReference = If(amountEndIndex &gt; 0, header.Substring(amountEndIndex+header.IndexOf(&quot;//&quot;) - amountEndIndex).Replace(&quot;/&quot;,&quot;&quot;), &quot;&quot;) '+parts(1).Trim().Substring(0,parts(1).Trim().IndexOf(&quot;:86:&quot;)).replace(vbLf,&quot;&quot;)&#xD;&#xA;                End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;If referenceCode.Contains(&quot;//&quot;) Then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;relatedReference = referenceCode.Split(&quot;//&quot;)(1)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;referenceCode = referenceCode.Split(&quot;//&quot;)(0)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;End If &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#xD;&#xA;                ' Add the parsed data to the DataTable, including the extracted account, file, page numbers, the unknown value, and the related reference&#xD;&#xA;                dtTrxn.Rows.Add(ValueDateStr, debit.ToString().TrimStart(&quot;0&quot;c), credit.ToString().TrimStart(&quot;0&quot;c), currency, referenceCode, relatedReference, description, accountNumber, fileNumber, pageNumber, openingBalance, previousClosingBalance, unknownValue)&#xD;&#xA;&#xD;&#xA;            Catch ex As Exception&#xD;&#xA;                Console.WriteLine($&quot;Error parsing line: {line}&quot; + ex.ToString )&#xD;&#xA;            End Try&#xD;&#xA;        Next&#xD;&#xA;    Else&#xD;&#xA;        ' No :61: transactions, create a row with the extracted data&#xD;&#xA;        dtTrxn.Rows.Add(&quot;&quot;, 0, 0, currency, &quot;&quot;, relatedReference, &quot;&quot;, accountNumber, fileNumber, pageNumber, openingBalance, previousClosingBalance, unknownValue)&#xD;&#xA;    End If&#xD;&#xA;Next&#xD;&#xA;&#xD;&#xA;' Now dtTrxn contains all the required data, including the transactions and the account, file, page numbers, the unknown value, and the related reference.&#xD;&#xA;dtSwiftStatement = dtTrxn ' Assign the resulting DataTable to your output variable&#xD;&#xA;&#xD;&#xA;dtSwiftStatement.Columns(&quot;ReferenceCode&quot;).ColumnName = &quot;Transaction Reference&quot;&#xD;&#xA;dtSwiftStatement.Columns(&quot;RelatedReference&quot;).ColumnName = &quot;Related Reference (61)&quot;&#xD;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="451.2,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_13">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="outputSwift">[tempSwift]</InArgument>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftStatement">[dtSwiftStatementTemp]</OutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="fileName">[CurrentFile.Name]</InArgument>
+              </ui:InvokeCode.Arguments>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InvokeCode>
+            <If Condition="[dtSwiftStatement is Nothing]" sap:VirtualizedContainerService.HintSize="451.2,572.8" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="449.6,225.6" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="416,165.6" sap2010:WorkflowViewState.IdRef="Assign_3">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftStatement]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="sd:DataTable">[dtSwiftStatementTemp]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="449.6,217.6" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:MergeDataTable Destination="[dtSwiftStatement]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="416,157.6" sap2010:WorkflowViewState.IdRef="MergeDataTable_1" MissingSchemaAction="Add" Source="[dtSwiftStatementTemp]" />
+                </Sequence>
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachFileX.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ForEachFileX>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="484.8,398.4" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="449.6,248" sap2010:WorkflowViewState.IdRef="Sequence_9">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Initialize the DataTable to store the combined results&#xD;&#xA;Dim dtTrxn As New DataTable()&#xD;&#xA;dtTrxn.Columns.Add(&quot;ValueDate&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;Debit&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;Credit&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;Currency&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;ReferenceCode&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;RelatedReference&quot;) ' New column for Related Reference after ReferenceCode&#xD;&#xA;dtTrxn.Columns.Add(&quot;TransactionDescription&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;AccountNumber&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;FileNumber&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;PageNumber&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;OpeningBalance&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;ClosingBalance&quot;)&#xD;&#xA;dtTrxn.Columns.Add(&quot;Unknown&quot;) ' Column for the unknown value from :20:&#xD;&#xA;&#xD;&#xA;' Input string containing SWIFT messages&#xD;&#xA;Dim input As String = outputSwift ' Replace with your actual input variable&#xD;&#xA;&#xD;&#xA;' Split the input string into batches using &quot;{1:F01&quot; as the delimiter&#xD;&#xA;Dim batches As String() = input.Split(New String() {&quot;{1:F01&quot;}, StringSplitOptions.None)&#xD;&#xA;&#xD;&#xA;' Variable to store the closing balance of the previous batch&#xD;&#xA;Dim previousClosingBalance As Decimal = 0D&#xD;&#xA;&#xD;&#xA;' Loop through each batch&#xD;&#xA;For i As Integer = 0 To batches.Length - 1&#xD;&#xA;    ' Skip empty batches&#xD;&#xA;    If String.IsNullOrWhiteSpace(batches(i)) Then Continue For&#xD;&#xA;&#xD;&#xA;    ' Reconstruct the batch by adding &quot;{1:F01&quot; prefix (which was removed during splitting)&#xD;&#xA;    Dim batch As String = &quot;{1:F01&quot; &amp; batches(i)&#xD;&#xA;&#xD;&#xA;    ' Extract account number, file number, and page number for this batch&#xD;&#xA;    Dim accountNumber As String = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:25:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;     Dim fileNumber As String = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:28C:)[^/\r\n]+&quot;).Value.Trim()&#xD;&#xA;    Dim pageNumber As String = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:28C:[^/]+/)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;&#xD;&#xA;    ' Extract the unknown value from :20:&#xD;&#xA;    Dim unknownValue As String = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:20:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;&#xD;&#xA;    ' Extract the Related Reference from :21: or similar tag if available&#xD;&#xA;    Dim relatedReference As String = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:21:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;&#xD;&#xA;    ' Extract Opening Balance and Currency&#xD;&#xA;    Dim openingBalance As Decimal = 0D&#xD;&#xA;    Dim currency As String = &quot;&quot;&#xD;&#xA;    Dim openingBalanceLine As String = &quot;&quot;&#xD;&#xA;&#xD;&#xA;    ' Check for :60M: or :60F:&#xD;&#xA;    If batch.Contains(&quot;:60M:&quot;) Then&#xD;&#xA;        openingBalanceLine = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:60M:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;    ElseIf batch.Contains(&quot;:60F:&quot;) Then&#xD;&#xA;        openingBalanceLine = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:60F:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;    End If&#xD;&#xA;&#xD;&#xA;    If Not String.IsNullOrEmpty(openingBalanceLine) Then&#xD;&#xA;        ' Skip the first character (C or D) and the second part (date)&#xD;&#xA;        If openingBalanceLine.Length &gt; 10 Then&#xD;&#xA;            currency = openingBalanceLine.Substring(7, 3).Trim()&#xD;&#xA;            Dim balancePart = openingBalanceLine.Substring(10).Trim().Replace(&quot;,&quot;, &quot;.&quot;)&#xD;&#xA;            Decimal.TryParse(balancePart, openingBalance)&#xD;&#xA;        End If&#xD;&#xA;    End If&#xD;&#xA;&#xD;&#xA;    ' Extract Closing Balance from :62F: or :62M:&#xD;&#xA;    Dim closingBalance As Decimal = 0D&#xD;&#xA;    Dim closingBalanceLine As String = &quot;&quot;&#xD;&#xA;&#xD;&#xA;    'If batch.Contains(&quot;:62F:&quot;) Then&#xD;&#xA;       closingBalanceLine = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:62F:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;   ' ElseIf batch.Contains(&quot;:62M:&quot;) Then&#xD;&#xA;       ' closingBalanceLine = System.Text.RegularExpressions.Regex.Match(batch, &quot;(?&lt;=:62M:)[^\r\n]+&quot;).Value.Trim()&#xD;&#xA;   ' End If&#xD;&#xA;&#xD;&#xA;    If Not String.IsNullOrEmpty(closingBalanceLine) Then&#xD;&#xA;        ' Skip the first character (C or D) and the second part (date)&#xD;&#xA;        If closingBalanceLine.Length &gt; 10 Then&#xD;&#xA;            Dim balancePart = closingBalanceLine.Substring(10).Trim().Replace(&quot;,&quot;, &quot;.&quot;)&#xD;&#xA;            Decimal.TryParse(balancePart, closingBalance)&#xD;&#xA;        End If&#xD;&#xA;    End If&#xD;&#xA;&#xD;&#xA;    ' Update the closing balance for the next batch&#xD;&#xA;    previousClosingBalance = closingBalance&#xD;&#xA;&#xD;&#xA;    ' Split the batch into transactions using &quot;:61:&quot; as the delimiter&#xD;&#xA;    Dim transactionLines = batch.Split(New String() {&quot;:61:&quot;}, StringSplitOptions.RemoveEmptyEntries)&#xD;&#xA;&#xD;&#xA;    If transactionLines.Length &gt; 1 Then&#xD;&#xA;        For Each line In transactionLines.Skip(1)&#xD;&#xA;            Dim parts = line.Split(New String() {vbLf}, 2, StringSplitOptions.None)&#xD;&#xA;            If parts.Length &lt; 2 Then Continue For&#xD;&#xA;&#xD;&#xA;            Dim header = parts(0).Trim()&#xD;&#xA;            Dim description = If(parts.Length &gt; 1, parts(1).Trim().replace(vbLf,&quot;&quot;).Split(&quot;:&quot;)(0), &quot;&quot;)&#xD;&#xA;&#xD;&#xA;            Try&#xD;&#xA;                ' Extract ValueDate and determine Debit/Credit&#xD;&#xA;                Dim ValueDateStr = header.Substring(0, 6)&#xD;&#xA;                Dim typeIndex As Integer = header.IndexOfAny({&quot;D&quot;c, &quot;C&quot;c})&#xD;&#xA;                Dim type As String = &quot;&quot;&#xD;&#xA;                Dim amountStr As String = &quot;&quot;&#xD;&#xA;                Dim amountStartIndex As Integer&#xD;&#xA;                Dim amountEndIndex As Integer&#xD;&#xA;&#xD;&#xA;                If typeIndex &gt;= 0 Then&#xD;&#xA;                    amountStartIndex = typeIndex + 1&#xD;&#xA;                    amountEndIndex = header.IndexOfAny({&quot;A&quot;c, &quot;B&quot;c, &quot;E&quot;c, &quot;F&quot;c, &quot;G&quot;c, &quot;H&quot;c, &quot;I&quot;c, &quot;J&quot;c, &quot;K&quot;c, &quot;L&quot;c, &quot;M&quot;c, &quot;N&quot;c, &quot;O&quot;c, &quot;P&quot;c, &quot;Q&quot;c, &quot;R&quot;c, &quot;S&quot;c, &quot;T&quot;c, &quot;U&quot;c, &quot;V&quot;c, &quot;W&quot;c, &quot;X&quot;c, &quot;Z&quot;c}, amountStartIndex)&#xD;&#xA;&#xD;&#xA;                    If amountEndIndex &gt; 0 Then&#xD;&#xA;                        amountStr = header.Substring(amountStartIndex, amountEndIndex - amountStartIndex).Trim().Replace(&quot;,&quot;, &quot;.&quot;)&#xD;&#xA;                        If header(typeIndex) = &quot;D&quot;c Then&#xD;&#xA;                            type = &quot;D&quot;&#xD;&#xA;                        ElseIf header(typeIndex) = &quot;C&quot;c Then&#xD;&#xA;                            type = &quot;C&quot;&#xD;&#xA;                        End If&#xD;&#xA;                    End If&#xD;&#xA;                End If&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;                Dim debit  As String =&quot;0&quot;&#xD;&#xA;                Dim credit As String = &quot;0&quot;&#xD;&#xA;&#xD;&#xA;                If type = &quot;D&quot; Then&#xD;&#xA;                    debit = amountStr.Replace(&quot;C&quot;,&quot;&quot;).Replace(&quot;D&quot;,&quot;&quot;).Replace(&quot;Y&quot;,&quot;&quot;)&#xD;&#xA;                ElseIf type = &quot;C&quot; Then&#xD;&#xA;                    credit = amountStr.Replace(&quot;C&quot;,&quot;&quot;).Replace(&quot;D&quot;,&quot;&quot;).Replace(&quot;Y&quot;,&quot;&quot;)&#xD;&#xA;                End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#xD;&#xA;                ' Extract ReferenceCode from header&#xD;&#xA;                Dim referenceCode As String = If(amountEndIndex &gt; 0, header.Substring(amountEndIndex), &quot;&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;referenceCode = referenceCode.Substring(4, referenceCode.Length-4)&#xD;&#xA;&#xD;&#xA;                If batch.Contains(&quot;:86:&quot;) Then&#xD;&#xA;                    referenceCode = If(amountEndIndex &gt; 0,   header.Substring(amountEndIndex, header.IndexOf(&quot;//&quot;) - amountEndIndex), &quot;&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;referenceCode = referenceCode.Substring(4, referenceCode.Length-4)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;relatedReference = If(amountEndIndex &gt; 0, header.Substring(amountEndIndex+header.IndexOf(&quot;//&quot;) - amountEndIndex).Replace(&quot;/&quot;,&quot;&quot;), &quot;&quot;) '+parts(1).Trim().Substring(0,parts(1).Trim().IndexOf(&quot;:86:&quot;)).replace(vbLf,&quot;&quot;)&#xD;&#xA;                End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;If referenceCode.Contains(&quot;//&quot;) Then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;relatedReference = referenceCode.Split(&quot;//&quot;)(1)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;referenceCode = referenceCode.Split(&quot;//&quot;)(0)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;End If &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#xD;&#xA;                ' Add the parsed data to the DataTable, including the extracted account, file, page numbers, the unknown value, and the related reference&#xD;&#xA;                dtTrxn.Rows.Add(ValueDateStr, debit.ToString().TrimStart(&quot;0&quot;c), credit.ToString().TrimStart(&quot;0&quot;c), currency, referenceCode, relatedReference, description, accountNumber, fileNumber, pageNumber, openingBalance, previousClosingBalance, unknownValue)&#xD;&#xA;&#xD;&#xA;            Catch ex As Exception&#xD;&#xA;                Console.WriteLine($&quot;Error parsing line: {line}&quot; + ex.ToString )&#xD;&#xA;            End Try&#xD;&#xA;        Next&#xD;&#xA;    Else&#xD;&#xA;        ' No :61: transactions, create a row with the extracted data&#xD;&#xA;        dtTrxn.Rows.Add(&quot;&quot;, 0, 0, currency, &quot;&quot;, relatedReference, &quot;&quot;, accountNumber, fileNumber, pageNumber, openingBalance, previousClosingBalance, unknownValue)&#xD;&#xA;    End If&#xD;&#xA;Next&#xD;&#xA;&#xD;&#xA;' Now dtTrxn contains all the required data, including the transactions and the account, file, page numbers, the unknown value, and the related reference.&#xD;&#xA;dtSwiftStatement = dtTrxn ' Assign the resulting DataTable to your output variable&#xD;&#xA;&#xD;&#xA;dtSwiftStatement.Columns(&quot;ReferenceCode&quot;).ColumnName = &quot;Transaction Reference&quot;&#xD;&#xA;dtSwiftStatement.Columns(&quot;RelatedReference&quot;).ColumnName = &quot;Related Reference (61)&quot;&#xD;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="416,188" sap2010:WorkflowViewState.IdRef="InvokeCode_10">
+            <ui:InvokeCode.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="outputSwift">[outputSwift]</InArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftStatement">[dtSwiftStatement]</InOutArgument>
+            </ui:InvokeCode.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:InvokeCode>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:FilterDataTable DataTable="[dtSwiftStatement]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="484.8,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dtSwiftwithoutAcc]" SelectColumnsMode="Keep">
+      <ui:FilterDataTable.Filters>
+        <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+          <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="And" Operator="EMPTY">
+            <ui:FilterOperationArgument.Column>
+              <InArgument x:TypeArguments="x:String">["AccountNumber"]</InArgument>
+            </ui:FilterOperationArgument.Column>
+          </ui:FilterOperationArgument>
+        </scg:List>
+      </ui:FilterDataTable.Filters>
+      <ui:FilterDataTable.SelectColumns>
+        <scg:List x:TypeArguments="InArgument" Capacity="4">
+          <x:Null />
+        </scg:List>
+      </ui:FilterDataTable.SelectColumns>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:FilterDataTable>
+    <ui:FilterDataTable DataTable="[dtSwiftStatement]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="484.8,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[dtSwiftStatement]" SelectColumnsMode="Keep">
+      <ui:FilterDataTable.Filters>
+        <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+          <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="And" Operator="EMPTY">
+            <ui:FilterOperationArgument.Column>
+              <InArgument x:TypeArguments="x:String">["AccountNumber"]</InArgument>
+            </ui:FilterOperationArgument.Column>
+          </ui:FilterOperationArgument>
+        </scg:List>
+      </ui:FilterDataTable.Filters>
+      <ui:FilterDataTable.SelectColumns>
+        <scg:List x:TypeArguments="InArgument" Capacity="4">
+          <x:Null />
+        </scg:List>
+      </ui:FilterDataTable.SelectColumns>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:FilterDataTable>
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="484.8,411.2" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch.Try>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="dtSwiftStatement.AsEnumerable().ToList().ForEach(Sub(row)&#xA;If row(&quot;Debit&quot;).ToString().Length&gt;0 Then&#xA;    row(&quot;Debit&quot;) = Double.Parse(row(&quot;Debit&quot;).ToString())*1&#xA;End If&#xA;&#xA;If row(&quot;Credit&quot;).ToString().Length&gt;0 Then&#xA;&#x9;row(&quot;Credit&quot;) = Double.Parse(row(&quot;Credit&quot;).ToString())*1&#xA;End If&#xA;End Sub)&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="449.6,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_12">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftStatement">[dtSwiftStatement]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+        </ui:InvokeCode>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,106.4" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+      <TryCatch.Finally>
+        <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="449.6,89.6" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </TryCatch.Finally>
+    </TryCatch>
+    <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="484.8,113.6" sap2010:WorkflowViewState.IdRef="ReportStatus_1" StatusText="[&quot;SWIFT 61 COMPLETED&quot;]" />
+  </Sequence>
+</Activity>

@@ -1,0 +1,252 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="RenameAndOpenfilesfromServer" VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="RenameAndOpenfilesfromServer_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:st="clr-namespace:System.Text;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>OfficeOpenXml</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Model</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Platform</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>ExcelDataReader</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Text.Encoding.CodePages</AssemblyReference>
+      <AssemblyReference>EPPlus</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>UiPath.CodedWorkflows</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>ExcelDataReader.DataSet</AssemblyReference>
+      <AssemblyReference>ExcelDataReader</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="RenameAndOpenfilesfromServer" sap:VirtualizedContainerService.HintSize="808.0000000000001,2056" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="classification" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence sap:VirtualizedContainerService.HintSize="516.8,2032.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="directoryPath" />
+        <Variable x:TypeArguments="x:String" Name="targetPrepaid" />
+        <Variable x:TypeArguments="x:String" Name="targetCredit" />
+        <Variable x:TypeArguments="x:String" Name="sourceDirectory" />
+        <Variable x:TypeArguments="x:String" Name="creditFiles" />
+        <Variable x:TypeArguments="x:String" Name="prepaidFiles" />
+        <Variable x:TypeArguments="x:String" Name="targetWorking" />
+        <Variable x:TypeArguments="s:String[]" Name="allFiles" />
+        <Variable x:TypeArguments="x:String" Name="currentFolderType" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="483.2,242.4" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+        <ui:MultipleAssign.AssignOperations>
+          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[sourceDirectory]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">C:\Users\edmondz\Downloads\REPORTS\REPORTS</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[targetCredit]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Documents", "Automated Reconciliations", "CREDIT CARD")]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[targetPrepaid]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Documents", "Automated Reconciliations", "PREPAID CARD")]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[targetWorking]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Documents", "Automated Reconciliations")]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+          </scg:List>
+        </ui:MultipleAssign.AssignOperations>
+      </ui:MultipleAssign>
+      <ui:InvokeCode ContinueOnError="{x:Null}" Code="System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="483.2,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_2" Language="CSharp">
+        <ui:InvokeCode.Arguments>
+          <InArgument x:TypeArguments="st:EncodingProvider" x:Key="providerArg">[System.Text.CodePagesEncodingProvider.Instance]</InArgument>
+        </ui:InvokeCode.Arguments>
+      </ui:InvokeCode>
+      <ui:InvokeCode ContinueOnError="{x:Null}" Code="&#xA;&#xA;Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);&#xA;&#xA;string today = DateTime.Today.ToString(&quot;yyyy-MM-dd&quot;);&#xA;&#xA;// Create working directory e.g., UNSORTED/yyyy-MM-dd&#xA;string workingPath = Path.Combine(targetWorking, today);&#xA;Directory.CreateDirectory(workingPath);&#xA;&#xA;// Update targetWorking so that caller can pick up final folder&#xA;targetWorking = workingPath;&#xA;&#xA;string[] prefixes = new[] { &quot;TT2H4T0&quot;, &quot;TT2L2T0&quot;, &quot;TT2P2T0&quot; };&#xA;&#xA;foreach (string prefix in prefixes)&#xA;{&#xA;    var matchingFiles = Directory.GetFiles(sourceDirectory, prefix + &quot;*&quot;, SearchOption.TopDirectoryOnly)&#xA;        .OrderByDescending(f =&gt; File.GetLastWriteTime(f))&#xA;        .Take(2)&#xA;        .ToList();&#xA;&#xA;    foreach (var originalFile in matchingFiles)&#xA;    {&#xA;        string file = originalFile;&#xA;        string fileName = Path.GetFileName(file);&#xA;&#xA;        // Rename to .xlsx if needed&#xA;        if (!file.EndsWith(&quot;.xlsx&quot;, StringComparison.OrdinalIgnoreCase))&#xA;        {&#xA;            string newFilePath = Path.Combine(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file) + &quot;.xlsx&quot;);&#xA;&#xA;            try&#xA;            {&#xA;                File.Move(file, newFilePath, true);&#xA;                file = newFilePath;&#xA;                fileName = Path.GetFileName(file);&#xA;                Console.WriteLine($&quot;🔁 Renamed extension: {fileName}&quot;);&#xA;            }&#xA;            catch (Exception ex)&#xA;            {&#xA;                Console.WriteLine($&quot;❌ Rename failed for {file}: {ex.Message}&quot;);&#xA;                continue;&#xA;            }&#xA;        }&#xA;&#xA;        // Determine final name&#xA;        string renamedFileName;&#xA;        if (fileName.ToUpper().StartsWith(&quot;TT2P2T0&quot;))&#xA;            renamedFileName = &quot;Posted Transaction Details.xlsx&quot;;&#xA;        else if (fileName.ToUpper().StartsWith(&quot;TT2L2T0&quot;))&#xA;            renamedFileName = &quot;Transaction Report.xlsx&quot;;&#xA;        else if (fileName.ToUpper().StartsWith(&quot;TT2H4T0&quot;))&#xA;            renamedFileName = &quot;Account Balance And Status Report.xlsx&quot;;&#xA;        else&#xA;            renamedFileName = fileName; // fallback&#xA;&#xA;        string workingDestPath = Path.Combine(workingPath, renamedFileName);&#xA;&#xA;        // If file already exists, append _TWO before extension&#xA;        if (File.Exists(workingDestPath))&#xA;        {&#xA;            string nameOnly = Path.GetFileNameWithoutExtension(renamedFileName);&#xA;            string ext = Path.GetExtension(renamedFileName);&#xA;            string altName = nameOnly + &quot;_TWO&quot; + ext;&#xA;            workingDestPath = Path.Combine(workingPath, altName);&#xA;            Console.WriteLine($&quot;⚠️ File exists — saving second copy as: {altName}&quot;);&#xA;        }&#xA;&#xA;        try&#xA;        {&#xA;            File.Copy(file, workingDestPath, true);&#xA;            Console.WriteLine($&quot;✅ Copied to working folder as: {Path.GetFileName(workingDestPath)}&quot;);&#xA;        }&#xA;        catch (Exception ex)&#xA;        {&#xA;            Console.WriteLine($&quot;❌ Failed to copy to working folder: {ex.Message}&quot;);&#xA;        }&#xA;    }&#xA;}&#xA;" DisplayName="Copy Files" sap:VirtualizedContainerService.HintSize="483.2,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_4" Language="CSharp">
+        <ui:InvokeCode.Arguments>
+          <InArgument x:TypeArguments="st:EncodingProvider" x:Key="providerArg">[System.Text.CodePagesEncodingProvider.Instance]</InArgument>
+          <InOutArgument x:TypeArguments="x:String" x:Key="targetWorking">[targetWorking]</InOutArgument>
+          <InOutArgument x:TypeArguments="x:String" x:Key="sourceDirectory">[sourceDirectory]</InOutArgument>
+        </ui:InvokeCode.Arguments>
+      </ui:InvokeCode>
+      <ui:InvokeCode ContinueOnError="{x:Null}" Code="&#xA;Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);&#xA;&#xA;string today = DateTime.Today.ToString(&quot;yyyy-MM-dd&quot;);&#xA;&#xA;// Define classification output folders only&#xA;string creditPath = Path.Combine(targetCredit, today);&#xA;string prepaidPath = Path.Combine(targetPrepaid, today);&#xA;&#xA;// Create classification folders&#xA;Directory.CreateDirectory(creditPath);&#xA;Directory.CreateDirectory(prepaidPath);&#xA;&#xA;Console.WriteLine($&quot;📁 Folders ready:\n - {creditPath}\n - {prepaidPath}&quot;);&#xA;" DisplayName="Folder Preparation" sap:VirtualizedContainerService.HintSize="483.2,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
+        <ui:InvokeCode.Arguments>
+          <InOutArgument x:TypeArguments="x:String" x:Key="sourceDirectory">[sourceDirectory]</InOutArgument>
+          <InOutArgument x:TypeArguments="x:String" x:Key="targetCredit">[targetCredit]</InOutArgument>
+          <InOutArgument x:TypeArguments="x:String" x:Key="targetPrepaid">[targetPrepaid]</InOutArgument>
+          <InOutArgument x:TypeArguments="x:String" x:Key="targetWorking">[targetWorking]</InOutArgument>
+        </ui:InvokeCode.Arguments>
+      </ui:InvokeCode>
+      <Assign sap:VirtualizedContainerService.HintSize="483.2,113.6" sap2010:WorkflowViewState.IdRef="Assign_6">
+        <Assign.To>
+          <OutArgument x:TypeArguments="s:String[]">[allFiles]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(targetWorking, "*.xlsx")]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="483.2,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Found &quot; &amp; allFiles.Length.ToString &amp; &quot; files in: &quot; &amp; targetWorking]" />
+      <ui:ForEachFileX DisplayName="For Each File in Folder" Folder="[targetWorking]" sap:VirtualizedContainerService.HintSize="483.2,828.8" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="SizeSmallestFirst" SkipFolderWithoutPermission="False">
+        <ui:ForEachFileX.Body>
+          <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
+            <ActivityAction.Argument1>
+              <DelegateInArgument x:TypeArguments="si:FileInfo" Name="currentFile" />
+            </ActivityAction.Argument1>
+            <ActivityAction.Argument2>
+              <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
+            </ActivityAction.Argument2>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="449.6,542.4" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="fileNameOnly" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;🔍 Processing file: &quot; &amp; currentFile.Name]" />
+              <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="416,120" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="Sheet0" WorkbookPath="[currentFile.FullName]" />
+              <ui:InvokeCode ContinueOnError="{x:Null}" Code="try&#xD;&#xA;{&#xD;&#xA;    // === Register encoding provider (safe for UiPath) ===&#xD;&#xA;    var providerType = Type.GetType(&quot;System.Text.CodePagesEncodingProvider, System.Text.Encoding.CodePages&quot;);&#xD;&#xA;    if (providerType != null)&#xD;&#xA;    {&#xD;&#xA;        var instanceProp = providerType.GetProperty(&quot;Instance&quot;);&#xD;&#xA;        var instance = instanceProp.GetValue(null);&#xD;&#xA;        var registerMethod = typeof(System.Text.Encoding).GetMethod(&quot;RegisterProvider&quot;);&#xD;&#xA;        registerMethod.Invoke(null, new[] { instance });&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    string fileNameOnly = currentFile.Name.ToLower();&#xD;&#xA;    classification = &quot;&quot;; // OUT result&#xD;&#xA;&#xD;&#xA;    // === Step 0: Rename single sheet to &quot;Data sheet1&quot; ===&#xD;&#xA;    using (var package = new OfficeOpenXml.ExcelPackage(new FileInfo(currentFile.FullName)))&#xD;&#xA;    {&#xD;&#xA;        if (package.Workbook.Worksheets.Count == 1)&#xD;&#xA;        {&#xD;&#xA;            var ws = package.Workbook.Worksheets[0];&#xD;&#xA;            ws.Name = &quot;Data sheet1&quot;;&#xD;&#xA;            package.Save();&#xD;&#xA;            Console.WriteLine($&quot;🔁 Renamed single sheet to 'Data sheet1': {currentFile.Name}&quot;);&#xD;&#xA;&#xD;&#xA;            // === Classification logic (same as merged path) ===&#xD;&#xA;            var dt = new DataTable();&#xD;&#xA;            var cells = ws.Cells;&#xD;&#xA;            bool hasHeader = true;&#xD;&#xA;&#xD;&#xA;            for (int col = ws.Dimension.Start.Column; col &lt;= ws.Dimension.End.Column; col++)&#xD;&#xA;                dt.Columns.Add(hasHeader ? cells[1, col].Text : $&quot;Column{col}&quot;);&#xD;&#xA;&#xD;&#xA;            for (int row = 2; row &lt;= ws.Dimension.End.Row; row++)&#xD;&#xA;            {&#xD;&#xA;                var dataRow = dt.NewRow();&#xD;&#xA;                for (int col = ws.Dimension.Start.Column; col &lt;= ws.Dimension.End.Column; col++)&#xD;&#xA;                    dataRow[col - 1] = cells[row, col].Text;&#xD;&#xA;&#xD;&#xA;                dt.Rows.Add(dataRow);&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;            int rowCount = dt.Rows.Count;&#xD;&#xA;&#xD;&#xA;            if (fileNameOnly.Contains(&quot;posted transaction details&quot;) || fileNameOnly.Contains(&quot;transaction report&quot;))&#xD;&#xA;            {&#xD;&#xA;                if (dt.Columns.Contains(&quot;Product Type&quot;))&#xD;&#xA;                {&#xD;&#xA;                    for (int i = 0; i &lt; Math.Min(rowCount, 10); i++)&#xD;&#xA;                    {&#xD;&#xA;                        string value = dt.Rows[i][&quot;Product Type&quot;]?.ToString().Trim().ToUpper();&#xD;&#xA;                        if (value == &quot;CREDIT&quot;) { classification = &quot;CREDIT&quot;; break; }&#xD;&#xA;                        else if (!string.IsNullOrWhiteSpace(value)) { classification = &quot;PREPAID&quot;; break; }&#xD;&#xA;                    }&#xD;&#xA;                }&#xD;&#xA;            }&#xD;&#xA;            else if (fileNameOnly.Contains(&quot;account balance and status report&quot;))&#xD;&#xA;            {&#xD;&#xA;                if (dt.Columns.Contains(&quot;Device Number&quot;))&#xD;&#xA;                {&#xD;&#xA;                    for (int i = 0; i &lt; Math.Min(rowCount, 10); i++)&#xD;&#xA;                    {&#xD;&#xA;                        string value = dt.Rows[i][&quot;Device Number&quot;]?.ToString().Trim();&#xD;&#xA;                        if (value.StartsWith(&quot;550558&quot;)) { classification = &quot;PREPAID&quot;; break; }&#xD;&#xA;                        else if (!string.IsNullOrWhiteSpace(value)) { classification = &quot;CREDIT&quot;; break; }&#xD;&#xA;                    }&#xD;&#xA;                }&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;            if (string.IsNullOrEmpty(classification))&#xD;&#xA;            {&#xD;&#xA;                Console.WriteLine($&quot;⚠️ Could not classify contents of: {fileNameOnly}&quot;);&#xD;&#xA;                return;&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;            // === Move to correct folder ===&#xD;&#xA;            string today = DateTime.Today.ToString(&quot;yyyy-MM-dd&quot;);&#xD;&#xA;            string destinationFolder = classification == &quot;CREDIT&quot;&#xD;&#xA;                ? Path.Combine(targetCredit, today)&#xD;&#xA;                : Path.Combine(targetPrepaid, today);&#xD;&#xA;&#xD;&#xA;            Directory.CreateDirectory(destinationFolder);&#xD;&#xA;            string destinationPath = Path.Combine(destinationFolder, currentFile.Name);&#xD;&#xA;&#xD;&#xA;            if (!string.Equals(currentFile.FullName, destinationPath, StringComparison.OrdinalIgnoreCase))&#xD;&#xA;            {&#xD;&#xA;                File.Copy(currentFile.FullName, destinationPath, true);&#xD;&#xA;                File.Delete(currentFile.FullName);&#xD;&#xA;                Console.WriteLine($&quot;✅ Moved to {classification} folder: {currentFile.Name}&quot;);&#xD;&#xA;            }&#xD;&#xA;            else&#xD;&#xA;            {&#xD;&#xA;                Console.WriteLine($&quot;✅ Already in correct folder: {currentFile.Name}&quot;);&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;            return; // ✅ Skip merging&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    // === Step 1: Merge all sheets ===&#xD;&#xA;    var mergedTable = new DataTable();&#xD;&#xA;&#xD;&#xA;    using (var stream = File.Open(currentFile.FullName, FileMode.Open, FileAccess.Read))&#xD;&#xA;    using (var reader = ExcelDataReader.ExcelReaderFactory.CreateReader(stream))&#xD;&#xA;    {&#xD;&#xA;        var dataSet = reader.AsDataSet(new ExcelDataReader.ExcelDataSetConfiguration&#xD;&#xA;        {&#xD;&#xA;            ConfigureDataTable = _ =&gt; new ExcelDataReader.ExcelDataTableConfiguration { UseHeaderRow = true }&#xD;&#xA;        });&#xD;&#xA;&#xD;&#xA;        foreach (DataTable sheet in dataSet.Tables)&#xD;&#xA;        {&#xD;&#xA;            if (sheet.Rows.Count == 0) continue;&#xD;&#xA;&#xD;&#xA;            if (mergedTable.Columns.Count == 0)&#xD;&#xA;                mergedTable = sheet.Clone();&#xD;&#xA;&#xD;&#xA;            foreach (DataRow row in sheet.Rows)&#xD;&#xA;                mergedTable.ImportRow(row);&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    // === Step 2: Classify merged data ===&#xD;&#xA;    int mergedRowCount = mergedTable.Rows.Count;&#xD;&#xA;&#xD;&#xA;    if (fileNameOnly.Contains(&quot;posted transaction details&quot;) || fileNameOnly.Contains(&quot;transaction report&quot;))&#xD;&#xA;    {&#xD;&#xA;        if (mergedTable.Columns.Contains(&quot;Product Type&quot;))&#xD;&#xA;        {&#xD;&#xA;            for (int i = 0; i &lt; Math.Min(mergedRowCount, 10); i++)&#xD;&#xA;            {&#xD;&#xA;                string value = mergedTable.Rows[i][&quot;Product Type&quot;]?.ToString().Trim().ToUpper();&#xD;&#xA;                if (value == &quot;CREDIT&quot;) { classification = &quot;CREDIT&quot;; break; }&#xD;&#xA;                else if (!string.IsNullOrWhiteSpace(value)) { classification = &quot;PREPAID&quot;; break; }&#xD;&#xA;            }&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    else if (fileNameOnly.Contains(&quot;account balance and status report&quot;))&#xD;&#xA;    {&#xD;&#xA;        if (mergedTable.Columns.Contains(&quot;Device Number&quot;))&#xD;&#xA;        {&#xD;&#xA;            for (int i = 0; i &lt; Math.Min(mergedRowCount, 10); i++)&#xD;&#xA;            {&#xD;&#xA;                string value = mergedTable.Rows[i][&quot;Device Number&quot;]?.ToString().Trim();&#xD;&#xA;                if (value.StartsWith(&quot;550558&quot;)) { classification = &quot;PREPAID&quot;; break; }&#xD;&#xA;                else if (!string.IsNullOrWhiteSpace(value)) { classification = &quot;CREDIT&quot;; break; }&#xD;&#xA;            }&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    if (string.IsNullOrEmpty(classification))&#xD;&#xA;    {&#xD;&#xA;        Console.WriteLine($&quot;⚠️ Could not classify contents of: {fileNameOnly}&quot;);&#xD;&#xA;        return;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    // === Step 3: Overwrite Excel with merged single sheet ===&#xD;&#xA;    using (var package = new OfficeOpenXml.ExcelPackage())&#xD;&#xA;    {&#xD;&#xA;        var ws = package.Workbook.Worksheets.Add(&quot;Data sheet1&quot;);&#xD;&#xA;&#xD;&#xA;        // Write headers&#xD;&#xA;        for (int col = 0; col &lt; mergedTable.Columns.Count; col++)&#xD;&#xA;            ws.Cells[1, col + 1].Value = mergedTable.Columns[col].ColumnName;&#xD;&#xA;&#xD;&#xA;        // Write rows&#xD;&#xA;        for (int row = 0; row &lt; mergedTable.Rows.Count; row++)&#xD;&#xA;        {&#xD;&#xA;            for (int col = 0; col &lt; mergedTable.Columns.Count; col++)&#xD;&#xA;                ws.Cells[row + 2, col + 1].Value = mergedTable.Rows[row][col];&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        package.SaveAs(new FileInfo(currentFile.FullName));&#xD;&#xA;        Console.WriteLine($&quot;📄 Overwritten with merged sheet: {currentFile.Name}&quot;);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    // === Step 4: Move merged file to correct folder ===&#xD;&#xA;    {&#xD;&#xA;        string today = DateTime.Today.ToString(&quot;yyyy-MM-dd&quot;);&#xD;&#xA;        string destinationFolder = classification == &quot;CREDIT&quot;&#xD;&#xA;            ? Path.Combine(targetCredit, today)&#xD;&#xA;            : Path.Combine(targetPrepaid, today);&#xD;&#xA;&#xD;&#xA;        Directory.CreateDirectory(destinationFolder);&#xD;&#xA;        string destinationPath = Path.Combine(destinationFolder, currentFile.Name);&#xD;&#xA;&#xD;&#xA;        if (!string.Equals(currentFile.FullName, destinationPath, StringComparison.OrdinalIgnoreCase))&#xD;&#xA;        {&#xD;&#xA;            File.Copy(currentFile.FullName, destinationPath, true);&#xD;&#xA;            File.Delete(currentFile.FullName);&#xD;&#xA;            Console.WriteLine($&quot;✅ Moved to {classification} folder: {currentFile.Name}&quot;);&#xD;&#xA;        }&#xD;&#xA;        else&#xD;&#xA;        {&#xD;&#xA;            Console.WriteLine($&quot;✅ Already in correct folder: {currentFile.Name}&quot;);&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;catch (Exception ex)&#xD;&#xA;{&#xD;&#xA;    Console.WriteLine($&quot;❌ Error processing {currentFile.Name.ToLower()}: {ex.Message}&quot;);&#xD;&#xA;}&#xD;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="416,188" sap2010:WorkflowViewState.IdRef="InvokeCode_8" Language="CSharp">
+                <ui:InvokeCode.Arguments>
+                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dataTable">[dt]</InOutArgument>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="classification">[classification]</InOutArgument>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="targetCredit">[targetCredit]</InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="targetPrepaid">[targetPrepaid]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="currentFolderType">[currentFolderType]</InArgument>
+                  <InArgument x:TypeArguments="si:FileInfo" x:Key="currentFile">[currentFile]</InArgument>
+                </ui:InvokeCode.Arguments>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:InvokeCode>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEachFileX.Body>
+      </ui:ForEachFileX>
+    </Sequence>
+  </Sequence>
+</Activity>

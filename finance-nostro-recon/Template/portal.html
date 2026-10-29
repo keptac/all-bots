@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nostro Manual Matching</title>
+<style>
+  :root{
+    --bg:#f4f5f7; --panel:#fff; --ink:#1c2430; --muted:#6b7684; --line:#dfe3e8;
+    --cbs:#002060; --stm:#c00000; --ok:#1a7f4b; --bad:#c0392b; --warn:#b06a00;
+    --accent:#0b5cad; --sel:#eaf2fb;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.45 "Segoe UI",system-ui,sans-serif}
+  header{background:var(--panel);border-bottom:1px solid var(--line);padding:9px 16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  header h1{font-size:15px;margin:0;font-weight:650}
+  .meta{color:var(--muted);font-size:12px}
+  .meta b{color:var(--ink);font-weight:600}
+  .spacer{flex:1}
+  button{font:inherit;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:5px;cursor:pointer}
+  button:hover:not(:disabled){border-color:#b9c0c8}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  button.primary:disabled{background:#9db4cc;border-color:#9db4cc}
+  button.link{border:0;background:none;color:var(--accent);padding:2px 4px;text-decoration:underline}
+  button.sm{padding:3px 9px;font-size:12px}
+  input,select{font:inherit;padding:5px 8px;border:1px solid var(--line);border-radius:5px;background:#fff}
+  main{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:7px;display:flex;flex-direction:column;min-height:0}
+  .panel h2{margin:0;padding:9px 12px;font-size:13px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+  .dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+  .dot.cbs{background:var(--cbs)} .dot.stm{background:var(--stm)}
+  .filters{display:flex;gap:6px;padding:8px 12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .filters input[type=search]{flex:1;min-width:130px}
+  .scroll{overflow:auto;max-height:42vh}
+  table{border-collapse:collapse;width:100%;font-size:12px}
+  th{position:sticky;top:0;background:#fafbfc;text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);font-weight:600;white-space:nowrap;z-index:1}
+  td{padding:5px 8px;border-bottom:1px solid #f0f2f4;vertical-align:top}
+  tbody tr.pick{cursor:pointer}
+  tbody tr.pick:hover{background:#f7f9fb}
+  tbody tr.sel{background:var(--sel)}
+  tbody tr.cand{box-shadow:inset 3px 0 0 var(--warn)}
+  tbody tr.now{background:#f0f7ff;font-weight:600}
+  .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .ref{font-family:Consolas,ui-monospace,monospace;font-size:11px;white-space:nowrap}
+  .narr{color:var(--muted);max-width:310px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cbs td.a{color:var(--cbs);font-weight:600}
+  .stm td.a{color:var(--stm);font-weight:600}
+  .count{padding:6px 12px;color:var(--muted);font-size:11.5px;border-top:1px solid var(--line)}
+  .band{margin:0 12px 12px;background:var(--panel);border:1px solid var(--line);border-radius:7px}
+  .band .row{display:flex;gap:16px;align-items:center;padding:10px 14px;flex-wrap:wrap}
+  .band h3{margin:0;padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--line);font-weight:650;display:flex;align-items:center;gap:10px}
+  .net{font-variant-numeric:tabular-nums;font-weight:650}
+  .verdict{padding:3px 9px;border-radius:99px;font-size:12px;font-weight:600}
+  .verdict.ok{background:#e4f4ea;color:var(--ok)}
+  .verdict.bad{background:#fbe9e7;color:var(--bad)}
+  .verdict.idle{background:#eef0f2;color:var(--muted)}
+  .sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--line)}
+  .sum div{background:var(--panel);padding:10px 14px}
+  .sum .k{color:var(--muted);font-size:11.5px}
+  .sum .v{font-variant-numeric:tabular-nums;font-size:14px;font-weight:650;margin-top:2px}
+  .sum .d{font-size:11px;color:var(--warn);font-variant-numeric:tabular-nums}
+  .sum .v.ok{color:var(--ok)} .sum .v.bad{color:var(--bad)}
+  .empty{padding:24px;text-align:center;color:var(--muted)}
+  .note{padding:10px 14px;border-top:1px solid var(--line);color:var(--muted);font-size:11.5px}
+  code{background:#eef0f2;padding:1px 5px;border-radius:3px;font-size:11px}
+  .start{margin:12px;padding:30px;border:2px dashed var(--line);border-radius:9px;text-align:center;background:var(--panel)}
+  .stale{margin:0 12px 12px;padding:9px 14px;background:#fff7e6;border:1px solid #f0d9a8;border-radius:7px;color:#7a5200;font-size:12px}
+  @media (max-width:1100px){ main{grid-template-columns:1fr} .scroll{max-height:34vh} }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Nostro Manual Matching</h1>
+  <label class="meta">Account <select id="acct" disabled><option>—</option></select></label>
+  <button id="histBtn" disabled>History</button>
+  <span class="meta" id="meta">no folder opened</span>
+  <span class="spacer"></span>
+  <span class="meta" id="userWrap">Your name <input id="who" size="13" placeholder="required"></span>
+  <button id="reopen" hidden>Change folder</button>
+</header>
+
+<div class="start" id="start">
+  <p><b>Open the reconciliation folder</b></p>
+  <p class="meta">Pick the <code>Nostro</code> folder — the one holding the dated run folders. The portal indexes
+     every run and account it finds, opens the most recent by itself, and writes tickets straight back into
+     <code>Manual Matches</code>.<br>Everything is read in your browser; nothing is uploaded.</p>
+  <p style="margin-top:16px">
+    <button class="primary" id="pickDir">Choose folder</button>
+    <input type="file" id="dirInput" webkitdirectory directory multiple hidden>
+  </p>
+</div>
+
+<section class="band" id="history" hidden>
+  <h3>History <span class="meta" id="histCount"></span><span class="spacer"></span><button class="link" id="histClose">hide</button></h3>
+  <div class="scroll" style="max-height:34vh"><table id="histTbl"><thead>
+    <tr><th>Run date</th><th>Bank</th><th>Account</th><th>Produced</th><th>Download</th><th></th></tr>
+  </thead><tbody></tbody></table></div>
+  <div class="note">Opening an older run lets you review it. Tickets always apply to items by Item Id, so raising
+    one against a stale run is refused later if the item has since been matched.</div>
+</section>
+
+<div class="stale" id="stale" hidden></div>
+
+<main id="app" hidden>
+  <section class="panel">
+    <h2><span class="dot cbs"></span> Ledger (CBS) outstanding <span class="spacer"></span><button class="link" id="clearL">clear</button></h2>
+    <div class="filters">
+      <input type="search" id="qL" placeholder="reference, UETR, narrative…">
+      <select id="gL"><option value="">any age</option></select>
+      <select id="sL"><option value="">DR and CR</option><option value="dr">DR only</option><option value="cr">CR only</option></select>
+    </div>
+    <div class="scroll"><table id="tL"><thead></thead><tbody></tbody></table></div>
+    <div class="count" id="cL"></div>
+  </section>
+
+  <section class="panel">
+    <h2><span class="dot stm"></span> Statement outstanding <span class="spacer"></span><button class="link" id="suggest">suggest counterparties</button><button class="link" id="clearS">clear</button></h2>
+    <div class="filters">
+      <input type="search" id="qS" placeholder="reference, UETR, narrative…">
+      <select id="gS"><option value="">any age</option></select>
+      <select id="sS"><option value="">DR and CR</option><option value="dr">DR only</option><option value="cr">CR only</option></select>
+    </div>
+    <div class="scroll"><table id="tS"><thead></thead><tbody></tbody></table></div>
+    <div class="count" id="cS"></div>
+  </section>
+</main>
+
+<section class="band" id="tray" hidden>
+  <div class="row">
+    <span>Ledger net <span class="net" id="netL">0.00</span></span>
+    <span>Statement net <span class="net" id="netS">0.00</span></span>
+    <span class="verdict idle" id="verdict">select items on both sides</span>
+    <span class="spacer"></span>
+    <input id="reason" size="30" placeholder="why these match (recorded)">
+    <button class="primary" id="add" disabled>Add ticket</button>
+  </div>
+  <div id="tickets"></div>
+</section>
+
+<section class="band" id="sumBand" hidden>
+  <h3>Summary position</h3>
+  <div class="sum">
+    <div><div class="k">Ledger balance</div><div class="v" id="sbL">—</div></div>
+    <div><div class="k">Statement balance</div><div class="v" id="sbS">—</div></div>
+    <div><div class="k">Corrected ledger balance</div><div class="v" id="scL">—</div><div class="d" id="sdL"></div></div>
+    <div><div class="k">Corrected statement balance</div><div class="v" id="scS">—</div><div class="d" id="sdS"></div></div>
+    <div><div class="k">Check_Balance</div><div class="v" id="sChk">—</div><div class="d" id="sdChk"></div></div>
+  </div>
+  <div class="note" id="saveNote"></div>
+  <div class="row">
+    <button class="primary" id="save" disabled>Save tickets to folder</button>
+    <button id="download">Download journal instead</button>
+    <span class="spacer"></span>
+    <span class="meta" id="savedAt"></span>
+  </div>
+</section>
+
+<script>
+(function(){
+  "use strict";
+  var D=null, selL=new Set(), selS=new Set(), tickets=[], cands=new Set();
+  var dirHandle=null, runs=[], current=null;
+  var $=function(id){return document.getElementById(id)};
+  var money=function(n){return (n||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})};
+  var fmt=function(n){return n===0?"":money(n)};
+  var esc=function(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+  var hasFS=(typeof window.showDirectoryPicker==="function");
+  var SKIP=/^(backup|manual matches)$/i;
+
+  // ---- who is signed in ----------------------------------------------------
+  // whoami.aspx returns the Windows identity IIS authenticated. When the portal
+  // runs from the file system, or the endpoint is absent, fall back to asking -
+  // the name only has to be trustworthy where it is served over the intranet.
+  try{ var w=localStorage.getItem("nostro.who"); if(w) $("who").value=w; }catch(e){}
+  $("who").addEventListener("input",function(){ try{localStorage.setItem("nostro.who",$("who").value)}catch(e){}; sync(); });
+
+  // ---- server mode ---------------------------------------------------------
+  // The people using this are on their own machines; the recon output is on the
+  // server. So when api.aspx answers, everything - the run index, the data, the
+  // downloads and the journal write - goes through it over this same
+  // authenticated origin. The folder picker below stays only as a fallback for
+  // running the page straight off a share or the file system.
+  var API=null;
+
+  function setUser(name){
+    $("who").value=name;
+    $("userWrap").innerHTML="Signed in as <b>"+esc(name)+"</b>";
+    var h=document.createElement("input"); h.type="hidden"; h.id="who"; h.value=name;
+    $("userWrap").appendChild(h);
+    sync();
+  }
+
+  (function boot(){
+    if(location.protocol==="file:") return;          // no server to ask
+    fetch("api.aspx?op=whoami",{credentials:"same-origin",cache:"no-store"})
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(j){
+        if(!j || !j.user) throw 0;
+        API="api.aspx";
+        setUser(j.user);
+        return fetch(API+"?op=runs",{credentials:"same-origin",cache:"no-store"});
+      })
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(list){ indexServer(list); })
+      .catch(function(){ /* no API - the folder picker stays */ });
+  })();
+
+  function indexServer(list){
+    runs=(list||[]).map(function(r){
+      var q="run="+encodeURIComponent(r.id);
+      return {
+        dir:r.id, date:r.date, bank:r.bank, account:r.account, when:r.when,
+        ord: (r.ord||r.when),
+        data: r.data ? {get:function(){ return fetch(API+"?op=data&"+q,{credentials:"same-origin",cache:"no-store"}); }} : null,
+        summary: r.summary ? {url:API+"?op=file&kind=summary&"+q} : null,
+        workings:r.workings ? {url:API+"?op=file&kind=workings&"+q} : null
+      };
+    });
+    if(!runs.length){
+      $("start").innerHTML="<p class='empty'>The server has no reconciliation runs yet.</p>";
+      return;
+    }
+    runs.sort(byRecency);
+    buildAccounts();
+  }
+
+  // ---- view switching ------------------------------------------------------
+  // History replaces the matching view rather than stacking on top of it, so
+  // there is only ever one thing on screen.
+  function setView(v){
+    var hist = (v==="history");
+    $("history").hidden = !hist;
+    $("app").hidden = hist || !D;
+    $("tray").hidden = hist || !D;
+    $("sumBand").hidden = hist || !D;
+    $("stale").hidden = hist || !staleRun;
+    $("histBtn").textContent = hist ? "Back to matching" : "History";
+    if(hist) renderHistory();
+  }
+  var staleRun=false;
+
+  // ---- indexing the folder -------------------------------------------------
+  $("pickDir").onclick=$("reopen").onclick=function(){ if(hasFS) pickFS(); else $("dirInput").click(); };
+
+  async function pickFS(){
+    try{ dirHandle=await window.showDirectoryPicker({mode:"readwrite"}); }
+    catch(e){ if(e&&e.name==="AbortError") return; $("dirInput").click(); return; }
+    var flat=[];
+    await walk(dirHandle,"",flat,0);
+    index(flat);
+  }
+  async function walk(dir,prefix,flat,depth){
+    if(depth>3) return;
+    for await (var entry of dir.values()){
+      var p=prefix?prefix+"/"+entry.name:entry.name;
+      if(entry.kind==="directory"){ if(!SKIP.test(entry.name)) await walk(entry,p,flat,depth+1); }
+      else {
+        var f=await entry.getFile();
+        flat.push({path:p,name:entry.name,when:f.lastModified,get:(function(h){return function(){return h.getFile()}})(entry)});
+      }
+    }
+  }
+  $("dirInput").addEventListener("change",function(e){
+    var flat=Array.from(e.target.files||[]).filter(function(f){
+      return !(f.webkitRelativePath||"").split("/").some(function(seg){return SKIP.test(seg)});
+    }).map(function(f){
+      return {path:f.webkitRelativePath||f.name,name:f.name,when:f.lastModified,get:function(){return Promise.resolve(f)}};
+    });
+    index(flat);
+  });
+
+  function index(flat){
+    var byDir={};
+    flat.forEach(function(f){
+      var parts=f.path.split("/"); var dir=parts.slice(0,-1).join("/");
+      (byDir[dir]=byDir[dir]||[]).push(f);
+    });
+    runs=[];
+    Object.keys(byDir).forEach(function(dir){
+      var fs=byDir[dir];
+      var pick=function(re){ return fs.filter(function(f){return re.test(f.name) && f.name.indexOf("~$")!==0})[0]; };
+      var data=pick(/^recon-data\.json$/i), sum=pick(/summary\.xlsx$/i), wrk=pick(/workings\.xlsx$/i);
+      if(!data && !sum && !wrk) return;
+      var parts=dir.split("/");
+      var acct="", src=(sum||wrk||data);
+      var m=src.name.match(/(\d{6,})/); if(m) acct=m[1];
+      var dparts=(parts[parts.length-2]||"").replace(/-/g," ");
+      var ordv=Date.parse(dparts); if(isNaN(ordv)) ordv=0;
+      runs.push({dir:dir, ord:ordv, bank:parts[parts.length-1]||"", date:parts[parts.length-2]||"",
+                 account:acct, when:Math.max.apply(null,fs.map(function(f){return f.when})),
+                 data:data, summary:sum, workings:wrk});
+    });
+    if(!runs.length){
+      $("start").innerHTML="<p class='empty'>No reconciliation runs found in that folder.<br>"+
+        "Pick the folder that holds the dated run folders.</p>"+
+        "<p><button class='primary' id='again'>Choose another folder</button></p>";
+      $("again").onclick=function(){ location.reload(); };
+      return;
+    }
+    runs.sort(byRecency);
+    buildAccounts();
+  }
+
+  // Newest means the newest RUN DATE, not the newest file time: applying manual
+  // matches rewrites a Summary, which would otherwise promote an old run.
+  function byRecency(a,b){ return (b.ord||b.when)-(a.ord||a.when) || b.when-a.when; }
+
+  function buildAccounts(){
+    var accts=[]; runs.forEach(function(r){ if(r.account && accts.indexOf(r.account)<0) accts.push(r.account); });
+    var sel=$("acct"); sel.innerHTML=""; sel.disabled=false;
+    accts.forEach(function(a){ var o=document.createElement("option"); o.value=o.textContent=a; sel.appendChild(o); });
+    sel.value=accts[0];
+    sel.onchange=function(){ openNewest(sel.value); renderHistory(); };
+    $("histBtn").disabled=false;
+    $("histBtn").onclick=function(){ setView($("history").hidden ? "history" : "match"); };
+    $("histClose").onclick=function(){ setView("match"); };
+
+    openNewest(accts[0]);
+    renderHistory();
+  }
+
+  function runsFor(acct){ return runs.filter(function(r){ return r.account===acct; }); }
+  function openNewest(acct){
+    var list=runsFor(acct).filter(function(r){return r.data});
+    if(!list.length){
+      alert("No recon-data.json for account "+acct+".\n\nThat account has runs in this folder, but none from a recon build that exports portal data. Re-run it once.");
+      return;
+    }
+    load(list[0]);
+  }
+
+  function renderHistory(){
+    var acct=$("acct").value, list=runsFor(acct);
+    $("histCount").textContent=list.length+" run(s) for "+acct;
+    var body=$("histTbl").querySelector("tbody"), h="";
+    list.forEach(function(r,i){
+      var isNow=current&&current.dir===r.dir;
+      h+="<tr"+(isNow?" class='now'":"")+">"+
+         "<td class='ref'>"+esc(r.date)+"</td><td>"+esc(r.bank)+"</td><td class='ref'>"+esc(r.account)+"</td>"+
+         "<td class='meta'>"+new Date(r.when).toLocaleString()+"</td>"+
+         "<td>"+
+           "<button class='sm' data-dl='summary' data-i='"+i+"'"+(r.summary?"":" disabled")+">Summary</button> "+
+           "<button class='sm' data-dl='workings' data-i='"+i+"'"+(r.workings?"":" disabled")+">Workings</button>"+
+         "</td>"+
+         "<td>"+(r.data?("<button class='sm' data-open='"+i+"'>"+(isNow?"open":"open")+"</button>"):"<span class='meta'>no portal data</span>")+"</td>"+
+         "</tr>";
+    });
+    body.innerHTML=h||"<tr><td colspan='6' class='empty'>no runs for this account</td></tr>";
+    body.querySelectorAll("[data-dl]").forEach(function(b){
+      b.onclick=function(){ grab(list[+b.getAttribute("data-i")][b.getAttribute("data-dl")]); };
+    });
+    body.querySelectorAll("[data-open]").forEach(function(b){
+      b.onclick=function(){ load(list[+b.getAttribute("data-open")]); setView("match"); };
+    });
+  }
+
+  async function grab(entry){
+    if(!entry) return;
+    if(entry.url){ var link=document.createElement("a"); link.href=entry.url; link.click(); return; }
+    var f=await entry.get();
+    var a=document.createElement("a");
+    a.href=URL.createObjectURL(f); a.download=entry.name; a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href)},5000);
+  }
+
+  async function load(run){
+    var txt=await (await run.data.get()).text();
+    try{ D=JSON.parse(txt); }catch(err){ alert("That recon-data.json is not readable.\n\n"+err.message); return; }
+    if(!D.ledger||!D.statement){ alert("That file has no outstanding items."); return; }
+    current=run;
+    if(D.account && $("acct").value!==D.account && runs.some(function(r){return r.account===D.account})) $("acct").value=D.account;
+    selL.clear(); selS.clear(); cands.clear(); tickets=[];
+    try{ var t=localStorage.getItem("nostro.tickets."+D.account); if(t) tickets=JSON.parse(t); }catch(e){}
+    var newest=runsFor(current.account).filter(function(r){return r.data})[0];
+    var stale=newest && newest.dir!==current.dir;
+    staleRun=stale;
+    $("stale").hidden=!stale;
+    if(stale) $("stale").innerHTML="You are viewing <b>"+esc(current.date)+"</b>, which is not the latest run for this "+
+      "account (<b>"+esc(newest.date)+"</b> is). Review freely — but raise tickets on the latest run, or they may be "+
+      "refused later because the items have already been matched.";
+    start();
+  }
+  function saveTickets(){ try{ localStorage.setItem("nostro.tickets."+D.account,JSON.stringify(tickets)); }catch(e){} }
+
+  function start(){
+    $("start").hidden=true; $("reopen").hidden=false;
+    setView("match");
+    $("meta").innerHTML="<b>"+esc(current.date)+"</b> · "+esc(current.bank)+" &nbsp; "+
+      D.ledger.length.toLocaleString()+" ledger &nbsp; "+D.statement.length.toLocaleString()+" statement &nbsp; run "+esc(D.generated)+
+      ((API||hasFS)?"":" &nbsp; <b>tickets will download</b> (this browser cannot write to the folder)");
+    ["L","S"].forEach(function(k){
+      var rows=k==="L"?D.ledger:D.statement, seen={}, sel=$("g"+k);
+      sel.length=1;
+      rows.forEach(function(r){ if(r.g) seen[r.g]=1; });
+      Object.keys(seen).sort().forEach(function(g){ var o=document.createElement("option"); o.value=o.textContent=g; sel.appendChild(o); });
+      $("q"+k).value=""; $("s"+k).value="";
+    });
+    head("tL"); head("tS"); render(); renderTickets(); renderHistory();
+  }
+  function head(id){
+    $(id).querySelector("thead").innerHTML=
+      "<tr><th>Date</th><th>Reference</th><th>Source ref</th><th class='num'>DR</th><th class='num'>CR</th><th>Age</th><th>Narrative</th></tr>";
+  }
+
+  // ---- table ---------------------------------------------------------------
+  var CAP=250;
+  function ticketed(){ var s=new Set(); tickets.forEach(function(t){ t.legs.forEach(function(l){ s.add(l.id); }); }); return s; }
+  function filtered(k){
+    var rows=k==="L"?D.ledger:D.statement, done=ticketed();
+    var q=$("q"+k).value.trim().toLowerCase(), g=$("g"+k).value, s=$("s"+k).value, out=[];
+    for(var i=0;i<rows.length;i++){
+      var r=rows[i];
+      if(done.has(r.id)) continue;
+      if(g && r.g!==g) continue;
+      if(s==="dr" && !(r.dr>0)) continue;
+      if(s==="cr" && !(r.cr>0)) continue;
+      if(q && (r.r1+" "+r.r2+" "+r.u+" "+r.n+" "+r.id).toLowerCase().indexOf(q)<0) continue;
+      out.push(r);
+    }
+    return out;
+  }
+  function render(){
+    ["L","S"].forEach(function(k){
+      var rows=filtered(k), sel=k==="L"?selL:selS, body=$("t"+k).querySelector("tbody");
+      var shown=rows.slice(0,CAP);
+      var extra=(k==="L"?D.ledger:D.statement).filter(function(r){ return sel.has(r.id) && shown.indexOf(r)<0; });
+      shown=extra.concat(shown);
+      var html="";
+      for(var i=0;i<shown.length;i++){
+        var r=shown[i];
+        html+="<tr class='pick "+(k==="L"?"cbs":"stm")+(sel.has(r.id)?" sel":"")+(cands.has(r.id)?" cand":"")+"' data-id='"+esc(r.id)+"' data-k='"+k+"'>"+
+          "<td class='ref'>"+esc(r.d)+"</td><td class='ref'>"+esc(r.r1)+"</td><td class='ref'>"+esc(r.r2)+"</td>"+
+          "<td class='num a'>"+fmt(r.dr)+"</td><td class='num a'>"+fmt(r.cr)+"</td><td class='num'>"+esc(r.a)+"</td>"+
+          "<td class='narr' title='"+esc(r.n)+"'>"+esc(r.n)+"</td></tr>";
+      }
+      body.innerHTML=html || "<tr><td colspan='7' class='empty'>nothing matches those filters</td></tr>";
+      $("c"+k).textContent="showing "+shown.length.toLocaleString()+" of "+rows.length.toLocaleString()+
+        (rows.length>CAP?" — narrow the search to see more":"")+" · "+sel.size+" selected";
+    });
+    sync(); summary();
+  }
+  document.addEventListener("click",function(e){
+    var tr=e.target.closest("tr.pick[data-id]"); if(!tr||!D) return;
+    var id=tr.getAttribute("data-id"), sel=tr.getAttribute("data-k")==="L"?selL:selS;
+    if(sel.has(id)) sel.delete(id); else sel.add(id);
+    render();
+  });
+  ["qL","qS","gL","gS","sL","sS"].forEach(function(id){ $(id).addEventListener("input",render); $(id).addEventListener("change",render); });
+  $("clearL").onclick=function(){ selL.clear(); cands.clear(); render(); };
+  $("clearS").onclick=function(){ selS.clear(); cands.clear(); render(); };
+
+  // ---- the balance rule ----------------------------------------------------
+  function rowsOf(k){ var all=k==="L"?D.ledger:D.statement, sel=k==="L"?selL:selS;
+    return all.filter(function(r){ return sel.has(r.id); }); }
+  function nets(){
+    var l=0,s=0;
+    rowsOf("L").forEach(function(r){ l+=r.dr-r.cr; });
+    rowsOf("S").forEach(function(r){ s+=r.cr-r.dr; });
+    return [Math.round(l*100)/100, Math.round(s*100)/100];
+  }
+  function sync(){
+    if(!D) return;
+    var n=nets(), v=$("verdict"), ok=false;
+    $("netL").textContent=money(n[0]); $("netS").textContent=money(n[1]);
+    if(selL.size===0||selS.size===0){ v.className="verdict idle"; v.textContent="select items on both sides"; }
+    else if(n[0]!==n[1]){ v.className="verdict bad"; v.textContent="does not balance — out by "+money(Math.round((n[0]-n[1])*100)/100); }
+    else { v.className="verdict ok"; v.textContent="balances — "+selL.size+" ledger : "+selS.size+" statement"; ok=true; }
+    $("add").disabled=!(ok && $("who").value.trim().length>0);
+    $("save").disabled=!(tickets.length>0 && $("who").value.trim().length>0);
+  }
+
+  // ---- live summary --------------------------------------------------------
+  function summary(){
+    if(!D) return;
+    var done=ticketed();
+    var sDR=0,sCR=0,lDR=0,lCR=0,sDR0=0,sCR0=0,lDR0=0,lCR0=0;
+    D.statement.forEach(function(r){ sDR0+=r.dr; sCR0+=r.cr; if(!done.has(r.id)){ sDR+=r.dr; sCR+=r.cr; } });
+    D.ledger.forEach(function(r){ lDR0+=r.dr; lCR0+=r.cr; if(!done.has(r.id)){ lDR+=r.dr; lCR+=r.cr; } });
+    var lb=D.ledgerBalance||0, sb=D.statementBalance||0;
+    var cl0=lb+sCR0-sDR0, cs0=sb+lDR0-lCR0, cl=lb+sCR-sDR, cs=sb+lDR-lCR;
+    var chk=Math.round((cl-cs)*100)/100, chk0=Math.round((cl0-cs0)*100)/100;
+    $("sbL").textContent=money(lb); $("sbS").textContent=money(sb);
+    $("scL").textContent=money(cl); $("scS").textContent=money(cs);
+    $("sdL").textContent=tickets.length?"was "+money(cl0):"";
+    $("sdS").textContent=tickets.length?"was "+money(cs0):"";
+    var e=$("sChk"); e.textContent=money(chk); e.className="v "+(Math.abs(chk)<0.5?"ok":"bad");
+    $("sdChk").textContent=tickets.length?(Math.abs(chk-chk0)<0.005?"unchanged by your tickets":"was "+money(chk0)):"";
+  }
+
+  // ---- suggestions ---------------------------------------------------------
+  $("suggest").onclick=function(){
+    cands.clear();
+    var picks=rowsOf("L").concat(rowsOf("S"));
+    if(picks.length!==1){ alert("Select exactly one item, on either side, then ask for suggestions."); return; }
+    var src=picks[0], fromLedger=selL.size===1;
+    var pool=(fromLedger?D.statement:D.ledger), done=ticketed();
+    var want=fromLedger?(src.dr-src.cr):(src.cr-src.dr);
+    var tok=String(src.n||"").toUpperCase().split(/[^A-Z0-9]+/).filter(function(t){return t.length>=5});
+    var scored=[];
+    for(var i=0;i<pool.length;i++){
+      var r=pool[i]; if(done.has(r.id)) continue;
+      var net=fromLedger?(r.cr-r.dr):(r.dr-r.cr);
+      if(Math.round(net*100)!==Math.round(want*100)) continue;
+      var sc=100;
+      var d1=Date.parse(String(src.v||src.d).replace(/\//g,"-")), d2=Date.parse(String(r.v||r.d).replace(/\//g,"-"));
+      if(!isNaN(d1)&&!isNaN(d2)) sc-=Math.min(40,Math.abs(d1-d2)/86400000);
+      if(src.u && r.u && src.u===r.u) sc+=60;
+      var hay=String(r.n||"").toUpperCase();
+      for(var t=0;t<tok.length;t++){ if(hay.indexOf(tok[t])>=0) sc+=6; }
+      if(src.r1 && hay.indexOf(String(src.r1).toUpperCase())>=0) sc+=40;
+      if(src.r2 && hay.indexOf(String(src.r2).toUpperCase())>=0) sc+=40;
+      scored.push([sc,r]);
+    }
+    if(!scored.length){ alert("No item on the other side carries the mirrored amount "+money(want)+".\n\nIf the amounts genuinely differ this is not a match — it needs an adjustment."); return; }
+    scored.sort(function(a,b){return b[0]-a[0]});
+    scored.slice(0,5).forEach(function(x){ cands.add(x[1].id); });
+    var side=fromLedger?"S":"L";
+    $("q"+side).value=""; $("g"+side).value=""; $("s"+side).value="";
+    render();
+    var first=document.querySelector("tr.cand"); if(first) first.scrollIntoView({block:"center"});
+  };
+
+  // ---- tickets -------------------------------------------------------------
+  $("add").onclick=function(){
+    var n=nets(); if(n[0]!==n[1]) return;
+    tickets.push({
+      ref:"MM"+new Date().toISOString().replace(/[^0-9]/g,"").slice(0,14),
+      by:$("who").value.trim(), on:new Date().toISOString().slice(0,19).replace("T"," "),
+      reason:$("reason").value.trim(), net:n[0],
+      legs:rowsOf("L").map(function(r){return {side:"CBS",id:r.id}})
+            .concat(rowsOf("S").map(function(r){return {side:"STATEMENT",id:r.id}}))
+    });
+    saveTickets(); selL.clear(); selS.clear(); cands.clear(); $("reason").value="";
+    render(); renderTickets();
+  };
+  function renderTickets(){
+    var el=$("tickets");
+    if(!tickets.length){ el.innerHTML="<div class='empty'>no tickets yet</div>"; $("save").disabled=true; return; }
+    var h="<table><thead><tr><th>Match Ref</th><th>Legs</th><th class='num'>Net</th><th>By</th><th>Reason</th><th></th></tr></thead><tbody>";
+    tickets.forEach(function(t,i){
+      h+="<tr><td class='ref'>"+esc(t.ref)+"</td><td>"+
+         t.legs.filter(function(l){return l.side==="CBS"}).length+" ledger : "+
+         t.legs.filter(function(l){return l.side==="STATEMENT"}).length+" statement</td>"+
+         "<td class='num'>"+fmt(t.net)+"</td><td>"+esc(t.by)+"</td><td class='narr'>"+esc(t.reason)+"</td>"+
+         "<td><button class='link' data-drop='"+i+"'>remove</button></td></tr>";
+    });
+    el.innerHTML=h+"</tbody></table>";
+    el.querySelectorAll("[data-drop]").forEach(function(b){
+      b.onclick=function(){ tickets.splice(+b.getAttribute("data-drop"),1); saveTickets(); render(); renderTickets(); };
+    });
+    sync();
+  }
+
+  // ---- saving --------------------------------------------------------------
+  function csv(v){ v=String(v==null?"":v); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; }
+  var HEAD="Match Ref,Side,Item Id,Status,Proposed By,Proposed On,Approved By,Approved On,Reason";
+  function newRows(){
+    var out=[];
+    tickets.forEach(function(t){ t.legs.forEach(function(l){
+      out.push([t.ref,l.side,l.id,"APPROVED",t.by,t.on,t.by,t.on,t.reason].map(csv).join(","));
+    }); });
+    return out;
+  }
+  $("save").onclick=async function(){
+    var rows=newRows();
+
+    // server mode: POST the legs and let the endpoint append them to the
+    // journal. It stamps the authenticated Windows user, so the name recorded
+    // is the one IIS proved rather than anything this page claims.
+    if(API){
+      var body=[];
+      tickets.forEach(function(t){ t.legs.forEach(function(l){
+        body.push([t.ref,l.side,l.id,t.reason.replace(/[|\r\n]/g," ")].join("|"));
+      }); });
+      try{
+        var r=await fetch(API+"?op=tickets&account="+encodeURIComponent(D.account),
+              {method:"POST",credentials:"same-origin",headers:{"Content-Type":"text/plain;charset=utf-8"},body:body.join("\n")});
+        var j=await r.json();
+        if(!r.ok) throw new Error(j && j.error ? j.error : ("HTTP "+r.status));
+        $("savedAt").textContent="saved "+j.saved+" leg(s) as "+j.user+" at "+new Date().toLocaleTimeString();
+        tickets=[]; saveTickets(); render(); renderTickets();
+        alert("Saved "+j.saved+" leg(s) to the journal.\n\n"+j.journal+"\n\nThe Apply Manual Matches job updates the Summary in place — removing the matched rows from the outstanding sheets and adding them to Matched Pairs.");
+      }catch(e){
+        alert("The server refused the tickets:\n\n"+e.message+"\n\nNothing was saved.");
+      }
+      return;
+    }
+
+    if(!hasFS||!dirHandle){ return doDownload(rows); }
+    try{
+      var mm=await dirHandle.getDirectoryHandle("Manual Matches",{create:true});
+      var fh=await mm.getFileHandle(D.account+".csv",{create:true});
+      var existing="";
+      try{ existing=await (await fh.getFile()).text(); }catch(e){}
+      var keep=existing.split(/\r?\n/).filter(function(l){ return l.trim().length>0 && l.indexOf("Match Ref,")!==0; });
+      var w=await fh.createWritable();
+      await w.write([HEAD].concat(keep,rows).join("\r\n")+"\r\n");
+      await w.close();
+      $("savedAt").textContent="saved "+rows.length+" leg(s) to Manual Matches\\"+D.account+".csv at "+new Date().toLocaleTimeString();
+      tickets=[]; saveTickets(); render(); renderTickets();
+      alert("Saved.\n\nThe tickets are in the journal as APPROVED. The Apply Manual Matches job updates the Summary in place — removing the matched rows from the outstanding sheets and adding them to Matched Pairs.");
+    }catch(e){
+      alert("Could not write to the folder ("+e.message+").\n\nDownloading the journal instead — copy it into the Manual Matches folder.");
+      doDownload(rows);
+    }
+  };
+  $("download").onclick=function(){ doDownload(newRows()); };
+  function doDownload(rows){
+    if(!rows.length){ alert("No tickets to save."); return; }
+    var blob=new Blob([[HEAD].concat(rows).join("\r\n")+"\r\n"],{type:"text/csv;charset=utf-8"});
+    var a=document.createElement("a");
+    a.href=URL.createObjectURL(blob); a.download=(D&&D.account?D.account:"manual-matches")+".csv"; a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href)},2000);
+    $("savedAt").textContent="downloaded "+rows.length+" leg(s) at "+new Date().toLocaleTimeString();
+  }
+
+  $("saveNote").innerHTML="Saving merges your tickets into <code>Manual Matches\\&lt;account&gt;.csv</code> as "+
+    "<code>APPROVED</code>, keeping anything already there. The figures above are recalculated live so you can see the "+
+    "effect before you save — <b>Check_Balance should not move</b>, because a ticket only clears equal value from both "+
+    "sides. The Apply Manual Matches job then edits the published Summary in place.";
+})();
+</script>
+</body>
+</html>

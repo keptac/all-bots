@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "resources": [
+    {
+      "resource": "asset",
+      "metadata": {
+        "folderPath": {
+          "defaultValue": "UNATTENDED",
+          "isExpression": false
+        },
+        "name": {
+          "defaultValue": "DatabaseConnectionString",
+          "isExpression": false
+        }
+      }
+    }
+  ]
+}

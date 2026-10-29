@@ -1,0 +1,337 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Unattended_Backfill" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="emailReceipients" Type="InArgument(x:String)" />
+    <x:Property Name="MODE" Type="InArgument(x:String)" />
+    <x:Property Name="RangeStart" Type="InArgument(x:String)" />
+    <x:Property Name="RangeEnd" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Unattended_Backfill_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Backfill" sap:VirtualizedContainerService.HintSize="604.6666666666666,2519.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_100">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="s:DateTime" Name="d" />
+      <Variable x:TypeArguments="s:DateTime" Name="endD" />
+      <Variable x:TypeArguments="s:DateTime" Name="prevD" />
+      <Variable x:TypeArguments="x:Int32" Name="dayCount" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, s:DateTime)" Name="lastBalanced" />
+      <Variable x:TypeArguments="scg:List(x:String)" Name="processKeys" />
+      <Variable x:TypeArguments="scg:List(x:String)" Name="stalled" />
+      <Variable x:TypeArguments="x:String" Name="heldKeys" />
+      <Variable x:TypeArguments="x:Boolean" Name="skipDay" />
+      <Variable x:TypeArguments="x:Boolean" Name="resumeMode" />
+      <Variable x:TypeArguments="x:Boolean" Name="stopLoop" />
+      <Variable x:TypeArguments="x:String" Name="resumeNote" />
+      <Variable x:TypeArguments="x:String" Name="markerPath" />
+      <Variable x:TypeArguments="x:String" Name="dayNote" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtTracker" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="496.6666666666667,277.3333333333333" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,165.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_113">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="416,57.333333333333336" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <ui:DeleteFolderX DisplayName="Delete Folder" sap:VirtualizedContainerService.HintSize="466.6666666666667,82" sap2010:WorkflowViewState.IdRef="DeleteFolderX_3" Path="D:\VISA\" Recursive="True" />
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="466.6666666666667,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_103">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Sequence>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+            <TryCatch.Finally>
+              <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="466.6666666666667,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_104">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
+            </TryCatch.Finally>
+          </TryCatch>
+          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="416,48" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <ui:DeleteFolderX DisplayName="Delete Folder" sap:VirtualizedContainerService.HintSize="466.6666666666667,82" sap2010:WorkflowViewState.IdRef="DeleteFolderX_2" Path="[&quot;C:\Users\&quot; &amp; Environment.UserName &amp; &quot;\Documents\AUTOMATED RECONS\Cards Recon\VISA&quot;]" Recursive="True" />
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="466.6666666666667,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_105">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Sequence>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+            <TryCatch.Finally>
+              <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="466.6666666666667,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_106">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
+            </TryCatch.Finally>
+          </TryCatch>
+        </Sequence>
+      </ui:CommentOut.Body>
+    </ui:CommentOut>
+    <Assign sap:VirtualizedContainerService.HintSize="496.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_100">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:DateTime">[endD]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:DateTime">[If(String.IsNullOrWhiteSpace(RangeEnd), DateTime.Now.Date.AddDays(-1), DateTime.ParseExact(RangeEnd.Trim(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="496.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_101">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:DateTime">[d]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:DateTime">[If(String.IsNullOrWhiteSpace(RangeStart), endD, DateTime.ParseExact(RangeStart.Trim(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Each process (name|currency) keeps its own last balanced date, so a day lost to&#xA;' one missing statement no longer holds the others back. A scheduled run (no&#xA;' RangeStart) starts the day after the furthest-behind process; a process already&#xA;' past a day is held on it rather than re-run. No dates on record = run as before.&#xA;Dim ci = System.Globalization.CultureInfo.InvariantCulture&#xA;markerPath = System.IO.Path.GetFullPath(&quot;Templates\last_balanced_dates.txt&quot;)&#xA;Dim legacyPath As String = System.IO.Path.GetFullPath(&quot;Templates\last_balanced_date.txt&quot;)&#xA;' The rows Unattended-Entry.xaml puts in the tracker for every date.&#xA;processKeys = New List(Of String) From {&quot;visaPosClearing|840&quot;, &quot;visaPosClearing|834&quot;, &quot;visaAtmClearing|TZS&quot;}&#xA;lastBalanced = New Dictionary(Of String, DateTime)&#xA;stalled = New List(Of String)&#xA;resumeMode = False&#xA;Dim readNote As String = &quot;&quot;&#xA;Try&#xA;    If System.IO.File.Exists(markerPath) Then&#xA;        For Each ln As String In System.IO.File.ReadAllLines(markerPath)&#xA;            Dim eq As Integer = ln.LastIndexOf(&quot;=&quot;c)&#xA;            Dim lb As DateTime&#xA;            If eq &gt; 0 AndAlso DateTime.TryParseExact(ln.Substring(eq + 1).Trim(), &quot;yyyy-MM-dd&quot;, ci, System.Globalization.DateTimeStyles.None, lb) Then&#xA;                lastBalanced(ln.Substring(0, eq).Trim()) = lb&#xA;            ElseIf ln.Trim() &lt;&gt; &quot;&quot; Then&#xA;                readNote = readNote &amp; &quot; unreadable line '&quot; &amp; ln &amp; &quot;';&quot;&#xA;            End If&#xA;        Next&#xA;    ElseIf System.IO.File.Exists(legacyPath) Then&#xA;        ' One-off upgrade from the single shared marker.&#xA;        Dim txt As String = System.IO.File.ReadAllText(legacyPath).Trim()&#xA;        Dim lb As DateTime&#xA;        If DateTime.TryParseExact(txt, &quot;yyyy-MM-dd&quot;, ci, System.Globalization.DateTimeStyles.None, lb) Then&#xA;            For Each k As String In processKeys&#xA;                lastBalanced(k) = lb&#xA;            Next&#xA;            readNote = &quot; every process seeded from &quot; &amp; legacyPath &amp; &quot;;&quot;&#xA;        Else&#xA;            readNote = &quot; &quot; &amp; legacyPath &amp; &quot; unreadable ('&quot; &amp; txt &amp; &quot;');&quot;&#xA;        End If&#xA;    End If&#xA;Catch ex As Exception&#xA;    lastBalanced.Clear()&#xA;    readNote = &quot; could not be read (&quot; &amp; ex.Message &amp; &quot;);&quot;&#xA;End Try&#xA;For Each k As String In lastBalanced.Keys.ToList()&#xA;    If Not processKeys.Contains(k) Then processKeys.Add(k)&#xA;    ' Too stale to replay safely; forget it so the next balanced day re-seeds it.&#xA;    If (endD - lastBalanced(k)).TotalDays &gt; 31 Then&#xA;        readNote = readNote &amp; &quot; &quot; &amp; k &amp; &quot; &quot; &amp; lastBalanced(k).ToString(&quot;yyyy-MM-dd&quot;) &amp; &quot; is more than 31 days back - dropped;&quot;&#xA;        lastBalanced.Remove(k)&#xA;    End If&#xA;Next&#xA;resumeNote = &quot;last balanced &quot; &amp; If(lastBalanced.Count = 0, &quot;(none)&quot;, String.Join(&quot;, &quot;, lastBalanced.Select(Function(kv) kv.Key &amp; &quot;=&quot; &amp; kv.Value.ToString(&quot;yyyy-MM-dd&quot;)))) &amp; &quot; |&quot; &amp; readNote&#xA;If Not String.IsNullOrWhiteSpace(RangeStart) Then&#xA;    resumeNote = &quot;explicit RangeStart given - not resuming | &quot; &amp; resumeNote&#xA;ElseIf lastBalanced.Count = 0 Then&#xA;    resumeNote = resumeNote &amp; &quot; nothing on record (&quot; &amp; markerPath &amp; &quot;) - running as before&quot;&#xA;Else&#xA;    Dim earliest As DateTime = lastBalanced.Values.Min()&#xA;    If earliest &lt; endD Then&#xA;        d = earliest.AddDays(1)&#xA;        resumeMode = True&#xA;        resumeNote = resumeNote &amp; &quot; resuming from &quot; &amp; d.ToString(&quot;yyyy-MM-dd&quot;) &amp; &quot; (&quot; &amp; (CInt((endD - d).TotalDays) + 1).ToString() &amp; &quot; day(s)); a process already past a day is held on it&quot;&#xA;    Else&#xA;        resumeNote = resumeNote &amp; &quot; nothing to catch up&quot;&#xA;    End If&#xA;End If" DisplayName="Resume from last balanced date" sap:VirtualizedContainerService.HintSize="496.6666666666667,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_110">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="RangeStart">[RangeStart]</InArgument>
+        <InArgument x:TypeArguments="s:DateTime" x:Key="endD">[endD]</InArgument>
+        <InOutArgument x:TypeArguments="s:DateTime" x:Key="d">[d]</InOutArgument>
+        <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:DateTime)" x:Key="lastBalanced">[lastBalanced]</OutArgument>
+        <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="processKeys">[processKeys]</OutArgument>
+        <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="stalled">[stalled]</OutArgument>
+        <OutArgument x:TypeArguments="x:Boolean" x:Key="resumeMode">[resumeMode]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="resumeNote">[resumeNote]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="markerPath">[markerPath]</OutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:LogMessage DisplayName="Log - resume decision" sap:VirtualizedContainerService.HintSize="496.6666666666667,144" sap2010:WorkflowViewState.IdRef="LogMessage_110" Level="Info" Message="[&quot;BACKFILL | &quot; + resumeNote]" />
+    <Assign sap:VirtualizedContainerService.HintSize="496.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_102">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:DateTime">[prevD]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:DateTime">[d.AddDays(-1)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log - backfill start" sap:VirtualizedContainerService.HintSize="496.6666666666667,144" sap2010:WorkflowViewState.IdRef="LogMessage_100" Level="Info" Message="[&quot;=== BACKFILL START | &quot; + d.ToString(&quot;yyyy-MM-dd&quot;) + &quot; to &quot; + endD.ToString(&quot;yyyy-MM-dd&quot;) + &quot; | &quot; + (CInt((endD - d).TotalDays) + 1).ToString + &quot; day(s) | seeded from &quot; + prevD.ToString(&quot;yyyy-MM-dd&quot;) + &quot; | mode=&quot; + MODE + &quot; ===&quot;]" />
+    <While DisplayName="For each business date" sap:VirtualizedContainerService.HintSize="496.6666666666667,1069.3333333333333" sap2010:WorkflowViewState.IdRef="While_100" Condition="[d &lt;= endD AndAlso Not stopLoop]">
+      <Sequence DisplayName="One business date" sap:VirtualizedContainerService.HintSize="450,872" sap2010:WorkflowViewState.IdRef="Sequence_101">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:LogMessage DisplayName="Log - day banner" sap:VirtualizedContainerService.HintSize="416,144" sap2010:WorkflowViewState.IdRef="LogMessage_101" Level="Info" Message="[&quot;=== DAY &quot; + (dayCount + 1).ToString + &quot; | business date &quot; + d.ToString(&quot;dd MMM yyyy&quot;) + &quot; (&quot; + d.DayOfWeek.ToString + &quot;) | previous &quot; + prevD.ToString(&quot;dd MMM yyyy&quot;) + &quot; ===&quot;]" />
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="' A process sits this day out when it is already balanced past it, or when an&#xA;' earlier day of this catch-up left it unbalanced (it must not jump that gap).&#xA;Dim held As New List(Of String)&#xA;If resumeMode Then&#xA;    For Each k As String In processKeys&#xA;        If (lastBalanced.ContainsKey(k) AndAlso lastBalanced(k) &gt;= d) OrElse stalled.Contains(k) Then held.Add(k)&#xA;    Next&#xA;End If&#xA;heldKeys = String.Join(&quot;;&quot;, held)&#xA;skipDay = resumeMode AndAlso processKeys.All(Function(k) held.Contains(k))" DisplayName="Which processes sit this day out" sap:VirtualizedContainerService.HintSize="416,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_112">
+          <ui:InvokeCode.Arguments>
+            <InArgument x:TypeArguments="s:DateTime" x:Key="d">[d]</InArgument>
+            <InArgument x:TypeArguments="x:Boolean" x:Key="resumeMode">[resumeMode]</InArgument>
+            <InArgument x:TypeArguments="scg:List(x:String)" x:Key="processKeys">[processKeys]</InArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:DateTime)" x:Key="lastBalanced">[lastBalanced]</InArgument>
+            <InArgument x:TypeArguments="scg:List(x:String)" x:Key="stalled">[stalled]</InArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="heldKeys">[heldKeys]</OutArgument>
+            <OutArgument x:TypeArguments="x:Boolean" x:Key="skipDay">[skipDay]</OutArgument>
+          </ui:InvokeCode.Arguments>
+        </ui:InvokeCode>
+        <ui:LogMessage DisplayName="Log - held processes" sap:VirtualizedContainerService.HintSize="416,144" sap2010:WorkflowViewState.IdRef="LogMessage_113" Level="Info" Message="[&quot;BACKFILL | &quot; + d.ToString(&quot;yyyy-MM-dd&quot;) + &quot; | held: &quot; + If(String.IsNullOrEmpty(heldKeys), &quot;(none)&quot;, heldKeys) + If(skipDay, &quot; | every process held - day skipped&quot;, &quot;&quot;)]" />
+        <If Condition="[Not skipDay]" DisplayName="Anything to run this day?" sap:VirtualizedContainerService.HintSize="416,300" sap2010:WorkflowViewState.IdRef="If_110">
+          <If.Then>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Unattended-Entry.xaml - one day" sap:VirtualizedContainerService.HintSize="416,147.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_100" UnSafe="False" WorkflowFileName="UNATTENDED\Unattended-Entry.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="emailReceipients">[emailReceipients]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="MODE">[MODE]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="businessDate">[d.ToString("yyyy-MM-dd")]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="previousBusinessDate">[prevD.ToString("yyyy-MM-dd")]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="holdProcesses">[heldKeys]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </If.Then>
+        </If>
+        <TryCatch DisplayName="Record last balanced date" sap:VirtualizedContainerService.HintSize="416,400" sap2010:WorkflowViewState.IdRef="TryCatch_110">
+          <TryCatch.Try>
+            <Sequence DisplayName="Check tracker" sap2010:WorkflowViewState.IdRef="Sequence_110">
+              <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dtTracker]" DisplayName="Read tracker" sap:VirtualizedContainerService.HintSize="382,120" sap2010:WorkflowViewState.IdRef="ReadRange_110" SheetName="Tracker" WorkbookPath="Templates\process_tracker.xlsx" />
+              <ui:InvokeCode ContinueOnError="{x:Null}" Code="' A process balanced this day when its tracker row is COMPLETE. Its date only&#xA;' moves forward one contiguous day at a time, so it never jumps over a gap.&#xA;Dim ci = System.Globalization.CultureInfo.InvariantCulture&#xA;Dim heldList As New List(Of String)(If(heldKeys, &quot;&quot;).Split(New Char() {&quot;;&quot;c}, StringSplitOptions.RemoveEmptyEntries))&#xA;Dim status As New Dictionary(Of String, String)&#xA;Dim key As String = d.AddDays(1).ToString(&quot;dd/MMM/yyyy&quot;)&#xA;If dtTracker IsNot Nothing AndAlso dtTracker.Columns.Contains(&quot;Date&quot;) AndAlso dtTracker.Columns.Contains(&quot;Process Name&quot;) AndAlso dtTracker.Columns.Contains(&quot;Currency&quot;) AndAlso dtTracker.Columns.Contains(&quot;Process Status&quot;) Then&#xA;    For Each r As System.Data.DataRow In dtTracker.Rows&#xA;        Dim s As String = r(&quot;Date&quot;).ToString().Trim()&#xA;        Dim rd As Date&#xA;        If s = key OrElse (Date.TryParseExact(s, &quot;dd/MMM/yyyy&quot;, ci, System.Globalization.DateTimeStyles.None, rd) AndAlso rd = d.AddDays(1)) Then&#xA;            status(r(&quot;Process Name&quot;).ToString().Trim() &amp; &quot;|&quot; &amp; r(&quot;Currency&quot;).ToString().Trim()) = r(&quot;Process Status&quot;).ToString().Trim()&#xA;        End If&#xA;    Next&#xA;End If&#xA;Dim notes As New List(Of String)&#xA;Dim moved As Boolean = False&#xA;For Each k As String In processKeys&#xA;    If heldList.Contains(k) Then&#xA;        notes.Add(k &amp; &quot; held&quot;)&#xA;    ElseIf status.ContainsKey(k) AndAlso status(k).Equals(&quot;COMPLETE&quot;) Then&#xA;        If Not lastBalanced.ContainsKey(k) OrElse d = lastBalanced(k).AddDays(1) Then&#xA;            lastBalanced(k) = d&#xA;            moved = True&#xA;            notes.Add(k &amp; &quot; balanced&quot;)&#xA;        Else&#xA;            notes.Add(k &amp; &quot; balanced, left at &quot; &amp; lastBalanced(k).ToString(&quot;yyyy-MM-dd&quot;))&#xA;        End If&#xA;    Else&#xA;        notes.Add(k &amp; &quot; NOT balanced (&quot; &amp; If(status.ContainsKey(k), status(k), &quot;no tracker row&quot;) &amp; &quot;)&quot;)&#xA;        If resumeMode AndAlso Not stalled.Contains(k) Then stalled.Add(k)&#xA;    End If&#xA;Next&#xA;If moved Then&#xA;    System.IO.File.WriteAllLines(markerPath, lastBalanced.OrderBy(Function(kv) kv.Key).Select(Function(kv) kv.Key &amp; &quot;=&quot; &amp; kv.Value.ToString(&quot;yyyy-MM-dd&quot;, ci)))&#xA;End If&#xA;dayNote = d.ToString(&quot;yyyy-MM-dd&quot;) &amp; &quot; | &quot; &amp; String.Join(&quot;, &quot;, notes) &amp; &quot; | last balanced &quot; &amp; If(lastBalanced.Count = 0, &quot;(none)&quot;, String.Join(&quot;, &quot;, lastBalanced.Select(Function(kv) kv.Key &amp; &quot;=&quot; &amp; kv.Value.ToString(&quot;yyyy-MM-dd&quot;))))&#xA;If stalled.Count &gt; 0 Then&#xA;    dayNote = dayNote &amp; &quot; | held for the rest of this run: &quot; &amp; String.Join(&quot;, &quot;, stalled)&#xA;End If&#xA;If resumeMode AndAlso processKeys.All(Function(k) stalled.Contains(k)) Then&#xA;    stopLoop = True&#xA;    dayNote = dayNote &amp; &quot; | every process is stuck - catch-up stops here; the next run retries each from its own last balanced date&quot;&#xA;End If" DisplayName="Was this day balanced?" sap:VirtualizedContainerService.HintSize="382,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_111">
+                <ui:InvokeCode.Arguments>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="dtTracker">[dtTracker]</InArgument>
+                  <InArgument x:TypeArguments="s:DateTime" x:Key="d">[d]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="markerPath">[markerPath]</InArgument>
+                  <InArgument x:TypeArguments="x:Boolean" x:Key="resumeMode">[resumeMode]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="heldKeys">[heldKeys]</InArgument>
+                  <InArgument x:TypeArguments="scg:List(x:String)" x:Key="processKeys">[processKeys]</InArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, s:DateTime)" x:Key="lastBalanced">[lastBalanced]</InArgument>
+                  <InArgument x:TypeArguments="scg:List(x:String)" x:Key="stalled">[stalled]</InArgument>
+                  <InOutArgument x:TypeArguments="x:Boolean" x:Key="stopLoop">[stopLoop]</InOutArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="dayNote">[dayNote]</OutArgument>
+                </ui:InvokeCode.Arguments>
+              </ui:InvokeCode>
+              <ui:LogMessage DisplayName="Log - day balance" sap:VirtualizedContainerService.HintSize="382,144" sap2010:WorkflowViewState.IdRef="LogMessage_111" Level="Info" Message="[&quot;BACKFILL | &quot; + dayNote]" />
+            </Sequence>
+          </TryCatch.Try>
+          <TryCatch.Catches>
+            <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_110">
+              <ActivityAction x:TypeArguments="s:Exception">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Could not confirm" sap2010:WorkflowViewState.IdRef="Sequence_111">
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_110">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Boolean">[stopLoop]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Boolean">[resumeMode]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:LogMessage DisplayName="Log - balance check failed" sap2010:WorkflowViewState.IdRef="LogMessage_112" Level="Warn" Message="[&quot;BACKFILL | &quot; + d.ToString(&quot;yyyy-MM-dd&quot;) + &quot; | could not confirm balance, last balanced date unchanged&quot; + If(resumeMode, &quot; - catch-up stops here&quot;, &quot;&quot;) + &quot; | &quot; + exception.Message]" />
+                </Sequence>
+              </ActivityAction>
+            </Catch>
+          </TryCatch.Catches>
+        </TryCatch>
+        <Assign sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_103">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Int32">[dayCount]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Int32">[dayCount + 1]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_104">
+          <Assign.To>
+            <OutArgument x:TypeArguments="s:DateTime">[prevD]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="s:DateTime">[d]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign sap:VirtualizedContainerService.HintSize="416,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_105">
+          <Assign.To>
+            <OutArgument x:TypeArguments="s:DateTime">[d]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="s:DateTime">[d.AddDays(1)]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+    </While>
+    <ui:LogMessage DisplayName="Log - backfill complete" sap:VirtualizedContainerService.HintSize="496.6666666666667,134.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_102" Level="Info" Message="[&quot;=== BACKFILL COMPLETE | &quot; + dayCount.ToString + &quot; day(s) processed | last business date &quot; + prevD.ToString(&quot;dd MMM yyyy&quot;) + &quot; ===&quot;]" />
+  </Sequence>
+</Activity>

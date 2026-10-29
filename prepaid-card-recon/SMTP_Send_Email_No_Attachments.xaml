@@ -1,0 +1,175 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="SMTP_Send_Email_No_Attachments" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="smtpPort" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="smtpServer" Type="InOutArgument(x:String)" />
+    <x:Property Name="emailBody" Type="InOutArgument(x:String)" />
+    <x:Property Name="emailSubject" Type="InOutArgument(x:String)" />
+    <x:Property Name="recipientEmails" Type="InOutArgument(x:String)" />
+    <x:Property Name="fromEmail" Type="InOutArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>970,515</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>SMTP_Send_Email_No_Attachments_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Net</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.HttpListener</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.Net.NameResolution</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Net.Requests</AssemblyReference>
+      <AssemblyReference>System.Net.ServicePoint</AssemblyReference>
+      <AssemblyReference>System.Net.WebClient</AssemblyReference>
+      <AssemblyReference>System.Net.WebHeaderCollection</AssemblyReference>
+      <AssemblyReference>System.Net.WebProxy</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="SMTP_Send_NO_Attachments" sap:VirtualizedContainerService.HintSize="829.6000000000001,711.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="EMAIL NO attachmnets" sap:VirtualizedContainerService.HintSize="512,688" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.4,242.4" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+        <ui:MultipleAssign.AssignOperations>
+          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[smtpServer]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">10.200.221.58</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:Int32">[smtpPort]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:Int32">25</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[recipientEmails]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">Zinzombe.Edmond@nmbbank.co.tz, Marysalome.Mngerere@nmbbank.co.tz, Dilgent.Mmbaga@nmbbank.co.tz, said.sungura@nmbbank.co.tz, Dorice.Masanja@nmbbank.co.tz, peter.munou@nmbbank.co.tz, said.sungura@nmbbank.co.tz</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[fromEmail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">Robot@nmbtz.com</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+          </scg:List>
+        </ui:MultipleAssign.AssignOperations>
+      </ui:MultipleAssign>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[recipientEmails]" />
+      <ui:InvokeCode ContinueOnError="{x:Null}" Code="&#xD;&#xA;&#xD;&#xA;try&#xD;&#xA;{&#xD;&#xA;    // === Debug print of all input parameters ===&#xD;&#xA;    Console.WriteLine(&quot;📨 recipientEmails: &quot; + recipientEmails);&#xD;&#xA;    Console.WriteLine(&quot;📨 fromEmail: &quot; + fromEmail);&#xD;&#xA;    Console.WriteLine(&quot;📨 emailSubject: &quot; + emailSubject);&#xD;&#xA;    Console.WriteLine(&quot;📨 emailBody: &quot; + emailBody);&#xD;&#xA;    Console.WriteLine(&quot;📨 smtpServer: &quot; + smtpServer);&#xD;&#xA;    Console.WriteLine(&quot;📨 smtpPort: &quot; + smtpPort.ToString());&#xD;&#xA;&#xD;&#xA;    // === Null checks ===&#xD;&#xA;    if (string.IsNullOrWhiteSpace(recipientEmails)) throw new Exception(&quot;recipientEmails is null or empty&quot;);&#xD;&#xA;    if (string.IsNullOrWhiteSpace(fromEmail)) throw new Exception(&quot;fromEmail is null or empty&quot;);&#xD;&#xA;    if (string.IsNullOrWhiteSpace(emailSubject)) throw new Exception(&quot;emailSubject is null or empty&quot;);&#xD;&#xA;    if (string.IsNullOrWhiteSpace(emailBody)) throw new Exception(&quot;emailBody is null or empty&quot;);&#xD;&#xA;    if (string.IsNullOrWhiteSpace(smtpServer)) throw new Exception(&quot;smtpServer is null or empty&quot;);&#xD;&#xA;&#xD;&#xA;    // === Split and clean recipient list ===&#xD;&#xA;    string[] recipients = recipientEmails&#xD;&#xA;        .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)&#xD;&#xA;        .Select(email =&gt; email.Trim())&#xD;&#xA;        .ToArray();&#xD;&#xA;&#xD;&#xA;    Console.WriteLine(&quot;✅ Parsed recipients:&quot;);&#xD;&#xA;    foreach (string email in recipients)&#xD;&#xA;    {&#xD;&#xA;        Console.WriteLine(&quot;  - &quot; + email);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    // === Create and send MailMessage ===&#xD;&#xA;    using (MailMessage mailMessage = new MailMessage())&#xD;&#xA;    {&#xD;&#xA;        mailMessage.From = new MailAddress(fromEmail);&#xD;&#xA;        mailMessage.Subject = emailSubject;&#xD;&#xA;        mailMessage.Body = emailBody;&#xD;&#xA;        mailMessage.IsBodyHtml = true;&#xD;&#xA;&#xD;&#xA;        foreach (string email in recipients)&#xD;&#xA;        {&#xD;&#xA;            mailMessage.To.Add(email);&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))&#xD;&#xA;        {&#xD;&#xA;            smtpClient.EnableSsl = false; // Use true if your SMTP server requires SSL&#xD;&#xA;            smtpClient.UseDefaultCredentials = true;&#xD;&#xA;&#xD;&#xA;            smtpClient.Send(mailMessage);&#xD;&#xA;            Console.WriteLine(&quot;✅ Email sent successfully via Anonymous SMTP Relay!&quot;);&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;catch (Exception ex)&#xD;&#xA;{&#xD;&#xA;    Console.WriteLine(&quot;❌ Error sending email: &quot; + ex.Message);&#xD;&#xA;}&#xD;&#xA;" DisplayName="EMAIL NO attachmnets" sap:VirtualizedContainerService.HintSize="478.4,188" sap2010:WorkflowViewState.IdRef="InvokeCode_2" Language="CSharp">
+        <ui:InvokeCode.Arguments>
+          <InOutArgument x:TypeArguments="x:String" x:Key="emailBody">
+            <VisualBasicReference x:TypeArguments="x:String" ExpressionText="emailBody" />
+          </InOutArgument>
+          <InOutArgument x:TypeArguments="x:String" x:Key="emailSubject">
+            <VisualBasicReference x:TypeArguments="x:String" ExpressionText="emailSubject" />
+          </InOutArgument>
+          <InOutArgument x:TypeArguments="x:String" x:Key="fromEmail">
+            <VisualBasicReference x:TypeArguments="x:String" ExpressionText="fromEmail" />
+          </InOutArgument>
+          <InOutArgument x:TypeArguments="x:String" x:Key="recipientEmails">
+            <VisualBasicReference x:TypeArguments="x:String" ExpressionText="recipientEmails" />
+          </InOutArgument>
+          <InOutArgument x:TypeArguments="x:Int32" x:Key="smtpPort">
+            <VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="smtpPort" />
+          </InOutArgument>
+          <InOutArgument x:TypeArguments="x:String" x:Key="smtpServer">
+            <VisualBasicReference x:TypeArguments="x:String" ExpressionText="smtpServer" />
+          </InOutArgument>
+        </ui:InvokeCode.Arguments>
+      </ui:InvokeCode>
+    </Sequence>
+  </Sequence>
+</Activity>

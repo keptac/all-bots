@@ -1,0 +1,1018 @@
+{
+  "name": "CreditCardRecon",
+  "projectId": "b73eea5b-218d-4004-9a6a-62b2cca82362",
+  "description": "Credit Card Recon",
+  "main": "CreditCardReconMain.xaml",
+  "dependencies": {
+    "ClosedXML": "[0.104.2]",
+    "EPPlus": "[7.5.3]",
+    "ExcelDataReader": "[3.7.0]",
+    "ExcelDataReader.DataSet": "[3.7.0]",
+    "System.Text.Encoding": "[4.3.0]",
+    "System.Text.Encoding.CodePages": "[9.0.4]",
+    "UiPath.Database.Activities": "[1.10.0]",
+    "UiPath.Excel.Activities": "[2.24.4]",
+    "UiPath.Form.Activities": "[2.0.8]",
+    "UiPath.FormActivityLibrary": "[2.0.8]",
+    "UiPath.System.Activities": "[24.10.7]",
+    "UiPath.WebAPI.Activities": "[1.21.1]",
+    "upwi.ExcelDataReader": "[3.6.0]"
+  },
+  "webServices": [],
+  "entitiesStores": [],
+  "schemaVersion": "4.0",
+  "studioVersion": "25.0.157.0",
+  "projectVersion": "1.0.17",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "netFrameworkLazyLoading": false,
+    "isPausable": true,
+    "isAttended": false,
+    "requiresUserInteraction": true,
+    "supportsPersistence": false,
+    "workflowSerialization": "DataContract",
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ],
+    "executionType": "Workflow",
+    "readyForPiP": false,
+    "startsInPiP": false,
+    "mustRestoreAllDependencies": true,
+    "pipType": "ChildSession",
+    "robotVersion": "24.10.0"
+  },
+  "designOptions": {
+    "projectProfile": "Developement",
+    "outputType": "Process",
+    "libraryOptions": {
+      "privateWorkflows": []
+    },
+    "processOptions": {
+      "ignoredFiles": []
+    },
+    "fileInfoCollection": [],
+    "saveToCloud": false
+  },
+  "arguments": {
+    "input": [],
+    "output": []
+  },
+  "expressionLanguage": "VisualBasic",
+  "entryPoints": [
+    {
+      "filePath": "CreditCardReconMain.xaml",
+      "uniqueId": "59224d6a-a638-45ff-950c-6f240603bc82",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "GetReconStatements.xaml",
+      "uniqueId": "1997bb73-7ecf-4f1a-a785-c5088a448dc4",
+      "input": [
+        {
+          "name": "dtGlStatementMatched",
+          "displayName": "dtGlStatementMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReportMatched",
+          "displayName": "dtHistoricalReconTransactionsReportMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsMatched",
+          "displayName": "dtPostedTransactionDetailsMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsManual",
+          "displayName": "dtPostedTransactionDetailsManual",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsRefund",
+          "displayName": "dtPostedTransactionDetailsRefund",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsIncome",
+          "displayName": "dtPostedTransactionDetailsIncome",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "adjustedCMSBalance",
+          "displayName": "adjustedCMSBalance",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "adjustedCBSBalance",
+          "displayName": "adjustedCBSBalance",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "grandTotalPostedTransactionDetails",
+          "displayName": "grandTotalPostedTransactionDetails",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "balanceMovementDebitOrCredit",
+          "displayName": "balanceMovementDebitOrCredit",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "balanceMovement",
+          "displayName": "balanceMovement",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "debitAmountCMS",
+          "displayName": "debitAmountCMS",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "toDate",
+          "displayName": "toDate",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactiondetailsSummary",
+          "displayName": "dtPostedTransactiondetailsSummary",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "cardManagementSystemBalance",
+          "displayName": "cardManagementSystemBalance",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtGlStatement",
+          "displayName": "dtGlStatement",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "totalCreditsGL",
+          "displayName": "totalCreditsGL",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "totalDebitsGL",
+          "displayName": "totalDebitsGL",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "fromDate",
+          "displayName": "fromDate",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtReversalsGl",
+          "displayName": "dtReversalsGl",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "glCurrentBalance",
+          "displayName": "glCurrentBalance",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "outStandingCreditAmountGL",
+          "displayName": "outStandingCreditAmountGL",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "outStandingDebitAmountGL",
+          "displayName": "outStandingDebitAmountGL",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "outStandingCreditAmountCMS",
+          "displayName": "outStandingCreditAmountCMS",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "outStandingDebitAmountCMS",
+          "displayName": "outStandingDebitAmountCMS",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "outstandingMatchedTxnReportStatement",
+          "displayName": "outstandingMatchedTxnReportStatement",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "outstandingMatchedGlStatement",
+          "displayName": "outstandingMatchedGlStatement",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "glCutOffBalance",
+          "displayName": "glCutOffBalance",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "creditCardFileName",
+          "displayName": "creditCardFileName",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReport",
+          "displayName": "dtHistoricalReconTransactionsReport",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtTransactionReportRRNAbsent",
+          "displayName": "dtTransactionReportRRNAbsent",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtTransactionReportRRNPresent",
+          "displayName": "dtTransactionReportRRNPresent",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtAuthorisationsReport",
+          "displayName": "dtAuthorisationsReport",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtAccountBalanceAndStatusReport",
+          "displayName": "dtAccountBalanceAndStatusReport",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPrepaidCreditCardTransactions",
+          "displayName": "dtPrepaidCreditCardTransactions",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtTransactionReport",
+          "displayName": "dtTransactionReport",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetails",
+          "displayName": "dtPostedTransactionDetails",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "totalPostedTransactionDetails",
+          "displayName": "totalPostedTransactionDetails",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPrepaidCreditCardReversedTransactions",
+          "displayName": "dtPrepaidCreditCardReversedTransactions",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsPurchase",
+          "displayName": "dtPostedTransactionDetailsPurchase",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsLatePaymentFee",
+          "displayName": "dtPostedTransactionDetailsLatePaymentFee",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsCashAdvance",
+          "displayName": "dtPostedTransactionDetailsCashAdvance",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsFundTransfer",
+          "displayName": "dtPostedTransactionDetailsFundTransfer",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsMiscAdjustmentCredit",
+          "displayName": "dtPostedTransactionDetailsMiscAdjustmentCredit",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsUniqueTxn",
+          "displayName": "dtPostedTransactionDetailsUniqueTxn",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsRecurringTxn",
+          "displayName": "dtPostedTransactionDetailsRecurringTxn",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsAtmCashWithdrawal",
+          "displayName": "dtPostedTransactionDetailsAtmCashWithdrawal",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsMiscAdjustmentDebit",
+          "displayName": "dtPostedTransactionDetailsMiscAdjustmentDebit",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsServiceTaxAndIncomeRev",
+          "displayName": "dtPostedTransactionDetailsServiceTaxAndIncomeRev",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtGlStatementLatePostedTxn",
+          "displayName": "dtGlStatementLatePostedTxn",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReportIncome",
+          "displayName": "dtHistoricalReconTransactionsReportIncome",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReportPurchase",
+          "displayName": "dtHistoricalReconTransactionsReportPurchase",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReportIncomeRev",
+          "displayName": "dtHistoricalReconTransactionsReportIncomeRev",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsPurchaseMatched",
+          "displayName": "dtPostedTransactionDetailsPurchaseMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtPostedTransactionDetailsRev",
+          "displayName": "dtPostedTransactionDetailsRev",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtCCSP",
+          "displayName": "dtCCSP",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtRemoteOnUsTransactionNotYetPosted",
+          "displayName": "dtRemoteOnUsTransactionNotYetPosted",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "reconDate",
+          "displayName": "reconDate",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "exchangeGainOrLoss",
+          "displayName": "exchangeGainOrLoss",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "lastReconDate",
+          "displayName": "lastReconDate",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtGlStatementPRDP",
+          "displayName": "dtGlStatementPRDP",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtCCSPMatched",
+          "displayName": "dtCCSPMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtRemoteOnUsTransactionNotYetPostedMatched",
+          "displayName": "dtRemoteOnUsTransactionNotYetPostedMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReportRemoteOnUs",
+          "displayName": "dtHistoricalReconTransactionsReportRemoteOnUs",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "creditCardWorkingsFileName",
+          "displayName": "creditCardWorkingsFileName",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtCCDD",
+          "displayName": "dtCCDD",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtAutoPaymentThankYou",
+          "displayName": "dtAutoPaymentThankYou",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReportRemoteOnUsMatched",
+          "displayName": "dtHistoricalReconTransactionsReportRemoteOnUsMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtGlStatementATMGvtLevy",
+          "displayName": "dtGlStatementATMGvtLevy",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtGlStatementIncomeUpdatedCBSOnly",
+          "displayName": "dtGlStatementIncomeUpdatedCBSOnly",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "dtGlStatementRefund",
+          "displayName": "dtGlStatementRefund",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "outputFileNameReconDate",
+          "displayName": "outputFileNameReconDate",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "smtpPort",
+          "displayName": "smtpPort",
+          "type": "System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "smtpServer",
+          "displayName": "smtpServer",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "emailBody",
+          "displayName": "emailBody",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "emailSubject",
+          "displayName": "emailSubject",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "recipientEmails",
+          "displayName": "recipientEmails",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "fromEmail",
+          "displayName": "fromEmail",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "required": false,
+          "hasDefault": false
+        }
+      ],
+      "output": [
+        {
+          "name": "dtGlStatementMatched",
+          "displayName": "dtGlStatementMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReportMatched",
+          "displayName": "dtHistoricalReconTransactionsReportMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsMatched",
+          "displayName": "dtPostedTransactionDetailsMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsManual",
+          "displayName": "dtPostedTransactionDetailsManual",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsRefund",
+          "displayName": "dtPostedTransactionDetailsRefund",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsIncome",
+          "displayName": "dtPostedTransactionDetailsIncome",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "adjustedCMSBalance",
+          "displayName": "adjustedCMSBalance",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "adjustedCBSBalance",
+          "displayName": "adjustedCBSBalance",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "grandTotalPostedTransactionDetails",
+          "displayName": "grandTotalPostedTransactionDetails",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "balanceMovementDebitOrCredit",
+          "displayName": "balanceMovementDebitOrCredit",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "balanceMovement",
+          "displayName": "balanceMovement",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "debitAmountCMS",
+          "displayName": "debitAmountCMS",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "toDate",
+          "displayName": "toDate",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "dtPostedTransactiondetailsSummary",
+          "displayName": "dtPostedTransactiondetailsSummary",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "cardManagementSystemBalance",
+          "displayName": "cardManagementSystemBalance",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "dtGlStatement",
+          "displayName": "dtGlStatement",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "totalCreditsGL",
+          "displayName": "totalCreditsGL",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "totalDebitsGL",
+          "displayName": "totalDebitsGL",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "fromDate",
+          "displayName": "fromDate",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "dtReversalsGl",
+          "displayName": "dtReversalsGl",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "glCurrentBalance",
+          "displayName": "glCurrentBalance",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "outStandingCreditAmountGL",
+          "displayName": "outStandingCreditAmountGL",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "outStandingDebitAmountGL",
+          "displayName": "outStandingDebitAmountGL",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "outStandingCreditAmountCMS",
+          "displayName": "outStandingCreditAmountCMS",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "outStandingDebitAmountCMS",
+          "displayName": "outStandingDebitAmountCMS",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "outstandingMatchedTxnReportStatement",
+          "displayName": "outstandingMatchedTxnReportStatement",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "outstandingMatchedGlStatement",
+          "displayName": "outstandingMatchedGlStatement",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "glCutOffBalance",
+          "displayName": "glCutOffBalance",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "creditCardFileName",
+          "displayName": "creditCardFileName",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReport",
+          "displayName": "dtHistoricalReconTransactionsReport",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtTransactionReportRRNAbsent",
+          "displayName": "dtTransactionReportRRNAbsent",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtTransactionReportRRNPresent",
+          "displayName": "dtTransactionReportRRNPresent",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtAuthorisationsReport",
+          "displayName": "dtAuthorisationsReport",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtAccountBalanceAndStatusReport",
+          "displayName": "dtAccountBalanceAndStatusReport",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPrepaidCreditCardTransactions",
+          "displayName": "dtPrepaidCreditCardTransactions",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtTransactionReport",
+          "displayName": "dtTransactionReport",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetails",
+          "displayName": "dtPostedTransactionDetails",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "totalPostedTransactionDetails",
+          "displayName": "totalPostedTransactionDetails",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "dtPrepaidCreditCardReversedTransactions",
+          "displayName": "dtPrepaidCreditCardReversedTransactions",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsPurchase",
+          "displayName": "dtPostedTransactionDetailsPurchase",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsLatePaymentFee",
+          "displayName": "dtPostedTransactionDetailsLatePaymentFee",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsCashAdvance",
+          "displayName": "dtPostedTransactionDetailsCashAdvance",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsFundTransfer",
+          "displayName": "dtPostedTransactionDetailsFundTransfer",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsMiscAdjustmentCredit",
+          "displayName": "dtPostedTransactionDetailsMiscAdjustmentCredit",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsUniqueTxn",
+          "displayName": "dtPostedTransactionDetailsUniqueTxn",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsRecurringTxn",
+          "displayName": "dtPostedTransactionDetailsRecurringTxn",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsAtmCashWithdrawal",
+          "displayName": "dtPostedTransactionDetailsAtmCashWithdrawal",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsMiscAdjustmentDebit",
+          "displayName": "dtPostedTransactionDetailsMiscAdjustmentDebit",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsServiceTaxAndIncomeRev",
+          "displayName": "dtPostedTransactionDetailsServiceTaxAndIncomeRev",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtGlStatementLatePostedTxn",
+          "displayName": "dtGlStatementLatePostedTxn",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReportIncome",
+          "displayName": "dtHistoricalReconTransactionsReportIncome",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReportPurchase",
+          "displayName": "dtHistoricalReconTransactionsReportPurchase",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReportIncomeRev",
+          "displayName": "dtHistoricalReconTransactionsReportIncomeRev",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsPurchaseMatched",
+          "displayName": "dtPostedTransactionDetailsPurchaseMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtPostedTransactionDetailsRev",
+          "displayName": "dtPostedTransactionDetailsRev",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtCCSP",
+          "displayName": "dtCCSP",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtRemoteOnUsTransactionNotYetPosted",
+          "displayName": "dtRemoteOnUsTransactionNotYetPosted",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "reconDate",
+          "displayName": "reconDate",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "exchangeGainOrLoss",
+          "displayName": "exchangeGainOrLoss",
+          "type": "System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "lastReconDate",
+          "displayName": "lastReconDate",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "dtGlStatementPRDP",
+          "displayName": "dtGlStatementPRDP",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtCCSPMatched",
+          "displayName": "dtCCSPMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtRemoteOnUsTransactionNotYetPostedMatched",
+          "displayName": "dtRemoteOnUsTransactionNotYetPostedMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReportRemoteOnUs",
+          "displayName": "dtHistoricalReconTransactionsReportRemoteOnUs",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "creditCardWorkingsFileName",
+          "displayName": "creditCardWorkingsFileName",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "dtCCDD",
+          "displayName": "dtCCDD",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtAutoPaymentThankYou",
+          "displayName": "dtAutoPaymentThankYou",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtHistoricalReconTransactionsReportRemoteOnUsMatched",
+          "displayName": "dtHistoricalReconTransactionsReportRemoteOnUsMatched",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtGlStatementATMGvtLevy",
+          "displayName": "dtGlStatementATMGvtLevy",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtGlStatementIncomeUpdatedCBSOnly",
+          "displayName": "dtGlStatementIncomeUpdatedCBSOnly",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "dtGlStatementRefund",
+          "displayName": "dtGlStatementRefund",
+          "type": "System.Data.DataTable, System.Data.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        },
+        {
+          "name": "outputFileNameReconDate",
+          "displayName": "outputFileNameReconDate",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "smtpPort",
+          "displayName": "smtpPort",
+          "type": "System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "smtpServer",
+          "displayName": "smtpServer",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "emailBody",
+          "displayName": "emailBody",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "emailSubject",
+          "displayName": "emailSubject",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "recipientEmails",
+          "displayName": "recipientEmails",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        },
+        {
+          "name": "fromEmail",
+          "displayName": "fromEmail",
+          "type": "System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+        }
+      ]
+    }
+  ],
+  "isTemplate": false,
+  "templateProjectData": {},
+  "publishData": {},
+  "targetFramework": "Windows"
+}

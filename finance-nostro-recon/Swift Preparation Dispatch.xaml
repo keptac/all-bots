@@ -1,0 +1,161 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Swift_Preparation_Dispatch" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="hasIso" Type="InArgument(x:Boolean)" />
+    <x:Property Name="hasLegacy" Type="InArgument(x:Boolean)" />
+    <x:Property Name="swiftMxFolderPath" Type="InArgument(x:String)" />
+    <x:Property Name="swiftFolderPath" Type="InArgument(x:String)" />
+    <x:Property Name="swiftDetailedFolderPath" Type="InArgument(x:String)" />
+    <x:Property Name="swiftWorkingsFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="workingsFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="summaryFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="dtSwiftCombined" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="dtSwiftStatement" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="missingPages" Type="OutArgument(x:String)" />
+  </x:Members>
+  <sap2010:WorkflowViewState.IdRef>Swift_Preparation_Dispatch_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Swift Preparation Dispatch" sap:VirtualizedContainerService.HintSize="664,900" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dtIsoCombined" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtIsoStatement" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtLegacyStatement" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtLegacyDetailed" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtLegacyCombined" />
+      <Variable x:TypeArguments="x:String" Name="isoMissingPages">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String" Value="" />
+        </Variable.Default>
+      </Variable>
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <If Condition="[hasIso]" DisplayName="If ISO 20022 statements arrived" sap:VirtualizedContainerService.HintSize="600,250" sap2010:WorkflowViewState.IdRef="If_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="swift-prep-20022 - Invoke Workflow File (swift-prep-20022.xaml)" sap:VirtualizedContainerService.HintSize="478.4,92" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="swift-prep-20022.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="x:String" x:Key="swiftFolderPath">[swiftMxFolderPath]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="swiftWorkingsFilePath">[swiftWorkingsFilePath]</InArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftCombined">[dtIsoCombined]</OutArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftStatement">[dtIsoStatement]</OutArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="missingPages">[isoMissingPages]</OutArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+      </If.Then>
+    </If>
+    <If Condition="[hasLegacy]" DisplayName="If legacy MT940 statements arrived" sap:VirtualizedContainerService.HintSize="600,400" sap2010:WorkflowViewState.IdRef="If_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Legacy chain" sap:VirtualizedContainerService.HintSize="560,330" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="True" DisplayName="Swift_Preparation_61.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="478.4,92" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Swift_Preparation_61.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="swiftFolderPath">[swiftFolderPath]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="swiftWorkingsFilePath">[swiftWorkingsFilePath]</InArgument>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftStatement">[dtLegacyStatement]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Swift Preparation Detailed.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="478.4,92" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Swift Preparation Detailed.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="swiftDetailedFolderPath">[swiftDetailedFolderPath]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="swiftWorkingsFilePath">[swiftWorkingsFilePath]</InArgument>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftDetailed">[dtLegacyDetailed]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Merge Swift.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="478.4,92" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Merge Swift.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="workingsFilePath">[workingsFilePath]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="summaryFilePath">[summaryFilePath]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="swiftWorkingsFilePath">[swiftWorkingsFilePath]</InArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftStatement">[dtLegacyStatement]</InArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftDetailed">[dtLegacyDetailed]</InArgument>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftCombined">[dtLegacyCombined]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </If.Then>
+    </If>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="' ============================================================================&#xA;'  SWIFT STATEMENT COMBINE - ISO 20022 AND LEGACY IN ONE PASS&#xA;' ============================================================================&#xA;'  Both standards can arrive on the same day while accounts migrate, so the&#xA;'  two prep chains run independently and their rows are brought together here.&#xA;'&#xA;'  Matching.xaml reads dtSwiftCombined on the ISO 20022 column names - it&#xA;'  filters per account on &quot;Account Number&quot; and ages on &quot;Value Date&quot; /&#xA;'  &quot;Booking Date&quot;. The legacy chain (Merge Swift) emits &quot;AccountNumber&quot;,&#xA;'  &quot;ValueDate&quot;, &quot;Book Date&quot;, &quot;TransactionDescription&quot; instead, so legacy rows&#xA;'  are renamed onto the ISO schema before the union. Appending them raw would&#xA;'  leave &quot;Account Number&quot; absent and reconcile nothing for those accounts.&#xA;' ============================================================================&#xA;&#xA;' The ISO contract, exactly as swift-prep-20022 projects dtSwiftStatement.&#xA;Dim isoCols As String() = { _&#xA;    &quot;Booking Date&quot;, &quot;Value Date&quot;, &quot;Debit&quot;, &quot;Credit&quot;, &quot;Currency&quot;, _&#xA;    &quot;Transaction Reference&quot;, &quot;Related Reference (21)&quot;, &quot;Related Reference (61)&quot;, _&#xA;    &quot;Narration&quot;, &quot;Account Number&quot;, &quot;Opening Balance&quot;, &quot;Closing Balance&quot;, _&#xA;    &quot;Source File&quot;, &quot;Page Number&quot;, &quot;Age&quot;, &quot;Statement Id&quot;, _&#xA;    &quot;Statement Creation Date Time&quot;, &quot;Last Page Indicator&quot;, &quot;Entry Amount&quot;, _&#xA;    &quot;Entry Currency&quot;, &quot;Credit Debit Indicator&quot;, &quot;Entry Status&quot;, &quot;End To End Id&quot;, _&#xA;    &quot;UETR&quot;, &quot;Transaction Type&quot;, &quot;Narrative&quot;, &quot;Additional Entry Information&quot;, _&#xA;    &quot;Bank Transaction Proprietary Code&quot;}&#xA;&#xA;' Legacy column -&gt; ISO column. Anything not listed has no MT940 equivalent and&#xA;' is left empty rather than guessed at.&#xA;Dim legacyMap As New Dictionary(Of String, String)()&#xA;legacyMap(&quot;Book Date&quot;) = &quot;Booking Date&quot;&#xA;legacyMap(&quot;ValueDate&quot;) = &quot;Value Date&quot;&#xA;legacyMap(&quot;Debit&quot;) = &quot;Debit&quot;&#xA;legacyMap(&quot;Credit&quot;) = &quot;Credit&quot;&#xA;legacyMap(&quot;Currency&quot;) = &quot;Currency&quot;&#xA;legacyMap(&quot;Transaction Reference&quot;) = &quot;Transaction Reference&quot;&#xA;legacyMap(&quot;Related Reference (21)&quot;) = &quot;Related Reference (21)&quot;&#xA;legacyMap(&quot;Related Reference (61)&quot;) = &quot;Related Reference (61)&quot;&#xA;legacyMap(&quot;Narration&quot;) = &quot;Narration&quot;&#xA;legacyMap(&quot;AccountNumber&quot;) = &quot;Account Number&quot;&#xA;legacyMap(&quot;OpeningBalance&quot;) = &quot;Opening Balance&quot;&#xA;legacyMap(&quot;ClosingBalance&quot;) = &quot;Closing Balance&quot;&#xA;legacyMap(&quot;FileNumber&quot;) = &quot;Source File&quot;&#xA;legacyMap(&quot;PageNumber&quot;) = &quot;Page Number&quot;&#xA;legacyMap(&quot;TransactionDescription&quot;) = &quot;Narrative&quot;&#xA;legacyMap(&quot;Message Type&quot;) = &quot;Transaction Type&quot;&#xA;&#xA;Dim result As New DataTable()&#xA;For Each c As String In isoCols&#xA;    result.Columns.Add(c, GetType(String))&#xA;Next&#xA;&#xA;Dim isoRows As Integer = 0&#xA;Dim legacyRows As Integer = 0&#xA;&#xA;' --- ISO rows: same schema already, copy across by name.&#xA;If in_dtIso IsNot Nothing Then&#xA;    For Each src As DataRow In in_dtIso.Rows&#xA;        Dim nr As DataRow = result.NewRow()&#xA;        For Each c As String In isoCols&#xA;            If in_dtIso.Columns.Contains(c) AndAlso Not src.IsNull(c) Then&#xA;                nr(c) = src(c).ToString()&#xA;            Else&#xA;                nr(c) = &quot;&quot;&#xA;            End If&#xA;        Next&#xA;        result.Rows.Add(nr)&#xA;        isoRows += 1&#xA;    Next&#xA;End If&#xA;&#xA;' --- Legacy rows: rename onto the ISO schema.&#xA;If in_dtLegacy IsNot Nothing Then&#xA;    For Each src As DataRow In in_dtLegacy.Rows&#xA;        Dim nr As DataRow = result.NewRow()&#xA;        For Each c As String In isoCols&#xA;            nr(c) = &quot;&quot;&#xA;        Next&#xA;&#xA;        For Each m As KeyValuePair(Of String, String) In legacyMap&#xA;            If in_dtLegacy.Columns.Contains(m.Key) AndAlso Not src.IsNull(m.Key) Then&#xA;                nr(m.Value) = src(m.Key).ToString()&#xA;            End If&#xA;        Next&#xA;&#xA;        ' MT940 statement lines are booked by definition; Matching tests this.&#xA;        If nr(&quot;Entry Status&quot;).ToString().Length = 0 Then nr(&quot;Entry Status&quot;) = &quot;BOOK&quot;&#xA;&#xA;        ' Narrative drives the matching text; fall back to Narration when the&#xA;        ' detailed extract had no description for the line.&#xA;        If nr(&quot;Narrative&quot;).ToString().Length = 0 Then nr(&quot;Narrative&quot;) = nr(&quot;Narration&quot;).ToString()&#xA;        If nr(&quot;Narration&quot;).ToString().Length = 0 Then nr(&quot;Narration&quot;) = nr(&quot;Narrative&quot;).ToString()&#xA;&#xA;        ' Derive what camt.053 carries explicitly and MT940 only implies.&#xA;        Dim dbt As String = nr(&quot;Debit&quot;).ToString().Trim()&#xA;        Dim crd As String = nr(&quot;Credit&quot;).ToString().Trim()&#xA;        Dim dbtVal As Double = 0&#xA;        Dim crdVal As Double = 0&#xA;        Double.TryParse(dbt, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, dbtVal)&#xA;        Double.TryParse(crd, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, crdVal)&#xA;        If dbtVal &lt;&gt; 0 Then&#xA;            nr(&quot;Credit Debit Indicator&quot;) = &quot;DBIT&quot;&#xA;            nr(&quot;Entry Amount&quot;) = Math.Abs(dbtVal).ToString(System.Globalization.CultureInfo.InvariantCulture)&#xA;        ElseIf crdVal &lt;&gt; 0 Then&#xA;            nr(&quot;Credit Debit Indicator&quot;) = &quot;CRDT&quot;&#xA;            nr(&quot;Entry Amount&quot;) = Math.Abs(crdVal).ToString(System.Globalization.CultureInfo.InvariantCulture)&#xA;        End If&#xA;        nr(&quot;Entry Currency&quot;) = nr(&quot;Currency&quot;).ToString()&#xA;&#xA;        ' Keep the parties the legacy extract carries rather than dropping them.&#xA;        Dim extra As New List(Of String)()&#xA;        For Each c As String In New String() {&quot;Ordering Institution&quot;, &quot;Beneficiary Institution&quot;}&#xA;            If in_dtLegacy.Columns.Contains(c) AndAlso Not src.IsNull(c) Then&#xA;                Dim v As String = src(c).ToString().Trim()&#xA;                If v.Length &gt; 0 Then extra.Add(c &amp; &quot;: &quot; &amp; v)&#xA;            End If&#xA;        Next&#xA;        If extra.Count &gt; 0 Then nr(&quot;Additional Entry Information&quot;) = String.Join(&quot; | &quot;, extra)&#xA;&#xA;        result.Rows.Add(nr)&#xA;        legacyRows += 1&#xA;    Next&#xA;End If&#xA;&#xA;out_dtSwiftCombined = result&#xA;&#xA;Console.WriteLine(&quot;Swift combine: &quot; &amp; isoRows.ToString() &amp; &quot; ISO 20022 row(s) + &quot; &amp; legacyRows.ToString() &amp; &quot; legacy row(s) normalised = &quot; &amp; result.Rows.Count.ToString() &amp; &quot; total&quot;)&#xA;&#xA;If result.Rows.Count = 0 Then&#xA;    Throw New Exception(&quot;Both statement chains produced no rows - nothing to reconcile.&quot;)&#xA;End If&#xA;" DisplayName="Combine ISO 20022 and legacy statements" sap:VirtualizedContainerService.HintSize="600,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtIso">[dtIsoCombined]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtLegacy">[dtLegacyCombined]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtSwiftCombined">[dtSwiftCombined]</OutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:MultipleAssign DisplayName="Publish outputs" sap:VirtualizedContainerService.HintSize="600,200" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftStatement]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="sd:DataTable">[dtSwiftCombined]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[missingPages]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[If(hasIso, If(isoMissingPages Is Nothing, "", isoMissingPages), "")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
+  </Sequence>
+</Activity>

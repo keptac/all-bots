@@ -1,0 +1,103 @@
+{
+  "name": "PrepaidCardRecon",
+  "projectId": "debd521b-5e93-4908-b63d-983c51a8e2ae",
+  "description": "PrepaidCardRecon",
+  "main": "PrepaidCardReconMain.xaml",
+  "dependencies": {
+    "EPPlus": "[7.5.3]",
+    "ExcelDataReader": "[3.7.0]",
+    "ExcelDataReader.DataSet": "[3.7.0]",
+    "ExcelDataReaderT": "[0.1.2]",
+    "InternalLabs.Linq.Activities": "[1.0.0]",
+    "System.Text.Encoding": "[4.3.0]",
+    "System.Text.Encoding.CodePages": "[8.0.0]",
+    "System.Threading.Tasks.Parallel": "[4.3.0]",
+    "UiPath.Excel.Activities": "[2.24.4]",
+    "UiPath.Form.Activities": "[2.0.8]",
+    "UiPath.System.Activities": "[23.10.5]",
+    "UiPath.WebAPI.Activities": "[1.21.1]"
+  },
+  "webServices": [],
+  "entitiesStores": [],
+  "schemaVersion": "4.0",
+  "studioVersion": "25.0.157.0",
+  "projectVersion": "1.0.23",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "netFrameworkLazyLoading": false,
+    "isPausable": true,
+    "isAttended": false,
+    "requiresUserInteraction": true,
+    "supportsPersistence": false,
+    "workflowSerialization": "DataContract",
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ],
+    "executionType": "Workflow",
+    "readyForPiP": false,
+    "startsInPiP": false,
+    "mustRestoreAllDependencies": true,
+    "pipType": "ChildSession",
+    "robotVersion": "24.10.0"
+  },
+  "designOptions": {
+    "projectProfile": "Developement",
+    "outputType": "Process",
+    "libraryOptions": {
+      "privateWorkflows": []
+    },
+    "processOptions": {
+      "ignoredFiles": []
+    },
+    "fileInfoCollection": [],
+    "saveToCloud": false
+  },
+  "arguments": {
+    "input": [],
+    "output": []
+  },
+  "expressionLanguage": "VisualBasic",
+  "entryPoints": [
+    {
+      "filePath": "Test.xaml",
+      "uniqueId": "09aa0275-1c41-42b3-90c3-ad47432e7603",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "Histo Insert Test.xaml",
+      "uniqueId": "44684b59-1ba9-4826-b87e-27a01efb9713",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "PrepaidCardReconMain.xaml",
+      "uniqueId": "18e31e66-a373-4526-8d3f-74789371a876",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "RenameAndOpenfilesfromServer.xaml",
+      "uniqueId": "2908884c-6a89-48b4-90cb-470caf536c15",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "TestAccountBalancesAndstatusReport.xaml",
+      "uniqueId": "b4114bc5-c1cd-4cea-9996-fd14e5f18662",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "TestTransactionReportFormating.xaml",
+      "uniqueId": "4e58e424-88a2-42f7-ac6d-4b0b42030ba6",
+      "input": [],
+      "output": []
+    }
+  ],
+  "isTemplate": false,
+  "templateProjectData": {},
+  "publishData": {},
+  "targetFramework": "Windows"
+}

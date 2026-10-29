@@ -1,0 +1,772 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="File_preparation" this:File_preparation.transactionsReportStatement="C:\Users\bridget\Downloads\visa_acq_outgoing_2024-09-04.csv" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="transactionsReportStatement" Type="InArgument(x:String)" />
+    <x:Property Name="dtProcessedReportStatement" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="reconResultsPath" Type="InArgument(x:String)" />
+    <x:Property Name="currencyCode" Type="InArgument(x:String)" />
+    <x:Property Name="processMsgCategory" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>844,4158.4</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>File_preparation_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="File_preparation" sap:VirtualizedContainerService.HintSize="715.3333333333333,9023.333333333334" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dtProcessedReportStatementTemp" />
+      <Variable x:TypeArguments="x:String" Name="dummy" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Switch x:TypeArguments="x:String" DisplayName="Switch for each" Expression="[processMsgCategory]" sap:VirtualizedContainerService.HintSize="583.3333333333334,8732" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Sequence x:Key="EP745" DisplayName="Prepare EP745" sap:VirtualizedContainerService.HintSize="581.3333333333334,4237.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:String" Name="ep745Statement" />
+          <Variable x:TypeArguments="x:Double" Name="settlementAmtSameCurrency" />
+          <Variable x:TypeArguments="x:Double" Name="settlementUsd" />
+          <Variable x:TypeArguments="sd:DataTable" Name="dtSettlements" />
+          <Variable x:TypeArguments="sd:DataTable" Name="dtProcessedReportReversals" />
+        </Sequence.Variables>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="547.3333333333334,101.33333333333333" sap2010:WorkflowViewState.IdRef="ReportStatus_4" StatusText="[&quot;30% - &quot;+processMsgCategory+&quot; REPORT PREPARATION&quot;]" />
+        <ui:ReadTextFile File="{x:Null}" Content="[ep745Statement]" DisplayName="Read Text File" FileName="[transactionsReportStatement]" sap:VirtualizedContainerService.HintSize="547.3333333333334,114" sap2010:WorkflowViewState.IdRef="ReadTextFile_2" />
+        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="547.3333333333334,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+          <ui:CommentOut.Body>
+            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,248" sap2010:WorkflowViewState.IdRef="Sequence_14">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Define the output DataTable&#xA;Dim dt As New DataTable&#xA;dt.Columns.Add(&quot;Batch Number&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Date&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Time&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;PAN&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;RRN&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Trace&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Issuer ID&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Transaction Type&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Processing Code&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Entry Mode&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Response Code&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Transaction Amount&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Currency&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Settlement Currency&quot;, GetType(String)) ' Add the Settlement Currency column&#xA;dt.Columns.Add(&quot;Debit Settlement&quot;, GetType(String)) ' Add Debit Settlement column next to Settlement Currency&#xA;dt.Columns.Add(&quot;Credit Settlement&quot;, GetType(String)) ' Add Credit Settlement column next to Debit Settlement&#xA;dt.Columns.Add(&quot;Terminal ID&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Branch Name&quot;, GetType(String))&#xA;&#xA;' Example input text (replace this with your actual text)&#xA;Dim inputText As String = ep745Statement&#xA;&#xA;Try&#xA;    ' Split input text into transactions&#xA;    Dim transactionBatches As String() = inputText.Split(New String() { &quot;----------------------------------------------------------------------------------------------------------------------------------- &quot; &amp; vbCrLf &amp; &quot; BAT&quot; }, StringSplitOptions.RemoveEmptyEntries)&#xA;&#x9;&#xA;&#x9;For Each transactionBatch In transactionBatches&#x9;&#xA;&#x9;        If Not transactionBatch.Contains(&quot;XMIT(GMT)/LOCL&quot;) Then&#xA;&#x9;            Continue For&#xA;&#x9;        End If&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim settlementCurrency As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;  ' Extract the Settlement Currency from the line containing &quot;(USD)&quot; or similar&#xA;&#x9;&#x9;&#x9; Dim settlementCurrencyIndex As Integer = transactionBatch.Replace(&quot; &quot;,&quot;&quot;).IndexOf(&quot;AMOUNT (&quot;)&#xA;&#x9;&#x9;&#x9;  If settlementCurrencyIndex &lt;&gt; -1 Then&#xA;&#x9;&#x9;&#x9;       settlementCurrency = transactionBatch.Replace(&quot; &quot;,&quot;&quot;).Substring(settlementCurrencyIndex + 1, 3).Trim()&#xA;&#x9;&#x9;&#x9;  End If&#xA;&#x9;&#x9;&#x9;  &#xA;&#x9;&#x9;&#x9;  Dim lines As String() = transactionBatch.Split(New String() { vbCrLf }, StringSplitOptions.RemoveEmptyEntries)&#xA;&#x9;&#x9;&#x9;  &#x9;&#x9;&#x9;Dim batchNumber As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim transactionDate As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim transactionTime As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim pan As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim rrn As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim trace As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim issuerID As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim transactionType As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim processingCode As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim entryMode As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim responseCode As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim transactionAmount As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim currency As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim debitSettlement As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim creditSettlement As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim terminalID As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim branchName As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;'Console.WriteLine(transactionBatch)&#xA;&#x9;&#x9;&#x9;  &#xA;&#x9;&#x9;&#x9;      ' Loop through each line to extract data&#xA;&#x9;&#x9;&#x9;    For Each line In lines&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;line = line.Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;        ' If in the transaction section, process the transaction lines&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        If line.Length &gt; 0 AndAlso IsNumeric(line.Substring(0, 2)) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            ' Adjust these indices and lengths based on your actual data format&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            batchNumber = line.Substring(0, 2).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            transactionDate = line.Substring(3, 6).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            transactionTime = line.Substring(9, 8).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            pan = line.Substring(18, 16).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            rrn = line.Substring(35, 15).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            trace = line.Substring(50, 7).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            issuerID = line.Substring(58, 6).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            transactionType = line.Substring(68, 6).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    processingCode = line.Substring(75, 6).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            entryMode = line.Substring(82, 3).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            responseCode = line.Substring(95, 2).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            transactionAmount = line.Substring(100, 12).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            currency = line.Substring(112, 3).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            ' Extract settlement amount, debit, and credit&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            Dim settlementAmount As String = line.Substring(123).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            If settlementAmount.EndsWith(&quot;CR&quot;) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;                creditSettlement = settlementAmount.Replace(&quot;CR&quot;, &quot;&quot;).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;                debitSettlement = &quot;0&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            ElseIf settlementAmount.EndsWith(&quot;DR&quot;) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;                debitSettlement = settlementAmount.Replace(&quot;DR&quot;, &quot;&quot;).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;                creditSettlement = &quot;0&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;' Extract Terminal ID from 'CA ID:' line&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;        If line.Contains(&quot;CA ID:&quot;) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            Dim caIDIndex As Integer = line.IndexOf(&quot;CA ID:&quot;) + 7&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            terminalID = line.Substring(caIDIndex, 8).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;' Extract Branch Name from '25/' or '45/' line&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            Dim branchIndex As Integer&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            If line.Contains(&quot;25/&quot;) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;                branchIndex = line.IndexOf(&quot;25/&quot;) + 3&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            ElseIf line.Contains(&quot;45/&quot;) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;                branchIndex = line.IndexOf(&quot;45/&quot;) + 3&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            Dim endIndex As Integer = line.IndexOf(&quot;/TZ&quot;, branchIndex)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            If endIndex &gt; -1 Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;                branchName = line.Substring(branchIndex, endIndex - branchIndex).Trim() ' Extract the full branch name&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;' Add extracted data to DataTable&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;        If Not String.IsNullOrEmpty(batchNumber) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            dt.Rows.Add(batchNumber, transactionDate, transactionTime, pan, rrn, trace, issuerID, transactionType, processingCode, entryMode, responseCode, transactionAmount, currency, settlementCurrency, debitSettlement, creditSettlement, terminalID, branchName)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;        End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;        End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;        &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;    Next&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;Next&#xA;&#x9;&#x9;&#xA;&#xA;&#xA;&#xA;    ' Assign the DataTable to an output argument&#xA;    dtProcessedReportStatementTemp = dt&#xA;&#xA;Catch ex As Exception&#xA;    ' Handle any errors that occur during execution&#xA;    Console.WriteLine(ex)&#xA;End Try&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="416,188" sap2010:WorkflowViewState.IdRef="InvokeCode_7">
+                <ui:InvokeCode.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="ep745Statement">[ep745Statement]</InArgument>
+                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedReportStatementTemp">[dtProcessedReportStatementTemp]</OutArgument>
+                </ui:InvokeCode.Arguments>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:InvokeCode>
+            </Sequence>
+          </ui:CommentOut.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:CommentOut>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Define the output DataTable&#xA;Dim dt As New DataTable&#xA;dt.Columns.Add(&quot;Batch Number&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Date&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Time&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;PAN&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;RRN&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Trace&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Issuer ID&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Transaction Type&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Processing Code&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Entry Mode&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Response Code&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Transaction Amount&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Currency&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Settlement Currency&quot;, GetType(String)) ' Add the Settlement Currency column&#xA;dt.Columns.Add(&quot;Debit Settlement&quot;, GetType(String)) ' Add Debit Settlement column next to Settlement Currency&#xA;dt.Columns.Add(&quot;Credit Settlement&quot;, GetType(String)) ' Add Credit Settlement column next to Debit Settlement&#xA;dt.Columns.Add(&quot;Terminal ID&quot;, GetType(String))&#xA;dt.Columns.Add(&quot;Branch Name&quot;, GetType(String))&#xA;&#xA;' Example input text (replace this with your actual text)&#xA;Dim inputText As String = ep745Statement&#xA;&#xA;&#xA;    ' Split input text into transactions&#xA;    Dim transactionBatches As String() = inputText.Split(New String() { &quot;----------------------------------------------------------------------------------------------------------------------------------- &quot; &amp; vbCrLf &amp; &quot; BAT&quot; }, StringSplitOptions.RemoveEmptyEntries)&#xA;&#x9;&#xA;&#x9;For Each transactionBatch In transactionBatches&#x9;&#xA;&#x9;&#x9;Try&#xA;&#x9;        If Not transactionBatch.Contains(&quot;XMIT(GMT)/LOCL&quot;) Then&#xA;&#x9;            Continue For&#xA;&#x9;        End If&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Dim settlementCurrency As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;  ' Extract the Settlement Currency from the line containing &quot;(USD)&quot; or similar&#xA;&#x9;&#x9;&#x9; Dim settlementCurrencyIndex As Integer = transactionBatch.Replace(&quot; &quot;,&quot;&quot;).IndexOf(&quot;AMOUNT(&quot;)&#xA;&#x9;&#x9;&#x9;  If settlementCurrencyIndex &lt;&gt; -1 Then&#xA;&#x9;&#x9;&#x9;       settlementCurrency = transactionBatch.Replace(&quot; &quot;,&quot;&quot;).Substring(settlementCurrencyIndex + 1, 3).Trim()&#xA;&#x9;&#x9;&#x9;  End If&#xA;&#x9;&#x9;&#x9;  &#xA;&#x9;&#x9;&#x9;  settlementCurrency = System.Text.RegularExpressions.Regex.Match(transactionBatch, &quot;\b(USD|TZS)\b&quot;).Value&#xA;&#x9;&#x9;&#x9;  &#xA;&#x9;&#x9;&#x9;  &#xA;&#x9;&#x9;&#x9;  Dim lines As String() = transactionBatch.Split(New String() { vbCrLf }, StringSplitOptions.RemoveEmptyEntries)&#xA;&#x9;&#x9;&#x9;  &#x9;&#x9;&#x9;Dim batchNumber As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim transactionDate As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim transactionTime As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim pan As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim rrn As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim trace As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim issuerID As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim transactionType As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim processingCode As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim entryMode As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim responseCode As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim transactionAmount As String = &quot;0.00&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim currency As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim debitSettlement As String = &quot;0.00&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim creditSettlement As String = &quot;0.00&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim terminalID As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;    Dim branchName As String = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Dim settlementAmount As String = &quot;0.00&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;'Console.WriteLine(transactionBatch)&#xA;&#x9;&#x9;&#x9;  &#xA;&#x9;&#x9;&#x9;      ' Loop through each line to extract data&#xA;&#x9;&#x9;&#x9;    For Each line In lines&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;line = line.Trim()&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Dim lineSplits As String() = line.Split(New String() { &quot; &quot; }, StringSplitOptions.RemoveEmptyEntries)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;        ' If in the transaction section, process the transaction lines&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        If lineSplits.Count &gt; 10 AndAlso IsNumeric(lineSplits(0)) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            ' Adjust these indices and lengths based on your actual data format&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            batchNumber = lineSplits(0)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            transactionDate = lineSplits(1)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            transactionTime = lineSplits(2)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            pan = lineSplits(3)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            ' Mask PAN when the statement supplies it unmasked: first 6 + ****** + last 4&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            Dim rawPan As String = pan.Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            If rawPan.Length &gt;= 10 AndAlso System.Text.RegularExpressions.Regex.IsMatch(rawPan, &quot;^\d+$&quot;) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;                pan = rawPan.Substring(0, 6) &amp; &quot;******&quot; &amp; rawPan.Substring(rawPan.Length - 4)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            rrn = lineSplits(4)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            trace = lineSplits(5)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            issuerID = lineSplits(6)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            transactionType = lineSplits(7)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    processingCode = lineSplits(8)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            entryMode = lineSplits(9)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;responseCode = lineSplits(11)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            transactionAmount = lineSplits(12)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            currency =lineSplits(13)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; settlementAmount  = lineSplits(14)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If  lineSplits.Count&gt;15 Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;responseCode = lineSplits(12)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            transactionAmount = lineSplits(13)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            currency = lineSplits(14)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; settlementAmount  = lineSplits(15)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            If settlementAmount.Contains(&quot;CR&quot;) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;                creditSettlement = settlementAmount.Replace(&quot;CR&quot;, &quot;&quot;).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;                debitSettlement = &quot;0.00&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            ElseIf settlementAmount.Contains(&quot;DR&quot;) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;                debitSettlement = settlementAmount.Replace(&quot;DR&quot;, &quot;&quot;).Trim()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;                creditSettlement = &quot;0.00&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;            End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;' Extract Terminal ID from 'CA ID:' line&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;        If line.Contains(&quot;CA ID:&quot;) Then&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            terminalID = lineSplits(2)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;branchName = lineSplits(4).Replace(&quot;25/&quot;,&quot;&quot;).Replace(&quot;45/&quot;,&quot;&quot;)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;' Add extracted data to DataTable&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;        If Not String.IsNullOrEmpty(batchNumber) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;            dt.Rows.Add(batchNumber, transactionDate, transactionTime, pan, rrn, trace, issuerID, transactionType, processingCode, entryMode, responseCode, transactionAmount, currency, settlementCurrency, debitSettlement, creditSettlement, terminalID, branchName)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    batchNumber = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;transactionDate  = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;transactionTime  = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;pan  = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;rrn  = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;trace  = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;issuerID  = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;transactionType  = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;processingCode  = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;entryMode  = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;responseCode  = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;transactionAmount  = &quot;0&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;currency  = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;debitSettlement  = &quot;0&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;creditSettlement  = &quot;0&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;terminalID  = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;branchName  = &quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;settlementAmount =&quot;&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;        End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;        End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;        &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;    Next&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;    dtProcessedReportStatementTemp = dt&#xA;&#xA;Catch ex As Exception&#xA;    ' Handle any errors that occur during execution&#xA;    Console.WriteLine(ex)&#xA;End Try&#xA;&#x9;&#xA;&#x9;Next&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="547.3333333333334,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_8">
+          <ui:InvokeCode.Arguments>
+            <InArgument x:TypeArguments="x:String" x:Key="ep745Statement">[ep745Statement]</InArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedReportStatementTemp">[dtProcessedReportStatementTemp]</OutArgument>
+          </ui:InvokeCode.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeCode>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="If dtProcessedReportStatementTemp IsNot Nothing AndAlso dtProcessedReportStatementTemp.Rows.Count &gt; 0 Then&#xA;    Dim ci = System.Globalization.CultureInfo.InvariantCulture&#xA;    Dim names As String() = {&quot;debit&quot;,&quot;credit&quot;,&quot;amount&quot;,&quot;balance&quot;,&quot;lcy_amount&quot;,&quot;fcy_amount&quot;,&quot;dr&quot;,&quot;cr&quot;}&#xA;    Dim targets As New List(Of Integer)&#xA;&#xA;    For i As Integer = 0 To dtProcessedReportStatementTemp.Columns.Count - 1&#xA;        Dim col As System.Data.DataColumn = dtProcessedReportStatementTemp.Columns(i)&#xA;        If col.DataType Is GetType(Double) OrElse col.DataType Is GetType(Decimal) Then Continue For&#xA;        Dim nm As String = col.ColumnName.Trim().ToLowerInvariant()&#xA;        Dim looksLikeMoney As Boolean = False&#xA;        For Each n As String In names&#xA;            If nm = n OrElse nm.EndsWith(&quot;_&quot; &amp; n) OrElse nm.EndsWith(&quot; &quot; &amp; n) Then looksLikeMoney = True&#xA;        Next&#xA;        If Not looksLikeMoney Then Continue For&#xA;&#xA;        Dim allParse As Boolean = True&#xA;        For Each r As System.Data.DataRow In dtProcessedReportStatementTemp.Rows&#xA;            Dim v As Object = r(i)&#xA;            If v Is Nothing OrElse IsDBNull(v) Then Continue For&#xA;            Dim s As String = v.ToString().Trim().Replace(&quot;,&quot;, &quot;&quot;)&#xA;            If s = &quot;&quot; Then Continue For&#xA;            If s.StartsWith(&quot;(&quot;) AndAlso s.EndsWith(&quot;)&quot;) Then s = &quot;-&quot; &amp; s.Substring(1, s.Length - 2)&#xA;            Dim d As Double&#xA;            If Not Double.TryParse(s, System.Globalization.NumberStyles.Any, ci, d) Then&#xA;                allParse = False&#xA;                Exit For&#xA;            End If&#xA;        Next&#xA;        If allParse Then targets.Add(i)&#xA;    Next&#xA;&#xA;    If targets.Count &gt; 0 Then&#xA;        Dim outT As New System.Data.DataTable()&#xA;        For i As Integer = 0 To dtProcessedReportStatementTemp.Columns.Count - 1&#xA;            If targets.Contains(i) Then&#xA;                outT.Columns.Add(dtProcessedReportStatementTemp.Columns(i).ColumnName, GetType(Double))&#xA;            Else&#xA;                outT.Columns.Add(dtProcessedReportStatementTemp.Columns(i).ColumnName, dtProcessedReportStatementTemp.Columns(i).DataType)&#xA;            End If&#xA;        Next&#xA;        For Each r As System.Data.DataRow In dtProcessedReportStatementTemp.Rows&#xA;            Dim nr As System.Data.DataRow = outT.NewRow()&#xA;            For i As Integer = 0 To dtProcessedReportStatementTemp.Columns.Count - 1&#xA;                Dim v As Object = r(i)&#xA;                If targets.Contains(i) Then&#xA;                    Dim d As Double = 0&#xA;                    If v IsNot Nothing AndAlso Not IsDBNull(v) Then&#xA;                        Dim s As String = v.ToString().Trim().Replace(&quot;,&quot;, &quot;&quot;)&#xA;                        If s.StartsWith(&quot;(&quot;) AndAlso s.EndsWith(&quot;)&quot;) Then s = &quot;-&quot; &amp; s.Substring(1, s.Length - 2)&#xA;                        If s &lt;&gt; &quot;&quot; Then Double.TryParse(s, System.Globalization.NumberStyles.Any, ci, d)&#xA;                    End If&#xA;                    nr(i) = d&#xA;                Else&#xA;                    nr(i) = v&#xA;                End If&#xA;            Next&#xA;            outT.Rows.Add(nr)&#xA;        Next&#xA;        dtProcessedReportStatementTemp = outT&#xA;    End If&#xA;End If" DisplayName="Numeric amounts - dtProcessedReportStatementTemp" sap:VirtualizedContainerService.HintSize="547.3333333333334,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_205">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedReportStatementTemp">[dtProcessedReportStatementTemp]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+        </ui:InvokeCode>
+        <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtProcessedReportStatementTemp]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="547.3333333333334,148" sap2010:WorkflowViewState.IdRef="WriteRange_5" SheetName="RAW REPORT" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+        <ui:FilterDataTable sap2010:Annotation.AnnotationText="New: Filter out terminals that start with 00&#xA;" DataTable="[dtProcessedReportStatementTemp]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="547.3333333333334,240.66666666666666" sap2010:WorkflowViewState.IdRef="FilterDataTable_17" OutputDataTable="[dtProcessedReportStatementTemp]" SelectColumnsMode="Keep">
+          <ui:FilterDataTable.Filters>
+            <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+              <ui:FilterOperationArgument BooleanOperator="And" Operator="STARTSWITH">
+                <ui:FilterOperationArgument.Column>
+                  <InArgument x:TypeArguments="x:String">["Terminal ID"]</InArgument>
+                </ui:FilterOperationArgument.Column>
+                <ui:FilterOperationArgument.Operand>
+                  <InArgument x:TypeArguments="x:String">["0"]</InArgument>
+                </ui:FilterOperationArgument.Operand>
+              </ui:FilterOperationArgument>
+            </scg:List>
+          </ui:FilterDataTable.Filters>
+          <ui:FilterDataTable.SelectColumns>
+            <scg:List x:TypeArguments="InArgument" Capacity="4">
+              <x:Null />
+            </scg:List>
+          </ui:FilterDataTable.SelectColumns>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:FilterDataTable>
+        <ui:FilterDataTable DataTable="[dtProcessedReportStatementTemp]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="547.3333333333334,196" sap2010:WorkflowViewState.IdRef="FilterDataTable_8" OutputDataTable="[dtProcessedReportStatementTemp]" SelectColumnsMode="Keep">
+          <ui:FilterDataTable.Filters>
+            <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+              <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                <ui:FilterOperationArgument.Column>
+                  <InArgument x:TypeArguments="x:String">["Response Code"]</InArgument>
+                </ui:FilterOperationArgument.Column>
+                <ui:FilterOperationArgument.Operand>
+                  <InArgument x:TypeArguments="x:String">["00"]</InArgument>
+                </ui:FilterOperationArgument.Operand>
+              </ui:FilterOperationArgument>
+              <ui:FilterOperationArgument BooleanOperator="Or" Operator="EQ">
+                <ui:FilterOperationArgument.Column>
+                  <InArgument x:TypeArguments="x:String">["Response Code"]</InArgument>
+                </ui:FilterOperationArgument.Column>
+                <ui:FilterOperationArgument.Operand>
+                  <InArgument x:TypeArguments="x:Int32">[0]</InArgument>
+                </ui:FilterOperationArgument.Operand>
+              </ui:FilterOperationArgument>
+            </scg:List>
+          </ui:FilterDataTable.Filters>
+          <ui:FilterDataTable.SelectColumns>
+            <scg:List x:TypeArguments="InArgument" Capacity="4">
+              <x:Null />
+            </scg:List>
+          </ui:FilterDataTable.SelectColumns>
+        </ui:FilterDataTable>
+        <ui:RemoveDuplicateRows DataTable="[dtProcessedReportStatementTemp]" DisplayName="Remove Duplicate Rows" sap:VirtualizedContainerService.HintSize="547.3333333333334,114" sap2010:WorkflowViewState.IdRef="RemoveDuplicateRows_1" OutputDataTable="[dtProcessedReportStatementTemp]" />
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Create HashSets to store references with corresponding debit and credit amounts&#xA;Dim debitAmounts As New HashSet(Of String)()&#xA;Dim creditAmounts As New HashSet(Of String)()&#xA; &#xA;' Process the DataTable to populate HashSets&#xA;For Each row As DataRow In dtProcessedReportStatementTemp.Rows&#xA;    Dim reference = row.Field(Of String)(&quot;RRN&quot;)&#xA;    Dim debitAmount = Convert.ToDouble(row(&quot;Debit Settlement&quot;).ToString.Replace(&quot;,&quot;,&quot;&quot;).Replace(&quot;.00&quot;,&quot;&quot;))&#xA;    Dim creditAmount = Convert.ToDouble(row(&quot;Credit Settlement&quot;).ToString.Replace(&quot;,&quot;,&quot;&quot;).Replace(&quot;.00&quot;,&quot;&quot;))&#xA;    If debitAmount &gt; 0 Then&#xA;        debitAmounts.Add($&quot;{reference}|{debitAmount}&quot;)&#xA;    End If&#xA; &#xA;    If creditAmount &gt; 0 Then&#xA;        creditAmounts.Add($&quot;{reference}|{creditAmount}&quot;)&#xA;    End If&#xA;Next&#xA; &#xA;' Filter out rows where debit and credit amounts are matched&#xA;Dim filteredRows = dtProcessedReportStatementTemp.AsEnumerable().Where(Function(row)&#xA;    Dim reference = row.Field(Of String)(&quot;RRN&quot;)&#xA;    Dim debitAmount = Convert.ToDouble(row(&quot;Debit Settlement&quot;).ToString.Replace(&quot;,&quot;,&quot;&quot;).Replace(&quot;.00&quot;,&quot;&quot;))&#xA;    Dim creditAmount = Convert.ToDouble(row(&quot;Credit Settlement&quot;).ToString.Replace(&quot;,&quot;,&quot;&quot;).Replace(&quot;.00&quot;,&quot;&quot;))&#xA;    ' Check if a corresponding opposite transaction exists&#xA;    If debitAmount &gt; 0 Then&#xA;        Return Not creditAmounts.Contains($&quot;{reference}|{debitAmount}&quot;)&#xA;    ElseIf creditAmount &gt; 0 Then&#xA;        Return Not debitAmounts.Contains($&quot;{reference}|{creditAmount}&quot;)&#xA;    End If&#xA;    Return True&#xA;End Function).CopyToDataTable()&#xA; &#xA;' Assign the filtered DataTable to a variable&#xA;dtProcessedReportStatementTemp = filteredRows" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="547.3333333333334,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_9">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedReportStatementTemp">[dtProcessedReportStatementTemp]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+        </ui:InvokeCode>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Create HashSets to store references with corresponding debit and credit amounts&#xA;Dim debitAmounts As New HashSet(Of String)()&#xA;Dim creditAmounts As New HashSet(Of String)()&#xA; &#xA;' Process the DataTable to populate HashSets&#xA;For Each row As DataRow In dtProcessedReportStatementTemp.Rows&#xA;    Dim reference = row.Field(Of String)(&quot;RRN&quot;)&#xA;    Dim debitAmount = Convert.ToDouble(row(&quot;Debit Settlement&quot;).ToString.Replace(&quot;,&quot;,&quot;&quot;).Replace(&quot;.00&quot;,&quot;&quot;))&#xA;    Dim creditAmount = Convert.ToDouble(row(&quot;Credit Settlement&quot;).ToString.Replace(&quot;,&quot;,&quot;&quot;).Replace(&quot;.00&quot;,&quot;&quot;))&#xA;    If debitAmount &gt; 0 Then&#xA;        debitAmounts.Add($&quot;{reference}|{debitAmount}&quot;)&#xA;    End If&#xA; &#xA;    If creditAmount &gt; 0 Then&#xA;        creditAmounts.Add($&quot;{reference}|{creditAmount}&quot;)&#xA;    End If&#xA;Next&#xA; &#xA;' Filter out rows where debit and credit amounts are matched&#xA;Dim filteredRows = dtProcessedReportStatementTemp.AsEnumerable().Where(Function(row)&#xA;    Dim reference = row.Field(Of String)(&quot;RRN&quot;)&#xA;    Dim debitAmount = Convert.ToDouble(row(&quot;Debit Settlement&quot;).ToString.Replace(&quot;,&quot;,&quot;&quot;).Replace(&quot;.00&quot;,&quot;&quot;))&#xA;    Dim creditAmount = Convert.ToDouble(row(&quot;Credit Settlement&quot;).ToString.Replace(&quot;,&quot;,&quot;&quot;).Replace(&quot;.00&quot;,&quot;&quot;))&#xA;    ' Check if a corresponding opposite transaction exists&#xA;    If debitAmount &gt; 0 Then&#xA;        Return  creditAmounts.Contains($&quot;{reference}|{debitAmount}&quot;)&#xA;    ElseIf creditAmount &gt; 0 Then&#xA;        Return  debitAmounts.Contains($&quot;{reference}|{creditAmount}&quot;)&#xA;    End If&#xA;    Return True&#xA;End Function).CopyToDataTable()&#xA; &#xA;' Assign the filtered DataTable to a variable&#xA;dtProcessedReportReversals= filteredRows" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="547.3333333333334,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_10">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedReportStatementTemp">[dtProcessedReportStatementTemp]</InOutArgument>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedReportReversals">[dtProcessedReportReversals]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+        </ui:InvokeCode>
+        <ui:FilterDataTable DataTable="[dtProcessedReportStatementTemp]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="547.3333333333334,196" sap2010:WorkflowViewState.IdRef="FilterDataTable_18" OutputDataTable="[dtProcessedReportStatementTemp]" SelectColumnsMode="Keep">
+          <ui:FilterDataTable.Filters>
+            <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+              <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                <ui:FilterOperationArgument.Column>
+                  <InArgument x:TypeArguments="x:String">["Transaction Amount"]</InArgument>
+                </ui:FilterOperationArgument.Column>
+                <ui:FilterOperationArgument.Operand>
+                  <InArgument x:TypeArguments="x:String">["0"]</InArgument>
+                </ui:FilterOperationArgument.Operand>
+              </ui:FilterOperationArgument>
+              <ui:FilterOperationArgument BooleanOperator="Or" Operator="EQ">
+                <ui:FilterOperationArgument.Column>
+                  <InArgument x:TypeArguments="x:String">["Transaction Amount"]</InArgument>
+                </ui:FilterOperationArgument.Column>
+                <ui:FilterOperationArgument.Operand>
+                  <InArgument x:TypeArguments="x:String">["0.00"]</InArgument>
+                </ui:FilterOperationArgument.Operand>
+              </ui:FilterOperationArgument>
+            </scg:List>
+          </ui:FilterDataTable.Filters>
+          <ui:FilterDataTable.SelectColumns>
+            <scg:List x:TypeArguments="InArgument" Capacity="4">
+              <x:Null />
+            </scg:List>
+          </ui:FilterDataTable.SelectColumns>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:FilterDataTable>
+        <If Condition="[reconResultsPath.contains(&quot;Issuer&quot;)]" sap:VirtualizedContainerService.HintSize="547.3333333333334,57.333333333333336" sap2010:WorkflowViewState.IdRef="If_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,274.4" sap2010:WorkflowViewState.IdRef="Sequence_7">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:FilterDataTable DataTable="[dtProcessedReportStatementTemp]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="353.6,185.6" sap2010:WorkflowViewState.IdRef="FilterDataTable_5" OutputDataTable="[dtProcessedReportStatementTemp]" SelectColumnsMode="Remove">
+                <ui:FilterDataTable.Filters>
+                  <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                    <ui:FilterOperationArgument BooleanOperator="And" Operator="NOTEQ">
+                      <ui:FilterOperationArgument.Column>
+                        <InArgument x:TypeArguments="x:String">["Debit Settlement"]</InArgument>
+                      </ui:FilterOperationArgument.Column>
+                      <ui:FilterOperationArgument.Operand>
+                        <InArgument x:TypeArguments="x:String">["0"]</InArgument>
+                      </ui:FilterOperationArgument.Operand>
+                    </ui:FilterOperationArgument>
+                    <ui:FilterOperationArgument BooleanOperator="Or" Operator="NOTEQ">
+                      <ui:FilterOperationArgument.Column>
+                        <InArgument x:TypeArguments="x:String">["Debit Settlement"]</InArgument>
+                      </ui:FilterOperationArgument.Column>
+                      <ui:FilterOperationArgument.Operand>
+                        <InArgument x:TypeArguments="x:String">["0.00"]</InArgument>
+                      </ui:FilterOperationArgument.Operand>
+                    </ui:FilterOperationArgument>
+                  </scg:List>
+                </ui:FilterDataTable.Filters>
+                <ui:FilterDataTable.SelectColumns>
+                  <scg:List x:TypeArguments="InArgument" Capacity="4">
+                    <x:Null />
+                  </scg:List>
+                </ui:FilterDataTable.SelectColumns>
+              </ui:FilterDataTable>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="376.8,252" sap2010:WorkflowViewState.IdRef="Sequence_8">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:FilterDataTable DataTable="[dtProcessedReportStatementTemp]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="333.6,162.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_13" OutputDataTable="[dtProcessedReportStatementTemp]" SelectColumnsMode="Remove">
+                <ui:FilterDataTable.Filters>
+                  <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                    <ui:FilterOperationArgument BooleanOperator="And" Operator="NOTEQ">
+                      <ui:FilterOperationArgument.Column>
+                        <InArgument x:TypeArguments="x:String">["Credit Settlement"]</InArgument>
+                      </ui:FilterOperationArgument.Column>
+                      <ui:FilterOperationArgument.Operand>
+                        <InArgument x:TypeArguments="x:String">["0.00"]</InArgument>
+                      </ui:FilterOperationArgument.Operand>
+                    </ui:FilterOperationArgument>
+                  </scg:List>
+                </ui:FilterDataTable.Filters>
+                <ui:FilterDataTable.SelectColumns>
+                  <scg:List x:TypeArguments="InArgument" Capacity="4">
+                    <x:Null />
+                  </scg:List>
+                </ui:FilterDataTable.SelectColumns>
+              </ui:FilterDataTable>
+            </Sequence>
+          </If.Else>
+        </If>
+        <Assign sap2010:Annotation.AnnotationText="Transaction currency same as settlement currency" sap:VirtualizedContainerService.HintSize="547.3333333333334,207.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_8">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Double">[settlementAmtSameCurrency]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Double" xml:space="preserve">[dtProcessedReportStatementTemp.AsEnumerable.Where(function(x)  x("Currency").ToString.Equals(currencyCode)  and x("Settlement Currency").ToString.Equals(currencyCode)).Sum(Function(a)Convert.ToDouble(a("Transaction Amount").ToString))]</InArgument>
+          </Assign.Value>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Assign>
+        <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[currencyCode]" sap:VirtualizedContainerService.HintSize="547.3333333333334,636" sap2010:WorkflowViewState.IdRef="Switch`1_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign x:Key="TZS" sap:VirtualizedContainerService.HintSize="450,144.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_9">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Double">[settlementUsd]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Double" xml:space="preserve">[dtProcessedReportStatementTemp.AsEnumerable.Where(function(x) x("Currency").ToString.Equals("TZS") and  x("Settlement Currency").ToString.Equals("USD")).Sum(Function(a)Convert.ToDouble(a("Transaction Amount").ToString))]</InArgument>
+            </Assign.Value>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Assign>
+          <Assign x:Key="USD" sap:VirtualizedContainerService.HintSize="450,144.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_10">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Double">[settlementUsd]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Double" xml:space="preserve">[dtProcessedReportStatementTemp.AsEnumerable.Where(function(x) x("Currency").ToString.Equals("USD") and  x("Settlement Currency").ToString.Equals("TZS")).Sum(Function(a)Convert.ToDouble(a("Transaction Amount").ToString))]</InArgument>
+            </Assign.Value>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Assign>
+        </Switch>
+        <ui:WriteCell Cell="A2" DisplayName="Write Cell Workbook" sap:VirtualizedContainerService.HintSize="547.3333333333334,148" sap2010:WorkflowViewState.IdRef="WriteCell_5" SheetName="BALANCES" Text="USD SETTLEMENT AMOUNT" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+        <ui:WriteCell Cell="B2" DisplayName="Write Cell Workbook" sap:VirtualizedContainerService.HintSize="547.3333333333334,148" sap2010:WorkflowViewState.IdRef="WriteCell_6" SheetName="BALANCES" Text="[settlementUsd.ToString]" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+        <ui:WriteCell Cell="A3" DisplayName="Write Cell Workbook" sap:VirtualizedContainerService.HintSize="433.6,148" sap2010:WorkflowViewState.IdRef="WriteCell_7" SheetName="BALANCES" Text="[currencyCode &amp; &quot; SETTLEMENT AMOUNT&quot;]" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+        <ui:WriteCell Cell="B3" DisplayName="Write Cell Workbook" sap:VirtualizedContainerService.HintSize="433.6,148" sap2010:WorkflowViewState.IdRef="WriteCell_8" SheetName="BALANCES" Text="[settlementAmtSameCurrency.ToString]" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+        <ui:FilterDataTable DataTable="[dtProcessedReportStatementTemp]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="547.3333333333334,196" sap2010:WorkflowViewState.IdRef="FilterDataTable_7" OutputDataTable="[dtProcessedReportStatementTemp]" SelectColumnsMode="Remove">
+          <ui:FilterDataTable.Filters>
+            <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+              <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                <ui:FilterOperationArgument.Column>
+                  <InArgument x:TypeArguments="x:String">["Currency"]</InArgument>
+                </ui:FilterOperationArgument.Column>
+                <ui:FilterOperationArgument.Operand>
+                  <InArgument x:TypeArguments="x:String">[currencyCode]</InArgument>
+                </ui:FilterOperationArgument.Operand>
+              </ui:FilterOperationArgument>
+            </scg:List>
+          </ui:FilterDataTable.Filters>
+          <ui:FilterDataTable.SelectColumns>
+            <scg:List x:TypeArguments="InArgument" Capacity="4">
+              <x:Null />
+            </scg:List>
+          </ui:FilterDataTable.SelectColumns>
+        </ui:FilterDataTable>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="If dtProcessedReportStatementTemp IsNot Nothing AndAlso dtProcessedReportStatementTemp.Rows.Count &gt; 0 Then&#xA;    Dim ci = System.Globalization.CultureInfo.InvariantCulture&#xA;    Dim names As String() = {&quot;debit&quot;,&quot;credit&quot;,&quot;amount&quot;,&quot;balance&quot;,&quot;lcy_amount&quot;,&quot;fcy_amount&quot;,&quot;dr&quot;,&quot;cr&quot;}&#xA;    Dim targets As New List(Of Integer)&#xA;&#xA;    For i As Integer = 0 To dtProcessedReportStatementTemp.Columns.Count - 1&#xA;        Dim col As System.Data.DataColumn = dtProcessedReportStatementTemp.Columns(i)&#xA;        If col.DataType Is GetType(Double) OrElse col.DataType Is GetType(Decimal) Then Continue For&#xA;        Dim nm As String = col.ColumnName.Trim().ToLowerInvariant()&#xA;        Dim looksLikeMoney As Boolean = False&#xA;        For Each n As String In names&#xA;            If nm = n OrElse nm.EndsWith(&quot;_&quot; &amp; n) OrElse nm.EndsWith(&quot; &quot; &amp; n) Then looksLikeMoney = True&#xA;        Next&#xA;        If Not looksLikeMoney Then Continue For&#xA;&#xA;        Dim allParse As Boolean = True&#xA;        For Each r As System.Data.DataRow In dtProcessedReportStatementTemp.Rows&#xA;            Dim v As Object = r(i)&#xA;            If v Is Nothing OrElse IsDBNull(v) Then Continue For&#xA;            Dim s As String = v.ToString().Trim().Replace(&quot;,&quot;, &quot;&quot;)&#xA;            If s = &quot;&quot; Then Continue For&#xA;            If s.StartsWith(&quot;(&quot;) AndAlso s.EndsWith(&quot;)&quot;) Then s = &quot;-&quot; &amp; s.Substring(1, s.Length - 2)&#xA;            Dim d As Double&#xA;            If Not Double.TryParse(s, System.Globalization.NumberStyles.Any, ci, d) Then&#xA;                allParse = False&#xA;                Exit For&#xA;            End If&#xA;        Next&#xA;        If allParse Then targets.Add(i)&#xA;    Next&#xA;&#xA;    If targets.Count &gt; 0 Then&#xA;        Dim outT As New System.Data.DataTable()&#xA;        For i As Integer = 0 To dtProcessedReportStatementTemp.Columns.Count - 1&#xA;            If targets.Contains(i) Then&#xA;                outT.Columns.Add(dtProcessedReportStatementTemp.Columns(i).ColumnName, GetType(Double))&#xA;            Else&#xA;                outT.Columns.Add(dtProcessedReportStatementTemp.Columns(i).ColumnName, dtProcessedReportStatementTemp.Columns(i).DataType)&#xA;            End If&#xA;        Next&#xA;        For Each r As System.Data.DataRow In dtProcessedReportStatementTemp.Rows&#xA;            Dim nr As System.Data.DataRow = outT.NewRow()&#xA;            For i As Integer = 0 To dtProcessedReportStatementTemp.Columns.Count - 1&#xA;                Dim v As Object = r(i)&#xA;                If targets.Contains(i) Then&#xA;                    Dim d As Double = 0&#xA;                    If v IsNot Nothing AndAlso Not IsDBNull(v) Then&#xA;                        Dim s As String = v.ToString().Trim().Replace(&quot;,&quot;, &quot;&quot;)&#xA;                        If s.StartsWith(&quot;(&quot;) AndAlso s.EndsWith(&quot;)&quot;) Then s = &quot;-&quot; &amp; s.Substring(1, s.Length - 2)&#xA;                        If s &lt;&gt; &quot;&quot; Then Double.TryParse(s, System.Globalization.NumberStyles.Any, ci, d)&#xA;                    End If&#xA;                    nr(i) = d&#xA;                Else&#xA;                    nr(i) = v&#xA;                End If&#xA;            Next&#xA;            outT.Rows.Add(nr)&#xA;        Next&#xA;        dtProcessedReportStatementTemp = outT&#xA;    End If&#xA;End If" DisplayName="Numeric amounts - dtProcessedReportStatementTemp" sap:VirtualizedContainerService.HintSize="547.3333333333334,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_206">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedReportStatementTemp">[dtProcessedReportStatementTemp]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+        </ui:InvokeCode>
+        <ui:FilterDataTable DataTable="[dtProcessedReportStatementTemp]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="547.3333333333334,196" sap2010:WorkflowViewState.IdRef="FilterDataTable_28" OutputDataTable="[dtProcessedReportStatementTemp]" SelectColumnsMode="Keep">
+          <ui:FilterDataTable.Filters>
+            <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+              <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                <ui:FilterOperationArgument.Column>
+                  <InArgument x:TypeArguments="x:String">["Transaction Amount"]</InArgument>
+                </ui:FilterOperationArgument.Column>
+                <ui:FilterOperationArgument.Operand>
+                  <InArgument x:TypeArguments="x:Int32">[0]</InArgument>
+                </ui:FilterOperationArgument.Operand>
+              </ui:FilterOperationArgument>
+            </scg:List>
+          </ui:FilterDataTable.Filters>
+          <ui:FilterDataTable.SelectColumns>
+            <scg:List x:TypeArguments="InArgument" Capacity="4">
+              <x:Null />
+            </scg:List>
+          </ui:FilterDataTable.SelectColumns>
+        </ui:FilterDataTable>
+        <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtProcessedReportStatementTemp]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="547.3333333333334,138.66666666666666" sap2010:WorkflowViewState.IdRef="WriteRange_6" SheetName="PROCESSED REPORT" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+      </Sequence>
+      <Sequence x:Key="POS File" DisplayName="Prepare POS File" sap:VirtualizedContainerService.HintSize="581.3333333333334,4218.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_23">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:String" Name="posStatement" />
+          <Variable x:TypeArguments="x:Double" Name="settlementTzs" />
+          <Variable x:TypeArguments="x:Double" Name="settlementUsd" />
+          <Variable x:TypeArguments="sd:DataTable" Name="dtSettlements" />
+          <Variable x:TypeArguments="x:String" Name="transactionsReportStatementResult" />
+          <Variable x:TypeArguments="sd:DataTable" Name="dtProcessedReportStatementTempExtra" />
+        </Sequence.Variables>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="547.3333333333334,101.33333333333333" sap2010:WorkflowViewState.IdRef="ReportStatus_6" StatusText="[&quot;30% - &quot;+processMsgCategory+&quot; REPORT PREPARATION&quot;]" />
+        <ui:ReadTextFile File="{x:Null}" Content="[transactionsReportStatementResult]" DisplayName="Read Text File" FileName="[transactionsReportStatement]" sap:VirtualizedContainerService.HintSize="547.3333333333334,114" sap2010:WorkflowViewState.IdRef="ReadTextFile_3" />
+        <ui:GenerateDataTable ColumnSeparators="{x:Null}" ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" CSVParsing="True" DataTable="[dtProcessedReportStatementTemp]" DisplayName="Generate Data Table" sap:VirtualizedContainerService.HintSize="547.3333333333334,236" sap2010:WorkflowViewState.IdRef="GenerateDataTable_1" Input="[transactionsReportStatementResult]" UseColumnHeader="True" />
+        <Sequence DisplayName="Sequence Handling Extra Column" sap:VirtualizedContainerService.HintSize="547.3333333333334,2051.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_21">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="ProcessedReportStatementTempExtra" />
+            <Variable x:TypeArguments="x:String" Name="ProcessedReportStatementTemp" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="468.6666666666667,562" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="Column1" DataTable="[dtProcessedReportStatementTemp]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="466.6666666666667,191.33333333333334" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" />
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,106.4" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+          <ui:FilterDataTable DataTable="[dtProcessedReportStatementTemp]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="468.6666666666667,196" sap2010:WorkflowViewState.IdRef="FilterDataTable_20" OutputDataTable="[dtProcessedReportStatementTempExtra]" SelectColumnsMode="Keep">
+            <ui:FilterDataTable.Filters>
+              <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="And" Operator="NOTEMPTY">
+                  <ui:FilterOperationArgument.Column>
+                    <InArgument x:TypeArguments="x:String">["Column1"]</InArgument>
+                  </ui:FilterOperationArgument.Column>
+                </ui:FilterOperationArgument>
+              </scg:List>
+            </ui:FilterDataTable.Filters>
+            <ui:FilterDataTable.SelectColumns>
+              <scg:List x:TypeArguments="InArgument" Capacity="4">
+                <x:Null />
+              </scg:List>
+            </ui:FilterDataTable.SelectColumns>
+          </ui:FilterDataTable>
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xA;dtProcessedReportStatementTempExtra.Columns.Remove(dtProcessedReportStatementTempExtra.Columns(&quot;AUTH_ID&quot;))&#xA;dtProcessedReportStatementTempExtra.Columns(&quot;RRN&quot;).ColumnName = &quot;AUTH_ID&quot;&#xA;dtProcessedReportStatementTempExtra.Columns(&quot;ACQ_NETWORK_ID&quot;).ColumnName = &quot;RRN&quot;&#xA;dtProcessedReportStatementTempExtra.Columns(&quot;Column1&quot;).ColumnName = &quot;ACQ_NETWORK_ID&quot;&#xA;&#xA;Catch ex As Exception &#xA;&#x9;dtProcessedReportStatementTempExtra = dtProcessedReportStatementTemp.clone()&#xA;&#x9;&#xA;End Try&#xA;&#xA;&#xA;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="468.6666666666667,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_13">
+            <ui:InvokeCode.Arguments>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedReportStatementTempExtra">[dtProcessedReportStatementTempExtra]</InOutArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedReportStatementTemp">[dtProcessedReportStatementTemp]</InArgument>
+            </ui:InvokeCode.Arguments>
+          </ui:InvokeCode>
+          <Assign sap:VirtualizedContainerService.HintSize="468.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_17">
+            <Assign.To>
+              <OutArgument x:TypeArguments="sd:DataTable">[dtProcessedReportStatementTempExtra]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[dtProcessedReportStatementTempExtra.DefaultView.ToTable(False,"DATE_TIME","PAN","MTI","TRAN_TYPE","RESPONSE_CODE","AMOUNT","AMOUNT_CURRENCY","FOREX_AMOUNT","FOREX_CURRENCY","TERMINAL_TYPE","TERM_ID","CARD_ACCEPTOR_ID","CARD_ACCEPTOR_NAME_LOCATION","TOTALS_GROUP","AUTH_ID","RRN","ACQ_NETWORK_ID"
+)]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:OutputDataTable DataTable="[dtProcessedReportStatementTempExtra]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="468.6666666666667,114" sap2010:WorkflowViewState.IdRef="OutputDataTable_1" Text="[ProcessedReportStatementTempExtra]" />
+          <ui:FilterDataTable DataTable="[dtProcessedReportStatementTemp]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="468.6666666666667,196" sap2010:WorkflowViewState.IdRef="FilterDataTable_26" OutputDataTable="[dtProcessedReportStatementTemp]" SelectColumnsMode="Keep">
+            <ui:FilterDataTable.Filters>
+              <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="And" Operator="NOTEMPTY">
+                  <ui:FilterOperationArgument.Column>
+                    <InArgument x:TypeArguments="x:String">["Column1"]</InArgument>
+                  </ui:FilterOperationArgument.Column>
+                </ui:FilterOperationArgument>
+              </scg:List>
+            </ui:FilterDataTable.Filters>
+            <ui:FilterDataTable.SelectColumns>
+              <scg:List x:TypeArguments="InArgument" Capacity="4">
+                <x:Null />
+              </scg:List>
+            </ui:FilterDataTable.SelectColumns>
+          </ui:FilterDataTable>
+          <ui:OutputDataTable DataTable="[dtProcessedReportStatementTemp]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="468.6666666666667,114" sap2010:WorkflowViewState.IdRef="OutputDataTable_2" Text="[ProcessedReportStatementTemp]" />
+          <Assign sap:VirtualizedContainerService.HintSize="468.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_18">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[ProcessedReportStatementTemp]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[ProcessedReportStatementTemp+ProcessedReportStatementTempExtra]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:GenerateDataTable ColumnSeparators="{x:Null}" ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" CSVParsing="True" DataTable="[dtProcessedReportStatementTemp]" DisplayName="Generate Data Table" sap:VirtualizedContainerService.HintSize="468.6666666666667,226.66666666666666" sap2010:WorkflowViewState.IdRef="GenerateDataTable_2" Input="[ProcessedReportStatementTemp]" UseColumnHeader="True" />
+        </Sequence>
+        <ui:FilterDataTable DataTable="[dtProcessedReportStatementTemp]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="547.2,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_27" OutputDataTable="[dtProcessedReportStatementTemp]" SelectColumnsMode="Keep">
+          <ui:FilterDataTable.Filters>
+            <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+              <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                <ui:FilterOperationArgument.Column>
+                  <InArgument x:TypeArguments="x:String">["MTI"]</InArgument>
+                </ui:FilterOperationArgument.Column>
+                <ui:FilterOperationArgument.Operand>
+                  <InArgument x:TypeArguments="x:String">["0220"]</InArgument>
+                </ui:FilterOperationArgument.Operand>
+              </ui:FilterOperationArgument>
+              <ui:FilterOperationArgument BooleanOperator="Or" Operator="EQ">
+                <ui:FilterOperationArgument.Column>
+                  <InArgument x:TypeArguments="x:String">["MTI"]</InArgument>
+                </ui:FilterOperationArgument.Column>
+                <ui:FilterOperationArgument.Operand>
+                  <InArgument x:TypeArguments="x:String">["220"]</InArgument>
+                </ui:FilterOperationArgument.Operand>
+              </ui:FilterOperationArgument>
+            </scg:List>
+          </ui:FilterDataTable.Filters>
+          <ui:FilterDataTable.SelectColumns>
+            <scg:List x:TypeArguments="InArgument" Capacity="4">
+              <x:Null />
+            </scg:List>
+          </ui:FilterDataTable.SelectColumns>
+        </ui:FilterDataTable>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="dtProcessedReportStatementTemp.Columns(&quot;AMOUNT&quot;).ColumnName = &quot;Transaction Amount&quot;&#xA;&#xA;dtProcessedReportStatementTemp.AsEnumerable.where(Function(r) r(&quot;Transaction Amount&quot;).ToString.Length &gt; 1).ToList.ForEach(Sub(row) row(&quot;Transaction Amount&quot;)= Math.Round(Convert.ToDecimal(row(&quot;Transaction Amount&quot;).ToString),2).ToString)&#xA;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="547.2,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_12">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedReportStatementTemp">[dtProcessedReportStatementTemp]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+        </ui:InvokeCode>
+        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="547.2,56.8" sap2010:WorkflowViewState.IdRef="CommentOut_5">
+          <ui:CommentOut.Body>
+            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="512,799.2" sap2010:WorkflowViewState.IdRef="Sequence_20">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If Condition="[reconResultsPath.contains(&quot;Issuer&quot;)]" sap:VirtualizedContainerService.HintSize="449.6,710.4" sap2010:WorkflowViewState.IdRef="If_4">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If.Then>
+                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,274.4" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:FilterDataTable DataTable="[dtProcessedReportStatementTemp]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="353.6,185.6" sap2010:WorkflowViewState.IdRef="FilterDataTable_21" OutputDataTable="[dtProcessedReportStatementTemp]" SelectColumnsMode="Remove">
+                      <ui:FilterDataTable.Filters>
+                        <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                          <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="EQ" />
+                        </scg:List>
+                      </ui:FilterDataTable.Filters>
+                      <ui:FilterDataTable.SelectColumns>
+                        <scg:List x:TypeArguments="InArgument" Capacity="4">
+                          <x:Null />
+                        </scg:List>
+                      </ui:FilterDataTable.SelectColumns>
+                    </ui:FilterDataTable>
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,274.4" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:FilterDataTable DataTable="[dtProcessedReportStatementTemp]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="353.6,185.6" sap2010:WorkflowViewState.IdRef="FilterDataTable_22" OutputDataTable="[dtProcessedReportStatementTemp]" SelectColumnsMode="Remove">
+                      <ui:FilterDataTable.Filters>
+                        <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                          <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="NOTEMPTY" />
+                        </scg:List>
+                      </ui:FilterDataTable.Filters>
+                      <ui:FilterDataTable.SelectColumns>
+                        <scg:List x:TypeArguments="InArgument" Capacity="4">
+                          <x:Null />
+                        </scg:List>
+                      </ui:FilterDataTable.SelectColumns>
+                    </ui:FilterDataTable>
+                  </Sequence>
+                </If.Else>
+              </If>
+            </Sequence>
+          </ui:CommentOut.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:CommentOut>
+        <Assign sap:VirtualizedContainerService.HintSize="547.2,113.6" sap2010:WorkflowViewState.IdRef="Assign_14">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Double">[settlementTzs]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Double" xml:space="preserve">[dtProcessedReportStatementTemp.AsEnumerable.Where(function(x)  x("AMOUNT_CURRENCY").ToString.Equals(currencyCode)  and x("FOREX_CURRENCY").ToString.Equals(currencyCode)).Sum(Function(a)Convert.ToDouble(a("Transaction Amount").ToString))]</InArgument>
+          </Assign.Value>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Assign>
+        <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[currencyCode]" sap:VirtualizedContainerService.HintSize="547.2,56.8" sap2010:WorkflowViewState.IdRef="Switch`1_6">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign x:Key="834" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_15">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Double">[settlementUsd]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Double" xml:space="preserve">[dtProcessedReportStatementTemp.AsEnumerable.Where(function(x) x("AMOUNT_CURRENCY").ToString.Equals("834") and  x("FOREX_CURRENCY").ToString.Equals("840")).Sum(Function(a)Convert.ToDouble(a("Transaction Amount").ToString))]</InArgument>
+            </Assign.Value>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Assign>
+          <Assign x:Key="840" sap:VirtualizedContainerService.HintSize="433.6,80.8" sap2010:WorkflowViewState.IdRef="Assign_16">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Double">[settlementUsd]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Double" xml:space="preserve">[dtProcessedReportStatementTemp.AsEnumerable.Where(function(x) x("AMOUNT_CURRENCY").ToString.Equals("840") and  x("FOREX_CURRENCY").ToString.Equals("834")).Sum(Function(a)Convert.ToDouble(a("Transaction Amount").ToString))]</InArgument>
+            </Assign.Value>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Assign>
+        </Switch>
+        <ui:BuildDataTable DataTable="[dtSettlements]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="547.2,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_4" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;type&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Amount&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+        <ui:WriteCell Cell="A2" DisplayName="Write Cell Workbook" sap:VirtualizedContainerService.HintSize="547.2,148" sap2010:WorkflowViewState.IdRef="WriteCell_13" SheetName="BALANCES" Text="USD SETTLEMENT AMOUNT" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+        <ui:WriteCell Cell="B2" DisplayName="Write Cell Workbook" sap:VirtualizedContainerService.HintSize="547.2,148" sap2010:WorkflowViewState.IdRef="WriteCell_14" SheetName="BALANCES" Text="[settlementUsd.ToString]" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+        <ui:WriteCell Cell="A3" DisplayName="Write Cell Workbook" sap:VirtualizedContainerService.HintSize="547.2,148" sap2010:WorkflowViewState.IdRef="WriteCell_15" SheetName="BALANCES" Text="TZS SETTLEMENT AMOUNT" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+        <ui:WriteCell Cell="B3" DisplayName="Write Cell Workbook" sap:VirtualizedContainerService.HintSize="547.2,148" sap2010:WorkflowViewState.IdRef="WriteCell_16" SheetName="BALANCES" Text="[settlementTzs.ToString]" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+        <ui:FilterDataTable DataTable="[dtProcessedReportStatementTemp]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="547.2,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_23" OutputDataTable="[dtProcessedReportStatementTemp]" SelectColumnsMode="Remove">
+          <ui:FilterDataTable.Filters>
+            <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+              <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                <ui:FilterOperationArgument.Column>
+                  <InArgument x:TypeArguments="x:String">["AMOUNT_CURRENCY"]</InArgument>
+                </ui:FilterOperationArgument.Column>
+                <ui:FilterOperationArgument.Operand>
+                  <InArgument x:TypeArguments="x:String">[currencyCode]</InArgument>
+                </ui:FilterOperationArgument.Operand>
+              </ui:FilterOperationArgument>
+            </scg:List>
+          </ui:FilterDataTable.Filters>
+          <ui:FilterDataTable.SelectColumns>
+            <scg:List x:TypeArguments="InArgument" Capacity="4">
+              <x:Null />
+            </scg:List>
+          </ui:FilterDataTable.SelectColumns>
+        </ui:FilterDataTable>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="If dtProcessedReportStatementTemp IsNot Nothing AndAlso dtProcessedReportStatementTemp.Rows.Count &gt; 0 Then&#xA;    Dim ci = System.Globalization.CultureInfo.InvariantCulture&#xA;    Dim names As String() = {&quot;debit&quot;,&quot;credit&quot;,&quot;amount&quot;,&quot;balance&quot;,&quot;lcy_amount&quot;,&quot;fcy_amount&quot;,&quot;dr&quot;,&quot;cr&quot;}&#xA;    Dim targets As New List(Of Integer)&#xA;&#xA;    For i As Integer = 0 To dtProcessedReportStatementTemp.Columns.Count - 1&#xA;        Dim col As System.Data.DataColumn = dtProcessedReportStatementTemp.Columns(i)&#xA;        If col.DataType Is GetType(Double) OrElse col.DataType Is GetType(Decimal) Then Continue For&#xA;        Dim nm As String = col.ColumnName.Trim().ToLowerInvariant()&#xA;        Dim looksLikeMoney As Boolean = False&#xA;        For Each n As String In names&#xA;            If nm = n OrElse nm.EndsWith(&quot;_&quot; &amp; n) OrElse nm.EndsWith(&quot; &quot; &amp; n) Then looksLikeMoney = True&#xA;        Next&#xA;        If Not looksLikeMoney Then Continue For&#xA;&#xA;        Dim allParse As Boolean = True&#xA;        For Each r As System.Data.DataRow In dtProcessedReportStatementTemp.Rows&#xA;            Dim v As Object = r(i)&#xA;            If v Is Nothing OrElse IsDBNull(v) Then Continue For&#xA;            Dim s As String = v.ToString().Trim().Replace(&quot;,&quot;, &quot;&quot;)&#xA;            If s = &quot;&quot; Then Continue For&#xA;            If s.StartsWith(&quot;(&quot;) AndAlso s.EndsWith(&quot;)&quot;) Then s = &quot;-&quot; &amp; s.Substring(1, s.Length - 2)&#xA;            Dim d As Double&#xA;            If Not Double.TryParse(s, System.Globalization.NumberStyles.Any, ci, d) Then&#xA;                allParse = False&#xA;                Exit For&#xA;            End If&#xA;        Next&#xA;        If allParse Then targets.Add(i)&#xA;    Next&#xA;&#xA;    If targets.Count &gt; 0 Then&#xA;        Dim outT As New System.Data.DataTable()&#xA;        For i As Integer = 0 To dtProcessedReportStatementTemp.Columns.Count - 1&#xA;            If targets.Contains(i) Then&#xA;                outT.Columns.Add(dtProcessedReportStatementTemp.Columns(i).ColumnName, GetType(Double))&#xA;            Else&#xA;                outT.Columns.Add(dtProcessedReportStatementTemp.Columns(i).ColumnName, dtProcessedReportStatementTemp.Columns(i).DataType)&#xA;            End If&#xA;        Next&#xA;        For Each r As System.Data.DataRow In dtProcessedReportStatementTemp.Rows&#xA;            Dim nr As System.Data.DataRow = outT.NewRow()&#xA;            For i As Integer = 0 To dtProcessedReportStatementTemp.Columns.Count - 1&#xA;                Dim v As Object = r(i)&#xA;                If targets.Contains(i) Then&#xA;                    Dim d As Double = 0&#xA;                    If v IsNot Nothing AndAlso Not IsDBNull(v) Then&#xA;                        Dim s As String = v.ToString().Trim().Replace(&quot;,&quot;, &quot;&quot;)&#xA;                        If s.StartsWith(&quot;(&quot;) AndAlso s.EndsWith(&quot;)&quot;) Then s = &quot;-&quot; &amp; s.Substring(1, s.Length - 2)&#xA;                        If s &lt;&gt; &quot;&quot; Then Double.TryParse(s, System.Globalization.NumberStyles.Any, ci, d)&#xA;                    End If&#xA;                    nr(i) = d&#xA;                Else&#xA;                    nr(i) = v&#xA;                End If&#xA;            Next&#xA;            outT.Rows.Add(nr)&#xA;        Next&#xA;        dtProcessedReportStatementTemp = outT&#xA;    End If&#xA;End If" DisplayName="Numeric amounts - dtProcessedReportStatementTemp" sap2010:WorkflowViewState.IdRef="InvokeCode_207">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedReportStatementTemp">[dtProcessedReportStatementTemp]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+        </ui:InvokeCode>
+        <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtProcessedReportStatementTemp]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="547.2,139.2" sap2010:WorkflowViewState.IdRef="WriteRange_10" SheetName="PROCESSED REPORT" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+      </Sequence>
+    </Switch>
+    <Assign DisplayName="Assign - Save to out argument" sap:VirtualizedContainerService.HintSize="583.3333333333334,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dtProcessedReportStatement]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[dtProcessedReportStatementTemp]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="583.3333333333334,92" sap2010:WorkflowViewState.IdRef="ReportStatus_2" StatusText="[&quot;48% - &quot;+processMsgCategory+&quot; REPORT PREPARATION COMPLETE.&quot;]" />
+  </Sequence>
+</Activity>

@@ -1,0 +1,126 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Portal_Update" VisualBasic.Settings="{x:Null}" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_PortalShare" Type="InArgument(x:String)" />
+    <x:Property Name="in_PortalUrl" Type="InArgument(x:String)" />
+    <x:Property Name="in_Emails" Type="InArgument(x:String)" />
+  </x:Members> <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.Process</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>System.Net.Http</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Algorithms</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Runs only when Main's PORTAL_UPDATE is True, instead of the reconciliation. Copies portal.html and api.aspx from this package to the live portal through PORTAL_SHARE (never web.config), keeps the old files as .bak, then checks the live page." DisplayName="Portal Update" sap:VirtualizedContainerService.HintSize="500,700" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="updateLog" />
+      <Variable x:TypeArguments="x:Int32" Name="updateExit" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Publishes a portal UI change: copies portal.html and api.aspx from this package&#xA;' to the live portal folder on the Orchestrator server, through the NostroPortal&#xA;' share set up once by hand (Deploy\portal\README.md, &quot;Automated updates&quot;).&#xA;'&#xA;'  - web.config is never copied. It holds ReconRoot and the sign-in settings,&#xA;'    and the robot is denied write on it.&#xA;'  - Each live file that is about to change is kept first as&#xA;'    &lt;name&gt;.&lt;yyyyMMdd-HHmmss&gt;.bak beside it. IIS has no MIME type for .bak, so&#xA;'    backups are never served. The newest 10 per file are kept.&#xA;'  - Afterwards the live page is fetched as the robot and compared byte for byte&#xA;'    with the package copy, so &quot;done&quot; means users are getting the new page.&#xA;'&#xA;' Exit codes: 0 updated (or already current) and verified live,&#xA;'             2 copied but the live check failed, 1 not updated.&#xA;Dim sb As New System.Text.StringBuilder()&#xA;Dim stamp As String = DateTime.Now.ToString(&quot;yyyyMMdd-HHmmss&quot;)&#xA;Dim Say = Sub(m As String) sb.AppendLine(&quot;[&quot; &amp; DateTime.Now.ToString(&quot;HH:mm:ss&quot;) &amp; &quot;] &quot; &amp; m)&#xA;Dim Hash = Function(b As Byte()) BitConverter.ToString(System.Security.Cryptography.SHA256.Create().ComputeHash(b))&#xA;out_ExitCode = 1&#xA;&#xA;Try&#xA;    Dim src As String = Path.Combine(Environment.CurrentDirectory, &quot;Deploy&quot;, &quot;portal&quot;)&#xA;    Dim dest As String = If(in_PortalShare, &quot;&quot;).Trim().TrimEnd(&quot;\&quot;c)&#xA;    Say(&quot;Portal update from &quot; &amp; src &amp; &quot; to &quot; &amp; dest &amp; &quot; (job ran as &quot; &amp; Environment.UserDomainName &amp; &quot;\&quot; &amp; Environment.UserName &amp; &quot; on &quot; &amp; Environment.MachineName &amp; &quot;)&quot;)&#xA;    If dest.Length = 0 Then Throw New ArgumentException(&quot;PORTAL_SHARE is empty - set it to the share of the live portal folder, e.g. \\NMB-DC-RBT-V001\NostroPortal.&quot;)&#xA;    If Not Directory.Exists(dest) Then Throw New DirectoryNotFoundException(&quot;Cannot reach &quot; &amp; dest &amp; &quot;. Either the NostroPortal share was not created on the Orchestrator server, or &quot; &amp; Environment.UserDomainName &amp; &quot;\&quot; &amp; Environment.UserName &amp; &quot; has no rights on it - see 'Automated updates' in Deploy\portal\README.md.&quot;)&#xA;    If Not File.Exists(Path.Combine(dest, &quot;web.config&quot;)) Then Throw New InvalidOperationException(dest &amp; &quot; has no web.config, so it is not the live portal folder. Nothing was copied.&quot;)&#xA;&#xA;    Dim changed As Integer = 0&#xA;    For Each name As String In New String() {&quot;portal.html&quot;, &quot;api.aspx&quot;}&#xA;        Dim srcFile As String = Path.Combine(src, name)&#xA;        If Not File.Exists(srcFile) Then Throw New FileNotFoundException(name &amp; &quot; is not in the published package: &quot; &amp; srcFile)&#xA;        Dim destFile As String = Path.Combine(dest, name)&#xA;        Dim newBytes As Byte() = File.ReadAllBytes(srcFile)&#xA;        If File.Exists(destFile) AndAlso Hash(File.ReadAllBytes(destFile)) = Hash(newBytes) Then&#xA;            Say(name &amp; &quot;: already current&quot;)&#xA;            Continue For&#xA;        End If&#xA;        If File.Exists(destFile) Then&#xA;            Dim bak As String = Path.Combine(dest, name &amp; &quot;.&quot; &amp; stamp &amp; &quot;.bak&quot;)&#xA;            File.Copy(destFile, bak, True)&#xA;            Say(name &amp; &quot;: previous version kept as &quot; &amp; Path.GetFileName(bak))&#xA;            For Each old As String In Directory.GetFiles(dest, name &amp; &quot;.*.bak&quot;).OrderByDescending(Function(f) f).Skip(10)&#xA;                File.Delete(old)&#xA;            Next&#xA;        End If&#xA;        File.WriteAllBytes(destFile, newBytes)&#xA;        changed += 1&#xA;        Say(name &amp; &quot;: updated (&quot; &amp; newBytes.Length.ToString(&quot;N0&quot;) &amp; &quot; bytes)&quot;)&#xA;    Next&#xA;    If changed = 0 Then Say(&quot;Nothing to copy - the live portal already matches this package.&quot;)&#xA;&#xA;    ' ---- live check ----&#xA;    Dim url As String = If(in_PortalUrl, &quot;&quot;).Trim()&#xA;    If Not url.EndsWith(&quot;/&quot;) Then url &amp;= &quot;/&quot;&#xA;    Try&#xA;        Using handler As New System.Net.Http.HttpClientHandler()&#xA;            handler.UseDefaultCredentials = True&#xA;            Using http As New System.Net.Http.HttpClient(handler)&#xA;                http.Timeout = TimeSpan.FromSeconds(60)&#xA;                Dim live As Byte() = http.GetByteArrayAsync(url &amp; &quot;portal.html?v=&quot; &amp; stamp).Result&#xA;                Dim who As String = http.GetStringAsync(url &amp; &quot;api.aspx?op=whoami&quot;).Result&#xA;                If Hash(live) &lt;&gt; Hash(File.ReadAllBytes(Path.Combine(src, &quot;portal.html&quot;))) Then&#xA;                    Say(&quot;Copied, but &quot; &amp; url &amp; &quot;portal.html does not match the package yet - check the browser and the IIS folder.&quot;)&#xA;                    out_ExitCode = 2&#xA;                Else&#xA;                    Say(&quot;Checked &quot; &amp; url &amp; &quot;: the live page matches this package; api.aspx answers &quot; &amp; who)&#xA;                    Say(&quot;DONE - users get the new portal on their next page load (Ctrl+F5 if their browser kept the old one).&quot;)&#xA;                    out_ExitCode = 0&#xA;                End If&#xA;            End Using&#xA;        End Using&#xA;    Catch ex As Exception&#xA;        Dim inner As Exception = If(ex.InnerException, ex)&#xA;        Say(&quot;Copied, but the live check of &quot; &amp; url &amp; &quot; failed: &quot; &amp; inner.Message &amp; &quot; - open the portal in a browser to confirm.&quot;)&#xA;        out_ExitCode = 2&#xA;    End Try&#xA;Catch ex As Exception&#xA;    Say(&quot;FAILED: &quot; &amp; ex.Message)&#xA;    Say(&quot;Only files listed above as 'updated' were changed; everything else on the live portal is as it was.&quot;)&#xA;    out_ExitCode = 1&#xA;End Try&#xA;&#xA;out_UpdateLog = sb.ToString()&#xA;Console.WriteLine(out_UpdateLog)" DisplayName="Copy the portal files and check the live page" sap:VirtualizedContainerService.HintSize="460,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1"><ui:InvokeCode.Arguments><InArgument x:TypeArguments="x:String" x:Key="in_PortalShare">[in_PortalShare]</InArgument><InArgument x:TypeArguments="x:String" x:Key="in_PortalUrl">[in_PortalUrl]</InArgument><OutArgument x:TypeArguments="x:String" x:Key="out_UpdateLog">[updateLog]</OutArgument><OutArgument x:TypeArguments="x:Int32" x:Key="out_ExitCode">[updateExit]</OutArgument></ui:InvokeCode.Arguments></ui:InvokeCode>
+    <ui:LogMessage DisplayName="Log update output" sap:VirtualizedContainerService.HintSize="460,110" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[updateLog]" />
+    <TryCatch sap2010:Annotation.AnnotationText="A mail problem is logged rather than thrown, so the job result still reflects the update." DisplayName="Email the update result" sap:VirtualizedContainerService.HintSize="460,340" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" Email="{x:Null}" MailMessage="{x:Null}" Password="{x:Null}" ReplyTo="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" UseOAuth="{x:Null}" Body="[&quot;&lt;p&gt;Portal update ran on &quot; + Environment.MachineName + &quot; (PORTAL_UPDATE = True). The reconciliation did not run.&lt;/p&gt;&lt;pre style=&quot;&quot;font-family:Consolas,monospace;font-size:12px;white-space:pre-wrap&quot;&quot;&gt;&quot; + System.Net.WebUtility.HtmlEncode(updateLog) + &quot;&lt;/pre&gt;&quot;]" DisplayName="Send SMTP Mail Message" EnableSSL="True" From="robot@nmbtz.com" sap:VirtualizedContainerService.HintSize="400,181.33333333333334" sap2010:WorkflowViewState.IdRef="SendMail_1" IgnoreCRL="False" IsBodyHtml="True" Name="Robot Notification" Port="25" SecureConnection="None" Server="exchangelb.nmbtz.com" Subject="[If(updateExit = 0, &quot;NOSTRO PORTAL - UPDATED&quot;, If(updateExit = 2, &quot;NOSTRO PORTAL - COPIED, LIVE CHECK FAILED&quot;, &quot;NOSTRO PORTAL - UPDATE FAILED&quot;))]" To="[in_Emails]" />
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="mailEx" />
+            </ActivityAction.Argument>
+            <ui:LogMessage DisplayName="Log mail failure" sap:VirtualizedContainerService.HintSize="380,110" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Warn" Message="[&quot;Could not send the portal update email: &quot; + mailEx.Message]" />
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <If Condition="[updateExit = 1]" DisplayName="Fail the job if the update failed" sap:VirtualizedContainerService.HintSize="460,200" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Throw DisplayName="Throw update failure" Exception="[New Exception(&quot;Portal update failed.&quot; + Environment.NewLine + updateLog)]" sap:VirtualizedContainerService.HintSize="400,92" sap2010:WorkflowViewState.IdRef="Throw_1" />
+      </If.Then>
+    </If>
+  </Sequence>
+</Activity>

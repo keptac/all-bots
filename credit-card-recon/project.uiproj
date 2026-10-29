@@ -1,0 +1,6 @@
+{
+  "Name": "CreditCardRecon",
+  "ProjectType": "Process",
+  "Description": "Credit Card Recon",
+  "MainFile": "CreditCardReconMain.xaml"
+}

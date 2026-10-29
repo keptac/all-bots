@@ -1,0 +1,31 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "entryPoints": [
+    {
+      "filePath": "Entry.xaml",
+      "uniqueId": "9c17355c-6ac0-457a-92f5-f5c776180f48",
+      "type": "process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "MODE": {
+            "type": "string",
+            "x-default-expression": "\"ATTENDED\"",
+            "default": "ATTENDED"
+          },
+          "BASE_FOLDER": {
+            "type": "string",
+            "x-default-expression": "\"\\\\10.200.241.83\\c$\\MCONLINE\\MFE\\DOWNLOAD\\0073370\\\"",
+            "default": "\\\\10.200.241.83\\c$\\MCONLINE\\MFE\\DOWNLOAD\\0073370\\"
+          },
+          "CLOSING_BALANCE_DATE_COLUMN": {
+            "type": "string",
+            "x-default-expression": "\"VALUE_DATE\"",
+            "default": "VALUE_DATE"
+          }
+        },
+        "required": []
+      }
+    }
+  ]
+}

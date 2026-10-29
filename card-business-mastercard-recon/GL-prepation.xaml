@@ -1,0 +1,1599 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="GL_prepation" this:GL_prepation.mode="ATTENDED" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:swf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" xmlns:this="clr-namespace:" xmlns:ue="clr-namespace:UiPath.Excel;assembly=UiPath.Excel.Activities" xmlns:ueab="clr-namespace:UiPath.Excel.Activities.Business;assembly=UiPath.Excel.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="glStatementPath" Type="InArgument(x:String)" />
+    <x:Property Name="dtProcessedGl" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="reconResultsPath" Type="InArgument(x:String)" />
+    <x:Property Name="dtPreviousRealExceptions" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="previousReportPath" Type="InArgument(x:String)" />
+    <x:Property Name="startDate" Type="InArgument(x:String)" />
+    <x:Property Name="amountColumn" Type="InArgument(x:String)" />
+    <x:Property Name="mode" Type="InArgument(x:String)" />
+    <x:Property Name="AccountNumber" Type="InArgument(x:String)" />
+    <x:Property Name="CLOSING_BALANCE_DATE_COLUMN" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1062.4,7065.6</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>GL_prepation_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>UiPath.Excel.Model</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>System.Windows.Forms</x:String>
+      <x:String>System.Windows.Forms.Layout</x:String>
+      <x:String>UiPathTeam.StatusProgress.Activities</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>Microsoft.Office.Interop.Excel</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms.Primitives</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>UiPathTeam.StatusProgress.Activities</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>Microsoft.Office.Interop.Excel</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="GL_prepation" sap:VirtualizedContainerService.HintSize="715.3333333333333,8846" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dtTempGl" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtCardNoFlex" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtProcessedHistoricalGl" />
+      <Variable x:TypeArguments="x:Double" Name="previousDayClosingBalance" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtRawGl" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtJournalPostings" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSettlements" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSettlements2" />
+      <Variable x:TypeArguments="swf:Form" Name="statusVal" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtCombinedGlFinal" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="571.3333333333334,101.33333333333333" sap2010:WorkflowViewState.IdRef="ReportStatus_1" StatusText="[&quot;25% - GL PROCESSING&quot;]" />
+    <Sequence DisplayName="Previous Recon" sap:VirtualizedContainerService.HintSize="571.3333333333334,2504" sap2010:WorkflowViewState.IdRef="Sequence_29">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="sd:DataTable" Name="previousRecon" />
+        <Variable x:TypeArguments="sd:DataTable" Name="dtPreviousReportCurrentExceptions" />
+        <Variable x:TypeArguments="x:String" Name="previousDayClosingBalanceString" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:InvokeCode ContinueOnError="True" Code="Dim excelApp As Microsoft.Office.Interop.Excel.Application = Nothing&#xA;Dim wb As Microsoft.Office.Interop.Excel.Workbook = Nothing&#xA;Try&#xA;&#x9;If String.IsNullOrWhiteSpace(previousReportPath) OrElse Not System.IO.File.Exists(previousReportPath) Then&#xA;&#x9;&#x9;Return&#xA;&#x9;End If&#xA;&#xA;&#x9;excelApp = New Microsoft.Office.Interop.Excel.Application()&#xA;&#x9;excelApp.Visible = False&#xA;&#x9;excelApp.DisplayAlerts = False&#xA;&#x9;excelApp.AskToUpdateLinks = False&#xA;&#xA;&#x9;wb = excelApp.Workbooks.Open(previousReportPath, False, False)&#xA;&#xA;&#x9;Dim strippedAny As Boolean = False&#xA;&#x9;For Each sh As Microsoft.Office.Interop.Excel.Worksheet In wb.Sheets&#xA;&#x9;&#x9;Dim ptCollection As Microsoft.Office.Interop.Excel.PivotTables = CType(sh.PivotTables(), Microsoft.Office.Interop.Excel.PivotTables)&#xA;&#x9;&#x9;Do While ptCollection.Count &gt; 0&#xA;&#x9;&#x9;&#x9;Dim pt As Microsoft.Office.Interop.Excel.PivotTable = ptCollection.Item(1)&#xA;&#x9;&#x9;&#x9;strippedAny = True&#xA;&#x9;&#x9;&#x9;pt.TableRange2.Clear()&#xA;&#x9;&#x9;&#x9;System.Runtime.InteropServices.Marshal.ReleaseComObject(pt)&#xA;&#x9;&#x9;Loop&#xA;&#x9;&#x9;System.Runtime.InteropServices.Marshal.ReleaseComObject(ptCollection)&#xA;&#x9;Next&#xA;&#xA;&#x9;If strippedAny Then&#xA;&#x9;&#x9;wb.Save()&#xA;&#x9;End If&#xA;Catch stripEx As Exception&#xA;&#x9;System.Console.WriteLine(&quot;Could not strip pivot tables from previous report: &quot; &amp; vbCrLf &amp; stripEx.Message)&#xA;Finally&#xA;&#x9;Try&#xA;&#x9;&#x9;If wb IsNot Nothing Then&#xA;&#x9;&#x9;&#x9;wb.Close(False)&#xA;&#x9;&#x9;&#x9;System.Runtime.InteropServices.Marshal.ReleaseComObject(wb)&#xA;&#x9;&#x9;End If&#xA;&#x9;Catch&#xA;&#x9;End Try&#xA;&#x9;Try&#xA;&#x9;&#x9;If excelApp IsNot Nothing Then&#xA;&#x9;&#x9;&#x9;excelApp.Quit()&#xA;&#x9;&#x9;&#x9;System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp)&#xA;&#x9;&#x9;End If&#xA;&#x9;Catch&#xA;&#x9;End Try&#xA;End Try" DisplayName="Strip Pivot Tables From Previous Report" sap:VirtualizedContainerService.HintSize="507.3333333333333,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_14">
+        <ui:InvokeCode.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="previousReportPath">[previousReportPath]</InArgument>
+        </ui:InvokeCode.Arguments>
+      </ui:InvokeCode>
+      <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="507.3333333333333,1403.3333333333333" sap2010:WorkflowViewState.IdRef="TryCatch_16">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <TryCatch.Try>
+          <ui:ReadCell Cell="J11" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="505.3333333333333,88" sap2010:WorkflowViewState.IdRef="ReadCell_7" PreserveFormat="True" SheetName="Recon Report" WorkbookPath="[previousReportPath]">
+            <ui:ReadCell.Result>
+              <OutArgument x:TypeArguments="x:Double">[previousDayClosingBalance]</OutArgument>
+            </ui:ReadCell.Result>
+          </ui:ReadCell>
+        </TryCatch.Try>
+        <TryCatch.Catches>
+          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="403.2,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_16">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ActivityAction x:TypeArguments="s:Exception">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="505.3333333333333,1095.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:ReadCell Cell="J10" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="471.3333333333333,120" sap2010:WorkflowViewState.IdRef="ReadCell_8" PreserveFormat="True" SheetName="Recon Report" WorkbookPath="[previousReportPath]">
+                  <ui:ReadCell.Result>
+                    <OutArgument x:TypeArguments="x:String">[previousDayClosingBalanceString]</OutArgument>
+                  </ui:ReadCell.Result>
+                </ui:ReadCell>
+                <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="471.3333333333333,915.3333333333334" sap2010:WorkflowViewState.IdRef="TryCatch_15">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <TryCatch.Try>
+                    <Assign sap:VirtualizedContainerService.HintSize="469.3333333333333,144.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_28">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Double">[previousDayClosingBalance]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Double">[Double.Parse(previousDayClosingBalanceString.Replace("(","-").replace(")","").replace(",",""))]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </TryCatch.Try>
+                  <TryCatch.Catches>
+                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="513.6,590.4" sap2010:WorkflowViewState.IdRef="Catch`1_15">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ActivityAction x:TypeArguments="s:Exception">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                        </ActivityAction.Argument>
+                        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="469.3333333333333,560" sap2010:WorkflowViewState.IdRef="TryCatch_14">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <TryCatch.Try>
+                            <ui:ReadCell Cell="K11" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="ReadCell_9" PreserveFormat="True" SheetName="Recon Report" WorkbookPath="[previousReportPath]">
+                              <ui:ReadCell.Result>
+                                <OutArgument x:TypeArguments="x:Double">[previousDayClosingBalance]</OutArgument>
+                              </ui:ReadCell.Result>
+                            </ui:ReadCell>
+                          </TryCatch.Try>
+                          <TryCatch.Catches>
+                            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="473.6,355.2" sap2010:WorkflowViewState.IdRef="Catch`1_14">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ActivityAction x:TypeArguments="s:Exception">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                </ActivityAction.Argument>
+                                <Sequence DisplayName="Sequence" sap:VirtualizedContainerService.HintSize="467.2,284" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:ReadCell Cell="K11" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="433.6,120" sap2010:WorkflowViewState.IdRef="ReadCell_10" PreserveFormat="True" SheetName="Recon Report" WorkbookPath="[previousReportPath]">
+                                    <ui:ReadCell.Result>
+                                      <OutArgument x:TypeArguments="x:String">[previousDayClosingBalanceString]</OutArgument>
+                                    </ui:ReadCell.Result>
+                                  </ui:ReadCell>
+                                  <Assign sap:VirtualizedContainerService.HintSize="433.6,104" sap2010:WorkflowViewState.IdRef="Assign_29">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:Double">[previousDayClosingBalance]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:Double">[Double.Parse(previousDayClosingBalanceString.Replace("(","-").replace(")","").replace(",",""))]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </Sequence>
+                              </ActivityAction>
+                            </Catch>
+                          </TryCatch.Catches>
+                        </TryCatch>
+                      </ActivityAction>
+                    </Catch>
+                  </TryCatch.Catches>
+                  <TryCatch.Finally>
+                    <Sequence DisplayName="Finally" sap2010:WorkflowViewState.IdRef="Sequence_41" />
+                  </TryCatch.Finally>
+                </TryCatch>
+              </Sequence>
+            </ActivityAction>
+          </Catch>
+        </TryCatch.Catches>
+        <TryCatch.Finally>
+          <Sequence DisplayName="Finally" sap2010:WorkflowViewState.IdRef="Sequence_42" />
+        </TryCatch.Finally>
+      </TryCatch>
+      <ui:ReadRange AddHeaders="True" DataTable="[previousRecon]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="507.3333333333333,120" sap2010:WorkflowViewState.IdRef="ReadRange_8" Range="B14" SheetName="Recon Report" WorkbookPath="[previousReportPath]" />
+      <ui:InvokeCode ContinueOnError="{x:Null}" Code="dtRawHistoricalGl.Columns.Add(&quot;RRN&quot;);&#xA;dtRawHistoricalGl.Columns.Add(&quot;PAN&quot;);&#xA;dtRawHistoricalGl.Columns.Add(&quot;TERM_ID&quot;);&#xA;dtRawHistoricalGl.Columns.Add(&quot;STAN&quot;);&#xA;&#xA;&#xA;var counter =1;&#xA;&#xA;var processedData = dtRawHistoricalGl.AsEnumerable()&#xA;    .Select(cRow =&gt;&#xA;    {&#xA;&#x9;&#x9;&#xA;        var transactionType = cRow[&quot;Narration&quot;].ToString();&#xA;&#x9;&#x9;var reference = cRow[2].ToString();&#xA;&#x9;&#x9;var rrn = &quot;NA000000000000&quot;+counter.ToString();&#xA;&#x9;&#x9;var cardnumber = &quot;NA000000000000&quot;+counter.ToString();&#xA;&#x9;&#x9;var stan = &quot;&quot;;&#xA;&#x9;&#x9;var termId = &quot;&quot;;&#xA;&#x9;&#x9;counter = counter+1;&#xA;&#x9;&#x9;&#xA;        if (!string.IsNullOrWhiteSpace(transactionType))&#xA;        {&#xA;&#x9;&#x9;&#x9;&#x9;try{&#xA;&#x9;&#x9;&#xA;            transactionType = transactionType.ToLowerInvariant().Replace(&quot; &quot;, &quot;&quot;);&#xA;&#x9;&#x9;&#x9;reference = reference.ToLowerInvariant().Replace(&quot; &quot;, &quot;&quot;);&#xA;&#x9;&#xA;&#x9;&#x9;&#x9;if(transactionType.Contains(&quot;journalposting&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;try{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[2].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[0];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[3];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}catch(Exception ex){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;} else if (transactionType.Contains(&quot;withdraw&quot;)  || transactionType.Contains(&quot;prepaid&quot;) || transactionType.Contains(&quot;******&quot;))&#xA;            {&#xA;&#x9;&#x9;&#x9;&#x9;if( transactionType.Contains(&quot;******&quot;) ){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[0];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[3];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;&#x9;}else{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                   rrn = parts[1].Substring(0, Math.Min(parts[1].Length, 6));&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   cardnumber = parts[0];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;            }&#xA;            else if (transactionType.Contains(&quot;billpayment&quot;))&#xA;            {&#xA;                var parts = transactionType.Split(&quot;@&quot;);&#xA;                if (parts.Length &gt; 1){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  rrn = parts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;cardnumber = parts[2].Split(&quot;billnumber:&quot;)[1].Split(&quot;!&quot;)[0];&#xA;&#x9;&#x9;&#x9;&#x9;} &#xA;            }else if(transactionType.Contains(&quot;journalposting&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Replace(&quot;id&quot;,&quot;&quot;).Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[0];;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[3];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;}&#xA;            else if ( transactionType.Contains(&quot;payableoncommandfees&quot;))&#xA;            {&#xA;                var parts = transactionType.Split(&quot;--&quot;);&#xA;                if (parts.Length &gt; 1)&#xA;                {&#xA;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;                    if (subParts.Length &gt; 2)&#xA;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   cardnumber = subParts[0];&#xA;                }&#xA;            }else if(transactionType.Contains(&quot;topupref&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;topupref&quot;);&#xA;                if (parts.Length &gt; 1)&#xA;                {&#xA;                    var subParts = parts[1].Split(&quot;debitac&quot;);&#xA;                    if (subParts.Length &gt; 1)&#xA;                        rrn = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   cardnumber = subParts[0];&#xA;                }&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}catch(Exception ex){&#xA;&#x9;&#x9;&#x9;Console.WriteLine(ex);&#xA;&#x9;&#x9;}&#xA;       }&#xA;&#xA;&#x9;&#x9;string patternEnd = @&quot;0{4,}$&quot;; &#xA;&#x9;&#x9;rrn = Regex.Replace(rrn, patternEnd, &quot;&quot;).PadRight(12,'0');&#xA;&#x9;&#x9;&#xA;        return new { Row = cRow, RRN = rrn.PadLeft(12,'0'), PAN=cardnumber, STAN=stan, TERM_ID=termId};&#xA;    })&#xA;    .ToList();&#xA;&#x9;&#x9;&#xA;&#xA;foreach (var result in processedData)&#xA;{&#xA;    result.Row.SetField(&quot;RRN&quot;, result.RRN);&#xA;&#x9;result.Row.SetField(&quot;PAN&quot;, result.PAN);&#xA;&#x9; result.Row.SetField(&quot;STAN&quot;, result.STAN);&#xA;&#x9;result.Row.SetField(&quot;TERM_ID&quot;, result.TERM_ID);&#xA;}&#xA;&#xA;dtProcessedHistoricalGl = processedData.Select(result =&gt; result.Row).CopyToDataTable();&#xA;&#xA;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="507.3333333333333,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_8" Language="CSharp">
+        <ui:InvokeCode.Arguments>
+          <InArgument x:TypeArguments="sd:DataTable" x:Key="dtRawHistoricalGl">[previousRecon]</InArgument>
+          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedHistoricalGl">[dtProcessedHistoricalGl]</InOutArgument>
+        </ui:InvokeCode.Arguments>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:InvokeCode>
+      <ui:InvokeCode ContinueOnError="{x:Null}" Code="finalTable.Columns.Add(&quot;TRN_CODE&quot;)&#xA;&#xA;&#xA;If finalTable.Columns(6).ColumnName.ToString.ToLower.Contains(&quot;transaction&quot;) Then&#xA;&#x9;finalTable.Columns(6).ColumnName = &quot;TRN_REF_NO&quot;&#xA;Else&#xA;&#x9;finalTable.Columns(2).ColumnName = &quot;TRN_REF_NO&quot;&#xA;End If&#xA;&#xA;&#xA;&#xA;&#xA;finalTable.Columns(&quot;Booking Date&quot;).ColumnName = &quot;BKG_DATE&quot;&#xA;finalTable.Columns(&quot;Debit&quot;).ColumnName = &quot;DEBIT&quot;&#xA;&#xA;finalTable.Columns(&quot;Narration&quot;). ColumnName = &quot;NARRATION&quot;&#xA;&#xA;finalTable.Columns(&quot;Credit&quot;).ColumnName = &quot;CREDIT&quot;&#xA;finalTable.Columns(&quot;Value Date&quot;).ColumnName = &quot;VALUE_DATE&quot;&#xA;&#xA;Try &#xA;&#x9;finalTable.Columns.Add(&quot;Branch code&quot;)&#xA;Catch ex As Exception&#xA;End Try" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="507.3333333333333,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_9">
+        <ui:InvokeCode.Arguments>
+          <InArgument x:TypeArguments="sd:DataTable" x:Key="finalTable">[dtProcessedHistoricalGl]</InArgument>
+        </ui:InvokeCode.Arguments>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:InvokeCode>
+      <ui:FilterDataTable DataTable="[dtProcessedHistoricalGl]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="433.6,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_10" OutputDataTable="[dtPreviousRealExceptions]" SelectColumnsMode="Keep">
+        <ui:FilterDataTable.Filters>
+          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="8">
+            <ui:FilterOperationArgument BooleanOperator="And" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Current Exceptions"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Current exceptions"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Current Exception"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Current exception"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Current exceptions"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="Or" Operator="EMPTY">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["BKG_DATE"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+            </ui:FilterOperationArgument>
+          </scg:List>
+        </ui:FilterDataTable.Filters>
+        <ui:FilterDataTable.SelectColumns>
+          <scg:List x:TypeArguments="InArgument" Capacity="4">
+            <x:Null />
+          </scg:List>
+        </ui:FilterDataTable.SelectColumns>
+      </ui:FilterDataTable>
+      <ui:FilterDataTable DataTable="[dtProcessedHistoricalGl]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="433.6,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_11" OutputDataTable="[dtProcessedHistoricalGl]" SelectColumnsMode="Keep">
+        <ui:FilterDataTable.Filters>
+          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="8">
+            <ui:FilterOperationArgument BooleanOperator="And" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Current Exceptions"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Current exceptions"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Current Exception"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Current exception"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Current exceptions"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+          </scg:List>
+        </ui:FilterDataTable.Filters>
+        <ui:FilterDataTable.SelectColumns>
+          <scg:List x:TypeArguments="InArgument" Capacity="4">
+            <x:Null />
+          </scg:List>
+        </ui:FilterDataTable.SelectColumns>
+      </ui:FilterDataTable>
+      <Assign sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_30">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dtProcessedHistoricalGl]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[dtProcessedHistoricalGl.DefaultView.ToTable(false,"BKG_DATE","VALUE_DATE", "TRN_REF_NO","TRN_CODE","NARRATION","DEBIT","CREDIT","PAN","STAN","RRN","TERM_ID" )]</InArgument>
+        </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Assign>
+    </Sequence>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="571.2,56.8" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="504,1361.6" sap2010:WorkflowViewState.IdRef="Sequence_32">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Previous Recon" sap:VirtualizedContainerService.HintSize="470.4,1301.6" sap2010:WorkflowViewState.IdRef="Sequence_9">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd:DataTable" Name="previousRecon" />
+              <Variable x:TypeArguments="sd:DataTable" Name="dtPreviousReportCurrentExceptions" />
+              <Variable x:TypeArguments="x:String" Name="previousDayClosingBalanceString" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="436.8,351.2" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <TryCatch.Try>
+                <ui:ReadCell Cell="J11" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="ReadCell_1" PreserveFormat="True" SheetName="Recon Report" WorkbookPath="[previousReportPath]">
+                  <ui:ReadCell.Result>
+                    <OutArgument x:TypeArguments="x:Double">[previousDayClosingBalance]</OutArgument>
+                  </ui:ReadCell.Result>
+                </ui:ReadCell>
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="403.2,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ActivityAction x:TypeArguments="s:Exception">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                    </ActivityAction.Argument>
+                    <Sequence sap:VirtualizedContainerService.HintSize="609.6,516" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:ReadCell Cell="J11" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="576,120" sap2010:WorkflowViewState.IdRef="ReadCell_5" PreserveFormat="True" SheetName="Recon Report" WorkbookPath="[previousReportPath]">
+                        <ui:ReadCell.Result>
+                          <OutArgument x:TypeArguments="x:String">[previousDayClosingBalanceString]</OutArgument>
+                        </ui:ReadCell.Result>
+                      </ui:ReadCell>
+                      <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="576,336" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <TryCatch.Try>
+                          <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_8">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Double">[previousDayClosingBalance]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Double">[Double.Parse(previousDayClosingBalanceString.Replace("(","-").replace(")","").replace(",",""))]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </TryCatch.Try>
+                        <TryCatch.Catches>
+                          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="436.8,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_4">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ActivityAction x:TypeArguments="s:Exception">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                              </ActivityAction.Argument>
+                              <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="536,319.2" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <TryCatch.Try>
+                                  <ui:ReadCell Cell="K11" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="ReadCell_3" PreserveFormat="True" SheetName="Recon Report" WorkbookPath="[previousReportPath]">
+                                    <ui:ReadCell.Result>
+                                      <OutArgument x:TypeArguments="x:Double">[previousDayClosingBalance]</OutArgument>
+                                    </ui:ReadCell.Result>
+                                  </ui:ReadCell>
+                                </TryCatch.Try>
+                                <TryCatch.Catches>
+                                  <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="403.2,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ActivityAction x:TypeArguments="s:Exception">
+                                      <ActivityAction.Argument>
+                                        <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                      </ActivityAction.Argument>
+                                      <Sequence sap:VirtualizedContainerService.HintSize="467.2,284.8" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <ui:ReadCell Cell="K11" DisplayName="Read Cell Workbook" sap:VirtualizedContainerService.HintSize="433.6,120" sap2010:WorkflowViewState.IdRef="ReadCell_6" PreserveFormat="True" SheetName="Recon Report" WorkbookPath="[previousReportPath]">
+                                          <ui:ReadCell.Result>
+                                            <OutArgument x:TypeArguments="x:String">[previousDayClosingBalanceString]</OutArgument>
+                                          </ui:ReadCell.Result>
+                                        </ui:ReadCell>
+                                        <Assign sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_9">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:Double">[previousDayClosingBalance]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:Double">[Double.Parse(previousDayClosingBalanceString.Replace("(","-").replace(")","").replace(",",""))]</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                      </Sequence>
+                                    </ActivityAction>
+                                  </Catch>
+                                </TryCatch.Catches>
+                              </TryCatch>
+                            </ActivityAction>
+                          </Catch>
+                        </TryCatch.Catches>
+                      </TryCatch>
+                    </Sequence>
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+            </TryCatch>
+            <ui:ReadRange AddHeaders="True" DataTable="[previousRecon]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="436.8,120" sap2010:WorkflowViewState.IdRef="ReadRange_4" Range="B14" SheetName="Recon Report" WorkbookPath="[previousReportPath]" />
+            <ui:FilterDataTable DataTable="[previousRecon]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="436.8,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_3" OutputDataTable="[dtPreviousRealExceptions]" SelectColumnsMode="Keep">
+              <ui:FilterDataTable.Filters>
+                <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                  <ui:FilterOperationArgument BooleanOperator="And" Operator="CONTAINS">
+                    <ui:FilterOperationArgument.Column>
+                      <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+                    </ui:FilterOperationArgument.Column>
+                    <ui:FilterOperationArgument.Operand>
+                      <InArgument x:TypeArguments="x:String">["Current Exceptions"]</InArgument>
+                    </ui:FilterOperationArgument.Operand>
+                  </ui:FilterOperationArgument>
+                  <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+                    <ui:FilterOperationArgument.Column>
+                      <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+                    </ui:FilterOperationArgument.Column>
+                    <ui:FilterOperationArgument.Operand>
+                      <InArgument x:TypeArguments="x:String">["Current exceptions"]</InArgument>
+                    </ui:FilterOperationArgument.Operand>
+                  </ui:FilterOperationArgument>
+                  <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="Or" Operator="EMPTY">
+                    <ui:FilterOperationArgument.Column>
+                      <InArgument x:TypeArguments="x:String">["Booking Date"]</InArgument>
+                    </ui:FilterOperationArgument.Column>
+                  </ui:FilterOperationArgument>
+                </scg:List>
+              </ui:FilterDataTable.Filters>
+              <ui:FilterDataTable.SelectColumns>
+                <scg:List x:TypeArguments="InArgument" Capacity="4">
+                  <x:Null />
+                </scg:List>
+              </ui:FilterDataTable.SelectColumns>
+            </ui:FilterDataTable>
+            <ui:FilterDataTable DataTable="[previousRecon]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="436.8,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_9" OutputDataTable="[dtPreviousReportCurrentExceptions]" SelectColumnsMode="Keep">
+              <ui:FilterDataTable.Filters>
+                <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                  <ui:FilterOperationArgument BooleanOperator="And" Operator="CONTAINS">
+                    <ui:FilterOperationArgument.Column>
+                      <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+                    </ui:FilterOperationArgument.Column>
+                    <ui:FilterOperationArgument.Operand>
+                      <InArgument x:TypeArguments="x:String">["Current Exceptions"]</InArgument>
+                    </ui:FilterOperationArgument.Operand>
+                  </ui:FilterOperationArgument>
+                  <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+                    <ui:FilterOperationArgument.Column>
+                      <InArgument x:TypeArguments="x:String">["Root Cause"]</InArgument>
+                    </ui:FilterOperationArgument.Column>
+                    <ui:FilterOperationArgument.Operand>
+                      <InArgument x:TypeArguments="x:String">["Current exceptions"]</InArgument>
+                    </ui:FilterOperationArgument.Operand>
+                  </ui:FilterOperationArgument>
+                </scg:List>
+              </ui:FilterDataTable.Filters>
+              <ui:FilterDataTable.SelectColumns>
+                <scg:List x:TypeArguments="InArgument" Capacity="4">
+                  <x:Null />
+                </scg:List>
+              </ui:FilterDataTable.SelectColumns>
+            </ui:FilterDataTable>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="&#xA;dtRawHistoricalGl.Columns.Add(&quot;RRN&quot;);&#xA;dtRawHistoricalGl.Columns.Add(&quot;PAN&quot;);&#xA;dtRawHistoricalGl.Columns.Add(&quot;TERM_ID&quot;);&#xA;dtRawHistoricalGl.Columns.Add(&quot;STAN&quot;);&#xA;&#xA;&#xA;var counter =0;&#xA;&#xA;var processedData = dtRawHistoricalGl.AsEnumerable()&#xA;    .Select(cRow =&gt;&#xA;    {&#xA;&#x9;&#x9;&#xA;        var transactionType = cRow[&quot;Narration&quot;].ToString();&#xA;&#x9;&#x9;var reference = cRow[2].ToString();&#xA;&#x9;&#x9;var rrn = &quot;NA000000000000&quot;+counter.ToString();&#xA;&#x9;&#x9;var cardnumber = &quot;NA000000000000&quot;+counter.ToString();&#xA;&#x9;&#x9;var stan = &quot;&quot;;&#xA;&#x9;&#x9;var termId = &quot;&quot;;&#xA;&#x9;&#x9;counter = counter+1;&#xA;&#x9;&#x9;&#xA;        if (!string.IsNullOrWhiteSpace(transactionType))&#xA;        {&#xA;&#x9;&#x9;&#x9;&#x9;try{&#xA;&#x9;&#x9;&#xA;            transactionType = transactionType.ToLowerInvariant().Replace(&quot; &quot;, &quot;&quot;);&#xA;&#x9;&#x9;&#x9;reference = reference.ToLowerInvariant().Replace(&quot; &quot;, &quot;&quot;);&#xA;&#x9;&#xA;&#x9;&#x9;&#x9;if(transactionType.Contains(&quot;journalposting&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;try{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[2].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[0];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[3];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}catch(Exception ex){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;} else if (transactionType.Contains(&quot;withdraw&quot;)  || transactionType.Contains(&quot;prepaid&quot;) || transactionType.Contains(&quot;******&quot;))&#xA;            {&#xA;&#x9;&#x9;&#x9;&#x9;if( transactionType.Contains(&quot;******&quot;) ){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[0];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[3];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;&#x9;}else{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                   rrn = parts[1].Substring(0, Math.Min(parts[1].Length, 6));&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   cardnumber = parts[0];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;            }&#xA;            else if (transactionType.Contains(&quot;billpayment&quot;))&#xA;            {&#xA;                var parts = transactionType.Split(&quot;@&quot;);&#xA;                if (parts.Length &gt; 1){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  rrn = parts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;cardnumber = parts[2].Split(&quot;billnumber:&quot;)[1].Split(&quot;!&quot;)[0];&#xA;&#x9;&#x9;&#x9;&#x9;} &#xA;            }else if(transactionType.Contains(&quot;journalposting&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Replace(&quot;id&quot;,&quot;&quot;).Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[0];;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[3];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;}&#xA;            else if ( transactionType.Contains(&quot;payableoncommandfees&quot;))&#xA;            {&#xA;                var parts = transactionType.Split(&quot;--&quot;);&#xA;                if (parts.Length &gt; 1)&#xA;                {&#xA;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;                    if (subParts.Length &gt; 2)&#xA;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   cardnumber = subParts[0];&#xA;                }&#xA;            }else if(transactionType.Contains(&quot;topupref&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;topupref&quot;);&#xA;                if (parts.Length &gt; 1)&#xA;                {&#xA;                    var subParts = parts[1].Split(&quot;debitac&quot;);&#xA;                    if (subParts.Length &gt; 1)&#xA;                        rrn = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   cardnumber = subParts[0];&#xA;                }&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}catch(Exception ex){&#xA;&#x9;&#x9;&#x9;Console.WriteLine(ex);&#xA;&#x9;&#x9;}&#xA;       }&#xA;&#x9;&#xA;&#xA;        return new { Row = cRow, RRN = rrn, PAN=cardnumber, STAN=stan, TERM_ID=termId};&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;&#xA;    })&#xA;    .ToList();&#xA;&#x9;&#x9;&#xA;&#xA;foreach (var result in processedData)&#xA;{&#xA;    result.Row.SetField(&quot;RRN&quot;, result.RRN);&#xA;&#x9;result.Row.SetField(&quot;PAN&quot;, result.PAN);&#xA;&#x9; result.Row.SetField(&quot;STAN&quot;, result.STAN);&#xA;&#x9;result.Row.SetField(&quot;TERM_ID&quot;, result.TERM_ID);&#xA;}&#xA;&#xA;dtProcessedHistoricalGl = processedData.Select(result =&gt; result.Row).CopyToDataTable();&#xA;&#xA;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="436.8,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_6" Language="CSharp">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="dtRawHistoricalGl">[dtPreviousReportCurrentExceptions]</InArgument>
+                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedHistoricalGl">[dtProcessedHistoricalGl]</InOutArgument>
+              </ui:InvokeCode.Arguments>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InvokeCode>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="finalTable.Columns.Add(&quot;TRN_CODE&quot;)&#xA;&#xA;If finalTable.Columns(2).ColumnName.ToString.ToLower.Contains(&quot;narration&quot;) Then&#xA;&#x9;finalTable.Columns(1).ColumnName = &quot;TRN_REF_NO&quot;&#xA;Else&#xA;&#x9;finalTable.Columns(2).ColumnName = &quot;TRN_REF_NO&quot;&#xA;End If&#xA;&#xA;finalTable.Columns(&quot;Booking Date&quot;).ColumnName = &quot;BKG_DATE&quot;&#xA;finalTable.Columns(&quot;Debit&quot;).ColumnName = &quot;DEBIT&quot;&#xA;&#xA;finalTable.Columns(&quot;Narration&quot;). ColumnName = &quot;NARRATION&quot;&#xA;&#xA;finalTable.Columns(&quot;Credit&quot;).ColumnName = &quot;CREDIT&quot;&#xA;finalTable.Columns(&quot;Value Date&quot;).ColumnName = &quot;VALUE_DATE&quot;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="436.8,56.8" sap2010:WorkflowViewState.IdRef="InvokeCode_7">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="finalTable">[dtProcessedHistoricalGl]</InArgument>
+              </ui:InvokeCode.Arguments>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InvokeCode>
+            <Assign sap:VirtualizedContainerService.HintSize="436.8,104.8" sap2010:WorkflowViewState.IdRef="Assign_5">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtProcessedHistoricalGl]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dtProcessedHistoricalGl.DefaultView.ToTable(false,"BKG_DATE","VALUE_DATE", "TRN_REF_NO","TRN_CODE","NARRATION","DEBIT","CREDIT","PAN","STAN","RRN","TERM_ID" )]</InArgument>
+              </Assign.Value>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Assign>
+          </Sequence>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[mode]" sap:VirtualizedContainerService.HintSize="571.2,1989.6" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Sequence x:Key="ATTENDED" DisplayName="GL Processing" sap:VirtualizedContainerService.HintSize="530.4,1747.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="sd:DataTable" Name="dtRawGl" />
+          <Variable x:TypeArguments="x:String" Name="category" />
+          <Variable x:TypeArguments="x:Int32" Name="startIndex" />
+          <Variable x:TypeArguments="x:Int32" Name="endIndex" />
+        </Sequence.Variables>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <If Condition="[reconResultsPath.Contains(&quot;MC POS&quot;)]" sap:VirtualizedContainerService.HintSize="496.8,56.8" sap2010:WorkflowViewState.IdRef="If_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="467.2,164.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_4">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[category]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">MCPOS</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="467.2,164.8" sap2010:WorkflowViewState.IdRef="Sequence_7">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_3">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[category]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">ATM</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </If.Else>
+        </If>
+        <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[category]" sap:VirtualizedContainerService.HintSize="496.8,838.4" sap2010:WorkflowViewState.IdRef="Switch`1_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence x:Key="ATM" sap2010:Annotation.AnnotationText="Preparation and formating of MC ATM GLs manually downloaded" DisplayName="ATM GL" sap:VirtualizedContainerService.HintSize="416,596" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ReadRange AddHeaders="True" DataTable="[dtRawGl]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="382.4,120" sap2010:WorkflowViewState.IdRef="ReadRange_2" Range="B12" SheetName="GL Statement" WorkbookPath="[glStatementPath]" />
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="dtRawGl.Columns.Add(&quot;RRN&quot;);&#xA;dtRawGl.Columns.Add(&quot;PAN&quot;);&#xA;dtRawGl.Columns.Add(&quot;TERM_ID&quot;);&#xA;dtRawGl.Columns.Add(&quot;STAN&quot;);&#xA;&#xA;var counter =1;&#xA;var processedData = dtRawGl.AsEnumerable()&#xA;    .Select(cRow =&gt;&#xA;    {&#xA;        var transactionType = cRow.Field&lt;string&gt;(&quot;Narration&quot;);&#xA;&#x9;&#x9;var reference = cRow.Field&lt;string&gt;(2);&#xA;&#x9;&#x9;string rrn = &quot;NA000000000000&quot;+counter.ToString();&#xA;&#x9;&#x9;string cardnumber = &quot;NA000000000000&quot;+counter.ToString();&#xA;&#x9;&#x9;string stan = &quot;&quot;;&#xA;&#x9;&#x9;string termId = &quot;&quot;;&#xA;&#x9;&#x9;counter = counter+1;&#xA;&#xA;        if (!string.IsNullOrWhiteSpace(transactionType))&#xA;        {&#xA;&#x9;&#x9;&#xA;            transactionType = transactionType.ToLowerInvariant().Replace(&quot; &quot;, &quot;&quot;);&#xA;&#x9;&#x9;&#x9;reference = reference.ToLowerInvariant().Replace(&quot; &quot;, &quot;&quot;);&#xA;&#x9;&#x9;&#xA;&#x9;&#xA;&#x9;&#x9;&#x9;if(transactionType.Contains(&quot;refund&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;try{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[3];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[4];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}catch(Exception ex){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}else if(transactionType.Contains(&quot;journalposting&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;try{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 2)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[2].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[0];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[3];&#xA;&#x9;                }else  if (parts.Length &lt; 3 )&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[3];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[4];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}catch(Exception ex){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else if (transactionType.Contains(&quot;withdraw&quot;)  || transactionType.Contains(&quot;prepaid&quot;) || transactionType.Contains(&quot;******&quot;))&#xA;            {&#xA;&#x9;&#x9;&#x9;&#x9;if( transactionType.Contains(&quot;******&quot;) ){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[0];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[3];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;&#x9;}else{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                   rrn = parts[1].Substring(0, Math.Min(parts[1].Length, 6));&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   cardnumber = parts[0];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;            }&#xA;            else if (transactionType.Contains(&quot;billpayment&quot;))&#xA;            {&#xA;                var parts = transactionType.Split(&quot;@&quot;);&#xA;                if (parts.Length &gt; 1){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  rrn = parts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;cardnumber = parts[2].Split(&quot;billnumber:&quot;)[1].Split(&quot;!&quot;)[0];&#xA;&#x9;&#x9;&#x9;&#x9;} &#xA;            }else if(transactionType.Contains(&quot;journalposting&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Replace(&quot;id&quot;,&quot;&quot;).Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[0];;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[3];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;}&#xA;            else if ( transactionType.Contains(&quot;payableoncommandfees&quot;))&#xA;            {&#xA;                var parts = transactionType.Split(&quot;--&quot;);&#xA;                if (parts.Length &gt; 1)&#xA;                {&#xA;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;                    if (subParts.Length &gt; 2)&#xA;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   cardnumber = subParts[0];&#xA;                }&#xA;            }else if(transactionType.Contains(&quot;topupref&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;topupref&quot;);&#xA;                if (parts.Length &gt; 1)&#xA;                {&#xA;                    var subParts = parts[1].Split(&quot;debitac&quot;);&#xA;                    if (subParts.Length &gt; 1)&#xA;                        rrn = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   cardnumber = subParts[0];&#xA;                }&#xA;&#x9;&#x9;&#x9;}&#xA;        }&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;if(String.IsNullOrEmpty(cardnumber.Replace(&quot; &quot;,&quot;&quot;))){&#xA;&#x9;&#x9;&#x9;cardnumber = &quot;NA000000000000&quot;+counter.ToString();&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;if(String.IsNullOrEmpty(rrn.Replace(&quot; &quot;,&quot;&quot;))){&#xA;&#x9;&#x9;&#x9;rrn = &quot;NA000000000000&quot;+counter.ToString();&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;string patternEnd = @&quot;0{4,}$&quot;; &#xA;&#x9;&#x9;var rrnTemp = Regex.Replace(rrn, patternEnd, &quot;&quot;).PadRight(12,'0');&#xA;&#xA;        return new { Row = cRow, RRN = rrnTemp.PadLeft(12,'0'), PAN=cardnumber, STAN=stan, TERM_ID=termId};&#xA;    })&#xA;    .ToList();&#xA;&#xA;foreach (var result in processedData)&#xA;{&#xA;    result.Row.SetField(&quot;RRN&quot;, result.RRN);&#xA;&#x9;result.Row.SetField(&quot;PAN&quot;, result.PAN);&#xA;&#x9; result.Row.SetField(&quot;STAN&quot;, result.STAN);&#xA;&#x9;result.Row.SetField(&quot;TERM_ID&quot;, result.TERM_ID);&#xA;}&#xA;&#xA;finalTable = processedData.Select(result =&gt; result.Row).CopyToDataTable();&#xA;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="382.4,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="dtRawGl">[dtRawGl]</InArgument>
+                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="finalTable">[dtProcessedGl]</InOutArgument>
+              </ui:InvokeCode.Arguments>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InvokeCode>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="finalTable.Columns.Add(&quot;TRN_CODE&quot;)&#xA;&#xA;&#xA;If finalTable.Columns(2).ColumnName.ToString.ToLower.Contains(&quot;narration&quot;) Then&#xA;&#x9;finalTable.Columns(1).ColumnName = &quot;TRN_REF_NO&quot;&#xA;Else&#xA;&#x9;finalTable.Columns(2).ColumnName = &quot;TRN_REF_NO&quot;&#xA;End If&#xA;&#xA;finalTable.Columns(&quot;Booking Date&quot;).ColumnName = &quot;BKG_DATE&quot;&#xA;finalTable.Columns(&quot;Debit&quot;).ColumnName = &quot;DEBIT&quot;&#xA;&#xA;finalTable.Columns(&quot;Narration&quot;). ColumnName = &quot;NARRATION&quot;&#xA;&#xA;finalTable.Columns(&quot;Credit&quot;).ColumnName = &quot;CREDIT&quot;&#xA;finalTable.Columns(&quot;Value Date&quot;).ColumnName = &quot;VALUE_DATE&quot;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="382.4,188" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="finalTable">[dtProcessedGl]</InArgument>
+              </ui:InvokeCode.Arguments>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InvokeCode>
+          </Sequence>
+          <Sequence x:Key="MCPOS" sap2010:Annotation.AnnotationText="Preparation and formating of MC POS GLs manually downloaded" DisplayName="MCPOS GL" sap:VirtualizedContainerService.HintSize="483.2,1027.2" sap2010:WorkflowViewState.IdRef="Sequence_36">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ReadRange AddHeaders="True" DataTable="[dtRawGl]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="449.6,120" sap2010:WorkflowViewState.IdRef="ReadRange_10" Range="B9" SheetName="GL Statement" WorkbookPath="[glStatementPath]" />
+            <If Condition="[dtRawGl.columns.contains(&quot;Narration&quot;)]" sap:VirtualizedContainerService.HintSize="449.6,431.2" sap2010:WorkflowViewState.IdRef="If_5">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,171.2" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:ReadRange AddHeaders="True" DataTable="[dtRawGl]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="382.4,111.2" sap2010:WorkflowViewState.IdRef="ReadRange_11" Range="B12" SheetName="GL Statement" WorkbookPath="[glStatementPath]" />
+                </Sequence>
+              </If.Else>
+            </If>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="dtRawGl.Columns.Add(&quot;RRN&quot;);&#xA;dtRawGl.Columns.Add(&quot;PAN&quot;);&#xA;dtRawGl.Columns.Add(&quot;TERM_ID&quot;);&#xA;dtRawGl.Columns.Add(&quot;STAN&quot;);&#xA;&#xA;var counter =1;&#xA;var processedData = dtRawGl.AsEnumerable()&#xA;    .Select(cRow =&gt;&#xA;    {&#xA;        var transactionType = cRow.Field&lt;string&gt;(&quot;Narration&quot;);&#xA;&#x9;&#x9;var reference = cRow.Field&lt;string&gt;(2);&#xA;&#x9;&#x9;string rrn = &quot;NA000000000000&quot;+counter.ToString();&#xA;&#x9;&#x9;string cardnumber = &quot;NA000000000000&quot;+counter.ToString();&#xA;&#x9;&#x9;string stan = &quot;&quot;;&#xA;&#x9;&#x9;string termId = &quot;&quot;;&#xA;&#x9;&#x9;counter = counter+1;&#xA;&#xA;        if (!string.IsNullOrWhiteSpace(transactionType))&#xA;        {&#xA;&#x9;&#x9;&#xA;            transactionType = transactionType.ToLowerInvariant().Replace(&quot; &quot;, &quot;&quot;);&#xA;&#x9;&#x9;&#x9;reference = reference.ToLowerInvariant().Replace(&quot; &quot;, &quot;&quot;);&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(transactionType.Contains(&quot;utilitypayments&quot;)){&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;try{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[1].Split(&quot;,&quot;);&#xA;&#x9;                    if (subParts.Length &gt;=2){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;cardnumber = subParts[0].Split(&quot;:&quot;)[1];&#xA;&#x9;                        rrn = subParts[1].Split(&quot;:&quot;)[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[2].Split(&quot;:&quot;)[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;&#x9;}catch(Exception ex){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;}else if(transactionType.Contains(&quot;refund&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;try{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[3];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[4];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}catch(Exception ex){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}else if(transactionType.Contains(&quot;journalposting&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;try{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 2)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[2].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[0];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[3];&#xA;&#x9;                }else  if (parts.Length &lt; 3 )&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[3];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[4];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}catch(Exception ex){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else if (transactionType.Contains(&quot;withdraw&quot;)  || transactionType.Contains(&quot;prepaid&quot;) || transactionType.Contains(&quot;******&quot;))&#xA;            {&#xA;&#x9;&#x9;&#x9;&#x9;if( transactionType.Contains(&quot;******&quot;) ){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[0];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[3];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;&#x9;}else{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                   rrn = parts[1].Substring(0, Math.Min(parts[1].Length, 6));&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   cardnumber = parts[0];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;            }&#xA;            else if (transactionType.Contains(&quot;billpayment&quot;))&#xA;            {&#xA;                var parts = transactionType.Split(&quot;@&quot;);&#xA;                if (parts.Length &gt; 1){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  rrn = parts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;cardnumber = parts[2].Split(&quot;billnumber:&quot;)[1].Split(&quot;!&quot;)[0];&#xA;&#x9;&#x9;&#x9;&#x9;} &#xA;            }else if(transactionType.Contains(&quot;journalposting&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Replace(&quot;id&quot;,&quot;&quot;).Split(&quot;--&quot;);&#xA;&#x9;                if (parts.Length &gt; 1)&#xA;&#x9;                {&#xA;&#x9;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;&#x9;                    if (subParts.Length &gt; 2)&#xA;&#x9;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;    cardnumber = subParts[0];;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stan = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;termId = subParts[3];&#xA;&#x9;                }&#xA;&#x9;&#x9;&#x9;}&#xA;            else if ( transactionType.Contains(&quot;payableoncommandfees&quot;))&#xA;            {&#xA;                var parts = transactionType.Split(&quot;--&quot;);&#xA;                if (parts.Length &gt; 1)&#xA;                {&#xA;                    var subParts = parts[1].Split(&quot;-&quot;);&#xA;                    if (subParts.Length &gt; 2)&#xA;                        rrn = subParts[2];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   cardnumber = subParts[0];&#xA;                }&#xA;            }else if(transactionType.Contains(&quot;topupref&quot;)){&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;var parts = transactionType.Split(&quot;topupref&quot;);&#xA;                if (parts.Length &gt; 1)&#xA;                {&#xA;                    var subParts = parts[1].Split(&quot;debitac&quot;);&#xA;                    if (subParts.Length &gt; 1)&#xA;                        rrn = subParts[1];&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   cardnumber = subParts[0];&#xA;                }&#xA;&#x9;&#x9;&#x9;}&#xA;        }&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;if(String.IsNullOrEmpty(cardnumber.Replace(&quot; &quot;,&quot;&quot;))){&#xA;&#x9;&#x9;&#x9;cardnumber = &quot;NA000000000000&quot;+counter.ToString();&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;if(String.IsNullOrEmpty(rrn.Replace(&quot; &quot;,&quot;&quot;))){&#xA;&#x9;&#x9;&#x9;rrn = &quot;NA000000000000&quot;+counter.ToString();&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;&#xA;&#x9;//&#x9;string patternEnd = @&quot;0{6,}$&quot;; &#xA;&#x9;//&#x9;rrn = Regex.Replace(rrn, patternEnd, &quot;&quot;).PadLeft(12,'0');&#xA;&#xA;        return new { Row = cRow, RRN = rrn, PAN=cardnumber, STAN=stan, TERM_ID=termId};&#xA;    })&#xA;    .ToList();&#xA;&#xA;foreach (var result in processedData)&#xA;{&#xA;    result.Row.SetField(&quot;RRN&quot;, result.RRN);&#xA;&#x9;result.Row.SetField(&quot;PAN&quot;, result.PAN);&#xA;&#x9; result.Row.SetField(&quot;STAN&quot;, result.STAN);&#xA;&#x9;result.Row.SetField(&quot;TERM_ID&quot;, result.TERM_ID);&#xA;}&#xA;&#xA;finalTable = processedData.Select(result =&gt; result.Row).CopyToDataTable();&#xA;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="449.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_12" Language="CSharp">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="dtRawGl">[dtRawGl]</InArgument>
+                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="finalTable">[dtProcessedGl]</InOutArgument>
+              </ui:InvokeCode.Arguments>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InvokeCode>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="finalTable.Columns.Add(&quot;TRN_CODE&quot;)&#xA;&#xA;&#xA;If finalTable.Columns(2).ColumnName.ToString.ToLower.Contains(&quot;narration&quot;) Then&#xA;&#x9;finalTable.Columns(1).ColumnName = &quot;TRN_REF_NO&quot;&#xA;Else&#xA;&#x9;finalTable.Columns(2).ColumnName = &quot;TRN_REF_NO&quot;&#xA;End If&#xA;&#xA;finalTable.Columns(&quot;Booking Date&quot;).ColumnName = &quot;BKG_DATE&quot;&#xA;finalTable.Columns(&quot;Debit&quot;).ColumnName = &quot;DEBIT&quot;&#xA;&#xA;finalTable.Columns(&quot;Narration&quot;). ColumnName = &quot;NARRATION&quot;&#xA;&#xA;finalTable.Columns(&quot;Credit&quot;).ColumnName = &quot;CREDIT&quot;&#xA;finalTable.Columns(&quot;Value Date&quot;).ColumnName = &quot;VALUE_DATE&quot;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="449.6,188" sap2010:WorkflowViewState.IdRef="InvokeCode_13">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="finalTable">[dtProcessedGl]</InArgument>
+              </ui:InvokeCode.Arguments>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InvokeCode>
+          </Sequence>
+        </Switch>
+        <ui:LookupDataTable CellValue="{x:Null}" LookupColumnIndex="{x:Null}" LookupDataColumn="{x:Null}" TargetColumnIndex="{x:Null}" TargetColumnName="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[dtProcessedGl]" DisplayName="Lookup Data Table" sap:VirtualizedContainerService.HintSize="496.8,56.8" sap2010:WorkflowViewState.IdRef="LookupDataTable_1" LookupColumnName="Balance" LookupValue="[previousDayClosingBalance.ToString]" RowIndex="[startIndex]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:LookupDataTable>
+        <Assign sap:VirtualizedContainerService.HintSize="496.8,113.6" sap2010:WorkflowViewState.IdRef="Assign_6">
+          <Assign.To>
+            <OutArgument x:TypeArguments="sd:DataTable">[dtProcessedGl]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="sd:DataTable">[dtProcessedGl.AsEnumerable.skip(startIndex+1).CopyToDataTable]</InArgument>
+          </Assign.Value>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Assign>
+        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="496.8,56.8" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+          <ui:CommentOut.Body>
+            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="449.6,192.8" sap2010:WorkflowViewState.IdRef="Sequence_33">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:SortDataTable ColumnIndex="{x:Null}" DataColumn="{x:Null}" ColumnName="[CLOSING_BALANCE_DATE_COLUMN]" DataTable="[dtProcessedGl]" DisplayName="Sort Data Table" sap:VirtualizedContainerService.HintSize="387.2,80.8" sap2010:WorkflowViewState.IdRef="SortDataTable_1" Order="Ascending" OutputDataTable="[dtProcessedGl]" SortOrder="Ascending" />
+            </Sequence>
+          </ui:CommentOut.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:CommentOut>
+        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="496.8,346.4" sap2010:WorkflowViewState.IdRef="TryCatch_13">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <TryCatch.Try>
+            <Assign sap:VirtualizedContainerService.HintSize="433.6,83.2" sap2010:WorkflowViewState.IdRef="Assign_26">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[endIndex]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32" xml:space="preserve">[dtProcessedGl.AsEnumerable.Select(Function(r,i) If(r(CLOSING_BALANCE_DATE_COLUMN).ToString.Contains( _ 
+DateTime.Parse(startDate).AddDays(-1).ToString("MM/dd/yyyy")  _ 
+) And Not r(amountColumn).ToString.Contains("-") ,i,0)).Max + 1]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </TryCatch.Try>
+          <TryCatch.Catches>
+            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="436.8,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_13">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ActivityAction x:TypeArguments="s:Exception">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                </ActivityAction.Argument>
+                <Assign sap:VirtualizedContainerService.HintSize="433.6,80.8" sap2010:WorkflowViewState.IdRef="Assign_27">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[endIndex]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </ActivityAction>
+            </Catch>
+          </TryCatch.Catches>
+        </TryCatch>
+        <If Condition="[endIndex&gt;0]" sap:VirtualizedContainerService.HintSize="496.8,56.8" sap2010:WorkflowViewState.IdRef="If_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_21">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="467.2,164.8" sap2010:WorkflowViewState.IdRef="Sequence_22">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_10">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[endIndex]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">[dtProcessedGl.Rows.Count]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </If.Else>
+        </If>
+        <If Condition="[amountColumn.Equals(&quot;CREDIT&quot;)]" sap:VirtualizedContainerService.HintSize="496.8,56.8" sap2010:WorkflowViewState.IdRef="If_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="601.6,765.6" sap2010:WorkflowViewState.IdRef="Sequence_11">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="568,705.6" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1">
+                <ueab:ExcelProcessScopeX.Body>
+                  <ActivityAction x:TypeArguments="ui:IExcelProcess">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="534.4,596" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="500.8,536" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1" ResizeWindow="None" WorkbookPath="[reconResultsPath]">
+                        <ueab:ExcelApplicationCard.Body>
+                          <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="467.2,243.2" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Recon Report&quot;).Cell(&quot;K11&quot;)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="433.6,183.2" sap2010:WorkflowViewState.IdRef="WriteCellX_1" Value="[dtProcessedGl(endIndex-1)(&quot;Balance&quot;).ToString()]" />
+                            </Sequence>
+                          </ActivityAction>
+                        </ueab:ExcelApplicationCard.Body>
+                      </ueab:ExcelApplicationCard>
+                    </Sequence>
+                  </ActivityAction>
+                </ueab:ExcelProcessScopeX.Body>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ueab:ExcelProcessScopeX>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="601.6,765.6" sap2010:WorkflowViewState.IdRef="Sequence_12">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="568,705.6" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_2">
+                <ueab:ExcelProcessScopeX.Body>
+                  <ActivityAction x:TypeArguments="ui:IExcelProcess">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="534.4,596" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="500.8,536" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_2" ResizeWindow="None" WorkbookPath="[reconResultsPath]">
+                        <ueab:ExcelApplicationCard.Body>
+                          <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="467.2,243.2" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Recon Report&quot;).Cell(&quot;J11&quot;)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="433.6,183.2" sap2010:WorkflowViewState.IdRef="WriteCellX_3" Value="[dtProcessedGl(endIndex-1)(&quot;Balance&quot;).ToString()]" />
+                            </Sequence>
+                          </ActivityAction>
+                        </ueab:ExcelApplicationCard.Body>
+                      </ueab:ExcelApplicationCard>
+                    </Sequence>
+                  </ActivityAction>
+                </ueab:ExcelProcessScopeX.Body>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ueab:ExcelProcessScopeX>
+            </Sequence>
+          </If.Else>
+        </If>
+        <Assign sap:VirtualizedContainerService.HintSize="496.8,104.8" sap2010:WorkflowViewState.IdRef="Assign_7">
+          <Assign.To>
+            <OutArgument x:TypeArguments="sd:DataTable">[dtProcessedGl]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="sd:DataTable">[dtProcessedGl.AsEnumerable.take(endIndex).CopyToDataTable]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <Sequence x:Key="UNATTENDED" sap:VirtualizedContainerService.HintSize="420.8,408" sap2010:WorkflowViewState.IdRef="Sequence_25">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:String" Name="DatabaseConnectionString" />
+          <Variable x:TypeArguments="ui:DatabaseConnection" Name="dbConnect" />
+        </Sequence.Variables>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="DatabaseConnectionString" CacheStrategy="None" DisplayName="Get Asset - Pull Database Settings" FolderPath="UNATTENDED" sap:VirtualizedContainerService.HintSize="387.2,174.4" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+          <ui:GetRobotAsset.Value>
+            <OutArgument x:TypeArguments="x:String">[DatabaseConnectionString]</OutArgument>
+          </ui:GetRobotAsset.Value>
+        </ui:GetRobotAsset>
+        <ui:DatabaseConnect DisplayName="Connect to database" sap:VirtualizedContainerService.HintSize="387.2,92" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="Microsoft.Data.SqlClient" ConnectionString="[DatabaseConnectionString]" DatabaseConnection="[dbConnect]" />
+        <ui:ExecuteQuery ContinueOnError="{x:Null}" CommandType="Text" DataTable="[dtProcessedGl]" DisplayName="strLoansInArrearsPath" ExistingDbConnection="[dbConnect]" sap:VirtualizedContainerService.HintSize="387.2,121.6" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="[&quot; exec [RPAReport].[dbo].Card_Recon_Statement '&quot;+startDate+&quot;' &quot;]" TimeoutMS="60000">
+          <ui:ExecuteQuery.Parameters>
+            <scg:Dictionary x:TypeArguments="x:String, Argument" />
+          </ui:ExecuteQuery.Parameters>
+        </ui:ExecuteQuery>
+        <ui:DatabaseDisconnect DatabaseConnection="[dbConnect]" DisplayName="Disconnect from database" sap:VirtualizedContainerService.HintSize="387.2,48" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
+      </Sequence>
+    </Switch>
+    <Assign sap:VirtualizedContainerService.HintSize="571.2,112.8" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dtProcessedGl]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[dtProcessedGl.DefaultView.ToTable(false,"BKG_DATE","VALUE_DATE", "TRN_REF_NO","TRN_CODE","NARRATION","DEBIT","CREDIT","PAN","STAN","RRN","TERM_ID" )]</InArgument>
+      </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Assign>
+    <TryCatch sap2010:Annotation.AnnotationText="Combine the current gl with previous days exceptions" DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="571.2,428.8" sap2010:WorkflowViewState.IdRef="TryCatch_9">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch.Try>
+        <ui:MergeDataTable Destination="[dtProcessedHistoricalGl]" DisplayName="Merge Data Table - Combine historical" sap:VirtualizedContainerService.HintSize="334.4,134.4" sap2010:WorkflowViewState.IdRef="MergeDataTable_1" MissingSchemaAction="Add" Source="[dtProcessedGl]" />
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="403.2,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_9">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence sap:VirtualizedContainerService.HintSize="420.8,580" sap2010:WorkflowViewState.IdRef="Sequence_27">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtProcessedHistoricalGl]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="387.2,148" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="COMBINE" WorkbookPath="[reconResultsPath.Replace(&quot;.xlsx&quot;,&quot;temp.xlsx&quot;)]" />
+              <ui:AppendRange DataTable="[dtProcessedGl]" DisplayName="Append Range Workbook" sap:VirtualizedContainerService.HintSize="387.2,148" sap2010:WorkflowViewState.IdRef="AppendRange_2" SheetName="COMBINE" WorkbookPath="[reconResultsPath.Replace(&quot;.xlsx&quot;,&quot;temp.xlsx&quot;)]" />
+              <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dtProcessedHistoricalGl]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="387.2,120" sap2010:WorkflowViewState.IdRef="ReadRange_7" SheetName="COMBINE" WorkbookPath="[reconResultsPath.Replace(&quot;.xlsx&quot;,&quot;temp.xlsx&quot;)]" />
+              <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="387.2,104" sap2010:WorkflowViewState.IdRef="DeleteFileX_1" Path="[reconResultsPath.Replace(&quot;.xlsx&quot;,&quot;temp.xlsx&quot;)]" />
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <Assign sap:VirtualizedContainerService.HintSize="571.2,113.6" sap2010:WorkflowViewState.IdRef="Assign_32">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dtCombinedGlFinal]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[dtProcessedHistoricalGl]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Sequence DisplayName="GL Postings and Settlements Matching" sap:VirtualizedContainerService.HintSize="571.2,3278.4" sap2010:WorkflowViewState.IdRef="Sequence_24">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="sd:DataTable" Name="dtPendingSettlements" />
+        <Variable x:TypeArguments="sd:DataTable" Name="dtPendingJournalPostings" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:FilterDataTable DataTable="[dtPreviousRealExceptions]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="537.6,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_4" OutputDataTable="[dtJournalPostings]" SelectColumnsMode="Keep">
+        <ui:FilterDataTable.Filters>
+          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+            <ui:FilterOperationArgument BooleanOperator="And" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Narration"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Journal"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Narration"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Settle"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+          </scg:List>
+        </ui:FilterDataTable.Filters>
+        <ui:FilterDataTable.SelectColumns>
+          <scg:List x:TypeArguments="InArgument" Capacity="4">
+            <x:Null />
+          </scg:List>
+        </ui:FilterDataTable.SelectColumns>
+      </ui:FilterDataTable>
+      <ui:FilterDataTable DataTable="[dtCombinedGlFinal]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="537.6,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_6" OutputDataTable="[dtSettlements]" SelectColumnsMode="Keep">
+        <ui:FilterDataTable.Filters>
+          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+            <ui:FilterOperationArgument BooleanOperator="And" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["NARRATION"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Settle"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["NARRATION"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Journal"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+          </scg:List>
+        </ui:FilterDataTable.Filters>
+        <ui:FilterDataTable.SelectColumns>
+          <scg:List x:TypeArguments="InArgument" Capacity="4">
+            <x:Null />
+          </scg:List>
+        </ui:FilterDataTable.SelectColumns>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:FilterDataTable>
+      <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="537.6,346.4" sap2010:WorkflowViewState.IdRef="TryCatch_7">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <TryCatch.Try>
+          <Assign sap:VirtualizedContainerService.HintSize="433.6,83.2" sap2010:WorkflowViewState.IdRef="Assign_31">
+            <Assign.To>
+              <OutArgument x:TypeArguments="sd:DataTable">[dtPendingSettlements]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[dtSettlements.AsEnumerable().Where(Function(rs) _
+    dtJournalPostings.AsEnumerable().Count(Function(rj) _
+        Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rs("CREDIT").ToString()), "0", rs("CREDIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2") _
+        .Equals(Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rj("DEBIT").ToString()), "0", rj("DEBIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2")) _ 
+		AndAlso Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rs("DEBIT").ToString()), "0", rs("DEBIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2") _
+        .Equals(Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rj("CREDIT").ToString()), "0", rj("CREDIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2"))) &lt; 1).CopyToDataTable()]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </TryCatch.Try>
+        <TryCatch.Catches>
+          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="436.8,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_7">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ActivityAction x:TypeArguments="s:Exception">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+              </ActivityAction.Argument>
+              <Assign sap:VirtualizedContainerService.HintSize="433.6,80.8" sap2010:WorkflowViewState.IdRef="Assign_17">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="sd:DataTable">[dtPendingSettlements]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="sd:DataTable">[dtSettlements.Clone()]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </ActivityAction>
+          </Catch>
+        </TryCatch.Catches>
+      </TryCatch>
+      <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="537.6,346.4" sap2010:WorkflowViewState.IdRef="TryCatch_11">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <TryCatch.Try>
+          <Assign sap:VirtualizedContainerService.HintSize="433.6,83.2" sap2010:WorkflowViewState.IdRef="Assign_22">
+            <Assign.To>
+              <OutArgument x:TypeArguments="sd:DataTable">[dtPendingJournalPostings]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[dtJournalPostings.AsEnumerable().Where(Function(rj) _
+    dtSettlements.AsEnumerable().Count(Function(rs) _
+        Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rs("CREDIT").ToString()), "0", rs("CREDIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2") _
+        .Equals(Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rj("DEBIT").ToString()), "0", rj("DEBIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2")) _ 
+		AndAlso Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rs("DEBIT").ToString()), "0", rs("DEBIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2") _
+        .Equals(Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rj("CREDIT").ToString()), "0", rj("CREDIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2"))) &lt; 1).CopyToDataTable()]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </TryCatch.Try>
+        <TryCatch.Catches>
+          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="436.8,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_11">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ActivityAction x:TypeArguments="s:Exception">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+              </ActivityAction.Argument>
+              <Assign sap:VirtualizedContainerService.HintSize="433.6,80.8" sap2010:WorkflowViewState.IdRef="Assign_23">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="sd:DataTable">[dtPendingJournalPostings]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="sd:DataTable">[dtJournalPostings.Clone()]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </ActivityAction>
+          </Catch>
+        </TryCatch.Catches>
+      </TryCatch>
+      <ui:FilterDataTable sap2010:Annotation.AnnotationText="remove journal postings and settlements" DataTable="[dtPreviousRealExceptions]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="537.6,225.6" sap2010:WorkflowViewState.IdRef="FilterDataTable_7" OutputDataTable="[dtPreviousRealExceptions]" SelectColumnsMode="Keep">
+        <ui:FilterDataTable.Filters>
+          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+            <ui:FilterOperationArgument BooleanOperator="And" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Narration"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Journal"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["Narration"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Settle"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+          </scg:List>
+        </ui:FilterDataTable.Filters>
+        <ui:FilterDataTable.SelectColumns>
+          <scg:List x:TypeArguments="InArgument" Capacity="4">
+            <x:Null />
+          </scg:List>
+        </ui:FilterDataTable.SelectColumns>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:FilterDataTable>
+      <ui:FilterDataTable sap2010:Annotation.AnnotationText="remove journal postings and settlements" DataTable="[dtCombinedGlFinal]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="537.6,225.6" sap2010:WorkflowViewState.IdRef="FilterDataTable_8" OutputDataTable="[dtProcessedGl]" SelectColumnsMode="Keep">
+        <ui:FilterDataTable.Filters>
+          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+            <ui:FilterOperationArgument BooleanOperator="And" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["NARRATION"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Settle"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["NARRATION"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:String">["Journal"]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
+          </scg:List>
+        </ui:FilterDataTable.Filters>
+        <ui:FilterDataTable.SelectColumns>
+          <scg:List x:TypeArguments="InArgument" Capacity="4">
+            <x:Null />
+          </scg:List>
+        </ui:FilterDataTable.SelectColumns>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:FilterDataTable>
+      <If sap2010:Annotation.AnnotationText="only for MC POS" Condition="[reconResultsPath.Contains(&quot;MC POS&quot;)]" sap:VirtualizedContainerService.HintSize="537.6,688.8" sap2010:WorkflowViewState.IdRef="If_6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <If.Then>
+          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="504,397.6" sap2010:WorkflowViewState.IdRef="Sequence_39">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="470.4,337.6" sap2010:WorkflowViewState.IdRef="TryCatch_19">
+              <TryCatch.Try>
+                <Assign sap:VirtualizedContainerService.HintSize="433.6,83.2" sap2010:WorkflowViewState.IdRef="Assign_37">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="sd:DataTable">[dtPreviousRealExceptions]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[dtPreviousRealExceptions.AsEnumerable() _
+    .GroupBy(Function(row) row("NARRATION").ToString() +row(amountColumn).ToString().replace("-","")) _
+    .Where(Function(Group) Not (Group.Count(Function(row) row(amountColumn).ToString.Contains("-")) = 1 AndAlso
+                           Group.Count(Function(row) Not row(amountColumn).ToString.Contains("-")) = 1)) _
+    .SelectMany(Function(Group) Group) _
+    .CopyToDataTable()]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="436.8,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_19">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ActivityAction x:TypeArguments="s:Exception">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                    </ActivityAction.Argument>
+                    <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_38">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="sd:DataTable">[dtPreviousRealExceptions]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="sd:DataTable">[dtPreviousRealExceptions.clone()]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+            </TryCatch>
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_40">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Sequence>
+        </If.Else>
+      </If>
+      <ui:MergeDataTable Destination="[dtPreviousRealExceptions]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="537.6,166.4" sap2010:WorkflowViewState.IdRef="MergeDataTable_3" MissingSchemaAction="Add" Source="[dtPendingJournalPostings]" />
+      <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtPreviousRealExceptions]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="537.6,148" sap2010:WorkflowViewState.IdRef="WriteRange_6" SheetName="REAL EXPECTIONS" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+      <ui:MergeDataTable Destination="[dtProcessedGl]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="537.6,166.4" sap2010:WorkflowViewState.IdRef="MergeDataTable_2" MissingSchemaAction="Add" Source="[dtPendingSettlements]" />
+      <Sequence DisplayName="Matched Transactions" sap:VirtualizedContainerService.HintSize="537.6,484" sap2010:WorkflowViewState.IdRef="Sequence_34">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="TryCatch_17">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <TryCatch.Try>
+            <Assign sap:VirtualizedContainerService.HintSize="433.6,83.2" sap2010:WorkflowViewState.IdRef="Assign_33">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtPendingSettlements]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[dtSettlements.AsEnumerable().Where(Function(rs) _
+    dtJournalPostings.AsEnumerable().Count(Function(rj) _
+        Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rs("CREDIT").ToString()), "0", rs("CREDIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2") _
+        .Equals(Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rj("DEBIT").ToString()), "0", rj("DEBIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2")) _ 
+		AndAlso Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rs("DEBIT").ToString()), "0", rs("DEBIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2") _
+        .Equals(Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rj("CREDIT").ToString()), "0", rj("CREDIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2"))) &gt;0).CopyToDataTable()]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </TryCatch.Try>
+          <TryCatch.Catches>
+            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="436.8,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_17">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ActivityAction x:TypeArguments="s:Exception">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                </ActivityAction.Argument>
+                <Assign sap:VirtualizedContainerService.HintSize="433.6,80.8" sap2010:WorkflowViewState.IdRef="Assign_34">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="sd:DataTable">[dtPendingSettlements]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="sd:DataTable">[dtSettlements.Clone()]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </ActivityAction>
+            </Catch>
+          </TryCatch.Catches>
+        </TryCatch>
+        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="TryCatch_18">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <TryCatch.Try>
+            <Assign sap:VirtualizedContainerService.HintSize="433.6,83.2" sap2010:WorkflowViewState.IdRef="Assign_35">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtPendingJournalPostings]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[dtJournalPostings.AsEnumerable().Where(Function(rj) _
+    dtSettlements.AsEnumerable().Count(Function(rs) _
+        Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rs("CREDIT").ToString()), "0", rs("CREDIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2") _
+        .Equals(Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rj("DEBIT").ToString()), "0", rj("DEBIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2")) _ 
+		AndAlso Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rs("DEBIT").ToString()), "0", rs("DEBIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2") _
+        .Equals(Math.Round(Decimal.Parse(If(String.IsNullOrEmpty(rj("CREDIT").ToString()), "0", rj("CREDIT").ToString().Replace(",", "").Replace(".00", ""))), 2).ToString("F2"))) &gt; 0).CopyToDataTable()]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </TryCatch.Try>
+          <TryCatch.Catches>
+            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="436.8,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_18">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ActivityAction x:TypeArguments="s:Exception">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                </ActivityAction.Argument>
+                <Assign sap:VirtualizedContainerService.HintSize="433.6,80.8" sap2010:WorkflowViewState.IdRef="Assign_36">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="sd:DataTable">[dtPendingJournalPostings]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="sd:DataTable">[dtJournalPostings.Clone()]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </ActivityAction>
+            </Catch>
+          </TryCatch.Catches>
+        </TryCatch>
+        <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtPendingSettlements]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="416,148" sap2010:WorkflowViewState.IdRef="WriteRange_4" SheetName="MATCHED TRANSACTIONS" WorkbookPath="[reconResultsPath]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:WriteRange>
+        <ui:AppendRange DataTable="[dtPendingJournalPostings]" DisplayName="Append Range Workbook" sap:VirtualizedContainerService.HintSize="416,139.2" sap2010:WorkflowViewState.IdRef="AppendRange_3" SheetName="MATCHED TRANSACTIONS" WorkbookPath="[reconResultsPath]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:AppendRange>
+      </Sequence>
+    </Sequence>
+    <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtProcessedGl]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="571.2,148" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="PROCESSED GL" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+    <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="571.2,90.4" sap2010:WorkflowViewState.IdRef="ReportStatus_2" StatusText="[&quot;30% - GL PROCESSING COMPLETE&quot;]" />
+  </Sequence>
+</Activity>

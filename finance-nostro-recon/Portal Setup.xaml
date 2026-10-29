@@ -1,0 +1,123 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Portal_Setup" VisualBasic.Settings="{x:Null}" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_ReportRoot" Type="InArgument(x:String)" />
+    <x:Property Name="in_Emails" Type="InArgument(x:String)" />
+  </x:Members> <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.Process</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Runs only when Main's PORTAL_SETUP is True, instead of the reconciliation. Sets up https://robot.nmbtz.com/portal on this server via Deploy\portal\Install-Portal.ps1." DisplayName="Portal Setup" sap:VirtualizedContainerService.HintSize="500,700" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="setupLog" />
+      <Variable x:TypeArguments="x:Int32" Name="setupExit" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Runs Deploy\portal\Install-Portal.ps1, which sets the portal up as the /portal&#xA;' application of the Orchestrator site. Everything it changes, and why it is safe&#xA;' to re-run, is described at the top of that script. Its whole log comes back&#xA;' here so it can be logged and emailed.&#xA;'&#xA;' Exit codes: 0 set up and answering, 2 set up but the HTTPS check failed,&#xA;'             1 not (fully) set up.&#xA;Dim script As String = Path.Combine(Environment.CurrentDirectory, &quot;Deploy&quot;, &quot;portal&quot;, &quot;Install-Portal.ps1&quot;)&#xA;If Not File.Exists(script) Then Throw New FileNotFoundException(&quot;Install-Portal.ps1 is not in the published package: &quot; &amp; script)&#xA;Dim root As String = If(in_ReportRoot, &quot;&quot;).Trim().TrimEnd(&quot;\&quot;c)&#xA;If root.Length = 0 Then Throw New ArgumentException(&quot;The report root is empty - set REPORT_ROOT to the folder the recon writes its dated run folders to.&quot;)&#xA;&#xA;' A 32-bit robot on 64-bit Windows would start the 32-bit PowerShell, whose&#xA;' appcmd cannot edit the 64-bit IIS configuration.&#xA;Dim folder As String = If(Environment.Is64BitOperatingSystem AndAlso Not Environment.Is64BitProcess, &quot;Sysnative&quot;, &quot;System32&quot;)&#xA;Dim ps As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), folder, &quot;WindowsPowerShell\v1.0\powershell.exe&quot;)&#xA;&#xA;' The script ships unsigned inside the package, so the policy is bypassed for&#xA;' this one process only - the machine's execution policy is not changed.&#xA;' The same command, ready to paste, for running it by hand as an administrator.&#xA;' It is put at the top of the log and the email, so a run that fails for lack of&#xA;' elevation still hands over everything needed to finish the job.&#xA;Dim cmd As String = &quot;powershell -NoProfile -ExecutionPolicy Bypass -File &quot;&quot;&quot; &amp; script &amp; &quot;&quot;&quot; -ReconRoot &quot;&quot;&quot; &amp; root &amp; &quot;&quot;&quot; -SourceDir &quot;&quot;&quot; &amp; Path.GetDirectoryName(script) &amp; &quot;&quot;&quot;&quot;&#xA;Dim byHand As String = String.Join(Environment.NewLine, New String() {&#xA;    &quot;Robot machine:            &quot; &amp; Environment.MachineName &amp; &quot; (job ran as &quot; &amp; Environment.UserDomainName &amp; &quot;\&quot; &amp; Environment.UserName &amp; &quot;)&quot;,&#xA;    &quot;Setup script:             &quot; &amp; script,&#xA;    &quot;Portal files:             &quot; &amp; Path.GetDirectoryName(script),&#xA;    &quot;Report root (ReconRoot):  &quot; &amp; root,&#xA;    &quot;&quot;,&#xA;    &quot;TO RUN IT BY HAND: sign in to the Orchestrator server with a local administrator account,&quot;,&#xA;    &quot;open PowerShell with 'Run as administrator', then run the check (changes nothing):&quot;,&#xA;    &quot;    &quot; &amp; cmd &amp; &quot; -CheckOnly&quot;,&#xA;    &quot;and if that looks right, the setup itself:&quot;,&#xA;    &quot;    &quot; &amp; cmd,&#xA;    &quot;If you are not on &quot; &amp; Environment.MachineName &amp; &quot;, first copy the 'Portal files' folder above to that&quot;,&#xA;    &quot;server and use its path there instead; ReconRoot must be a folder the server can reach.&quot;,&#xA;    New String(&quot;-&quot;c, 78)})&#xA;Dim psi As New System.Diagnostics.ProcessStartInfo(ps, &quot;-NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;&quot;&quot; &amp; script &amp; &quot;&quot;&quot; -ReconRoot &quot;&quot;&quot; &amp; root &amp; &quot;&quot;&quot; -SourceDir &quot;&quot;&quot; &amp; Path.GetDirectoryName(script) &amp; &quot;&quot;&quot;&quot;)&#xA;psi.UseShellExecute = False&#xA;psi.RedirectStandardOutput = True&#xA;psi.RedirectStandardError = True&#xA;psi.CreateNoWindow = True&#xA;&#xA;Using p As System.Diagnostics.Process = System.Diagnostics.Process.Start(psi)&#xA;    Dim so As System.Threading.Tasks.Task(Of String) = p.StandardOutput.ReadToEndAsync()&#xA;    Dim se As System.Threading.Tasks.Task(Of String) = p.StandardError.ReadToEndAsync()&#xA;    If Not p.WaitForExit(10 * 60 * 1000) Then&#xA;        p.Kill()&#xA;        Throw New TimeoutException(&quot;Install-Portal.ps1 did not finish within 10 minutes.&quot;)&#xA;    End If&#xA;    p.WaitForExit()&#xA;    out_SetupLog = byHand &amp; Environment.NewLine &amp; so.Result &amp; If(se.Result.Trim().Length &gt; 0, Environment.NewLine &amp; &quot;STDERR:&quot; &amp; Environment.NewLine &amp; se.Result, &quot;&quot;)&#xA;    out_ExitCode = p.ExitCode&#xA;End Using&#xA;Console.WriteLine(out_SetupLog)" DisplayName="Run Install-Portal.ps1" sap:VirtualizedContainerService.HintSize="460,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1"><ui:InvokeCode.Arguments><InArgument x:TypeArguments="x:String" x:Key="in_ReportRoot">[in_ReportRoot]</InArgument><OutArgument x:TypeArguments="x:String" x:Key="out_SetupLog">[setupLog]</OutArgument><OutArgument x:TypeArguments="x:Int32" x:Key="out_ExitCode">[setupExit]</OutArgument></ui:InvokeCode.Arguments></ui:InvokeCode>
+    <ui:LogMessage DisplayName="Log setup output" sap:VirtualizedContainerService.HintSize="460,110" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[setupLog]" />
+    <TryCatch sap2010:Annotation.AnnotationText="A mail problem is logged rather than thrown, so the job result still reflects the setup." DisplayName="Email the setup result" sap:VirtualizedContainerService.HintSize="460,340" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" Email="{x:Null}" MailMessage="{x:Null}" Password="{x:Null}" ReplyTo="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" UseOAuth="{x:Null}" Body="[&quot;&lt;p&gt;Portal setup ran on &quot; + Environment.MachineName + &quot; (PORTAL_SETUP = True). The reconciliation did not run.&lt;/p&gt;&lt;pre style=&quot;&quot;font-family:Consolas,monospace;font-size:12px;white-space:pre-wrap&quot;&quot;&gt;&quot; + System.Net.WebUtility.HtmlEncode(setupLog) + &quot;&lt;/pre&gt;&quot;]" DisplayName="Send SMTP Mail Message" EnableSSL="True" From="robot@nmbtz.com" sap:VirtualizedContainerService.HintSize="400,181.33333333333334" sap2010:WorkflowViewState.IdRef="SendMail_1" IgnoreCRL="False" IsBodyHtml="True" Name="Robot Notification" Port="25" SecureConnection="None" Server="exchangelb.nmbtz.com" Subject="[If(setupExit = 0, &quot;NOSTRO PORTAL - SETUP COMPLETE&quot;, If(setupExit = 2, &quot;NOSTRO PORTAL - SET UP, HTTPS CHECK FAILED&quot;, &quot;NOSTRO PORTAL - SETUP FAILED&quot;))]" To="[in_Emails]" />
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="mailEx" />
+            </ActivityAction.Argument>
+            <ui:LogMessage DisplayName="Log mail failure" sap:VirtualizedContainerService.HintSize="380,110" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Warn" Message="[&quot;Could not send the portal setup email: &quot; + mailEx.Message]" />
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <If Condition="[setupExit = 1]" DisplayName="Fail the job if setup failed" sap:VirtualizedContainerService.HintSize="460,200" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Throw DisplayName="Throw setup failure" Exception="[New Exception(&quot;Portal setup failed - nothing after the failed step was changed.&quot; + Environment.NewLine + setupLog)]" sap:VirtualizedContainerService.HintSize="400,92" sap2010:WorkflowViewState.IdRef="Throw_1" />
+      </If.Then>
+    </If>
+  </Sequence>
+</Activity>

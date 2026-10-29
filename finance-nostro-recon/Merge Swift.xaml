@@ -1,0 +1,203 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Experiment" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="workingsFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="summaryFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="swiftWorkingsFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="dtSwiftStatement" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="dtSwiftDetailed" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="dtSwiftCombined" Type="OutArgument(sd:DataTable)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>766.4,1455.2</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Experiment_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Merge Swift" sap:VirtualizedContainerService.HintSize="851.6,1312" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftMerged" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtSwiftUnMerged" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="Merge Swift" sap:VirtualizedContainerService.HintSize="449.6,795.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xD;&#xA;    ' Create a new DataTable to store the merged results&#xD;&#xA;    Dim MergedTable As New DataTable()&#xD;&#xA;    Dim UnmatchedTable As New DataTable()&#xD;&#xA;&#xD;&#xA;    ' Add columns to MergedTable&#xD;&#xA;&#x9; MergedTable.Columns.Add(&quot;Book Date&quot;, GetType(String)) ' Common column&#xD;&#xA;    MergedTable.Columns.Add(&quot;Transaction Reference&quot;, GetType(String)) ' Common column&#xD;&#xA;    MergedTable.Columns.Add(&quot;ValueDate&quot;, GetType(String)) ' From DataTable1&#xD;&#xA;    MergedTable.Columns.Add(&quot;Debit&quot;) ' From DataTable1&#xD;&#xA;    MergedTable.Columns.Add(&quot;Credit&quot;) ' From DataTable1&#xD;&#xA;    MergedTable.Columns.Add(&quot;Currency&quot;, GetType(String)) ' From DataTable1&#xD;&#xA;    MergedTable.Columns.Add(&quot;Related Reference (61)&quot;, GetType(String)) ' From DataTable1&#xD;&#xA;    MergedTable.Columns.Add(&quot;TransactionDescription&quot;, GetType(String)) ' From DataTable1&#xD;&#xA;    MergedTable.Columns.Add(&quot;AccountNumber&quot;, GetType(String)) ' From DataTable1&#xD;&#xA;    MergedTable.Columns.Add(&quot;OpeningBalance&quot;, GetType(String)) ' From DataTable1&#xD;&#xA;    MergedTable.Columns.Add(&quot;ClosingBalance&quot;, GetType(String)) ' From DataTable1&#xD;&#xA;    MergedTable.Columns.Add(&quot;Message Type&quot;, GetType(String)) ' From DataTable2&#xD;&#xA;    MergedTable.Columns.Add(&quot;Related Reference (21)&quot;, GetType(String)) ' From DataTable2&#xD;&#xA;    MergedTable.Columns.Add(&quot;Narration&quot;, GetType(String)) ' From DataTable2&#xD;&#xA;    MergedTable.Columns.Add(&quot;Ordering Institution&quot;, GetType(String)) ' From DataTable2&#xD;&#xA;    MergedTable.Columns.Add(&quot;Beneficiary Institution&quot;, GetType(String)) ' From DataTable2&#xD;&#xA;&#x9;MergedTable.Columns.Add(&quot;PageNumber&quot;, GetType(String)) ' From DataTable2&#xD;&#xA;&#x9;MergedTable.Columns.Add(&quot;FileNumber&quot;, GetType(String)) ' From DataTable2&#xD;&#xA;&#xD;&#xA;    ' Add columns to UnmatchedTable (same structure as MergedTable)&#xD;&#xA;    For Each col As DataColumn In MergedTable.Columns&#xD;&#xA;        UnmatchedTable.Columns.Add(col.ColumnName, col.DataType)&#xD;&#xA;    Next&#xD;&#xA;&#xD;&#xA;    ' Create a dictionary for quick look-up from DataTable2 (dtSwiftDetailed)&#xD;&#xA;    Dim dt2Dict As New Dictionary(Of String, DataRow)()&#xD;&#xA;    For Each row2 As DataRow In dtSwiftDetailed.Rows&#xD;&#xA;        Dim transRef As String = row2(&quot;Transaction Reference&quot;).ToString()&#xD;&#xA;        If Not dt2Dict.ContainsKey(transRef) Then&#xD;&#xA;            dt2Dict.Add(transRef, row2)&#xD;&#xA;        End If&#xD;&#xA;    Next&#xD;&#xA;&#xD;&#xA;    ' Loop through each row in DataTable1 (dtSwiftStatement)&#xD;&#xA;    For Each row1 As DataRow In dtSwiftStatement.Rows&#xD;&#xA;        Try&#xD;&#xA;            ' Check if a matching row exists in the dictionary (faster lookup)&#xD;&#xA;            If dt2Dict.ContainsKey(row1(&quot;Transaction Reference&quot;).ToString()) Then&#xD;&#xA;                Dim row2 As DataRow = dt2Dict(row1(&quot;Transaction Reference&quot;).ToString())&#xD;&#xA;&#xD;&#xA;                ' Create a new row for the merged table&#xD;&#xA;                Dim newRow As DataRow = MergedTable.NewRow()&#xD;&#xA;&#xD;&#xA;                ' Populate the new row with data from both DataTables&#xD;&#xA;                newRow(&quot;Transaction Reference&quot;) = row1(&quot;Transaction Reference&quot;).ToString() 'DT1&#xD;&#xA;                newRow(&quot;ValueDate&quot;) = row1(&quot;ValueDate&quot;).ToString() 'DT1&#xD;&#xA;                newRow(&quot;Debit&quot;) = row1(&quot;Debit&quot;).ToString() 'DT1&#xD;&#xA;                newRow(&quot;Credit&quot;) = row1(&quot;Credit&quot;).ToString() 'DT1&#xD;&#xA;                newRow(&quot;Currency&quot;) = row1(&quot;Currency&quot;).ToString() 'DT1&#xD;&#xA;                newRow(&quot;Related Reference (61)&quot;) = row1(&quot;Related Reference (61)&quot;).ToString() 'DT1&#xD;&#xA;                newRow(&quot;TransactionDescription&quot;) = row1(&quot;TransactionDescription&quot;).ToString() 'DT1&#xD;&#xA;                newRow(&quot;AccountNumber&quot;) = row1(&quot;AccountNumber&quot;).ToString() 'DT1&#xD;&#xA;                newRow(&quot;OpeningBalance&quot;) = row1(&quot;OpeningBalance&quot;).ToString() 'DT1&#xD;&#xA;                newRow(&quot;ClosingBalance&quot;) = row1(&quot;ClosingBalance&quot;).ToString() 'DT1&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Try&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;newRow(&quot;PageNumber&quot;) = row1(&quot;PageNumber&quot;).ToString() 'DT1&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;newRow(&quot;FileNumber&quot;) = row1(&quot;FileNumber&quot;).ToString() 'DT1&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Catch exPageNumber As Exception&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;End Try&#xD;&#xA;&#xD;&#xA;                ' Add DataTable2 data&#xD;&#xA;                newRow(&quot;Message Type&quot;) = row2(&quot;Message Type&quot;).ToString() 'DT2&#xD;&#xA;                newRow(&quot;Related Reference (21)&quot;) = row2(&quot;Related Reference (21)&quot;).ToString() 'DT2&#xD;&#xA;                newRow(&quot;Narration&quot;) = row2(&quot;Narration&quot;).ToString() 'DT2&#xD;&#xA;                newRow(&quot;Ordering Institution&quot;) = row2(&quot;Ordering Institution&quot;).ToString() 'DT2&#xD;&#xA;                newRow(&quot;Beneficiary Institution&quot;) = row2(&quot;Beneficiary Institution&quot;).ToString() 'DT2&#xD;&#xA;&#xD;&#xA;                ' Add the new row to the MergedTable&#xD;&#xA;                MergedTable.Rows.Add(newRow)&#xD;&#xA;            Else&#xD;&#xA;                ' No match found, add the row to UnmatchedTable&#xD;&#xA;                Dim unmatchedRow As DataRow = UnmatchedTable.NewRow()&#xD;&#xA;&#xD;&#xA;                ' Copy the DataTable1 row to the UnmatchedTable&#xD;&#xA;                unmatchedRow(&quot;Transaction Reference&quot;) = row1(&quot;Transaction Reference&quot;).ToString()&#xD;&#xA;                unmatchedRow(&quot;ValueDate&quot;) = row1(&quot;ValueDate&quot;).ToString()&#xD;&#xA;                unmatchedRow(&quot;Debit&quot;) = row1(&quot;Debit&quot;).ToString()&#xD;&#xA;                unmatchedRow(&quot;Credit&quot;) = row1(&quot;Credit&quot;).ToString()&#xD;&#xA;                unmatchedRow(&quot;Currency&quot;) = row1(&quot;Currency&quot;).ToString()&#xD;&#xA;                unmatchedRow(&quot;Related Reference (61)&quot;) = row1(&quot;Related Reference (61)&quot;).ToString()&#xD;&#xA;                unmatchedRow(&quot;TransactionDescription&quot;) = row1(&quot;TransactionDescription&quot;).ToString()&#xD;&#xA;                unmatchedRow(&quot;AccountNumber&quot;) = row1(&quot;AccountNumber&quot;).ToString()&#xD;&#xA;                unmatchedRow(&quot;OpeningBalance&quot;) = row1(&quot;OpeningBalance&quot;).ToString()&#xD;&#xA;                unmatchedRow(&quot;ClosingBalance&quot;) = row1(&quot;ClosingBalance&quot;).ToString()&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Try&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;unmatchedRow(&quot;PageNumber&quot;) = row1(&quot;PageNumber&quot;).ToString()&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;unmatchedRow(&quot;FileNumber&quot;) = row1(&quot;FileNumber&quot;).ToString()&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Catch exPageNumber As Exception&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;End Try&#xD;&#xA;&#xD;&#xA;                ' Add the unmatched row to the UnmatchedTable&#xD;&#xA;                UnmatchedTable.Rows.Add(unmatchedRow)&#xD;&#xA;            End If&#xD;&#xA;        Catch ex As Exception&#xD;&#xA;            ' Log the error for the specific row and continue processing&#xD;&#xA;            Console.WriteLine(&quot;Error processing row with Reference: &quot; &amp; row1(&quot;Transaction Reference&quot;).ToString() &amp; &quot; - &quot; &amp; ex.Message)&#xD;&#xA;        End Try&#xD;&#xA;    Next&#xD;&#xA;&#xD;&#xA;    ' Output the merged table (dtSwiftMerged) and the unmatched table (dtUnmatched)&#xD;&#xA;    dtSwiftMerged = MergedTable&#xD;&#xA;    dtSwiftUnMerged = UnmatchedTable&#xD;&#xA;&#xD;&#xA;Catch ex As Exception&#xD;&#xA;    ' Handle general errors for the entire merge operation&#xD;&#xA;    Console.WriteLine(&quot;An error occurred while merging DataTables: &quot; &amp; ex.Message)&#xD;&#xA;End Try&#xD;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="416,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+        <ui:InvokeCode.Arguments>
+          <InArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftStatement">
+            <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dtSwiftStatement" />
+          </InArgument>
+          <InArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftDetailed">
+            <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dtSwiftDetailed" />
+          </InArgument>
+          <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftMerged">
+            <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dtSwiftMerged" />
+          </OutArgument>
+          <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtSwiftUnMerged">
+            <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dtSwiftUnMerged" />
+          </OutArgument>
+        </ui:InvokeCode.Arguments>
+      </ui:InvokeCode>
+      <Assign sap:VirtualizedContainerService.HintSize="416,174.4" sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftMerged]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[dtSwiftMerged.DefaultView.ToTable(False, "Book Date","ValueDate", "Debit", "Credit", "Currency","Transaction Reference",  "Related Reference (21)","Related Reference (61)", "TransactionDescription", "AccountNumber", "OpeningBalance", "ClosingBalance", "Message Type",  "Narration", "Ordering Institution", "Beneficiary Institution","FileNumber", "PageNumber")]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap:VirtualizedContainerService.HintSize="416,174.4" sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftUnMerged]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[dtSwiftUnMerged.DefaultView.ToTable(False, "Book Date","ValueDate", "Debit", "Credit", "Currency", "Transaction Reference","Related Reference (21)","Related Reference (61)", "TransactionDescription", "AccountNumber", "OpeningBalance", "ClosingBalance", "Message Type",  "Narration", "Ordering Institution", "Beneficiary Institution","FileNumber", "PageNumber")]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:MergeDataTable Destination="[dtSwiftMerged]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="416,157.6" sap2010:WorkflowViewState.IdRef="MergeDataTable_1" MissingSchemaAction="Add" Source="[dtSwiftUnMerged]" />
+    </Sequence>
+    <Assign sap2010:Annotation.AnnotationText="Remove duplicates" sap:VirtualizedContainerService.HintSize="449.6,205.6" sap2010:WorkflowViewState.IdRef="Assign_41">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftMerged]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[dtSwiftMerged.AsEnumerable().GroupBy(Function(row) String.Join(",", row.ItemArray)).
+    Select(Function(g) g.First()).CopyToDataTable()]</InArgument>
+      </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="Assign_40">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dtSwiftCombined]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[dtSwiftMerged]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="449.6,113.6" sap2010:WorkflowViewState.IdRef="ReportStatus_1" StatusText="[&quot;MERGING 61 and DETAILED COMPLETE&quot;]" />
+  </Sequence>
+</Activity>

@@ -1,0 +1,566 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Report" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="dtOutstandingGlFinal" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="reconResultsPath" Type="InArgument(x:String)" />
+    <x:Property Name="reportType" Type="InArgument(x:String)" />
+    <x:Property Name="processCategory" Type="InArgument(x:String)" />
+    <x:Property Name="dtPreviousRealExceptions" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="closingBalance" Type="InArgument(x:String)" />
+    <x:Property Name="amountColumn" Type="InArgument(x:String)" />
+    <x:Property Name="fileDate" Type="InArgument(x:String)" />
+    <x:Property Name="currencyCode" Type="InArgument(x:String)" />
+    <x:Property Name="dtOutstandingStatement" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="processMsgCategory" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1062.4,3444</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Report_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>Microsoft.Win32.SafeHandles</x:String>
+      <x:String>System.Net</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.Configuration.Assemblies</x:String>
+      <x:String>System.CodeDom.Compiler</x:String>
+      <x:String>System.Buffers</x:String>
+      <x:String>System.Buffers.Text</x:String>
+      <x:String>System.Buffers.Binary</x:String>
+      <x:String>System.Threading</x:String>
+      <x:String>System.Threading.Tasks</x:String>
+      <x:String>System.Threading.Tasks.Sources</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Text.Unicode</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Security.Principal</x:String>
+      <x:String>System.Security.Permissions</x:String>
+      <x:String>System.Security.Cryptography</x:String>
+      <x:String>System.Runtime</x:String>
+      <x:String>System.Runtime.Remoting</x:String>
+      <x:String>System.Runtime.ExceptionServices</x:String>
+      <x:String>System.Runtime.ConstrainedExecution</x:String>
+      <x:String>System.Runtime.Versioning</x:String>
+      <x:String>System.Runtime.Loader</x:String>
+      <x:String>System.Runtime.Intrinsics</x:String>
+      <x:String>System.Runtime.Intrinsics.Wasm</x:String>
+      <x:String>System.Runtime.Intrinsics.Arm</x:String>
+      <x:String>System.Runtime.Intrinsics.X86</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.InteropServices.ObjectiveC</x:String>
+      <x:String>System.Runtime.InteropServices.Marshalling</x:String>
+      <x:String>System.Runtime.InteropServices.ComTypes</x:String>
+      <x:String>System.Runtime.CompilerServices</x:String>
+      <x:String>System.Resources</x:String>
+      <x:String>System.Reflection.Metadata</x:String>
+      <x:String>System.Reflection.Emit</x:String>
+      <x:String>System.IO.Enumeration</x:String>
+      <x:String>System.Diagnostics.SymbolStore</x:String>
+      <x:String>System.Diagnostics.Contracts</x:String>
+      <x:String>System.Diagnostics.CodeAnalysis</x:String>
+      <x:String>System.Diagnostics.Tracing</x:String>
+      <x:String>System.Collections.Concurrent</x:String>
+      <x:String>Internal</x:String>
+      <x:String>System.CodeDom</x:String>
+      <x:String>Microsoft.CSharp</x:String>
+      <x:String>System.Linq.Expressions.Interpreter</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>UiPath.Workflow.Runtime</x:String>
+      <x:String>System.Activities.Tracking</x:String>
+      <x:String>System.Activities.Statements.Tracking</x:String>
+      <x:String>System.Activities.Runtime</x:String>
+      <x:String>System.Activities.Runtime.DurableInstancing</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>System.Activities.ParallelTracking</x:String>
+      <x:String>System.Activities.Hosting</x:String>
+      <x:String>System.Activities.Persistence</x:String>
+      <x:String>System.Activities.DurableInstancing</x:String>
+      <x:String>System.ComponentModel.Design.Serialization</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>Microsoft.VisualBasic.FileIO</x:String>
+      <x:String>ClosedXML.Excel</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>ClosedXML</AssemblyReference>
+      <AssemblyReference>GlobalVariablesT1PNoYwrqg</AssemblyReference>
+      <AssemblyReference>Microsoft.PowerShell.Commands.Diagnostics</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Registry</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.Concurrent</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.DiagnosticSource</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.EventLog</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.FileVersionInfo</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.PerformanceCounter</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.Process</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.StackTrace</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.TextWriterTraceListener</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.TraceSource</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.MemoryMappedFiles</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.Pipes</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Net.HttpListener</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.Net.NameResolution</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Net.Requests</AssemblyReference>
+      <AssemblyReference>System.Net.ServicePoint</AssemblyReference>
+      <AssemblyReference>System.Net.WebClient</AssemblyReference>
+      <AssemblyReference>System.Net.WebHeaderCollection</AssemblyReference>
+      <AssemblyReference>System.Net.WebProxy</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Resources.Writer</AssemblyReference>
+      <AssemblyReference>System.Runtime.CompilerServices.VisualC</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Claims</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Pkcs</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.ProtectedData</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Security.Principal.Windows</AssemblyReference>
+      <AssemblyReference>System.Text.Encoding.CodePages</AssemblyReference>
+      <AssemblyReference>System.Text.Encodings.Web</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Threading</AssemblyReference>
+      <AssemblyReference>System.Threading.AccessControl</AssemblyReference>
+      <AssemblyReference>System.Threading.Tasks.Parallel</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms.Design</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.IO.Compression</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Report" sap:VirtualizedContainerService.HintSize="1172,3201.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dtDefaultRecon" />
+      <Variable x:TypeArguments="x:String" Name="balanceMsg" />
+      <Variable x:TypeArguments="x:Boolean" Name="balanceOk" />
+      <Variable x:TypeArguments="x:Int32" Name="insertionIndex" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtFinalGl" />
+      <Variable x:TypeArguments="x:String" Name="amountsFixed" />
+      <Variable x:TypeArguments="x:String" Name="sortMsg" />
+      <Variable x:TypeArguments="x:String" Name="settlementTzsAmt" />
+      <Variable x:TypeArguments="x:String" Name="settlementUsdAmt" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtGlMissingFields" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtMissingFields" />
+      <Variable x:TypeArguments="x:String" Name="rcaMsg" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="435.2,99.2" sap2010:WorkflowViewState.IdRef="ReportStatus_3" StatusText="[&quot;90% - OUTSTANDING REPORT&quot;]" />
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[currencyCode]" sap:VirtualizedContainerService.HintSize="435.2,56.8" sap2010:WorkflowViewState.IdRef="Switch`1_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign x:Key="834" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_8">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[currencyCode]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">TZS</InArgument>
+        </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Assign>
+      <Assign x:Key="840" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_9">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[currencyCode]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">USD</InArgument>
+        </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Assign>
+    </Switch>
+    <ui:FilterDataTable DataTable="[dtOutstandingGlFinal]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="435.2,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dtOutstandingGlFinal]" SelectColumnsMode="Remove">
+      <ui:FilterDataTable.Filters>
+        <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+          <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+            <ui:FilterOperationArgument.Column>
+              <InArgument x:TypeArguments="x:String">["RRN"]</InArgument>
+            </ui:FilterOperationArgument.Column>
+            <ui:FilterOperationArgument.Operand>
+              <InArgument x:TypeArguments="x:String">["UNDEFINED"]</InArgument>
+            </ui:FilterOperationArgument.Operand>
+          </ui:FilterOperationArgument>
+        </scg:List>
+      </ui:FilterDataTable.Filters>
+      <ui:FilterDataTable.SelectColumns>
+        <scg:List x:TypeArguments="InArgument" Capacity="4">
+          <x:Null />
+        </scg:List>
+      </ui:FilterDataTable.SelectColumns>
+    </ui:FilterDataTable>
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dtMissingFields]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="435.2,120" sap2010:WorkflowViewState.IdRef="ReadRange_3" PreserveFormat="True" SheetName="MISSING TRXN FIELDS" WorkbookPath="[reconResultsPath]" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="dtOutstandingGlFinal.Columns.Add(&quot;SNO&quot;)&#xA;dtOutstandingGlFinal.Columns.Add(&quot;Branch_Code&quot;)&#xA;dtOutstandingGlFinal.Columns.Add(&quot;GL_Code&quot;)&#xA;dtOutstandingGlFinal.Columns.Add(&quot;GL_Description&quot;)&#xA;dtOutstandingGlFinal.Columns.Add(&quot;Aging&quot;)&#xA;dtOutstandingGlFinal.Columns.Add(&quot;Aging Group&quot;)&#xA;dtOutstandingGlFinal.Columns.Add(&quot;BOT Classification&quot;)&#xA;dtOutstandingGlFinal.Columns.Add(&quot;Root Cause&quot;)&#xA;dtOutstandingGlFinal.Columns.Add(&quot;Root Cause Category&quot;)&#xA;dtOutstandingGlFinal.Columns.Add(&quot;Recommended Action&quot;)&#xA;dtOutstandingGlFinal.Columns.Add(&quot;Action Owner&quot;)&#xA;&#xA;&#xA;dtMissingFields.Columns.Add(&quot;SNO&quot;)&#xA;dtMissingFields.Columns.Add(&quot;Branch_Code&quot;)&#xA;dtMissingFields.Columns.Add(&quot;GL_Code&quot;)&#xA;dtMissingFields.Columns.Add(&quot;GL_Description&quot;)&#xA;dtMissingFields.Columns.Add(&quot;Aging&quot;)&#xA;dtMissingFields.Columns.Add(&quot;Aging Group&quot;)&#xA;dtMissingFields.Columns.Add(&quot;BOT Classification&quot;)&#xA;dtMissingFields.Columns.Add(&quot;Root Cause&quot;)&#xA;dtMissingFields.Columns.Add(&quot;Root Cause Category&quot;)&#xA;dtMissingFields.Columns.Add(&quot;Recommended Action&quot;)&#xA;dtMissingFields.Columns.Add(&quot;Action Owner&quot;)&#xA;&#xA;'Change the gl_code and description&#xA;&#xA;Dim branchCode = &quot;101&quot;&#xA;Dim glCode = &quot;&quot;&#xA;Dim glDescription = &quot;&quot;&#xA;Dim counter = 0&#xA;Dim ageCount As Double = 0&#xA;&#xA;If reconResultsPath.Contains(&quot;VISA ATM Clearing&quot;) Then&#xA;&#x9;branchCode = &quot;101&quot;&#xA; &#x9;glCode = &quot;122020002&quot;&#xA;&#x9;glDescription = &quot;VISA ATM Clearing&quot;&#xA;&#x9;&#xA;Else If reconResultsPath.Contains(&quot;VISA POS Clearing&quot;) Then&#xA;&#x9;branchCode = &quot;101&quot;&#xA;&#x9;glCode = &quot;122020011&quot;&#xA; &#x9;glDescription = &quot;VISA POS Clearing Account&quot;&#xA;End If&#xA;&#xA;' Smart Vista card postings (&quot;Journal Posting-Miscellaneous ... VIS POS PURCHASE&quot;)&#xA;' are cleared by the VISA settlement whatever their age, so Card Reconciliation&#xA;' wants them classed that way instead of &quot;Current exception&quot; / &quot;Need further investigation&quot;.&#xA;Dim smartVista As New System.Text.RegularExpressions.Regex(&quot;VIS\s+POS\s+PURCHASE&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase)&#xA;' Manual journal postings of the settlement itself (&quot;VISA POS Clearing Settlement 11 Oct 2026 USD&quot;)&#xA;' wait for the expected settlement rather than needing investigation.&#xA;Dim postedSettlement As New System.Text.RegularExpressions.Regex(&quot;VISA\s+POS\s+Clearing\s+Settlement&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase)&#xA;Dim tagSmartVista As Action(Of DataRow, String) = Sub(r As DataRow, narrCol As String)&#xA;&#x9;If smartVista.IsMatch(r(narrCol).ToString()) Then&#xA;&#x9;&#x9;r(&quot;Root Cause&quot;) = &quot;Smart vista transaction&quot;&#xA;&#x9;&#x9;r(&quot;Root Cause Category&quot;) = &quot;System&quot;&#xA;&#x9;&#x9;r(&quot;Recommended Action&quot;) = &quot;To be matched with settlement&quot;&#xA;&#x9;&#x9;r(&quot;Action Owner&quot;) = &quot;Card Reconciliation&quot;&#xA;&#x9;Else If postedSettlement.IsMatch(r(narrCol).ToString()) Then&#xA;&#x9;&#x9;r(&quot;Root Cause&quot;) = &quot;Posted settlement&quot;&#xA;&#x9;&#x9;r(&quot;Root Cause Category&quot;) = &quot;System&quot;&#xA;&#x9;&#x9;r(&quot;Recommended Action&quot;) = &quot;To be matched with the expected settlement&quot;&#xA;&#x9;&#x9;r(&quot;Action Owner&quot;) = &quot;Card Reconciliation&quot;&#xA;&#x9;End If&#xA;End Sub&#xA;&#xA;' Rows carried forward from earlier reports still show the GL code as their&#xA;' Transaction Ref No. Take the reference from the narration, as GL prep now does.&#xA;Dim glCodeShape As New System.Text.RegularExpressions.Regex(&quot;^12\d{7}$&quot;)&#xA;Dim narrRef As New System.Text.RegularExpressions.Regex(&quot;Reference\s*[:.]\s*(\d+)&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase)&#xA;Dim uploadRef As New System.Text.RegularExpressions.Regex(&quot;via\s+UPLOAD\s+(\w+)&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase)&#xA;For Each r As DataRow In dtPreviousRealExceptions.Rows&#xA;&#x9;tagSmartVista(r, &quot;Narration&quot;)&#xA;&#x9;Dim ref As String = r(&quot;Transaction Ref No:&quot;).ToString().Trim()&#xA;&#x9;If ref &lt;&gt; &quot;&quot; AndAlso Not glCodeShape.IsMatch(ref) Then Continue For&#xA;&#x9;Dim m As System.Text.RegularExpressions.Match = narrRef.Match(r(&quot;Narration&quot;).ToString())&#xA;&#x9;If Not m.Success Then m = uploadRef.Match(r(&quot;Narration&quot;).ToString())&#xA;&#x9;If m.Success Then r(&quot;Transaction Ref No:&quot;) = m.Groups(1).Value&#xA;Next&#xA;&#xA;&#xA;dtPreviousRealExceptions.AsEnumerable().ToList().ForEach(Sub(row)&#xA;&#x9;Try&#xA;&#x9;&#x9;Try&#xA;&#x9;&#x9;&#x9;ageCount = (DateTime.Parse(fileDate) - DateTime.Parse(row(&quot;Value Date&quot;).ToString)).TotalDays&#xA;&#x9;&#x9;Catch inEx As Exception&#xA;&#x9;&#x9;&#x9;Try&#xA;&#x9;&#x9;&#x9;&#x9;ageCount = (DateTime.Parse(fileDate) -  DateTime.FromOADate(Double.Parse(row(&quot;Value Date&quot;).ToString))).TotalDays&#xA;&#x9;&#x9;&#x9;Catch oaEx As Exception&#xA;&#x9;&#x9;&#x9;&#x9;ageCount = 0&#xA;&#x9;&#x9;&#x9;&#x9;ageCount = 0 : System.Console.WriteLine(oaEx)&#xA;&#x9;&#x9;&#x9;End Try&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;End Try &#xA;&#x9;&#x9;&#xA;&#x9;&#x9;row(&quot;Aging&quot;) = ageCount&#xA;&#x9;&#x9;row(&quot;SNO&quot;) = counter.ToString()&#xA;&#x9;&#x9;counter = counter +1&#xA;&#x9;&#xA;&#x9;&#x9;If ageCount&lt;4 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;0-3 Days&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 31 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;4-30 Days&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 61 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;31-60 Days&quot;&#xA;&#x9;&#x9;Else If  ageCount&lt; 90 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;61-90 Days&quot;&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;Above 90 Days&quot;&#xA;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;If ageCount&lt;30 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 60 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 90 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If  ageCount&lt; 180 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;&#xA;&#x9;Catch ex As Exception&#xA;&#x9;&#x9;System.Console.WriteLine(&quot;Can't assign age: &quot; &amp; vbCrLf &amp; ex.Message)&#xA;&#x9;End Try&#xA;&#x9;&#xA;&#x9;'Try &#xA;&#x9;'&#x9;If row(&quot;Narration&quot;).ToString.ToLower.Contains(&quot;merchant payment&quot;) Or (Not row(&quot;Aging&quot;).ToString.Equals(&quot;0&quot;)) Or ageCount&gt;1 Then&#xA;&#x9;'&#x9;&#x9;row(&quot;Root Cause&quot;) = &quot;Available in the gl but not in outgoing file&quot;&#xA;&#x9;'&#x9;&#x9;row(&quot;Root Cause Category&quot;) = &quot;System&quot;&#xA;&#x9;'&#x9;&#x9;row(&quot;Recommended Action&quot;) = &quot;Need further investigation&quot;&#xA;&#x9;'&#x9;&#x9;row(&quot;Action Owner&quot;) = &quot;Card Reconciliation&quot;&#xA;&#x9;'&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;'&#x9;&#x9;row(&quot;Root Cause&quot;) = &quot;Current exception&quot;&#xA;&#x9;'&#x9;&#x9;row(&quot;Root Cause Category&quot;) = &quot;System&quot;&#xA;&#x9;'&#x9;&#x9;row(&quot;Recommended Action&quot;) = &quot;To be matched on the next day&quot;&#xA;&#x9;'&#x9;&#x9;row(&quot;Action Owner&quot;) = &quot;Card Reconciliation&quot;&#xA;&#x9;'&#x9;&#x9;&#xA;&#x9;'&#x9;End If&#xA;&#x9;'Catch excsd As Exception&#xA;&#x9;'End Try&#xA;&#x9;&#x9;&#xA;End Sub)&#xA;&#xA;&#xA;&#xA;&#xA;dtOutstandingGlFinal.AsEnumerable().ToList().ForEach(Sub(row)&#xA;&#x9;&#xA;&#x9;row(&quot;Branch_Code&quot;) = branchCode&#xA;&#x9;row(&quot;GL_Code&quot;) = glCode&#xA;&#x9;row(&quot;GL_Description&quot;) = glDescription&#xA;&#x9;&#xA;&#x9;Try&#xA;&#x9;&#x9;Try&#xA;&#x9;&#x9;&#x9;ageCount = (DateTime.Parse(fileDate) - DateTime.Parse(row(&quot;VALUE_DATE&quot;).ToString)).TotalDays&#xA;&#x9;&#x9;Catch inEx As Exception&#xA;&#x9;&#x9;&#x9;Try&#xA;&#x9;&#x9;&#x9;&#x9;ageCount = (DateTime.Parse(fileDate) -  DateTime.FromOADate(Double.Parse(row(&quot;VALUE_DATE&quot;).ToString))).TotalDays&#xA;&#x9;&#x9;&#x9;Catch oaEx As Exception&#xA;&#x9;&#x9;&#x9;&#x9;ageCount = 0 : System.Console.WriteLine(oaEx)&#xA;&#x9;&#x9;&#x9;End Try&#xA;&#x9;&#x9;End Try &#xA;&#x9;&#xA;&#x9;&#x9;row(&quot;Aging&quot;) = ageCount&#xA;&#x9;&#x9;row(&quot;SNO&quot;) = counter&#xA;&#x9;&#x9;counter = counter +1&#xA;&#x9;&#xA;&#x9;&#x9;If ageCount&lt;4 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;0-3 Days&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 31 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;4-30 Days&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 61 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;31-60 Days&quot;&#xA;&#x9;&#x9;Else If  ageCount&lt; 90 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;61-90 Days&quot;&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;Above 90 Days&quot;&#xA;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;If ageCount&lt;30 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 60 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 90 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If  ageCount&lt; 180 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;End If&#xA;&#x9;&#xA;Catch ex As Exception&#xA;&#x9;System.Console.WriteLine(&quot;Can't assign age: &quot; &amp; vbCrLf &amp; ex.Message)&#xA;End Try&#xA;&#x9;&#xA;If  row(&quot;Aging&quot;).ToString.Equals(&quot;0&quot;) Or ageCount &lt;1 Then&#xA;&#x9;&#x9;row(&quot;Root Cause&quot;) = &quot;Current exception&quot;&#xA;&#x9;&#x9;row(&quot;Root Cause Category&quot;) = &quot;System&quot;&#xA;&#x9;&#x9;row(&quot;Recommended Action&quot;) = &quot;To be matched on the next day&quot;&#xA;&#x9;&#x9;row(&quot;Action Owner&quot;) = &quot;Card Reconciliation&quot;&#xA;&#x9;Else&#xA;&#x9;&#x9;row(&quot;Root Cause&quot;) = &quot;Available in the gl but not in outgoing file&quot;&#xA;&#x9;&#x9;row(&quot;Root Cause Category&quot;) = &quot;System&quot;&#xA;&#x9;&#x9;row(&quot;Recommended Action&quot;) = &quot;Need further investigation&quot;&#xA;&#x9;&#x9;row(&quot;Action Owner&quot;) = &quot;Card Reconciliation&quot;&#xA;&#xA;End If&#xA;tagSmartVista(row, &quot;NARRATION&quot;)&#xA;End Sub)&#xA;&#xA;&#xA;&#xA;dtMissingFields.AsEnumerable().ToList().ForEach(Sub(row)&#xA;&#x9;&#xA;&#x9;row(&quot;Branch_Code&quot;) = branchCode&#xA;&#x9;row(&quot;GL_Code&quot;) = glCode&#xA;&#x9;row(&quot;GL_Description&quot;) = glDescription&#xA;&#x9;&#xA;&#x9;Try&#xA;&#x9;&#x9;Try&#xA;&#x9;&#x9;&#x9;ageCount = (DateTime.Parse(fileDate) - DateTime.Parse(row(&quot;VALUE_DATE&quot;).ToString)).TotalDays&#xA;&#x9;&#x9;Catch inEx As Exception&#xA;&#x9;&#x9;&#x9;Try&#xA;&#x9;&#x9;&#x9;&#x9;ageCount = (DateTime.Parse(fileDate) -  DateTime.FromOADate(Double.Parse(row(&quot;VALUE_DATE&quot;).ToString))).TotalDays&#xA;&#x9;&#x9;&#x9;Catch oaEx As Exception&#xA;&#x9;&#x9;&#x9;&#x9;ageCount = 0 : System.Console.WriteLine(oaEx)&#xA;&#x9;&#x9;&#x9;End Try&#xA;&#x9;&#x9;End Try &#xA;&#x9;&#xA;&#x9;&#x9;row(&quot;Aging&quot;) = ageCount.ToString&#xA;&#x9;&#x9;row(&quot;SNO&quot;) = counter&#xA;&#x9;&#x9;counter = counter +1&#xA;&#x9;&#xA;&#x9;&#x9;If ageCount&lt;4 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;0-3 Days&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 31 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;4-30 Days&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 61 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;31-60 Days&quot;&#xA;&#x9;&#x9;Else If  ageCount&lt; 90 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;61-90 Days&quot;&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;Above 90 Days&quot;&#xA;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;If ageCount&lt;30 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 60 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 90 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If  ageCount&lt; 180 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;End If&#xA;&#x9;&#xA;Catch ex As Exception&#xA;&#x9;System.Console.WriteLine(&quot;Can't assign age: &quot; &amp; vbCrLf &amp; ex.Message)&#xA;End Try&#xA;&#xA;If  row(&quot;Aging&quot;).ToString.Equals(&quot;0&quot;) Or ageCount &lt; 1 Then&#xA;&#x9;&#x9;row(&quot;Root Cause&quot;) = &quot;Current exception&quot;&#xA;&#x9;&#x9;row(&quot;Root Cause Category&quot;) = &quot;System&quot;&#xA;&#x9;&#x9;row(&quot;Recommended Action&quot;) = &quot;To be matched on the next day&quot;&#xA;&#x9;&#x9;row(&quot;Action Owner&quot;) = &quot;Card Reconciliation&quot;&#xA;&#x9;Else&#xA;&#x9;&#x9;row(&quot;Root Cause&quot;) = &quot;Available in the gl but not in outgoing file&quot;&#xA;&#x9;&#x9;row(&quot;Root Cause Category&quot;) = &quot;System&quot;&#xA;&#x9;&#x9;row(&quot;Recommended Action&quot;) = &quot;Need further investigation&quot;&#xA;&#x9;&#x9;row(&quot;Action Owner&quot;) = &quot;Card Reconciliation&quot;&#xA;&#xA;End If&#xA;tagSmartVista(row, &quot;NARRATION&quot;)&#xA;&#xA;&#xA;End Sub)&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;Dim workbook As New XLWorkbook(reconResultsPath)&#xA;Dim worksheet As IXLWorksheet = workbook.Worksheet(&quot;Report&quot;)&#xA;worksheet.Cell(&quot;B5&quot;).Value = &quot;DAILY RECONCILIATION STATEMENT - &quot;+glDescription.ToUpper()+&quot; : GL CODE &quot;+glCode&#xA;workbook.Save()&#xA;&#xA;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="435.2,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_8">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="dtOutstandingGlFinal">[dtOutstandingGlFinal]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="reconResultsPath">[reconResultsPath]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="fileDate">[fileDate]</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPreviousRealExceptions">[dtPreviousRealExceptions]</InOutArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="dtMissingFields">[dtMissingFields]</InArgument>
+      </ui:InvokeCode.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeCode>
+    <Assign sap:VirtualizedContainerService.HintSize="435.2,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dtOutstandingGlFinal]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[dtOutstandingGlFinal.DefaultView.ToTable(false,"SNO","Branch_Code","GL_Code","GL_Description","BKG_DATE","VALUE_DATE","TRN_REF_NO","NARRATION","DEBIT","CREDIT","Aging","Aging Group","BOT Classification","Root Cause","Root Cause Category","Recommended Action","Action Owner")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="435.2,113.6" sap2010:WorkflowViewState.IdRef="Assign_6">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dtMissingFields]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[dtMissingFields.DefaultView.ToTable(false,"SNO","Branch_Code","GL_Code","GL_Description","BKG_DATE","VALUE_DATE","TRN_REF_NO","NARRATION","DEBIT","CREDIT","Aging","Aging Group","BOT Classification","Root Cause","Root Cause Category","Recommended Action","Action Owner")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="435.2,99.2" sap2010:WorkflowViewState.IdRef="ReportStatus_5" StatusText="[&quot;95% - OUTSTANDING REPORT&quot;]" />
+    <ui:RemoveDataColumn Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="SNO" DataTable="[dtPreviousRealExceptions]" DisplayName="Remove Data Column" sap:VirtualizedContainerService.HintSize="435.2,220" sap2010:WorkflowViewState.IdRef="RemoveDataColumn_1" />
+    <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="SNO" DataTable="[dtPreviousRealExceptions]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="435.2,220" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" />
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="435.2,448.8" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch.Try>
+        <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_2">
+          <Assign.To>
+            <OutArgument x:TypeArguments="sd:DataTable">[dtPreviousRealExceptions]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="sd:DataTable">[dtPreviousRealExceptions.DefaultView.ToTable(False,"SNO","Branch_Code","GL_Code","GL_Description","Booking Date","Value Date","Transaction Ref No:","Narration","Debit","Credit","Aging","Aging Group","BOT Classification","Root Cause","Root Cause Category","Recommended Action","Action Owner")]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="436.8,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtPreviousRealExceptions]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dtPreviousRealExceptions.DefaultView.ToTable(False,"SNO","Branch code","GL_Code","GL Description","Booking Date","Value Date","Transaction Ref No:","Narration","Debit","Credit","Aging","Aging Group","BOT Classification","Root Cause","Root Cause Category","Recommended Action","Action Owner")]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+      <TryCatch.Finally>
+        <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="433.6,89.6" sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </TryCatch.Finally>
+    </TryCatch>
+    <ui:ReadCell Cell="B2" DisplayName="Read Cell Workbook USD Settlement" sap:VirtualizedContainerService.HintSize="435.2,120" sap2010:WorkflowViewState.IdRef="ReadCell_1" SheetName="BALANCES" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]">
+      <ui:ReadCell.Result>
+        <OutArgument x:TypeArguments="x:String">[settlementUsdAmt]</OutArgument>
+      </ui:ReadCell.Result>
+    </ui:ReadCell>
+    <ui:ReadCell Cell="B3" DisplayName="Read Cell Workbook TZS Settlements" sap:VirtualizedContainerService.HintSize="435.2,120" sap2010:WorkflowViewState.IdRef="ReadCell_2" SheetName="BALANCES" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]">
+      <ui:ReadCell.Result>
+        <OutArgument x:TypeArguments="x:String">[settlementTzsAmt]</OutArgument>
+      </ui:ReadCell.Result>
+    </ui:ReadCell>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code=" Try&#xA;&#x9;fileDate = DateTime.ParseExact(fileDate, &quot;dd MMM yyyy&quot;, CultureInfo.InvariantCulture).ToString(&quot;dd-MMM-yyyy&quot;)&#xA;Catch ex As Exception&#xA;&#x9;&#xA;End Try&#xA;&#xA;settlementTzsAmt = Math.Round(Convert.ToDecimal(settlementTzsAmt),2).ToString &#xA;settlementUsdAmt =  Math.Round(Convert.ToDecimal(settlementUsdAmt),2).ToString &#xA;&#xA;If reconPath.Contains(&quot;VISA ATM Clearing&quot;) Then&#xA;&#x9;&#x9;If currencyCode.Equals(&quot;TZS&quot;) Then&#xA;&#x9;&#x9;&#x9;If amountColumn.Equals(&quot;DEBIT&quot;) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;If Not settlementUsdAmt.equals(&quot;0&quot;) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot;Settlement TZS&quot;,fileDate,fileDate,&quot;&quot;,&quot;Amount to be  posted for Settlement  (TZS) &quot;+fileDate,Convert.ToDouble(settlementTzsAmt),&quot;&quot;,&quot;0&quot;,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Settlement Not yet posted&quot;,&quot;People&quot;,&quot;Settlement To be posted&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot;Settlement USD&quot;,fileDate,fileDate,&quot;&quot;,&quot;Amount to be  posted for Settlement  (USD) &quot;+fileDate,Convert.ToDouble(settlementUsdAmt),&quot;&quot;,&quot;0&quot;,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Settlement Not yet posted&quot;,&quot;People&quot;,&quot;Settlement To be posted&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot;Settlement TZS&quot;,fileDate,fileDate,&quot;&quot;,&quot;Amount to be  posted for Settlement  (TZS) &quot;+fileDate,Convert.ToDouble(settlementTzsAmt),&quot;&quot;,&quot;0&quot;,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Settlement Not yet posted&quot;,&quot;People&quot;,&quot;Settlement To be posted&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;If Not settlementUsdAmt.Equals(&quot;0&quot;) Then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot;Settlement TZS&quot;,fileDate,fileDate,&quot;&quot;,&quot;Amount to be  posted for Settlement  (TZS) &quot;+fileDate,&quot;&quot;,Convert.ToDouble(settlementTzsAmt),&quot;0&quot;,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Settlement Not yet posted&quot;,&quot;People&quot;,&quot;Settlement To be posted&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot;Settlement USD&quot;,fileDate,fileDate,&quot;&quot;,&quot;Amount to be  posted for Settlement  (USD) &quot;+fileDate,&quot;&quot;,Convert.ToDouble(settlementUsdAmt),&quot;0&quot;,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Settlement Not yet posted&quot;,&quot;People&quot;,&quot;Settlement To be posted&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot;Settlement TZS&quot;,fileDate,fileDate,&quot;&quot;,&quot;Amount to be  posted for Settlement  (TZS) &quot;+fileDate,&quot;&quot;,Convert.ToDouble(settlementTzsAmt),&quot;0&quot;,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Settlement Not yet posted&quot;,&quot;People&quot;,&quot;Settlement To be posted&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;End If&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;&#x9;If amountColumn.Equals(&quot;CREDIT&quot;) Then&#xA;&#x9;&#x9;&#x9;&#x9;dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot;Settlement USD&quot;,fileDate,fileDate,&quot;&quot;,&quot;Amount to be  posted for Settlement  (USD) &quot;+fileDate,Convert.ToDouble(settlementTzsAmt),&quot;&quot;,&quot;0&quot;,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Settlement Not yet posted&quot;,&quot;People&quot;,&quot;Settlement To be posted&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;&#x9;Else &#xA;&#x9;&#x9;&#x9;&#x9;dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot; Settlement USD&quot;,fileDate,fileDate,&quot;&quot;,&quot;Amount to be  posted for Settlement  (USD) &quot;+fileDate,&quot;&quot;,Convert.ToDouble(settlementTzsAmt),0,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Settlement Not yet posted&quot;,&quot;People&quot;,&quot;Settlement To be posted&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;&#x9;End If&#xA;&#x9;&#x9;End If&#xA;Else&#xA;&#x9;If currencyCode.Equals(&quot;TZS&quot;) Then&#xA;&#x9;&#x9;If amountColumn.Equals(&quot;CREDIT&quot;) Then&#xA;&#x9;&#x9;&#x9;dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot;VISA POS Clearing Account&quot;,fileDate,fileDate,&quot;&quot;,&quot;VISA POS CLEARING SETTLEMENT  &quot;+fileDate,Convert.ToDouble(settlementTzsAmt),&quot;&quot;,&quot;0&quot;,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Pending settlement&quot;,&quot;People&quot;,&quot;To post the pending settlement&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;&#x9;'dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot;VISA POS Clearing Account&quot;,fileDate,fileDate,&quot;&quot;,&quot;VISA POS CLEARING SETTLEMENT  (USD) &quot;+fileDate,Convert.ToDouble(settlementUsdAmt),&quot;&quot;,&quot;0&quot;,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Pending settlement&quot;,&quot;People&quot;,&quot;To post the pending settlement&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot;VISA POS Clearing Account&quot;,fileDate,fileDate,&quot;&quot;,&quot;VISA POS CLEARING SETTLEMENT  (TZS) &quot;+fileDate,&quot;&quot;,Convert.ToDouble(settlementTzsAmt),&quot;0&quot;,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Pending settlement&quot;,&quot;People&quot;,&quot;To post the pending settlement&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;&#x9;'dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot;VISA POS Clearing Account&quot;,fileDate,fileDate,&quot;&quot;,&quot;VISA POS CLEARING SETTLEMENT (USD) &quot;+fileDate,&quot;&quot;,Convert.ToDouble(settlementUsdAmt),&quot;0&quot;,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Pending settlement&quot;,&quot;People&quot;,&quot;To post the pending settlement&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;End If&#xA;&#x9;Else&#xA;&#x9;&#x9;If amountColumn.Equals(&quot;CREDIT&quot;) Then&#xA;&#x9;&#x9;&#x9;dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot;VISA POS Clearing Account&quot;,fileDate,fileDate,&quot;&quot;,&quot;VISA POS CLEARING SETTLEMENT  (USD) &quot;+fileDate,Convert.ToDouble(settlementTzsAmt),&quot;&quot;,&quot;0&quot;,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Pending settlement&quot;,&quot;People&quot;,&quot;To post the pending settlement&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;Else &#xA;&#x9;&#x9;&#x9;dtPreviousRealExceptions.Rows.Add({&quot;&quot;,&quot;101&quot;,&quot;&quot;,&quot; VISA POS Clearing Account&quot;,fileDate,fileDate,&quot;&quot;,&quot;VISA POS CLEARING SETTLEMENT  (USD) &quot;+fileDate,&quot;&quot;,Convert.ToDouble(settlementTzsAmt),0,&quot;0-3 Days&quot;,&quot;Not Applicable&quot;,&quot;Pending settlement&quot;,&quot;People&quot;,&quot;To post the pending settlement&quot;,&quot;Card Settlement&quot;})&#xA;&#x9;&#x9;End If&#xA;&#x9;End If&#xA;End If&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="435.2,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="settlementTzsAmt">[settlementTzsAmt]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="settlementUsdAmt">[settlementUsdAmt]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="dtPreviousRealExceptions">[dtPreviousRealExceptions]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="amountColumn">[amountColumn]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="fileDate">[fileDate]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="currencyCode">[currencyCode]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="reconPath">[reconResultsPath]</InArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="If dtPreviousRealExceptions IsNot Nothing AndAlso dtPreviousRealExceptions.Rows.Count &gt; 0 Then&#xA;    Dim ci = System.Globalization.CultureInfo.InvariantCulture&#xA;    Dim names As String() = {&quot;debit&quot;,&quot;credit&quot;,&quot;amount&quot;,&quot;balance&quot;,&quot;lcy_amount&quot;,&quot;fcy_amount&quot;,&quot;dr&quot;,&quot;cr&quot;}&#xA;    Dim targets As New List(Of Integer)&#xA;&#xA;    For i As Integer = 0 To dtPreviousRealExceptions.Columns.Count - 1&#xA;        Dim col As System.Data.DataColumn = dtPreviousRealExceptions.Columns(i)&#xA;        If col.DataType Is GetType(Double) OrElse col.DataType Is GetType(Decimal) Then Continue For&#xA;        Dim nm As String = col.ColumnName.Trim().ToLowerInvariant()&#xA;        Dim looksLikeMoney As Boolean = False&#xA;        For Each n As String In names&#xA;            If nm = n OrElse nm.EndsWith(&quot;_&quot; &amp; n) OrElse nm.EndsWith(&quot; &quot; &amp; n) Then looksLikeMoney = True&#xA;        Next&#xA;        If Not looksLikeMoney Then Continue For&#xA;&#xA;        Dim allParse As Boolean = True&#xA;        For Each r As System.Data.DataRow In dtPreviousRealExceptions.Rows&#xA;            Dim v As Object = r(i)&#xA;            If v Is Nothing OrElse IsDBNull(v) Then Continue For&#xA;            Dim s As String = v.ToString().Trim().Replace(&quot;,&quot;, &quot;&quot;)&#xA;            If s = &quot;&quot; Then Continue For&#xA;            If s.StartsWith(&quot;(&quot;) AndAlso s.EndsWith(&quot;)&quot;) Then s = &quot;-&quot; &amp; s.Substring(1, s.Length - 2)&#xA;            Dim d As Double&#xA;            If Not Double.TryParse(s, System.Globalization.NumberStyles.Any, ci, d) Then&#xA;                allParse = False&#xA;                Exit For&#xA;            End If&#xA;        Next&#xA;        If allParse Then targets.Add(i)&#xA;    Next&#xA;&#xA;    If targets.Count &gt; 0 Then&#xA;        Dim outT As New System.Data.DataTable()&#xA;        For i As Integer = 0 To dtPreviousRealExceptions.Columns.Count - 1&#xA;            If targets.Contains(i) Then&#xA;                outT.Columns.Add(dtPreviousRealExceptions.Columns(i).ColumnName, GetType(Double))&#xA;            Else&#xA;                outT.Columns.Add(dtPreviousRealExceptions.Columns(i).ColumnName, dtPreviousRealExceptions.Columns(i).DataType)&#xA;            End If&#xA;        Next&#xA;        For Each r As System.Data.DataRow In dtPreviousRealExceptions.Rows&#xA;            Dim nr As System.Data.DataRow = outT.NewRow()&#xA;            For i As Integer = 0 To dtPreviousRealExceptions.Columns.Count - 1&#xA;                Dim v As Object = r(i)&#xA;                If targets.Contains(i) Then&#xA;                    Dim d As Double = 0&#xA;                    If v IsNot Nothing AndAlso Not IsDBNull(v) Then&#xA;                        Dim s As String = v.ToString().Trim().Replace(&quot;,&quot;, &quot;&quot;)&#xA;                        If s.StartsWith(&quot;(&quot;) AndAlso s.EndsWith(&quot;)&quot;) Then s = &quot;-&quot; &amp; s.Substring(1, s.Length - 2)&#xA;                        If s &lt;&gt; &quot;&quot; Then Double.TryParse(s, System.Globalization.NumberStyles.Any, ci, d)&#xA;                    End If&#xA;                    nr(i) = d&#xA;                Else&#xA;                    nr(i) = v&#xA;                End If&#xA;            Next&#xA;            outT.Rows.Add(nr)&#xA;        Next&#xA;        dtPreviousRealExceptions = outT&#xA;    End If&#xA;End If" DisplayName="Numeric amounts - dtPreviousRealExceptions" sap2010:WorkflowViewState.IdRef="InvokeCode_203">
+      <ui:InvokeCode.Arguments>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPreviousRealExceptions">[dtPreviousRealExceptions]</InOutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtPreviousRealExceptions]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="435.2,148" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="OUTSTANDING FORMATED" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:WriteRange>
+    <ui:AppendRange DataTable="[dtOutstandingGlFinal]" DisplayName="Append Range Workbook" sap:VirtualizedContainerService.HintSize="435.2,148" sap2010:WorkflowViewState.IdRef="AppendRange_1" SheetName="OUTSTANDING FORMATED" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[processMsgCategory]" sap:VirtualizedContainerService.HintSize="435.2,56.8" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Sequence x:Key="EP745" DisplayName="Structure the EP745 outstandings" sap:VirtualizedContainerService.HintSize="496,554.4" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="dtOutstandingStatement.Columns.Add(&quot;SNO&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Transaction Ref No:&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Narration&quot;)&#xA;&#xA;dtOutstandingStatement.Columns.Add(&quot;Debit&quot;, GetType(Double))&#xA;dtOutstandingStatement.Columns.Add(&quot;Credit&quot;, GetType(Double))&#xA;&#xA;dtOutstandingStatement.Columns.Add(&quot;Branch_Code&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;GL_Code&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;GL_Description&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Aging&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Aging Group&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;BOT Classification&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Root Cause&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Root Cause Category&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Recommended Action&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Action Owner&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;BKG_DATE&quot;)&#xA;dtOutstandingStatement.Columns(&quot;Date&quot;).ColumnName = &quot;VALUE_DATE&quot;&#xA;&#xA;'Change the gl_code and description&#xA;Dim branchCode = &quot;101&quot;&#xA;Dim glCode = &quot;&quot;&#xA;Dim glDescription = &quot;&quot;&#xA;Dim counter = 0&#xA;Dim ageCount As Double = 0&#xA;&#xA;If reconResultsPath.Contains(&quot;VISA ATM Clearing&quot;) Then&#xA;&#x9;branchCode = &quot;101&quot;&#xA; &#x9;glCode = &quot;122020002&quot;&#xA;&#x9;glDescription = &quot;VISA ATM Clearing&quot;&#xA;&#x9;&#xA;Else If reconResultsPath.Contains(&quot;VISA POS Clearing&quot;) Then&#xA;&#x9;branchCode = &quot;101&quot;&#xA;&#x9;glCode = &quot;122020011&quot;&#xA; &#x9;glDescription = &quot;VISA POS Clearing Account&quot;&#xA;End If&#xA;&#xA;dtOutstandingStatement.AsEnumerable().ToList().ForEach(Sub(row)&#xA;&#xA;Try&#xA;&#x9;Dim ci2 = System.Globalization.CultureInfo.InvariantCulture&#xA;&#x9;Dim rawDate As String = row(&quot;VALUE_DATE&quot;).ToString().Trim()&#xA;&#x9;Dim vd As DateTime&#xA;&#x9;If DateTime.TryParseExact(rawDate, New String() {&quot;dMMMyyyy&quot;,&quot;ddMMMyyyy&quot;,&quot;d MMM yyyy&quot;,&quot;dd MMM yyyy&quot;,&quot;yyyy-MM-dd&quot;,&quot;MM/dd/yyyy&quot;}, ci2, System.Globalization.DateTimeStyles.None, vd) Then&#xA;&#x9;&#x9;row(&quot;VALUE_DATE&quot;) = vd.ToString(&quot;MM/dd/yyyy&quot;)&#xA;&#x9;Else&#xA;&#x9;&#x9;' The VISA outgoing file carries day and month only (&quot;09SEP&quot;), so &quot;dMMMyyyy&quot;&#xA;&#x9;&#x9;' never matches and the aging fallback below hands &quot;09SEP&quot; to DateTime.Parse,&#xA;&#x9;&#x9;' which reads it as 1 Sep 2009 - 6,218 days old, filed under &quot;Above 90 Days&quot;&#xA;&#x9;&#x9;' and BOT-classified &quot;Loss&quot;. Anchor the missing year on the report date.&#xA;&#x9;&#x9;If DateTime.TryParseExact(rawDate, New String() {&quot;dMMM&quot;,&quot;ddMMM&quot;}, ci2, System.Globalization.DateTimeStyles.None, vd) Then&#xA;&#x9;&#x9;&#x9;Dim anchor As DateTime = DateTime.Parse(fileDate, ci2)&#xA;&#x9;&#x9;&#x9;Dim y As Integer = anchor.Year&#xA;&#x9;&#x9;&#x9;If vd.Month = 2 AndAlso vd.Day = 29 AndAlso Not DateTime.IsLeapYear(y) Then y = y - 1&#xA;&#x9;&#x9;&#x9;Dim stamped As New DateTime(y, vd.Month, vd.Day)&#xA;&#x9;&#x9;&#x9;' A December row seen in an early-January run belongs to the year before.&#xA;&#x9;&#x9;&#x9;If stamped &gt; anchor.AddDays(1) Then stamped = stamped.AddYears(-1)&#xA;&#x9;&#x9;&#x9;row(&quot;VALUE_DATE&quot;) = stamped.ToString(&quot;MM/dd/yyyy&quot;)&#xA;&#x9;&#x9;End If&#xA;&#x9;End If&#xA;Catch ex2 As Exception&#xA;End Try&#xA;&#xA;&#x9;row(&quot;BKG_DATE&quot;) = row(&quot;VALUE_DATE&quot;).ToString&#xA;&#x9;&#xA;&#x9;row(&quot;Branch_Code&quot;) = branchCode&#xA;&#x9;row(&quot;GL_Code&quot;) = glCode&#xA;&#x9;row(&quot;GL_Description&quot;) = glDescription&#xA;&#x9;row(&quot;Narration&quot;) = &quot;EP745 TRANS  - -  &quot;+row(&quot;PAN&quot;).ToString+&quot; - &quot;+row(&quot;Trace&quot;).ToString+&quot; - &quot;+row(&quot;RRN&quot;).ToString+&quot; - &quot;+row(&quot;Terminal ID&quot;).ToString&#xA;&#x9;&#x9;&#xA;&#x9;If amountColumn.Equals(&quot;DEBIT&quot;) Then&#xA;&#x9;&#x9;row(&quot;Credit&quot;) = Convert.ToDouble( Math.Round(Convert.ToDecimal(row(&quot;Transaction Amount&quot;).ToString.Replace(&quot;,&quot;,&quot;&quot;)),2).ToString )&#xA;&#x9;&#x9;row(&quot;Debit&quot;) = Convert.ToDouble( Convert.ToDecimal(0) )&#xA;&#x9;Else&#xA;&#x9;&#x9;row(&quot;Debit&quot;) = Convert.ToDouble( Math.Round(Convert.ToDecimal(row(&quot;Transaction Amount&quot;).ToString.Replace(&quot;,&quot;,&quot;&quot;)),2).ToString )&#xA;&#x9;&#x9;row(&quot;Credit&quot;) = Convert.ToDouble( Convert.ToDecimal(0) )&#xA;&#x9;End If&#xA;&#x9;&#xA;&#x9;Try&#xA;&#x9;&#x9;Try&#xA;&#x9;&#x9;&#x9;ageCount = (DateTime.Parse(fileDate) - DateTime.Parse(row(&quot;VALUE_DATE&quot;).ToString)).TotalDays&#xA;&#x9;&#x9;Catch inEx As Exception&#xA;&#x9;&#x9;&#x9;Try&#xA;&#x9;&#x9;&#x9;&#x9;ageCount = (DateTime.Parse(fileDate) -  DateTime.FromOADate(Double.Parse(row(&quot;VALUE_DATE&quot;).ToString))).TotalDays&#xA;&#x9;&#x9;&#x9;Catch oaEx As Exception&#xA;&#x9;&#x9;&#x9;&#x9;ageCount = 0 : System.Console.WriteLine(oaEx)&#xA;&#x9;&#x9;&#x9;End Try&#xA;&#x9;&#x9;End Try &#xA;&#x9;&#xA;&#x9;&#x9;row(&quot;Aging&quot;) = ageCount.ToString&#xA;&#x9;&#x9;row(&quot;SNO&quot;) = counter&#xA;&#x9;&#x9;counter = counter +1&#xA;&#x9;&#xA;&#x9;&#x9;If ageCount&lt;4 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;0-3 Days&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 31 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;4-30 Days&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 61 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;31-60 Days&quot;&#xA;&#x9;&#x9;Else If  ageCount&lt; 90 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;61-90 Days&quot;&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;Above 90 Days&quot;&#xA;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;If ageCount&lt;30 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 60 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 90 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If  ageCount&lt; 180 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;End If&#xA;&#x9;&#xA;Catch ex As Exception&#xA;&#x9;System.Console.WriteLine(&quot;Can't assign age: &quot; &amp; vbCrLf &amp; ex.Message)&#xA;End Try&#xA;&#x9;&#xA;&#x9;If row(&quot;Narration&quot;).ToString().Contains(&quot;CA&quot;) Then&#xA;&#x9;&#x9;row(&quot;Root Cause&quot;) = &quot;Reversal Transaction&quot;&#xA;&#x9;&#x9;row(&quot;Root Cause Category&quot;) = &quot;System&quot;&#xA;&#x9;&#x9;row(&quot;Recommended Action&quot;) = &quot;To be rectified with settlement amount&quot;&#xA;&#x9;&#x9;row(&quot;Action Owner&quot;) = &quot;Card Reconciliation&quot;&#xA;&#x9;Else&#xA;&#x9;&#x9;row(&quot;Root Cause&quot;) = &quot;Amount that did not hit the GL but were settled&quot;&#xA;&#x9;&#x9;row(&quot;Root Cause Category&quot;) = &quot;System&quot;&#xA;&#x9;&#x9;row(&quot;Recommended Action&quot;) = &quot;Under investigation&quot;&#xA;&#x9;&#x9;row(&quot;Action Owner&quot;) = &quot;Card Reconciliation&quot;&#xA;&#x9;End If&#xA;&#x9;&#xA;&#x9;&#xA;&#xA;End Sub)&#xA;&#xA;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="433.6,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_3">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtOutstandingStatement">[dtOutstandingStatement]</InOutArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="fileDate">[fileDate]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="reconResultsPath">[reconResultsPath]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="amountColumn">[amountColumn]</InArgument>
+          </ui:InvokeCode.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeCode>
+        <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_5">
+          <Assign.To>
+            <OutArgument x:TypeArguments="sd:DataTable">[dtOutstandingStatement]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="sd:DataTable">[dtOutstandingStatement.DefaultView.ToTable(False,"SNO","Branch_Code","GL_Code","GL_Description","BKG_DATE","VALUE_DATE","Transaction Ref No:","Narration","Debit","Credit","Aging","Aging Group","BOT Classification","Root Cause","Root Cause Category","Recommended Action","Action Owner")]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <ui:AppendRange DataTable="[dtOutstandingStatement]" DisplayName="Append Range Workbook" sap:VirtualizedContainerService.HintSize="433.6,116" sap2010:WorkflowViewState.IdRef="AppendRange_2" SheetName="OUTSTANDING FORMATED" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+      </Sequence>
+      <Sequence x:Key="POS File" DisplayName="Structure the POS outstandings" sap:VirtualizedContainerService.HintSize="496,609.6" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xA;&#xA;dtOutstandingStatement.Columns.Add(&quot;SNO&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Transaction Ref No:&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Narration&quot;)&#xA;&#xA;dtOutstandingStatement.Columns.Add(&quot;Debit&quot;, GetType(Double))&#xA;dtOutstandingStatement.Columns.Add(&quot;Credit&quot;, GetType(Double))&#xA;&#xA;dtOutstandingStatement.Columns.Add(&quot;Branch_Code&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;GL_Code&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;GL_Description&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Aging&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Aging Group&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;BOT Classification&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Root Cause&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Root Cause Category&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Recommended Action&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;Action Owner&quot;)&#xA;dtOutstandingStatement.Columns.Add(&quot;BKG_DATE&quot;)&#xA;dtOutstandingStatement.Columns(&quot;DATE_TIME&quot;).ColumnName = &quot;VALUE_DATE&quot;&#xA;Catch ex As Exception&#xA;End Try&#xA;'Change the gl_code and description&#xA;Dim branchCode = &quot;101&quot;&#xA;Dim glCode = &quot;&quot;&#xA;Dim glDescription = &quot;&quot;&#xA;Dim counter = 0&#xA;Dim ageCount As Double = 0&#xA;&#xA;If reconResultsPath.Contains(&quot;VISA ATM Clearing&quot;) Then&#xA;&#x9;branchCode = &quot;101&quot;&#xA; &#x9;glCode = &quot;122020002&quot;&#xA;&#x9;glDescription = &quot;VISA ATM Clearing&quot;&#xA;&#x9;&#xA;Else If reconResultsPath.Contains(&quot;VISA POS Clearing&quot;) Then&#xA;&#x9;branchCode = &quot;101&quot;&#xA;&#x9;glCode = &quot;122020011&quot;&#xA; &#x9;glDescription = &quot;VISA POS Clearing Account&quot;&#xA;End If&#xA;&#xA;dtOutstandingStatement.AsEnumerable().ToList().ForEach(Sub(row)&#xA;&#xA;Try&#xA;&#x9;'row(&quot;VALUE_DATE&quot;) = DateTime.ParseExact(row(&quot;VALUE_DATE&quot;).ToString,&quot;yyyy-MM-dd&quot;, System.Globalization.CultureInfo.InvariantCulture).ToString(&quot;MM/dd/yyyy&quot;)&#xA;&#x9;&#x9;row(&quot;VALUE_DATE&quot;) = DateTime.Parse(row(&quot;VALUE_DATE&quot;).ToString, System.Globalization.CultureInfo.InvariantCulture).ToString(&quot;dd-MMM-yyyy&quot;)&#xA;Catch ex As Exception&#xA;End Try&#xA;&#xA;&#x9;row(&quot;BKG_DATE&quot;) = row(&quot;VALUE_DATE&quot;).ToString&#xA;&#x9;&#xA;&#x9;row(&quot;Branch_Code&quot;) = branchCode&#xA;&#x9;row(&quot;GL_Code&quot;) = glCode&#xA;&#x9;row(&quot;GL_Description&quot;) = glDescription&#xA;&#x9;row(&quot;Narration&quot;) =  row(&quot;CARD_ACCEPTOR_NAME_LOCATION&quot;).ToString.Replace(&quot;  &quot;,&quot; &quot;)+&quot;  - -  &quot;+row(&quot;PAN&quot;).ToString+&quot; - &quot;+row(&quot;AUTH_ID&quot;).ToString+&quot; - &quot;+row(&quot;RRN&quot;).ToString+&quot; - &quot;+row(&quot;TERM_ID&quot;).ToString&#xA;&#x9;&#x9;&#xA;&#x9;If amountColumn.Equals(&quot;CREDIT&quot;) Then&#xA;&#x9;&#x9;row(&quot;Credit&quot;) = Convert.ToDouble( Math.Round(Convert.ToDecimal(row(&quot;Transaction Amount&quot;).ToString.Replace(&quot;,&quot;,&quot;&quot;)),2).ToString )&#xA;&#x9;&#x9;row(&quot;Debit&quot;) = Convert.ToDouble( Convert.ToDecimal(0) )&#xA;&#x9;Else&#xA;&#x9;&#x9;row(&quot;Debit&quot;) = Convert.ToDouble( Math.Round(Convert.ToDecimal(row(&quot;Transaction Amount&quot;).ToString.Replace(&quot;,&quot;,&quot;&quot;)),2).ToString )&#xA;&#x9;&#x9;row(&quot;Credit&quot;) = Convert.ToDouble( Convert.ToDecimal(0) )&#xA;&#x9;End If&#xA;&#x9;&#xA;&#x9;Try&#xA;&#x9;&#x9;Try&#xA;&#x9;&#x9;&#x9;ageCount = (DateTime.Parse(fileDate) - DateTime.Parse(row(&quot;VALUE_DATE&quot;).ToString)).TotalDays&#xA;&#x9;&#x9;Catch inEx As Exception&#xA;&#x9;&#x9;&#x9;Try&#xA;&#x9;&#x9;&#x9;&#x9;ageCount = (DateTime.Parse(fileDate) -  DateTime.FromOADate(Double.Parse(row(&quot;VALUE_DATE&quot;).ToString))).TotalDays&#xA;&#x9;&#x9;&#x9;Catch oaEx As Exception&#xA;&#x9;&#x9;&#x9;&#x9;ageCount = 0 : System.Console.WriteLine(oaEx)&#xA;&#x9;&#x9;&#x9;End Try&#xA;&#x9;&#x9;End Try &#xA;&#x9;&#xA;&#x9;&#x9;row(&quot;Aging&quot;) = ageCount.ToString&#xA;&#x9;&#x9;row(&quot;SNO&quot;) = counter&#xA;&#x9;&#x9;counter = counter +1&#xA;&#x9;&#xA;&#x9;&#x9;If ageCount&lt;4 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;0-3 Days&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 31 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;4-30 Days&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 61 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;31-60 Days&quot;&#xA;&#x9;&#x9;Else If  ageCount&lt; 90 Then&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;61-90 Days&quot;&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;row(&quot;Aging Group&quot;) = &quot;Above 90 Days&quot;&#xA;&#x9;&#x9;End If&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;If ageCount&lt;30 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 60 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If ageCount&lt; 90 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else If  ageCount&lt; 180 Then&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;row(&quot;BOT Classification&quot;) = &quot;Not Applicable&quot;&#xA;&#x9;&#x9;End If&#xA;&#x9;&#xA;Catch ex As Exception&#xA;&#x9;System.Console.WriteLine(&quot;Can't assign age: &quot; &amp; vbCrLf &amp; ex.Message)&#xA;End Try&#xA;&#x9;&#xA;&#x9;row(&quot;Root Cause&quot;) = &quot;Available in outgoing file but not in the gl&quot;&#xA;&#x9;row(&quot;Root Cause Category&quot;) = &quot;System&quot;&#xA;&#x9;row(&quot;Recommended Action&quot;) = &quot;Need further investigation&quot;&#xA;&#x9;row(&quot;Action Owner&quot;) = &quot;Card Reconciliation&quot;&#xA;&#xA;&#xA;End Sub)&#xA;&#xA;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="433.6,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_6">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtOutstandingStatement">[dtOutstandingStatement]</InOutArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="fileDate">[fileDate]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="reconResultsPath">[reconResultsPath]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="amountColumn">[amountColumn]</InArgument>
+          </ui:InvokeCode.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeCode>
+        <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_7">
+          <Assign.To>
+            <OutArgument x:TypeArguments="sd:DataTable">[dtOutstandingStatement]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="sd:DataTable">[dtOutstandingStatement.DefaultView.ToTable(False,"SNO","Branch_Code","GL_Code","GL_Description","BKG_DATE","VALUE_DATE","Transaction Ref No:","Narration","Debit","Credit","Aging","Aging Group","BOT Classification","Root Cause","Root Cause Category","Recommended Action","Action Owner")]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <ui:AppendRange DataTable="[dtOutstandingStatement]" DisplayName="Append Range Workbook" sap:VirtualizedContainerService.HintSize="433.6,139.2" sap2010:WorkflowViewState.IdRef="AppendRange_3" SheetName="OUTSTANDING FORMATED" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+      </Sequence>
+    </Switch>
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dtFinalGl]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="435.2,120" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="OUTSTANDING FORMATED" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim src As System.Data.DataTable = dtFinalGl&#xA;If src IsNot Nothing AndAlso src.Rows.Count &gt; 0 Then&#xA;    Dim ci = System.Globalization.CultureInfo.InvariantCulture&#xA;    Dim debitIx As Integer = -1&#xA;    Dim creditIx As Integer = -1&#xA;    Dim narrIx As Integer = -1&#xA;    Dim droppedBal As Integer = 0&#xA;&#xA;    For i As Integer = 0 To src.Columns.Count - 1&#xA;        Dim nm As String = src.Columns(i).ColumnName.Trim().ToLowerInvariant()&#xA;        If nm = &quot;debit&quot; Then debitIx = i&#xA;        If nm = &quot;credit&quot; Then creditIx = i&#xA;        If nm = &quot;narration&quot; Then narrIx = i&#xA;    Next&#xA;    If debitIx &lt; 0 AndAlso src.Columns.Count &gt; 8 Then debitIx = 8&#xA;    If creditIx &lt; 0 AndAlso src.Columns.Count &gt; 9 Then creditIx = 9&#xA;    If narrIx &lt; 0 AndAlso src.Columns.Count &gt; 7 Then narrIx = 7&#xA;&#xA;    Dim outT As New System.Data.DataTable()&#xA;    For i As Integer = 0 To src.Columns.Count - 1&#xA;        If i = debitIx OrElse i = creditIx Then&#xA;            outT.Columns.Add(src.Columns(i).ColumnName, GetType(Double))&#xA;        Else&#xA;            outT.Columns.Add(src.Columns(i).ColumnName, src.Columns(i).DataType)&#xA;        End If&#xA;    Next&#xA;&#xA;    For Each r As System.Data.DataRow In src.Rows&#xA;        If narrIx &gt;= 0 Then&#xA;            Dim nTxt As String = &quot;&quot;&#xA;            If r(narrIx) IsNot Nothing AndAlso Not IsDBNull(r(narrIx)) Then nTxt = r(narrIx).ToString().Trim().ToLowerInvariant()&#xA;            If nTxt.Contains(&quot;opening balance&quot;) OrElse nTxt.Contains(&quot;closing balance&quot;) Then&#xA;                droppedBal = droppedBal + 1&#xA;                Continue For&#xA;            End If&#xA;        End If&#xA;        Dim nr As System.Data.DataRow = outT.NewRow()&#xA;        For i As Integer = 0 To src.Columns.Count - 1&#xA;            Dim v As Object = r(i)&#xA;            If i = debitIx OrElse i = creditIx Then&#xA;                Dim d As Double = 0&#xA;                If v IsNot Nothing AndAlso Not IsDBNull(v) Then&#xA;                    Dim s As String = v.ToString().Trim().Replace(&quot;,&quot;, &quot;&quot;)&#xA;                    If s.StartsWith(&quot;(&quot;) AndAlso s.EndsWith(&quot;)&quot;) Then&#xA;                        s = &quot;-&quot; &amp; s.Substring(1, s.Length - 2)&#xA;                    End If&#xA;                    If Not Double.TryParse(s, System.Globalization.NumberStyles.Any, ci, d) Then&#xA;                        d = 0&#xA;                    End If&#xA;                End If&#xA;                nr(i) = d&#xA;            Else&#xA;                nr(i) = v&#xA;            End If&#xA;        Next&#xA;        outT.Rows.Add(nr)&#xA;    Next&#xA;&#xA;    amountsFixed = &quot;debit col=&quot; &amp; debitIx.ToString() &amp; &quot; credit col=&quot; &amp; creditIx.ToString() &amp; &quot; rows=&quot; &amp; outT.Rows.Count.ToString() &amp; &quot; balRowsDropped=&quot; &amp; droppedBal.ToString()&#xA;    dtFinalGl = outT&#xA;End If" DisplayName="Force Debit/Credit to numbers" sap2010:WorkflowViewState.IdRef="InvokeCode_90">
+      <ui:InvokeCode.Arguments>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtFinalGl">[dtFinalGl]</InOutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="amountsFixed">[amountsFixed]</OutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="If dtFinalGl IsNot Nothing AndAlso dtFinalGl.Rows.Count &gt; 1 Then&#xA;    Dim ci = System.Globalization.CultureInfo.InvariantCulture&#xA;    Dim fmts As String() = {&quot;dd-MMM-yyyy&quot;, &quot;d-MMM-yyyy&quot;, &quot;dd MMM yyyy&quot;, &quot;d MMM yyyy&quot;, &quot;dd-MMM-yy&quot;, &quot;MM/dd/yyyy HH:mm:ss&quot;, &quot;M/d/yyyy H:mm:ss&quot;, &quot;M/d/yyyy h:mm:ss tt&quot;, &quot;MM/dd/yyyy&quot;, &quot;M/d/yyyy&quot;, &quot;yyyy-MM-dd HH:mm:ss&quot;, &quot;yyyy-MM-dd&quot;}&#xA;    Dim vdIx As Integer = -1&#xA;    Dim bdIx As Integer = -1&#xA;    Dim snoIx As Integer = -1&#xA;    For i As Integer = 0 To dtFinalGl.Columns.Count - 1&#xA;        Dim nm As String = dtFinalGl.Columns(i).ColumnName.Trim().ToLowerInvariant()&#xA;        If nm = &quot;value date&quot; OrElse nm = &quot;value_date&quot; Then vdIx = i&#xA;        If nm = &quot;booking date&quot; OrElse nm = &quot;bkg_date&quot; Then bdIx = i&#xA;        If nm = &quot;sno&quot; Then snoIx = i&#xA;    Next&#xA;    If vdIx &lt; 0 AndAlso dtFinalGl.Columns.Count &gt; 5 Then vdIx = 5&#xA;    If bdIx &lt; 0 AndAlso dtFinalGl.Columns.Count &gt; 4 Then bdIx = 4&#xA;&#xA;    ' Value Date arrives in three shapes: OADate numbers (carried forward),&#xA;    ' dd-MMM-yyyy text (statement side) and MM/dd/yyyy HH:mm:ss text (GL side).&#xA;    Dim toDate As Func(Of Object, DateTime) = Function(v As Object) As DateTime&#xA;        If v Is Nothing OrElse IsDBNull(v) Then Return DateTime.MaxValue&#xA;        If TypeOf v Is DateTime Then Return CType(v, DateTime).Date&#xA;        Dim s As String = v.ToString().Trim()&#xA;        If s = &quot;&quot; Then Return DateTime.MaxValue&#xA;        Dim d As Double&#xA;        If Double.TryParse(s, System.Globalization.NumberStyles.Float, ci, d) AndAlso d &gt; 20000 AndAlso d &lt; 80000 Then Return DateTime.FromOADate(d).Date&#xA;        Dim dt As DateTime&#xA;        If DateTime.TryParseExact(s, fmts, ci, System.Globalization.DateTimeStyles.AllowWhiteSpaces, dt) Then Return dt.Date&#xA;        If DateTime.TryParse(s, ci, System.Globalization.DateTimeStyles.AllowWhiteSpaces, dt) Then Return dt.Date&#xA;        Return DateTime.MaxValue&#xA;    End Function&#xA;&#xA;    ' Stable sort: oldest value date first, current day last. Rows with the&#xA;    ' same value date keep their existing order (settlement, GL, statement).&#xA;    Dim keyed As New List(Of Tuple(Of DateTime, Integer))&#xA;    Dim unparsed As Integer = 0&#xA;    For i As Integer = 0 To dtFinalGl.Rows.Count - 1&#xA;        Dim vd As DateTime = toDate(dtFinalGl.Rows(i)(vdIx))&#xA;        If vd = DateTime.MaxValue Then unparsed = unparsed + 1&#xA;        keyed.Add(Tuple.Create(vd, i))&#xA;    Next&#xA;    Dim ordered As List(Of Tuple(Of DateTime, Integer)) = keyed.OrderBy(Function(k) k.Item1).ThenBy(Function(k) k.Item2).ToList()&#xA;&#xA;    ' Both date columns are written as OADate numbers, the shape carried-forward&#xA;    ' rows already have: the template formats F:G as d-mmm-yy, and the next&#xA;    ' run's Aging falls back to FromOADate. Unparseable text is kept as is.&#xA;    Dim outT As System.Data.DataTable = dtFinalGl.Clone()&#xA;    If snoIx &gt;= 0 Then outT.Columns(snoIx).DataType = GetType(Integer)&#xA;    outT.Columns(vdIx).DataType = GetType(Object)&#xA;    If bdIx &gt;= 0 Then outT.Columns(bdIx).DataType = GetType(Object)&#xA;    Dim n As Integer = 0&#xA;    Dim converted As Integer = 0&#xA;    For Each k As Tuple(Of DateTime, Integer) In ordered&#xA;        n = n + 1&#xA;        Dim srcRow As System.Data.DataRow = dtFinalGl.Rows(k.Item2)&#xA;        Dim nr As System.Data.DataRow = outT.NewRow()&#xA;        For i As Integer = 0 To dtFinalGl.Columns.Count - 1&#xA;            If i = snoIx Then&#xA;                nr(i) = n&#xA;            ElseIf i = vdIx OrElse i = bdIx Then&#xA;                Dim dd As DateTime = toDate(srcRow(i))&#xA;                If dd = DateTime.MaxValue Then&#xA;                    nr(i) = srcRow(i)&#xA;                Else&#xA;                    nr(i) = dd.ToOADate()&#xA;                    converted = converted + 1&#xA;                End If&#xA;            Else&#xA;                nr(i) = srcRow(i)&#xA;            End If&#xA;        Next&#xA;        outT.Rows.Add(nr)&#xA;    Next&#xA;    dtFinalGl = outT&#xA;    sortMsg = &quot;SORT | Report rows ordered by Value Date | rows=&quot; &amp; n.ToString() &amp; &quot; vdCol=&quot; &amp; vdIx.ToString() &amp; &quot; unparsedDates=&quot; &amp; unparsed.ToString() &amp; &quot; datesConverted=&quot; &amp; converted.ToString()&#xA;End If" DisplayName="Sort outstanding by Value Date" sap2010:WorkflowViewState.IdRef="InvokeCode_SortVD">
+      <ui:InvokeCode.Arguments>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtFinalGl">[dtFinalGl]</InOutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="sortMsg">[sortMsg]</OutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:LogMessage DisplayName="Log - sort by Value Date" sap2010:WorkflowViewState.IdRef="LogMessage_SortVD" Level="Info" Message="[sortMsg]" />
+    <ui:WriteRange AddHeaders="False" DataTable="[dtFinalGl]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="435.2,148" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="Report" StartingCell="B15" WorkbookPath="[reconResultsPath]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:WriteRange>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="If dtOutstandingStatement IsNot Nothing AndAlso dtOutstandingStatement.Rows.Count &gt; 0 Then&#xA;    Dim ci = System.Globalization.CultureInfo.InvariantCulture&#xA;    Dim names As String() = {&quot;debit&quot;,&quot;credit&quot;,&quot;amount&quot;,&quot;balance&quot;,&quot;lcy_amount&quot;,&quot;fcy_amount&quot;,&quot;dr&quot;,&quot;cr&quot;}&#xA;    Dim targets As New List(Of Integer)&#xA;&#xA;    For i As Integer = 0 To dtOutstandingStatement.Columns.Count - 1&#xA;        Dim col As System.Data.DataColumn = dtOutstandingStatement.Columns(i)&#xA;        If col.DataType Is GetType(Double) OrElse col.DataType Is GetType(Decimal) Then Continue For&#xA;        Dim nm As String = col.ColumnName.Trim().ToLowerInvariant()&#xA;        Dim looksLikeMoney As Boolean = False&#xA;        For Each n As String In names&#xA;            If nm = n OrElse nm.EndsWith(&quot;_&quot; &amp; n) OrElse nm.EndsWith(&quot; &quot; &amp; n) Then looksLikeMoney = True&#xA;        Next&#xA;        If Not looksLikeMoney Then Continue For&#xA;&#xA;        Dim allParse As Boolean = True&#xA;        For Each r As System.Data.DataRow In dtOutstandingStatement.Rows&#xA;            Dim v As Object = r(i)&#xA;            If v Is Nothing OrElse IsDBNull(v) Then Continue For&#xA;            Dim s As String = v.ToString().Trim().Replace(&quot;,&quot;, &quot;&quot;)&#xA;            If s = &quot;&quot; Then Continue For&#xA;            If s.StartsWith(&quot;(&quot;) AndAlso s.EndsWith(&quot;)&quot;) Then s = &quot;-&quot; &amp; s.Substring(1, s.Length - 2)&#xA;            Dim d As Double&#xA;            If Not Double.TryParse(s, System.Globalization.NumberStyles.Any, ci, d) Then&#xA;                allParse = False&#xA;                Exit For&#xA;            End If&#xA;        Next&#xA;        If allParse Then targets.Add(i)&#xA;    Next&#xA;&#xA;    If targets.Count &gt; 0 Then&#xA;        Dim outT As New System.Data.DataTable()&#xA;        For i As Integer = 0 To dtOutstandingStatement.Columns.Count - 1&#xA;            If targets.Contains(i) Then&#xA;                outT.Columns.Add(dtOutstandingStatement.Columns(i).ColumnName, GetType(Double))&#xA;            Else&#xA;                outT.Columns.Add(dtOutstandingStatement.Columns(i).ColumnName, dtOutstandingStatement.Columns(i).DataType)&#xA;            End If&#xA;        Next&#xA;        For Each r As System.Data.DataRow In dtOutstandingStatement.Rows&#xA;            Dim nr As System.Data.DataRow = outT.NewRow()&#xA;            For i As Integer = 0 To dtOutstandingStatement.Columns.Count - 1&#xA;                Dim v As Object = r(i)&#xA;                If targets.Contains(i) Then&#xA;                    Dim d As Double = 0&#xA;                    If v IsNot Nothing AndAlso Not IsDBNull(v) Then&#xA;                        Dim s As String = v.ToString().Trim().Replace(&quot;,&quot;, &quot;&quot;)&#xA;                        If s.StartsWith(&quot;(&quot;) AndAlso s.EndsWith(&quot;)&quot;) Then s = &quot;-&quot; &amp; s.Substring(1, s.Length - 2)&#xA;                        If s &lt;&gt; &quot;&quot; Then Double.TryParse(s, System.Globalization.NumberStyles.Any, ci, d)&#xA;                    End If&#xA;                    nr(i) = d&#xA;                Else&#xA;                    nr(i) = v&#xA;                End If&#xA;            Next&#xA;            outT.Rows.Add(nr)&#xA;        Next&#xA;        dtOutstandingStatement = outT&#xA;    End If&#xA;End If" DisplayName="Numeric amounts - dtOutstandingStatement" sap2010:WorkflowViewState.IdRef="InvokeCode_204">
+      <ui:InvokeCode.Arguments>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtOutstandingStatement">[dtOutstandingStatement]</InOutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtOutstandingStatement]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="435.2,148" sap2010:WorkflowViewState.IdRef="WriteRange_4" SheetName="OUTSTANDING STATEMENT FORMATED" WorkbookPath="[reconResultsPath.replace(&quot;Recon Report&quot;,&quot;Workings&quot;)]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:WriteRange>
+    <TryCatch DisplayName="Try Catch - Root cause Analysis pivot" sap2010:WorkflowViewState.IdRef="TryCatch_RCA">
+      <TryCatch.Try>
+        <Sequence DisplayName="Build Root cause Analysis pivot" sap2010:WorkflowViewState.IdRef="Sequence_RCA">
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="' --- Root cause Analysis pivot -------------------------------------------&#xA;' Adds the &quot;Root cause Analysis&quot; pivot table the manual report carries, built&#xA;' on the Report sheet's detail block (header row 14 down to the last item):&#xA;' rows Root Cause &gt; Recommended Action &gt; Aging Group in tabular form, values&#xA;' Count, Sum of Debit and Sum of Credit, with a Grand Total. ClosedXML writes&#xA;' the pivot definition only; Excel fills it in when the workbook is opened&#xA;' (refresh on open). The totals logged below equal the Report sheet's J9/K9.&#xA;Dim wb As New XLWorkbook(reconResultsPath)&#xA;Dim ws As IXLWorksheet = wb.Worksheet(&quot;Report&quot;)&#xA;&#xA;Dim hdr As New Dictionary(Of String, Integer)(StringComparer.OrdinalIgnoreCase)&#xA;Dim firstCol As Integer = Integer.MaxValue&#xA;Dim lastCol As Integer = 0&#xA;For Each c As IXLCell In ws.Row(14).CellsUsed()&#xA;    Dim h As String = c.GetString().Trim()&#xA;    If h = &quot;&quot; Then Continue For&#xA;    If hdr.ContainsKey(h) Then Throw New Exception(&quot;Root cause Analysis: header '&quot; &amp; h &amp; &quot;' appears twice on Report row 14&quot;)&#xA;    hdr.Add(h, c.Address.ColumnNumber)&#xA;    firstCol = Math.Min(firstCol, c.Address.ColumnNumber)&#xA;    lastCol = Math.Max(lastCol, c.Address.ColumnNumber)&#xA;Next&#xA;For Each need As String In New String() {&quot;Root Cause&quot;, &quot;Recommended Action&quot;, &quot;Aging Group&quot;, &quot;Debit&quot;, &quot;Credit&quot;}&#xA;    If Not hdr.ContainsKey(need) Then Throw New Exception(&quot;Root cause Analysis: header '&quot; &amp; need &amp; &quot;' not found on Report row 14&quot;)&#xA;Next&#xA;' A pivot source may not have a blank header inside it.&#xA;For c As Integer = firstCol To lastCol&#xA;    If ws.Cell(14, c).GetString().Trim() = &quot;&quot; Then Throw New Exception(&quot;Root cause Analysis: blank header in Report row 14, column &quot; &amp; c.ToString())&#xA;Next&#xA;&#xA;Dim lastUsed As IXLRow = ws.LastRowUsed()&#xA;Dim lastRow As Integer = If(lastUsed Is Nothing, 14, lastUsed.RowNumber())&#xA;If lastRow &lt; 15 Then&#xA;    wb.Dispose()&#xA;    rcaMsg = &quot;RCA | no outstanding items on the Report sheet - pivot not added&quot;&#xA;    Return&#xA;End If&#xA;&#xA;' Totals for the log line only; the pivot does its own arithmetic in Excel.&#xA;Dim ci As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture&#xA;Dim num As Func(Of IXLCell, Double) = Function(cell As IXLCell)&#xA;    Dim d As Double = 0&#xA;    If cell.TryGetValue(Of Double)(d) Then Return d&#xA;    Dim s As String = cell.GetString().Trim().Replace(&quot;,&quot;, &quot;&quot;)&#xA;    If s.StartsWith(&quot;(&quot;) AndAlso s.EndsWith(&quot;)&quot;) Then s = &quot;-&quot; &amp; s.Substring(1, s.Length - 2)&#xA;    Double.TryParse(s, System.Globalization.NumberStyles.Any, ci, d)&#xA;    Return d&#xA;End Function&#xA;Dim totCnt As Integer = 0&#xA;Dim totDr As Double = 0&#xA;Dim totCr As Double = 0&#xA;For r As Integer = 15 To lastRow&#xA;    If ws.Cell(r, hdr(&quot;Aging Group&quot;)).IsEmpty() Then Continue For&#xA;    totCnt = totCnt + 1&#xA;    totDr = totDr + num(ws.Cell(r, hdr(&quot;Debit&quot;)))&#xA;    totCr = totCr + num(ws.Cell(r, hdr(&quot;Credit&quot;)))&#xA;Next&#xA;&#xA;' Rebuild on every run, first in the workbook as in the manual report.&#xA;If wb.Worksheets.Contains(&quot;Root cause Analysis&quot;) Then wb.Worksheets.Delete(&quot;Root cause Analysis&quot;)&#xA;Dim rca As IXLWorksheet = wb.Worksheets.Add(&quot;Root cause Analysis&quot;, 1)&#xA;&#xA;Dim source As IXLRange = ws.Range(14, firstCol, lastRow, lastCol)&#xA;Dim pt As IXLPivotTable = rca.PivotTables.Add(&quot;Root cause Analysis&quot;, rca.Cell(&quot;B2&quot;), source)&#xA;pt.RowLabels.Add(&quot;Root Cause&quot;)&#xA;pt.RowLabels.Add(&quot;Recommended Action&quot;)&#xA;pt.RowLabels.Add(&quot;Aging Group&quot;)&#xA;pt.Values.Add(&quot;Aging Group&quot;, &quot;Count&quot;).SetSummaryFormula(XLPivotSummary.Count)&#xA;pt.Values.Add(&quot;Debit&quot;, &quot;Sum of Debit&quot;).SetSummaryFormula(XLPivotSummary.Sum).NumberFormat.Format = &quot;#,##0.00&quot;&#xA;pt.Values.Add(&quot;Credit&quot;, &quot;Sum of Credit&quot;).SetSummaryFormula(XLPivotSummary.Sum).NumberFormat.Format = &quot;#,##0.00&quot;&#xA;pt.SetLayout(XLPivotLayout.Tabular)&#xA;pt.RepeatRowLabels = False&#xA;pt.ShowGrandTotalsRows = True&#xA;pt.ShowGrandTotalsColumns = True&#xA;pt.RefreshDataOnOpen = True&#xA;pt.Theme = XLPivotTableTheme.PivotStyleLight16&#xA;&#xA;rca.Column(1).Width = 3.4&#xA;rca.Column(2).Width = 42&#xA;rca.Column(3).Width = 36&#xA;rca.Column(4).Width = 14&#xA;rca.Column(5).Width = 9&#xA;rca.Column(6).Width = 20&#xA;rca.Column(7).Width = 20&#xA;&#xA;' Keep Report as the sheet the workbook opens on, with only it selected.&#xA;For Each sh As IXLWorksheet In wb.Worksheets&#xA;    sh.TabSelected = False&#xA;Next&#xA;ws.SetTabActive()&#xA;ws.TabSelected = True&#xA;&#xA;wb.Save()&#xA;wb.Dispose()&#xA;&#xA;' ClosedXML 0.95 does not write the tabular layout into the file and lists the&#xA;' aging groups in the order they first appear (oldest first). Patch the saved&#xA;' pivot definition directly: every field non-compact / non-outline, as in the&#xA;' manual report, and Aging Group ordered youngest to oldest.&#xA;Dim nsMain As System.Xml.Linq.XNamespace = &quot;http://schemas.openxmlformats.org/spreadsheetml/2006/main&quot;&#xA;Dim nsRel As System.Xml.Linq.XNamespace = &quot;http://schemas.openxmlformats.org/package/2006/relationships&quot;&#xA;Dim ageOrder As String() = {&quot;0-3 Days&quot;, &quot;4-30 Days&quot;, &quot;31-60 Days&quot;, &quot;61-90 Days&quot;, &quot;Above 90 Days&quot;}&#xA;Dim patched As Boolean = False&#xA;Using fs As New System.IO.FileStream(reconResultsPath, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite)&#xA;    Using zip As New System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Update)&#xA;        Dim readXml As Func(Of System.IO.Compression.ZipArchiveEntry, System.Xml.Linq.XDocument) = Function(e As System.IO.Compression.ZipArchiveEntry)&#xA;            Using st As System.IO.Stream = e.Open()&#xA;                Return System.Xml.Linq.XDocument.Load(st)&#xA;            End Using&#xA;        End Function&#xA;        Dim writeXml As Action(Of System.IO.Compression.ZipArchiveEntry, System.Xml.Linq.XDocument) = Sub(e As System.IO.Compression.ZipArchiveEntry, d As System.Xml.Linq.XDocument)&#xA;            Using st As System.IO.Stream = e.Open()&#xA;                st.SetLength(0)&#xA;                d.Save(st)&#xA;            End Using&#xA;        End Sub&#xA;&#xA;        For Each entry As System.IO.Compression.ZipArchiveEntry In zip.Entries.ToList()&#xA;            If Not entry.FullName.Contains(&quot;pivotTables/&quot;) OrElse entry.FullName.Contains(&quot;_rels/&quot;) Then Continue For&#xA;            Dim def As System.Xml.Linq.XDocument = readXml(entry)&#xA;            If def.Root Is Nothing OrElse def.Root.Name &lt;&gt; nsMain + &quot;pivotTableDefinition&quot; Then Continue For&#xA;            If CStr(def.Root.Attribute(&quot;name&quot;)) &lt;&gt; &quot;Root cause Analysis&quot; Then Continue For&#xA;&#xA;            def.Root.SetAttributeValue(&quot;compact&quot;, &quot;0&quot;)&#xA;            def.Root.SetAttributeValue(&quot;compactData&quot;, &quot;0&quot;)&#xA;            def.Root.SetAttributeValue(&quot;indent&quot;, &quot;0&quot;)&#xA;            Dim fields As List(Of System.Xml.Linq.XElement) = def.Root.Element(nsMain + &quot;pivotFields&quot;).Elements(nsMain + &quot;pivotField&quot;).ToList()&#xA;            For Each pf As System.Xml.Linq.XElement In fields&#xA;                pf.SetAttributeValue(&quot;compact&quot;, &quot;0&quot;)&#xA;                pf.SetAttributeValue(&quot;outline&quot;, &quot;0&quot;)&#xA;            Next&#xA;&#xA;            ' Map the Aging Group items to their text through the pivot cache.&#xA;            Dim ageIdx As Integer = fields.FindIndex(Function(pf As System.Xml.Linq.XElement) CStr(pf.Attribute(&quot;name&quot;)) = &quot;Aging Group&quot;)&#xA;            Dim relName As String = entry.FullName.Substring(0, entry.FullName.LastIndexOf(&quot;/&quot;) + 1) &amp; &quot;_rels/&quot; &amp; entry.Name &amp; &quot;.rels&quot;&#xA;            Dim relEntry As System.IO.Compression.ZipArchiveEntry = zip.GetEntry(relName)&#xA;            If ageIdx &gt;= 0 AndAlso relEntry IsNot Nothing Then&#xA;                Dim target As String = &quot;&quot;&#xA;                For Each rel As System.Xml.Linq.XElement In readXml(relEntry).Root.Elements(nsRel + &quot;Relationship&quot;)&#xA;                    If CStr(rel.Attribute(&quot;Type&quot;)).EndsWith(&quot;/pivotCacheDefinition&quot;) Then target = CStr(rel.Attribute(&quot;Target&quot;))&#xA;                Next&#xA;                If target.StartsWith(&quot;/&quot;) Then&#xA;                    target = target.Substring(1)&#xA;                ElseIf target &lt;&gt; &quot;&quot; Then&#xA;                    target = New Uri(New Uri(&quot;http://x/&quot; &amp; entry.FullName), target).AbsolutePath.Substring(1)&#xA;                End If&#xA;                Dim cacheEntry As System.IO.Compression.ZipArchiveEntry = If(target = &quot;&quot;, Nothing, zip.GetEntry(target))&#xA;                If cacheEntry IsNot Nothing Then&#xA;                    Dim cacheFields As List(Of System.Xml.Linq.XElement) = readXml(cacheEntry).Root.Element(nsMain + &quot;cacheFields&quot;).Elements(nsMain + &quot;cacheField&quot;).ToList()&#xA;                    Dim sharedTexts As List(Of String) = cacheFields(ageIdx).Element(nsMain + &quot;sharedItems&quot;).Elements().Select(Function(si As System.Xml.Linq.XElement) CStr(si.Attribute(&quot;v&quot;))).ToList()&#xA;                    Dim itemsEl As System.Xml.Linq.XElement = fields(ageIdx).Element(nsMain + &quot;items&quot;)&#xA;                    If itemsEl IsNot Nothing Then&#xA;                        Dim rank As Func(Of System.Xml.Linq.XElement, Integer) = Function(it As System.Xml.Linq.XElement)&#xA;                            Dim xa As System.Xml.Linq.XAttribute = it.Attribute(&quot;x&quot;)&#xA;                            If xa Is Nothing Then Return 1000&#xA;                            Dim x As Integer = CInt(xa.Value)&#xA;                            Dim pos As Integer = If(x &lt; sharedTexts.Count, Array.IndexOf(ageOrder, sharedTexts(x)), -1)&#xA;                            Return If(pos &lt; 0, 100 + x, pos)&#xA;                        End Function&#xA;                        Dim ordered As List(Of System.Xml.Linq.XElement) = itemsEl.Elements(nsMain + &quot;item&quot;).OrderBy(rank).ToList()&#xA;                        itemsEl.RemoveNodes()&#xA;                        For Each it As System.Xml.Linq.XElement In ordered&#xA;                            itemsEl.Add(it)&#xA;                        Next&#xA;                    End If&#xA;                End If&#xA;            End If&#xA;&#xA;            ' Excel rebuilds the row and column items on the refresh-on-open.&#xA;            If def.Root.Element(nsMain + &quot;rowItems&quot;) IsNot Nothing Then def.Root.Element(nsMain + &quot;rowItems&quot;).Remove()&#xA;            If def.Root.Element(nsMain + &quot;colItems&quot;) IsNot Nothing Then def.Root.Element(nsMain + &quot;colItems&quot;).Remove()&#xA;            writeXml(entry, def)&#xA;            patched = True&#xA;        Next&#xA;    End Using&#xA;End Using&#xA;If Not patched Then Throw New Exception(&quot;Root cause Analysis: pivot saved but its definition was not found to set the tabular layout&quot;)&#xA;&#xA;rcaMsg = &quot;RCA | Root cause Analysis pivot added | source=Report!&quot; &amp; source.RangeAddress.ToStringRelative() &amp; &quot; | items=&quot; &amp; totCnt.ToString() &amp; &quot; | DR=&quot; &amp; totDr.ToString(&quot;N2&quot;) &amp; &quot; | CR=&quot; &amp; totCr.ToString(&quot;N2&quot;)" DisplayName="Build Root cause Analysis pivot" sap2010:WorkflowViewState.IdRef="InvokeCode_RCA">
+            <ui:InvokeCode.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="reconResultsPath">[reconResultsPath]</InArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="rcaMsg">[rcaMsg]</OutArgument>
+            </ui:InvokeCode.Arguments>
+          </ui:InvokeCode>
+          <ui:LogMessage DisplayName="Log - Root cause Analysis" sap2010:WorkflowViewState.IdRef="LogMessage_RCA" Level="Info" Message="[rcaMsg]" />
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch_RCA">
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="rcaException" />
+            </ActivityAction.Argument>
+            <ui:LogMessage DisplayName="Log - Root cause Analysis failed" sap2010:WorkflowViewState.IdRef="LogMessage_RCAFailed" Level="Warn" Message="[&quot;RCA | Root cause Analysis pivot NOT built (report is otherwise unaffected) | &quot; + rcaException.Message]" />
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="' --- Balance self-check ------------------------------------------------&#xA;' J9/K9/&lt;bal&gt;10/&lt;bal&gt;12 are template formulas. ClosedXML saves no cached&#xA;' value for them, so an unattended run could never see its own Difference&#xA;' and a broken reconciliation shipped silently. Recompute the totals here and&#xA;' fail the run when it does not balance. The workbook is NOT modified.&#xA;Dim balCol As String = &quot;K&quot;&#xA;If Not amountColumn.Equals(&quot;CREDIT&quot;) Then&#xA;&#x9;balCol = &quot;J&quot;&#xA;End If&#xA;&#xA;Dim wbChk As New XLWorkbook(reconResultsPath)&#xA;Dim wsChk As IXLWorksheet = wbChk.Worksheet(&quot;Report&quot;)&#xA;&#xA;Dim lastUsed As IXLRow = wsChk.LastRowUsed()&#xA;Dim lastRow As Integer = 14&#xA;If lastUsed IsNot Nothing Then&#xA;&#x9;lastRow = lastUsed.RowNumber()&#xA;End If&#xA;&#xA;Dim totalDr As Double = 0&#xA;Dim totalCr As Double = 0&#xA;Dim dv As Double&#xA;Dim cv As Double&#xA;Dim r As Integer&#xA;For r = 15 To lastRow&#xA;&#x9;dv = 0&#xA;&#x9;cv = 0&#xA;&#x9;wsChk.Cell(&quot;J&quot; &amp; r.ToString()).TryGetValue(Of Double)(dv)&#xA;&#x9;wsChk.Cell(&quot;K&quot; &amp; r.ToString()).TryGetValue(Of Double)(cv)&#xA;&#x9;totalDr = totalDr + dv&#xA;&#x9;totalCr = totalCr + cv&#xA;Next&#xA;&#xA;Dim netOutstanding As Double = totalDr - totalCr&#xA;Dim glCutOff As Double = 0&#xA;wsChk.Cell(balCol &amp; &quot;11&quot;).TryGetValue(Of Double)(glCutOff)&#xA;Dim difference As Double = netOutstanding + glCutOff&#xA;&#xA;&#x27; Read-only: the template formulas in J9/K9/{J|K}10/{J|K}12 are left intact so&#xA;&#x27; Excel recalculates them on open. Nothing downstream reads those cells.&#xA;wbChk.Dispose()&#xA;&#xA;Dim summary As String = fileDate &amp; &quot; | DR=&quot; &amp; totalDr.ToString(&quot;N2&quot;) &amp; &quot; | CR=&quot; &amp; totalCr.ToString(&quot;N2&quot;) &amp; &quot; | NET OUTSTANDING=&quot; &amp; netOutstanding.ToString(&quot;N2&quot;) &amp; &quot; | GL CUT-OFF=&quot; &amp; glCutOff.ToString(&quot;N2&quot;) &amp; &quot; | DIFFERENCE=&quot; &amp; difference.ToString(&quot;N2&quot;) &amp; &quot; | detail rows=&quot; &amp; (lastRow - 14).ToString()&#xA;&#xA;balanceOk = Not (Math.Abs(difference) &gt; 0.01)&#xA;&#xA;If balanceOk Then&#xA;&#x9;balanceMsg = &quot;RECON BALANCE OK | &quot; &amp; summary&#xA;Else&#xA;&#x9;balanceMsg = &quot;RECON OUT OF BALANCE | &quot; &amp; summary &amp; &quot; | report=&quot; &amp; reconResultsPath&#xA;End If" DisplayName="Balance Self-Check" sap:VirtualizedContainerService.HintSize="435.2,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_900">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="reconResultsPath">[reconResultsPath]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="amountColumn">[amountColumn]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="fileDate">[fileDate]</InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="balanceMsg">[balanceMsg]</OutArgument>
+        <OutArgument x:TypeArguments="x:Boolean" x:Key="balanceOk">[balanceOk]</OutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:LogMessage DisplayName="Log - balance check" sap:VirtualizedContainerService.HintSize="435.2,112" sap2010:WorkflowViewState.IdRef="LogMessage_900" Level="Info" Message="[balanceMsg]" />
+    <If Condition="[Not balanceOk]" DisplayName="If - out of balance" sap:VirtualizedContainerService.HintSize="435.2,260" sap2010:WorkflowViewState.IdRef="If_900">
+      <If.Then>
+        <Throw DisplayName="Throw - out of balance" Exception="[New System.Exception(balanceMsg)]" sap:VirtualizedContainerService.HintSize="416,114.66666666666667" sap2010:WorkflowViewState.IdRef="Throw_900" />
+      </If.Then>
+    </If>
+    <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="435.2,90.4" sap2010:WorkflowViewState.IdRef="ReportStatus_4" StatusText="[&quot;100% - &quot;+reportType.ToUpper()+&quot; RECON COMPLETE&quot;]" />
+  </Sequence>
+</Activity>

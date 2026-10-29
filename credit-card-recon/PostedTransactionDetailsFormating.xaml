@@ -1,0 +1,341 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="PostedTransactionDetailsFormating" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="dtHistoricalReconTransactionsReportRemoteOnUsMatched" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtAutoPaymentThankYou" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtCCDD" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="creditCardWorkingsFileName" Type="InOutArgument(x:String)" />
+    <x:Property Name="dtHistoricalReconTransactionsReportRemoteOnUs" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtRemoteOnUsTransactionNotYetPostedMatched" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtCCSPMatched" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtGlStatementPRDP" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="lastReconDate" Type="InOutArgument(x:String)" />
+    <x:Property Name="exchangeGainOrLoss" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="reconDate" Type="InOutArgument(x:String)" />
+    <x:Property Name="dtRemoteOnUsTransactionNotYetPosted" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtCCSP" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsPurchaseMatched" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtHistoricalReconTransactionsReportIncomeRev" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtHistoricalReconTransactionsReportPurchase" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtHistoricalReconTransactionsReportIncome" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtGlStatementLatePostedTxn" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsServiceTaxAndIncomeRev" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsMiscAdjustmentDebit" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsAtmCashWithdrawal" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsRecurringTxn" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsUniqueTxn" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsMiscAdjustmentCredit" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsFundTransfer" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsCashAdvance" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsLatePaymentFee" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsPurchase" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtGlStatementATMGvtLevy" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPrepaidCreditCardReversedTransactions" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtGlStatementMatched" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtHistoricalReconTransactionsReportMatched" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsMatched" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsManual" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsRefund" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetailsIncome" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="adjustedCMSBalance" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="adjustedCBSBalance" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="grandTotalPostedTransactionDetails" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="balanceMovementDebitOrCredit" Type="InOutArgument(x:String)" />
+    <x:Property Name="balanceMovement" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="debitAmountCMS" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="toDate" Type="InOutArgument(x:String)" />
+    <x:Property Name="dtPostedTransactiondetailsSummary" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="cardManagementSystemBalance" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="dtGlStatement" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="totalCreditsGL" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="totalDebitsGL" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="fromDate" Type="InOutArgument(x:String)" />
+    <x:Property Name="dtReversalsGl" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="glCurrentBalance" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="outStandingCreditAmountGL" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="outStandingDebitAmountGL" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="outStandingCreditAmountCMS" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="outStandingDebitAmountCMS" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="outstandingMatchedTxnReportStatement" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="outstandingMatchedGlStatement" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="glCutOffBalance" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="creditCardFileName" Type="InOutArgument(x:String)" />
+    <x:Property Name="dtHistoricalReconTransactionsReport" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtTransactionReportRRNAbsent" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtTransactionReportRRNPresent" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtAuthorisationsReport" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtAccountBalanceAndStatusReport" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPrepaidCreditCardTransactions" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtTransactionReport" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtPostedTransactionDetails" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="totalPostedTransactionDetails" Type="InOutArgument(x:Decimal)" />
+    <x:Property Name="dtPostedTransactionDetailsRev" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtGlStatementIncomeUpdatedCBSOnly" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="dtGlStatementRefund" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="smtpPort" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="smtpServer" Type="InOutArgument(x:String)" />
+    <x:Property Name="emailBody" Type="InOutArgument(x:String)" />
+    <x:Property Name="emailSubject" Type="InOutArgument(x:String)" />
+    <x:Property Name="recipientEmails" Type="InOutArgument(x:String)" />
+    <x:Property Name="fromEmail" Type="InOutArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>PostedTransactionDetailsFormating_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>OfficeOpenXml</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Globalization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Text.Encoding.CodePages</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>EPPlus</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="PostedTransactionDetailsFormating" sap:VirtualizedContainerService.HintSize="859.2,2817.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="PTD" sap:VirtualizedContainerService.HintSize="483.2,2794.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:InvokeCode ContinueOnError="{x:Null}" Code="// Function to ensure necessary columns exist in relevant DataTables&#xA;void EnsureColumnsExist(DataTable table, string[] columns)&#xA;{&#xA;    foreach (string column in columns)&#xA;    {&#xA;        if (!table.Columns.Contains(column))&#xA;        {&#xA;            table.Columns.Add(column, typeof(string));&#xA;            //Console.WriteLine($&quot;Added missing column: {column} to table {table.TableName}&quot;);&#xA;        }&#xA;    }&#xA;}&#xA;&#xA;// Define required columns for all tables&#xA;string[] requiredColumns = { &quot;ARN&quot;, &quot;C_PAN&quot;, &quot;Search Key&quot;, &quot;ARN FOUND&quot;, &quot;ARN Search Key&quot;, &quot;TraceAuditNumber&quot;, &quot;ReferenceNumber&quot; };&#xA;&#xA;// Ensure columns exist in all relevant DataTables&#xA;EnsureColumnsExist(dtPostedTransactionDetails, requiredColumns);&#xA;EnsureColumnsExist(dtTransactionReport, new string[] { &quot;ARN&quot;, &quot;Billing Amount&quot; });&#xA;&#xA;// Process posted transaction details&#xA;foreach (DataRow postedRow in dtPostedTransactionDetails.Rows)&#xA;{&#xA;    string microfilmReferenceNumber = postedRow[&quot;Microfilm Reference Number&quot;]?.ToString() ?? &quot;&quot;;&#xA;    string billingAmount = postedRow[&quot;Billing Amount&quot;]?.ToString() ?? &quot;0&quot;;&#xA;&#xA;    // Assign ARN and create a unique key&#xA;    postedRow[&quot;ARN&quot;] = microfilmReferenceNumber;&#xA;    string arnSearchKey = $&quot;{microfilmReferenceNumber}|{billingAmount}&quot;;&#xA;    postedRow[&quot;ARN Search Key&quot;] = arnSearchKey;&#xA;&#xA;&#xA;    // Search for a match in dtTransactionReport&#xA;    var matchingRows = dtTransactionReport.AsEnumerable()&#xA;        .Where(row =&gt;&#xA;        {&#xA;            string arn = row[&quot;ARN&quot;]?.ToString() ?? &quot;&quot;;&#xA;            string cleanArn = arn.Contains(&quot;/&quot;)&#xA;                ? arn.Substring(0, arn.IndexOf('/'))&#xA;                : arn.Substring(0, Math.Min(23, arn.Length));&#xA;&#xA;            return cleanArn.Equals(microfilmReferenceNumber, StringComparison.OrdinalIgnoreCase) &amp;&amp;&#xA;                   row[&quot;Billing Amount&quot;].ToString() == billingAmount;&#xA;        });&#xA;&#xA;    if (matchingRows.Any())&#xA;    {&#xA;        postedRow[&quot;ARN FOUND&quot;] = &quot;TRUE&quot;;&#xA;&#xA;        foreach (var matchingTransactionRow in matchingRows)&#xA;        {&#xA;            // Update postedRow with TraceAuditNumber and ReferenceNumber from dtTransactionReport&#xA;            string traceAuditNumber = matchingTransactionRow[&quot;Trace Audit Number&quot;]?.ToString() ?? &quot;&quot;;&#xA;            string referenceNumber = matchingTransactionRow[&quot;Reference Number&quot;]?.ToString() ?? &quot;&quot;;&#xA;            postedRow[&quot;TraceAuditNumber&quot;] = traceAuditNumber;&#xA;            postedRow[&quot;ReferenceNumber&quot;] = referenceNumber;&#xA;        }&#xA;    }&#xA;    else&#xA;    {&#xA;        postedRow[&quot;ARN FOUND&quot;] = &quot;FALSE&quot;;&#xA;        //Console.WriteLine($&quot;No matching transaction found for ARN: {microfilmReferenceNumber}, Billing Amount: {billingAmount}&quot;);&#xA;    }&#xA;}&#xA;" DisplayName="Search Microfilm Reference Number" sap:VirtualizedContainerService.HintSize="449.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
+        <ui:InvokeCode.Arguments>
+          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPostedTransactionDetails">[dtPostedTransactionDetails]</InOutArgument>
+          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtTransactionReport">[dtTransactionReport]</InOutArgument>
+        </ui:InvokeCode.Arguments>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:InvokeCode>
+      <Assign sap:VirtualizedContainerService.HintSize="449.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dtPostedTransactionDetailsRev]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[dtPostedTransactionDetails.Clone()]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap:VirtualizedContainerService.HintSize="449.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dtPostedTransactionDetailsMatched]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[dtPostedTransactionDetails.Clone()]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:InvokeCode ContinueOnError="{x:Null}" Code="&#xA;// Ensure the column 'C_PAN' exists&#xA;if (!dtPostedTransactionDetails.Columns.Contains(&quot;C_PAN&quot;))&#xA;{&#xA;    dtPostedTransactionDetails.Columns.Add(&quot;C_PAN&quot;, typeof(string));&#xA;}&#xA;&#xA;// Replace '000000' with 'XXXXXX' and set 'C_PAN' column&#xA;foreach (DataRow row in dtPostedTransactionDetails.Rows)&#xA;{&#xA;    string deviceNumber = row[&quot;Device Number&quot;].ToString();&#xA;    if (!string.IsNullOrEmpty(deviceNumber))&#xA;    {&#xA;        string maskedPAN = deviceNumber.Substring(0, 6) + &quot;XXXXXX&quot; + deviceNumber.Substring(12, 4);&#xA;        row[&quot;C_PAN&quot;] = maskedPAN;&#xA;    }&#xA;}&#xA;" DisplayName="PTD add C_PAN" sap:VirtualizedContainerService.HintSize="449.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_2" Language="CSharp">
+        <ui:InvokeCode.Arguments>
+          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPostedTransactionDetails">[dtPostedTransactionDetails]</InOutArgument>
+        </ui:InvokeCode.Arguments>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:InvokeCode>
+      <ui:InvokeCode ContinueOnError="{x:Null}" Code="// Ensure the column 'Search Key' exists&#xA;if (!dtPostedTransactionDetails.Columns.Contains(&quot;Search Key&quot;))&#xA;{&#xA;    dtPostedTransactionDetails.Columns.Add(&quot;Search Key&quot;, typeof(string));&#xA;}&#xA;&#xA;foreach (DataRow row in dtPostedTransactionDetails.Rows)&#xA;{&#xA;    string cPan = row[&quot;C_PAN&quot;]?.ToString() ?? string.Empty;&#xA;    string referenceNumber = row[&quot;ReferenceNumber&quot;]?.ToString() ?? string.Empty;&#xA;&#xA;    string billingAmountFormatted = &quot;0.00&quot;;&#xA;    if (decimal.TryParse(row[&quot;Billing Amount&quot;]?.ToString(), out decimal billingAmount))&#xA;    {&#xA;        billingAmountFormatted = billingAmount.ToString(&quot;F2&quot;);&#xA;    }&#xA;&#xA;    string searchKey = cPan + referenceNumber + billingAmountFormatted;&#xA;&#xA;    // Remove special characters (keep only letters and numbers)&#xA;    searchKey = Regex.Replace(searchKey, &quot;[^a-zA-Z0-9]&quot;, &quot;&quot;);&#xA;&#xA;    row[&quot;Search Key&quot;] = searchKey;&#xA;}&#xA;" DisplayName="PTD add Search Key" sap:VirtualizedContainerService.HintSize="449.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_3" Language="CSharp">
+        <ui:InvokeCode.Arguments>
+          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPostedTransactionDetails">[dtPostedTransactionDetails]</InOutArgument>
+        </ui:InvokeCode.Arguments>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:InvokeCode>
+      <ui:InvokeCode ContinueOnError="{x:Null}" Code="// Step 1: Ensure necessary columns exist&#xA;if (!dtPostedTransactionDetails.Columns.Contains(&quot;Transaction Type&quot;))&#xA;{&#xA;    dtPostedTransactionDetails.Columns.Add(&quot;Transaction Type&quot;, typeof(string));&#xA;    Console.WriteLine(&quot;Added missing column: Transaction Type&quot;);&#xA;}&#xA;&#xA;if (!dtPostedTransactionDetails.Columns.Contains(&quot;Billing Amount&quot;))&#xA;{&#xA;    dtPostedTransactionDetails.Columns.Add(&quot;Billing Amount&quot;, typeof(decimal));&#xA;    Console.WriteLine(&quot;Added missing column: Billing Amount&quot;);&#xA;}&#xA;&#xA;// Step 2: Final Transaction Code to DR/CR mappings&#xA;var transactionCodeTypeMapping = new System.Collections.Generic.Dictionary&lt;string, string&gt;(System.StringComparer.OrdinalIgnoreCase)&#xA;{&#xA;    {&quot;ATM CASH WITHDRAWAL&quot;, &quot;DR&quot;},&#xA;&#x9;    {&quot;ATM CASH WITHDRAWAL REV&quot;, &quot;CR&quot;},&#xA;    {&quot;CARD FEE&quot;, &quot;DR&quot;},&#xA;&#x9;    {&quot;CARD FEE REV&quot;, &quot;CR&quot;},&#xA;    {&quot;CASH ADVANCE&quot;, &quot;DR&quot;},&#xA;&#x9;    {&quot;CASH ADVANCE REV&quot;, &quot;CR&quot;},&#xA;    {&quot;FUND TRANSFER&quot;, &quot;CR&quot;},&#xA;&#x9;    {&quot;FUND TRANSFER REV&quot;, &quot;DR&quot;},&#xA;    {&quot;INTEREST CHARGES&quot;, &quot;DR&quot;},&#xA;&#x9;    {&quot;INTEREST CHARGES REV&quot;, &quot;CR&quot;},&#xA;    {&quot;LATE PAYMENT FEE&quot;, &quot;DR&quot;},&#xA;&#x9;    {&quot;LATE PAYMENT FEE REV&quot;, &quot;CR&quot;},&#xA;    {&quot;MISC ADJUSTMENT CREDIT&quot;, &quot;CR&quot;},&#xA;&#x9;    {&quot;MISC ADJUSTMENT CREDIT REV&quot;, &quot;DR&quot;},&#xA;    {&quot;OVERLIMIT FEE&quot;, &quot;DR&quot;},&#xA;&#x9;    {&quot;OVERLIMIT FEE REV&quot;, &quot;CR&quot;},&#xA;    {&quot;PURCHASE&quot;, &quot;DR&quot;},&#xA;&#x9;    {&quot;PURCHASE REV&quot;, &quot;CR&quot;},&#xA;    {&quot;RECURRING TXN&quot;, &quot;DR&quot;},&#xA;&#x9;    {&quot;RECURRING TXN REV&quot;, &quot;CR&quot;},&#xA;    {&quot;REFUND&quot;, &quot;CR&quot;},&#xA;&#x9;    {&quot;REFUND REV&quot;, &quot;DR&quot;},&#xA;    {&quot;SERVICE TAX/TAX ON INCOME&quot;, &quot;DR&quot;},&#xA;    {&quot;SERVICE TAX/TAX ON INCOME REV&quot;, &quot;CR&quot;},&#xA;    {&quot;TRANSACTION FEES&quot;, &quot;DR&quot;},&#xA;&#x9;    {&quot;TRANSACTION FEES REV&quot;, &quot;CR&quot;},&#xA;    {&quot;UNIQUE TXN&quot;, &quot;DR&quot;},&#xA;&#x9;    {&quot;UNIQUE TXN REV&quot;, &quot;CR&quot;},&#xA;    {&quot;AUTO PAYMENT - THANK YOU&quot;, &quot;CR&quot;},&#xA;    {&quot;AUTO PAYMENT REV&quot;, &quot;DR&quot;}&#xA;};&#xA;&#xA;// Step 3: Set Transaction Type based on Transaction Code&#xA;foreach (System.Data.DataRow row in dtPostedTransactionDetails.Rows)&#xA;{&#xA;    string transactionCode = row[&quot;Transaction Code&quot;].ToString().Trim();&#xA;&#xA;    if (transactionCodeTypeMapping.ContainsKey(transactionCode))&#xA;    {&#xA;        row[&quot;Transaction Type&quot;] = transactionCodeTypeMapping[transactionCode];&#xA;    }&#xA;    else&#xA;    {&#xA;        row[&quot;Transaction Type&quot;] = &quot;&quot;; // If not found, leave it blank&#xA;    }&#xA;}&#xA;&#xA;// Step 4: Negate Billing Amounts where Transaction Type = CR&#xA;foreach (System.Data.DataRow row in dtPostedTransactionDetails.Rows)&#xA;{&#xA;    string transactionType = row[&quot;Transaction Type&quot;].ToString().Trim().ToUpper();&#xA;&#xA;    if (transactionType == &quot;CR&quot;)&#xA;    {&#xA;        if (decimal.TryParse(row[&quot;Billing Amount&quot;].ToString(), out decimal billingAmount))&#xA;        {&#xA;            row[&quot;Billing Amount&quot;] = -Math.Abs(billingAmount); // Force it to be negative&#xA;        }&#xA;    }&#xA;}&#xA;&#xA;// Step 5: Save changes (optional)&#xA;dtPostedTransactionDetails.AcceptChanges();&#xA;" DisplayName="NEGATE DR/CR IN PTD" sap:VirtualizedContainerService.HintSize="449.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_4" Language="CSharp">
+        <ui:InvokeCode.Arguments>
+          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPostedTransactionDetails">[dtPostedTransactionDetails]</InOutArgument>
+          <InOutArgument x:TypeArguments="x:Decimal" x:Key="totalPostedTransactionDetails">[totalPostedTransactionDetails]</InOutArgument>
+        </ui:InvokeCode.Arguments>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:InvokeCode>
+      <Sequence DisplayName="Write RAW PTD" sap:VirtualizedContainerService.HintSize="449.6,1696.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="try&#xA;{&#xA;    // Ensure the Excel file exists&#xA;    if (!File.Exists(creditCardWorkingsFileName))&#xA;    {&#xA;        throw new FileNotFoundException($&quot;The file '{creditCardWorkingsFileName}' does not exist.&quot;);&#xA;    }&#xA;&#xA;    // Create or open the Excel package&#xA;    using (ExcelPackage excelPackage = new ExcelPackage(new FileInfo(creditCardWorkingsFileName)))&#xA;    {&#xA;        // Access or create the worksheet named &quot;GL&quot;&#xA;        ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[&quot;PTD&quot;];&#xA;        if (workSheet == null)&#xA;        {&#xA;            // Create the &quot;HIST&quot; worksheet if it doesn't exist&#xA;            workSheet = excelPackage.Workbook.Worksheets.Add(&quot;PTD&quot;);&#xA;        }&#xA;&#xA;        // Write DataTable headers&#xA;        for (int col = 0; col &lt; dtPostedTransactionDetails.Columns.Count; col++)&#xA;        {&#xA;            workSheet.Cells[1, col + 1].Value = dtPostedTransactionDetails.Columns[col].ColumnName;&#xA;        }&#xA;&#xA;        // Write DataTable rows&#xA;        for (int rowIndex = 0; rowIndex &lt; dtPostedTransactionDetails.Rows.Count; rowIndex++)&#xA;        {&#xA;            for (int colIndex = 0; colIndex &lt; dtPostedTransactionDetails.Columns.Count; colIndex++)&#xA;            {&#xA;                // Write the cell values&#xA;                workSheet.Cells[rowIndex + 2, colIndex + 1].Value = dtPostedTransactionDetails.Rows[rowIndex][colIndex];&#xA;&#xA;                // Apply custom date format if the column contains dates (optional)&#xA;                // For example, assuming the column &quot;Booking Date&quot; is of type DateTime&#xA;                if (dtPostedTransactionDetails.Columns[colIndex].ColumnName == &quot;Booking Date&quot;)&#xA;                {&#xA;                    workSheet.Cells[rowIndex + 2, colIndex + 1].Style.Numberformat.Format = &quot;dd-mmm-yy&quot;; // Custom date format&#xA;                }&#xA;            }&#xA;        }&#xA;&#xA;        // Save the changes to the Excel file&#xA;        excelPackage.Save();&#xA;    }&#xA;}&#xA;catch (Exception ex)&#xA;{&#xA;    // Handle any exceptions&#xA;    Console.WriteLine(&quot;An error occurred: &quot; + ex.Message);&#xA;}&#xA;" DisplayName="Excel write &quot;PTD&quot;" sap:VirtualizedContainerService.HintSize="416,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_5" Language="CSharp">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="x:String" x:Key="creditCardWorkingsFileName">[creditCardWorkingsFileName]</InOutArgument>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPostedTransactionDetails">[dtPostedTransactionDetails]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeCode>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Ensure the summary DataTable is initialized&#xA;If dtPostedTransactiondetailsSummary Is Nothing Then&#xA;    dtPostedTransactiondetailsSummary = New DataTable()&#xA;End If&#xA;&#xA;' Create columns in the summary table&#xA;dtPostedTransactiondetailsSummary.Columns.Add(&quot;Transaction Code&quot;, GetType(String))&#xA;dtPostedTransactiondetailsSummary.Columns.Add(&quot;Total Billing Amount&quot;, GetType(Decimal)) ' Use Decimal for financial data&#xA;&#xA;' Group data by Transaction Code and calculate totals&#xA;Dim groupedData = dtPostedTransactionDetails.AsEnumerable() _&#xA;    .GroupBy(Function(row) row.Field(Of String)(&quot;Transaction Code&quot;)) _&#xA;    .Select(Function(Group) New With {&#xA;        .TransactionCode = Group.Key,&#xA;        .TotalBillingAmount = Group.Sum(Function(row) Convert.ToDecimal(row(&quot;Billing Amount&quot;))) ' Convert to Decimal explicitly&#xA;    })&#xA;&#xA;' Populate the summary table&#xA;For Each Group In groupedData&#xA;    dtPostedTransactiondetailsSummary.Rows.Add(Group.TransactionCode, Group.TotalBillingAmount)&#xA;Next&#xA;&#xA;' Calculate the grand total&#xA;Dim grandTotal As Decimal = dtPostedTransactionDetails.AsEnumerable() _&#xA;    .Sum(Function(row) Convert.ToDecimal(row(&quot;Billing Amount&quot;))) ' Convert to Decimal explicitly&#xA;dtPostedTransactiondetailsSummary.Rows.Add(&quot;Grand Total&quot;, grandTotal)&#xA;grandTotalPostedTransactionDetails = grandTotal&#xA;&#xA;' Output the summary table (for testing/debugging purposes)&#xA;'For Each row As DataRow In dtPostedTransactiondetailsSummary.Rows&#xA;    'Console.WriteLine(String.Format(&quot;Transaction Code: {0}, Total Billing Amount: {1}&quot;, row(&quot;Transaction Code&quot;), row(&quot;Total Billing Amount&quot;)))&#xA;'Next&#xA;" DisplayName="summarize PSD by Transaction Code" sap:VirtualizedContainerService.HintSize="416,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_6">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPostedTransactionDetails">[dtPostedTransactionDetails]</InOutArgument>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPostedTransactiondetailsSummary">[dtPostedTransactiondetailsSummary]</InOutArgument>
+            <InOutArgument x:TypeArguments="x:Decimal" x:Key="grandTotalPostedTransactionDetails">[grandTotalPostedTransactionDetails]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeCode>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="' Calculate balance movement&#xA;Dim systemDifference AS Decimal&#xA;systemDifference = adjustedCBSBalance - adjustedCMSBalance&#xA;&#xA;balanceMovement = grandTotalPostedTransactionDetails-systemDifference&#xA;&#xA;' Log calculated balance movement&#xA;Console.WriteLine(&quot;Adjusted CBS Balance: &quot; &amp; adjustedCBSBalance)&#xA;Console.WriteLine(&quot;Adjusted CMS Balance: &quot; &amp; adjustedCMSBalance)&#xA;Console.WriteLine(&quot;Balance Movement: &quot; &amp; balanceMovement)&#xA;&#xA;' Determine if it is a Debit, Credit, or Neutral&#xA;If balanceMovement &gt; 0 Then&#xA;    balanceMovementDebitOrCredit = &quot;DEBIT&quot;&#xA;    Console.WriteLine(&quot;Balance Movement Type: DEBIT&quot;)&#xA;ElseIf balanceMovement &lt; 0 Then&#xA;    balanceMovementDebitOrCredit = &quot;CREDIT&quot;&#xA;    Console.WriteLine(&quot;Balance Movement Type: CREDIT&quot;)&#xA;Else&#xA;    balanceMovementDebitOrCredit = &quot;NEUTRAL&quot; ' Optional case for zero balance&#xA;    Console.WriteLine(&quot;Balance Movement Type: NEUTRAL&quot;)&#xA;End If&#xA;" DisplayName="balanceMovement " sap:VirtualizedContainerService.HintSize="416,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_7">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="x:Decimal" x:Key="adjustedCMSBalance">[adjustedCMSBalance]</InOutArgument>
+            <InOutArgument x:TypeArguments="x:Decimal" x:Key="balanceMovement">[balanceMovement]</InOutArgument>
+            <InOutArgument x:TypeArguments="x:String" x:Key="balanceMovementDebitOrCredit">[balanceMovementDebitOrCredit]</InOutArgument>
+            <InOutArgument x:TypeArguments="x:Decimal" x:Key="grandTotalPostedTransactionDetails">[grandTotalPostedTransactionDetails]</InOutArgument>
+            <InOutArgument x:TypeArguments="x:Decimal" x:Key="adjustedCBSBalance">[adjustedCBSBalance]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+        </ui:InvokeCode>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="// === 1. Ensure MATCH column exists ===&#xA;void EnsureMatchColumn(DataTable table)&#xA;{&#xA;    if (!table.Columns.Contains(&quot;MATCH&quot;))&#xA;    {&#xA;        table.Columns.Add(&quot;MATCH&quot;, typeof(bool));&#xA;    }&#xA;}&#xA;&#xA;EnsureMatchColumn(dtPostedTransactionDetails);&#xA;EnsureMatchColumn(dtPostedTransactionDetailsRev);&#xA;&#xA;// === 2. Helper to Copy Row ===&#xA;void CopyRow(DataRow source, DataRow target, DataTable targetTable)&#xA;{&#xA;    foreach (DataColumn col in targetTable.Columns)&#xA;    {&#xA;        if (source.Table.Columns.Contains(col.ColumnName))&#xA;        {&#xA;            target[col.ColumnName] = source[col.ColumnName];&#xA;        }&#xA;    }&#xA;}&#xA;&#xA;// === 3. Strict Matching Logic: C_PAN + Device + Opposite Transaction Type + Opposite Billing Amount + Reversal ===&#xA;var rowsToRemoveAfterMatching = new List&lt;DataRow&gt;();&#xA;&#xA;for (int i = 0; i &lt; dtPostedTransactionDetails.Rows.Count; i++)&#xA;{&#xA;    var row1 = dtPostedTransactionDetails.Rows[i];&#xA;&#xA;    string cpan1 = row1[&quot;C_PAN&quot;]?.ToString() ?? &quot;&quot;;&#xA;    string device1 = row1[&quot;Device Number&quot;]?.ToString() ?? &quot;&quot;;&#xA;    string reversal1 = row1.Table.Columns.Contains(&quot;Reversal&quot;) ? (row1[&quot;Reversal&quot;]?.ToString().ToUpper() ?? &quot;&quot;) : &quot;&quot;;&#xA;    string transactionType1 = row1.Table.Columns.Contains(&quot;Transaction Type&quot;) ? (row1[&quot;Transaction Type&quot;]?.ToString().ToUpper() ?? &quot;&quot;) : &quot;&quot;;&#xA;    decimal billingAmount1 = 0;&#xA;    decimal.TryParse(row1[&quot;Billing Amount&quot;]?.ToString(), out billingAmount1);&#xA;&#xA;    if (string.IsNullOrEmpty(cpan1)) continue;&#xA;    if (row1[&quot;MATCH&quot;] != DBNull.Value &amp;&amp; Convert.ToBoolean(row1[&quot;MATCH&quot;])) continue; // already matched&#xA;&#xA;    bool matched = false;&#xA;&#xA;    for (int j = 0; j &lt; dtPostedTransactionDetails.Rows.Count; j++)&#xA;    {&#xA;        if (i == j) continue;&#xA;&#xA;        var row2 = dtPostedTransactionDetails.Rows[j];&#xA;&#xA;        string cpan2 = row2[&quot;C_PAN&quot;]?.ToString() ?? &quot;&quot;;&#xA;        string device2 = row2[&quot;Device Number&quot;]?.ToString() ?? &quot;&quot;;&#xA;        string reversal2 = row2.Table.Columns.Contains(&quot;Reversal&quot;) ? (row2[&quot;Reversal&quot;]?.ToString().ToUpper() ?? &quot;&quot;) : &quot;&quot;;&#xA;        string transactionType2 = row2.Table.Columns.Contains(&quot;Transaction Type&quot;) ? (row2[&quot;Transaction Type&quot;]?.ToString().ToUpper() ?? &quot;&quot;) : &quot;&quot;;&#xA;        decimal billingAmount2 = 0;&#xA;        decimal.TryParse(row2[&quot;Billing Amount&quot;]?.ToString(), out billingAmount2);&#xA;&#xA;        if (string.IsNullOrEmpty(cpan2)) continue;&#xA;        if (row2[&quot;MATCH&quot;] != DBNull.Value &amp;&amp; Convert.ToBoolean(row2[&quot;MATCH&quot;])) continue; // already matched&#xA;&#xA;        bool strictMatch =&#xA;            cpan1 == cpan2 &amp;&amp;&#xA;            device1 == device2 &amp;&amp;&#xA;            transactionType1 != transactionType2 &amp;&amp; // Opposite Transaction Type (CR &lt;&gt; DR)&#xA;            Math.Round(billingAmount1, 2) == -Math.Round(billingAmount2, 2) &amp;&amp;&#xA;            reversal1 != reversal2; // One is YES, one is NO&#xA;&#xA;        if (strictMatch)&#xA;        {&#xA;            // Mark both rows as matched&#xA;            row1[&quot;MATCH&quot;] = true;&#xA;            row2[&quot;MATCH&quot;] = true;&#xA;            matched = true;&#xA;&#xA;            // === 🔥 LOG the matched pair ===&#xA;            // Console.WriteLine(&quot;✅ Matched Reversal Pair:&quot;);&#xA;            // Console.WriteLine($&quot;   -&gt; Original: {row1[&quot;Transaction Code&quot;]} | Amount: {billingAmount1} | Reversal: {reversal1} | Type: {transactionType1}&quot;);&#xA;            // Console.WriteLine($&quot;   -&gt; Reversal: {row2[&quot;Transaction Code&quot;]} | Amount: {billingAmount2} | Reversal: {reversal2} | Type: {transactionType2}&quot;);&#xA;            // Console.WriteLine($&quot;   -&gt; C_PAN: {cpan1} | Device: {device1}&quot;);&#xA;            // Console.WriteLine(&quot;&quot;);&#xA;&#xA;            break;&#xA;        }&#xA;    }&#xA;&#xA;    if (matched)&#xA;    {&#xA;        rowsToRemoveAfterMatching.Add(row1);&#xA;    }&#xA;}&#xA;&#xA;// === 4. Move matched + REV reversals to dtPostedTransactionDetailsRev ===&#xA;var rowsToRemoveFinal = new List&lt;DataRow&gt;();&#xA;&#xA;foreach (var row in dtPostedTransactionDetails.AsEnumerable().ToList())&#xA;{&#xA;    bool isMatched = row.Table.Columns.Contains(&quot;MATCH&quot;) &amp;&amp; row[&quot;MATCH&quot;] != DBNull.Value &amp;&amp; Convert.ToBoolean(row[&quot;MATCH&quot;]);&#xA;    string transCode = row[&quot;Transaction Code&quot;]?.ToString().ToUpper() ?? &quot;&quot;;&#xA;&#xA;    bool containsRev = transCode.Contains(&quot;REV&quot;);&#xA;&#xA;    if (isMatched || containsRev)&#xA;    {&#xA;        var newRow = dtPostedTransactionDetailsRev.NewRow();&#xA;        CopyRow(row, newRow, dtPostedTransactionDetailsRev);&#xA;&#xA;        // Set MATCH TRUE/FALSE&#xA;        newRow[&quot;MATCH&quot;] = isMatched;&#xA;&#xA;        dtPostedTransactionDetailsRev.Rows.Add(newRow);&#xA;&#xA;        // Remove from source&#xA;        rowsToRemoveFinal.Add(row);&#xA;    }&#xA;}&#xA;&#xA;// Remove all moved rows&#xA;foreach (var row in rowsToRemoveFinal.Distinct().ToList())&#xA;{&#xA;    dtPostedTransactionDetails.Rows.Remove(row);&#xA;}&#xA;&#xA;// Accept Changes&#xA;dtPostedTransactionDetails.AcceptChanges();&#xA;dtPostedTransactionDetailsRev.AcceptChanges();&#xA;&#xA;// === 5. Print Final Summary ===&#xA;int matchedCount = dtPostedTransactionDetailsRev.AsEnumerable()&#xA;    .Count(r =&gt; r[&quot;MATCH&quot;] != DBNull.Value &amp;&amp; Convert.ToBoolean(r[&quot;MATCH&quot;]));&#xA;&#xA;int unmatchedCount = dtPostedTransactionDetailsRev.AsEnumerable()&#xA;    .Count(r =&gt; r[&quot;MATCH&quot;] != DBNull.Value &amp;&amp; !Convert.ToBoolean(r[&quot;MATCH&quot;]));&#xA;&#xA;Console.WriteLine(&quot;=============================================&quot;);&#xA;Console.WriteLine($&quot;✅ Stage 1 Strict Matching Complete:&quot;);&#xA;Console.WriteLine($&quot;✅ Total Matched Reversals (MATCH=TRUE): {matchedCount}&quot;);&#xA;Console.WriteLine($&quot;✅ Total Unmatched Reversals (MATCH=FALSE): {unmatchedCount}&quot;);&#xA;Console.WriteLine($&quot;✅ Remaining rows in dtPostedTransactionDetails: {dtPostedTransactionDetails.Rows.Count}&quot;);&#xA;Console.WriteLine(&quot;=============================================&quot;);&#xA;" DisplayName="Remove Auto REV" sap:VirtualizedContainerService.HintSize="416,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_14" Language="CSharp">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPostedTransactionDetails">[dtPostedTransactionDetails]</InOutArgument>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPostedTransactionDetailsRev">[dtPostedTransactionDetailsRev]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeCode>
+        <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="416,122.4" sap2010:WorkflowViewState.IdRef="ReportStatus_2" StatusText="[&quot;Done removing AUTO REV from PostedTransaction Details....&quot;]" />
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="try&#xA;{&#xA;    // Ensure the Excel file exists&#xA;    if (!File.Exists(creditCardWorkingsFileName))&#xA;    {&#xA;        throw new FileNotFoundException($&quot;The file '{creditCardWorkingsFileName}' does not exist.&quot;);&#xA;    }&#xA;&#xA;    // Create or open the Excel package&#xA;    using (ExcelPackage excelPackage = new ExcelPackage(new FileInfo(creditCardWorkingsFileName)))&#xA;    {&#xA;        // Access or create the worksheet named &quot;PTD FINAL&quot;&#xA;        ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[&quot;PTD  REV&quot;];&#xA;        if (workSheet == null)&#xA;        {&#xA;            // Create the &quot;HIST&quot; worksheet if it doesn't exist&#xA;            workSheet = excelPackage.Workbook.Worksheets.Add(&quot;PTD  REV&quot;);&#xA;        }&#xA;&#xA;        // Write DataTable headers&#xA;        for (int col = 0; col &lt; dtPostedTransactionDetailsRev.Columns.Count; col++)&#xA;        {&#xA;            workSheet.Cells[1, col + 1].Value = dtPostedTransactionDetailsRev.Columns[col].ColumnName;&#xA;        }&#xA;&#xA;        // Write DataTable rows&#xA;        for (int rowIndex = 0; rowIndex &lt; dtPostedTransactionDetailsRev.Rows.Count; rowIndex++)&#xA;        {&#xA;            for (int colIndex = 0; colIndex &lt; dtPostedTransactionDetailsRev.Columns.Count; colIndex++)&#xA;            {&#xA;                // Write the cell values&#xA;                workSheet.Cells[rowIndex + 2, colIndex + 1].Value = dtPostedTransactionDetailsRev.Rows[rowIndex][colIndex];&#xA;&#xA;                // Apply custom date format if the column contains dates (optional)&#xA;                // For example, assuming the column &quot;Booking Date&quot; is of type DateTime&#xA;                if (dtPostedTransactionDetailsRev.Columns[colIndex].ColumnName == &quot;Booking Date&quot;)&#xA;                {&#xA;                    workSheet.Cells[rowIndex + 2, colIndex + 1].Style.Numberformat.Format = &quot;dd-mmm-yy&quot;; // Custom date format&#xA;                }&#xA;            }&#xA;        }&#xA;&#xA;        // Save the changes to the Excel file&#xA;        excelPackage.Save();&#xA;    }&#xA;}&#xA;catch (Exception ex)&#xA;{&#xA;    // Handle any exceptions&#xA;    Console.WriteLine(&quot;An error occurred: &quot; + ex.Message);&#xA;}&#xA;" DisplayName="Excel write &quot;PTD REV&quot;" sap:VirtualizedContainerService.HintSize="416,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_16" Language="CSharp">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="x:String" x:Key="creditCardWorkingsFileName">[creditCardWorkingsFileName]</InOutArgument>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPostedTransactionDetailsRev">[dtPostedTransactionDetailsRev]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeCode>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="&#xA;                // List to store rows to remove&#xA;var rowsToRemove = new List&lt;DataRow&gt;();&#xA;&#xA;// Ensure MATCH column exists and is boolean&#xA;if (!dtPostedTransactionDetailsRev.Columns.Contains(&quot;MATCH&quot;))&#xA;{&#xA;    dtPostedTransactionDetailsRev.Columns.Add(&quot;MATCH&quot;, typeof(bool));&#xA;}&#xA;&#xA;// Loop and filter rows with MATCH = true&#xA;foreach (DataRow row in dtPostedTransactionDetailsRev.Rows)&#xA;{&#xA;    if (row[&quot;MATCH&quot;] != DBNull.Value &amp;&amp; Convert.ToBoolean(row[&quot;MATCH&quot;]) == true)&#xA;    {&#xA;        dtPostedTransactionDetailsMatched.ImportRow(row);&#xA;        rowsToRemove.Add(row);&#xA;    }&#xA;}&#xA;&#xA;// Remove matched rows from dtPostedTransactionDetailsRev&#xA;foreach (var row in rowsToRemove)&#xA;{&#xA;    dtPostedTransactionDetailsRev.Rows.Remove(row);&#xA;}&#xA;&#xA;// Save changes&#xA;dtPostedTransactionDetailsRev.AcceptChanges();&#xA;dtPostedTransactionDetailsMatched.AcceptChanges();&#xA;&#xA;// Print the number of removed rows&#xA;int removedCount = rowsToRemove.Count;&#xA;Console.WriteLine($&quot;✅ Removed {removedCount} matched rows from dtPostedTransactionDetailsRev.&quot;);&#xA;&#xA;if (removedCount % 2 == 0)&#xA;{&#xA;    Console.WriteLine(&quot;✅ Count is even, as expected.&quot;);&#xA;}&#xA;else&#xA;{&#xA;    Console.WriteLine(&quot;⚠️ Count is NOT even — please investigate.&quot;);&#xA;}&#xA;" DisplayName="MOVE ALL MATCH=TRUE" sap:VirtualizedContainerService.HintSize="416,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_18" Language="CSharp">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPostedTransactionDetailsRev">[dtPostedTransactionDetailsRev]</InOutArgument>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPostedTransactionDetailsMatched">[dtPostedTransactionDetailsMatched]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeCode>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="try&#xA;{&#xA;    // Ensure the Excel file exists&#xA;    if (!File.Exists(creditCardWorkingsFileName))&#xA;    {&#xA;        throw new FileNotFoundException($&quot;The file '{creditCardWorkingsFileName}' does not exist.&quot;);&#xA;    }&#xA;&#xA;    // Create or open the Excel package&#xA;    using (ExcelPackage excelPackage = new ExcelPackage(new FileInfo(creditCardWorkingsFileName)))&#xA;    {&#xA;        // Access or create the worksheet named &quot;PTD FINAL&quot;&#xA;        ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[&quot;PTD  UNMATCH REV&quot;];&#xA;        if (workSheet == null)&#xA;        {&#xA;            // Create the &quot;HIST&quot; worksheet if it doesn't exist&#xA;            workSheet = excelPackage.Workbook.Worksheets.Add(&quot;PTD UNMATCH REV&quot;);&#xA;        }&#xA;&#xA;        // Write DataTable headers&#xA;        for (int col = 0; col &lt; dtPostedTransactionDetailsRev.Columns.Count; col++)&#xA;        {&#xA;            workSheet.Cells[1, col + 1].Value = dtPostedTransactionDetailsRev.Columns[col].ColumnName;&#xA;        }&#xA;&#xA;        // Write DataTable rows&#xA;        for (int rowIndex = 0; rowIndex &lt; dtPostedTransactionDetailsRev.Rows.Count; rowIndex++)&#xA;        {&#xA;            for (int colIndex = 0; colIndex &lt; dtPostedTransactionDetailsRev.Columns.Count; colIndex++)&#xA;            {&#xA;                // Write the cell values&#xA;                workSheet.Cells[rowIndex + 2, colIndex + 1].Value = dtPostedTransactionDetailsRev.Rows[rowIndex][colIndex];&#xA;&#xA;                // Apply custom date format if the column contains dates (optional)&#xA;                // For example, assuming the column &quot;Booking Date&quot; is of type DateTime&#xA;                if (dtPostedTransactionDetailsRev.Columns[colIndex].ColumnName == &quot;Booking Date&quot;)&#xA;                {&#xA;                    workSheet.Cells[rowIndex + 2, colIndex + 1].Style.Numberformat.Format = &quot;dd-mmm-yy&quot;; // Custom date format&#xA;                }&#xA;            }&#xA;        }&#xA;&#xA;        // Save the changes to the Excel file&#xA;        excelPackage.Save();&#xA;    }&#xA;}&#xA;catch (Exception ex)&#xA;{&#xA;    // Handle any exceptions&#xA;    Console.WriteLine(&quot;An error occurred: &quot; + ex.Message);&#xA;}&#xA;" DisplayName="Excel write &quot;PTD UNMATCH REV&quot;" sap:VirtualizedContainerService.HintSize="416,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_19" Language="CSharp">
+          <ui:InvokeCode.Arguments>
+            <InOutArgument x:TypeArguments="x:String" x:Key="creditCardWorkingsFileName">[creditCardWorkingsFileName]</InOutArgument>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtPostedTransactionDetailsRev">[dtPostedTransactionDetailsRev]</InOutArgument>
+          </ui:InvokeCode.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeCode>
+        <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="416,113.6" sap2010:WorkflowViewState.IdRef="ReportStatus_3" StatusText="[&quot;Done writing PostedTransaction Details to workings file ....&quot;]" />
+      </Sequence>
+    </Sequence>
+  </Sequence>
+</Activity>

@@ -1,0 +1,445 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Auto_Extraction" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="extractionState" Type="OutArgument(x:String)" />
+    <x:Property Name="currency" Type="InArgument(x:String)" />
+    <x:Property Name="statementFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="glFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="glCode" Type="InArgument(x:String)" />
+    <x:Property Name="processName" Type="InArgument(x:String)" />
+    <x:Property Name="glFromDate" Type="InArgument(x:String)" />
+    <x:Property Name="glToDate" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Auto_Extraction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Auto_Extraction" sap:VirtualizedContainerService.HintSize="704,4939.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="SQ_Compute If Unspooled" sap:VirtualizedContainerService.HintSize="536.6666666666666,4916.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="ui:DatabaseConnection" Name="DBConnectionString" />
+        <Variable x:TypeArguments="x:String" Name="cbsExtractedSuccess" />
+        <Variable x:TypeArguments="s:DateTime" Name="runStart" />
+        <Variable x:TypeArguments="s:DateTime" Name="queryStart" />
+        <Variable x:TypeArguments="x:Boolean" Name="dbConnected" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign sap:VirtualizedContainerService.HintSize="502.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_20">
+        <Assign.To>
+          <OutArgument x:TypeArguments="s:DateTime">[runStart]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="s:DateTime">[DateTime.Now]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:LogMessage DisplayName="Log - START banner" sap:VirtualizedContainerService.HintSize="502.6666666666667,144" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Info" Message="[&quot;=== EXTRACTION START | process=&quot; + processName + &quot; | glCode=&quot; + glCode + &quot; | currencyIn=&quot; + currency + &quot; | glFile=&quot; + glFilePath + &quot; | stmtFile=&quot; + statementFilePath + &quot; | robot=&quot; + Environment.MachineName + &quot; | at=&quot; + DateTime.Now.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;) + &quot; ===&quot;]" />
+      <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="502.6666666666667,1424" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <TryCatch.Try>
+          <Sequence DisplayName="Connect to CBS SQL" sap:VirtualizedContainerService.HintSize="466.6666666666667,607.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_30">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log - connecting" sap:VirtualizedContainerService.HintSize="432.6666666666667,144" sap2010:WorkflowViewState.IdRef="LogMessage_21" Level="Info" Message="[&quot;EXTRACTION | DB | connecting to SQL Server (linked server CBS) ...&quot;]" />
+            <ui:DatabaseConnect DisplayName="Connect to database" sap:VirtualizedContainerService.HintSize="432.6666666666667,92" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="Microsoft.Data.SqlClient" ConnectionString="Data Source=10.200.224.98,4050;Persist Security Info=True;User ID=rpauser;Password=Robot**@dm1n;Encrypt=False" DatabaseConnection="[DBConnectionString]" />
+            <Assign sap:VirtualizedContainerService.HintSize="432.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_21">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Boolean">[dbConnected]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Boolean">[True]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:LogMessage DisplayName="Log - connected" sap:VirtualizedContainerService.HintSize="432.6666666666667,134.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_22" Level="Info" Message="[&quot;EXTRACTION | DB | connection established&quot;]" />
+          </Sequence>
+        </TryCatch.Try>
+        <TryCatch.Catches>
+          <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+            <ActivityAction x:TypeArguments="s:Exception">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="466.6666666666667,548" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign sap:VirtualizedContainerService.HintSize="432.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_22">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Boolean">[dbConnected]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Boolean">[False]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <Assign sap:VirtualizedContainerService.HintSize="432.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_23">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[cbsExtractedSuccess]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">["CBS FAILED"]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <ui:LogMessage DisplayName="Log - DB connect failed" sap:VirtualizedContainerService.HintSize="432.6666666666667,134.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Error" Message="[&quot;EXTRACTION | DB CONNECT FAILED | process=&quot; + processName + &quot; | &quot; + exception.GetType().ToString + &quot; | &quot; + exception.Message + Environment.NewLine + exception.ToString]" />
+              </Sequence>
+            </ActivityAction>
+          </Catch>
+        </TryCatch.Catches>
+        <TryCatch.Finally>
+          <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="466.6666666666667,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_21">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Sequence>
+        </TryCatch.Finally>
+      </TryCatch>
+      <Sequence DisplayName="Extract statements. CBS" sap:VirtualizedContainerService.HintSize="502.6666666666667,3021.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="sd:DataTable" Name="dtCbsStatementResult" />
+        </Sequence.Variables>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Assign sap:VirtualizedContainerService.HintSize="468.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_8">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[currency]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String" xml:space="preserve">[if( currency.Equals("834") or currency.Equals("840"), if(currency.Equals("834"),"TZS","USD"), currency  )]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <ui:LogMessage DisplayName="Log - resolved params" sap:VirtualizedContainerService.HintSize="468.6666666666667,144" sap2010:WorkflowViewState.IdRef="LogMessage_23" Level="Info" Message="[&quot;EXTRACTION | params | currency=&quot; + currency + &quot; | glCode=&quot; + glCode + &quot; | businessDate=&quot; + glFromDate + &quot;..&quot; + glToDate + &quot; | dbConnected=&quot; + dbConnected.ToString]" />
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="468.6666666666667,144" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Trace" Message="[&quot;EXTRACTION | GL QUERY SQL |&quot; + Environment.NewLine + &quot;SELECT *&#xA;FROM OPENQUERY(CBS,'&#xA;WITH PARAMS AS&#xA;(&#xA;    SELECT&#xA;       ''&quot;+currency+&quot;''  CURRENCY,&#xA;        ''&quot;+glCode+&quot;''      GL_CODE,&#xA;        TO_DATE(''&quot;+glFromDate+&quot;'', ''YYYYMMDD'') AS P_FROM_DATE,&#xA;        TO_DATE(''&quot;+glToDate+&quot;'', ''YYYYMMDD'') AS P_TO_DATE&#xA;    FROM DUAL&#xA;),&#xA;OPENING_BAL AS&#xA;(&#xA;    SELECT&#xA;        0 ROWNUMBERKB,&#xA;        P.P_FROM_DATE BOOKINGDATE,&#xA;        NULL TRN_REF_NO,&#xA;        NULL VALUEDATE,&#xA;        NULL TRN_CODE,&#xA;        ''SYSTEM'' TRANSACTIONMAKER,&#xA;        ''OPENING BALANCE'' NARRATION,&#xA;        NULL REL_ACCT,&#xA;        0 DEBIT,&#xA;        0 CREDIT,&#xA;        NULL INSTR_NO,&#xA;        NVL(SUM(DECODE(H.DRCR_IND,''D'',-1,1)*DECODE(H.AC_CCY,''TZS'',H.LCY_AMOUNT,H.FCY_AMOUNT)),0) BALANCE,&#xA;        NULL AUTHSATUS,&#xA;        NULL BRANCH_CODE,&#xA;        NULL BRANCH_NAME,&#xA;        NULL ADDRESS,&#xA;        NULL ACCOUNT_NO,&#xA;        NULL GL_DESC,&#xA;        NULL ACCOUNT_CCY,&#xA;        NULL P_FROM_DATE,&#xA;        NULL P_TO_DATE,&#xA;        NULL OWNER_ID&#xA;    FROM PARAMS P,FCUBS147.ACZB_HISTORY H&#xA;    WHERE H.AC_NO = P.GL_CODE&#xA;      AND H.AC_CCY = P.CURRENCY&#xA;      AND H.TRN_DT &lt; P.P_FROM_DATE&#xA;    GROUP BY&#xA;        P.P_FROM_DATE&#xA;),&#xA; &#xA;TXNS AS&#xA;(&#xA; &#xA;SELECT ROW_NUMBER() OVER (PARTITION BY A.AC_NO ORDER BY A.AC_ENTRY_SR_NO) ROW_NUM,&#xA;       A.TRN_DT     BKG_DATE,&#xA;       A.VALUE_DT   VALUE_DATE,&#xA;       A.TRN_REF_NO,&#xA;       A.TRN_CODE,&#xA;       A.USER_ID || '' - '' || SU.USER_NAME TRANSACTIONMAKER,&#xA;      TRN_DESC||'' - ''|| (SELECT   fcubs147.ACPKS_STMT_NARRATION_CUSTOM.FN_GET_NARRATIVE( A.AC_ENTRY_SR_NO) from dual) NARRATION,&#xA;       A.INSTRUMENT_CODE INSTR_NO,&#xA;       NVL(A.RELATED_ACCOUNT, A.RELATED_REFERENCE) RELATED_ACCOUNT,&#xA;       DECODE(A.DRCR_IND, ''D'',DECODE(A.AC_CCY, ''TZS'', A.LCY_AMOUNT, A.FCY_AMOUNT), 0) DEBIT,&#xA;       DECODE(A.DRCR_IND,''C'',DECODE(A.AC_CCY, ''TZS'', A.LCY_AMOUNT, A.FCY_AMOUNT), 0) CREDIT,&#xA;       DECODE(A.DRCR_IND, ''D'',  -DECODE(A.AC_CCY, ''TZS'', A.LCY_AMOUNT, A.FCY_AMOUNT), &#xA;       DECODE(A.AC_CCY, ''TZS'', A.LCY_AMOUNT, A.FCY_AMOUNT)) MOVEMENT,&#xA;       DECODE(A.AUTH_STAT, ''A'', NULL, ''*'') AUTH_STAT,&#xA;       A.AC_BRANCH BRANCH_CODE,&#xA;       A.AC_CCY,&#xA;       SB.BRANCH_NAME&#xA;FROM FCUBS147.ACVW_ALL_AC_ENTRIES A&#xA;  LEFT JOIN FCUBS147.SMTB_USER SU&#xA;    ON SU.USER_ID = A.USER_ID&#xA;  LEFT JOIN FCUBS147.STTM_TRN_CODE TC&#xA;    ON TC.TRN_CODE = A.TRN_CODE&#xA;  LEFT JOIN FCUBS147.STZM_BRANCH SB&#xA;    ON SB.BRANCH_CODE = A.AC_BRANCH&#xA;CROSS JOIN PARAMS P&#xA; &#xA;WHERE A.AC_NO = P.GL_CODE&#xA;   AND A.AC_CCY = P.CURRENCY&#xA;   AND A.CUST_GL = ''G''&#xA;   AND A.TRN_DT BETWEEN P.P_FROM_DATE AND P.P_TO_DATE),&#xA; &#xA;CLOSING_BAL AS&#xA;(&#xA;    SELECT&#xA;        999999 ROWNUMBERKB,&#xA;        P.P_TO_DATE BOOKINGDATE,&#xA;        NULL TRN_REF_NO,&#xA;        NULL VALUEDATE,&#xA;        NULL TRN_CODE,&#xA;        ''SYSTEM'' TRANSACTIONMAKER,&#xA;        ''CLOSING BALANCE'' NARRATION,&#xA;        NULL REL_ACCT,&#xA;        0 DEBIT,&#xA;        0 CREDIT,&#xA;        NULL INSTR_NO,&#xA;        NVL(SUM(DECODE(H.DRCR_IND,''D'',-1,1)*DECODE(H.AC_CCY,''TZS'',H.LCY_AMOUNT,H.FCY_AMOUNT)),0) BALANCE,&#xA;        NULL  AUTHSATUS,&#xA;        NULL BRANCH_CODE,&#xA;        NULL BRANCH_NAME,&#xA;        NULL ADDRESS,&#xA;        NULL ACCOUNT_NO,&#xA;        NULL GL_DESC,&#xA;        NULL ACCOUNT_CCY,&#xA;        NULL P_FROM_DATE,&#xA;        NULL P_TO_DATE,&#xA;        NULL OWNER_ID&#xA;    FROM PARAMS P,&#xA;         FCUBS147.ACZB_HISTORY H&#xA;    WHERE H.AC_NO = P.GL_CODE&#xA;      AND H.AC_CCY = P.CURRENCY&#xA;      AND H.TRN_DT &lt;  (P.P_TO_DATE+1)&#xA;    GROUP BY&#xA;        P.P_TO_DATE&#xA;),&#xA; &#xA; &#xA;TXN_SD AS &#xA;(&#xA;SELECT&#xA;    A.ROW_NUM ROWNUMBERKB,&#xA;    A.BKG_DATE BOOKINGDATE,&#xA;    A.TRN_REF_NO,&#xA;    A.VALUE_DATE VALUEDATE,&#xA;    A.TRN_CODE,&#xA;    A.TRANSACTIONMAKER,&#xA;    A.NARRATION,&#xA;    A.RELATED_ACCOUNT REL_ACCT,&#xA;    A.DEBIT,&#xA;    A.CREDIT,&#xA;    A.INSTR_NO,&#xA;    SUM(A.MOVEMENT) OVER (PARTITION BY A.BRANCH_CODE ORDER BY A.ROW_NUM) BALANCE,&#xA;    A.AUTH_STAT AUTHSATUS,&#xA;    A.BRANCH_CODE,&#xA;    A.BRANCH_NAME,&#xA;    A.BRANCH_NAME ADDRESS,&#xA;    P.GL_CODE ACCOUNT_NO,&#xA;    GM.GL_DESC,&#xA;    AC_CCY ACCOUNT_CCY,&#xA;    P.P_FROM_DATE,&#xA;    P.P_TO_DATE,&#xA;    NULL OWNER_ID&#xA;&#xA;&#xA;FROM TXNS A&#xA;CROSS JOIN PARAMS P&#xA;LEFT JOIN FCUBS147.GLTM_GLMASTER GM&#xA;       ON GM.GL_CODE = P.GL_CODE ORDER BY  A.ROW_NUM&#xA;)&#xA; &#xA; &#xA;SELECT &#xA;    BOOKINGDATE,&#xA;    VALUEDATE,&#xA;    TRN_REF_NO, &#xA;    INSTR_NO,&#xA;    NARRATION,&#xA;    REL_ACCT,&#xA;    DEBIT,&#xA;    CREDIT,&#xA;    BALANCE&#xA;FROM &#xA;(&#xA;   SELECT * FROM OPENING_BAL&#xA;    UNION ALL&#xA;     SELECT * FROM TXN_SD&#xA;    UNION ALL&#xA;    SELECT * FROM CLOSING_BAL&#xA;) ORDER BY 1')&#xA; &quot;]" />
+        <Assign sap:VirtualizedContainerService.HintSize="468.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_24">
+          <Assign.To>
+            <OutArgument x:TypeArguments="s:DateTime">[queryStart]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="s:DateTime">[DateTime.Now]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <ui:LogMessage DisplayName="Log - query start" sap:VirtualizedContainerService.HintSize="468.6666666666667,144" sap2010:WorkflowViewState.IdRef="LogMessage_24" Level="Info" Message="[&quot;EXTRACTION | GL FETCH | executing query | glCode=&quot; + glCode + &quot; | currency=&quot; + currency + &quot; | timeoutMs=200000&quot;]" />
+        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="468.6666666666667,986" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+          <TryCatch.Try>
+            <Sequence DisplayName="Run GL query" sap:VirtualizedContainerService.HintSize="466.6666666666667,346" sap2010:WorkflowViewState.IdRef="Sequence_31">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:ExecuteQuery ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="change back to -1" CommandType="Text" DataTable="[dtCbsStatementResult]" DisplayName="Run query" ExistingDbConnection="[DBConnectionString]" sap:VirtualizedContainerService.HintSize="432.6666666666667,151.33333333333334" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="[&quot;SELECT *&#xA;FROM OPENQUERY(CBS,'&#xA;WITH PARAMS AS&#xA;(&#xA;    SELECT&#xA;       ''&quot;+currency+&quot;''  CURRENCY,&#xA;        ''&quot;+glCode+&quot;''      GL_CODE,&#xA;        TO_DATE(''&quot;+glFromDate+&quot;'', ''YYYYMMDD'') AS P_FROM_DATE,&#xA;        TO_DATE(''&quot;+glToDate+&quot;'', ''YYYYMMDD'') AS P_TO_DATE&#xA;    FROM DUAL&#xA;),&#xA;OPENING_BAL AS&#xA;(&#xA;    SELECT&#xA;        0 ROWNUMBERKB,&#xA;        P.P_FROM_DATE BOOKINGDATE,&#xA;        NULL TRN_REF_NO,&#xA;        NULL VALUEDATE,&#xA;        NULL TRN_CODE,&#xA;        ''SYSTEM'' TRANSACTIONMAKER,&#xA;        ''OPENING BALANCE'' NARRATION,&#xA;        NULL REL_ACCT,&#xA;        0 DEBIT,&#xA;        0 CREDIT,&#xA;        NULL INSTR_NO,&#xA;        NVL(SUM(DECODE(H.DRCR_IND,''D'',-1,1)*DECODE(H.AC_CCY,''TZS'',H.LCY_AMOUNT,H.FCY_AMOUNT)),0) BALANCE,&#xA;        NULL AUTHSATUS,&#xA;        NULL BRANCH_CODE,&#xA;        NULL BRANCH_NAME,&#xA;        NULL ADDRESS,&#xA;        NULL ACCOUNT_NO,&#xA;        NULL GL_DESC,&#xA;        NULL ACCOUNT_CCY,&#xA;        NULL P_FROM_DATE,&#xA;        NULL P_TO_DATE,&#xA;        NULL OWNER_ID&#xA;    FROM PARAMS P,FCUBS147.ACZB_HISTORY H&#xA;    WHERE H.AC_NO = P.GL_CODE&#xA;      AND H.AC_CCY = P.CURRENCY&#xA;      AND H.TRN_DT &lt; P.P_FROM_DATE&#xA;    GROUP BY&#xA;        P.P_FROM_DATE&#xA;),&#xA; &#xA;TXNS AS&#xA;(&#xA; &#xA;SELECT ROW_NUMBER() OVER (PARTITION BY A.AC_NO ORDER BY A.AC_ENTRY_SR_NO) ROW_NUM,&#xA;       A.TRN_DT     BKG_DATE,&#xA;       A.VALUE_DT   VALUE_DATE,&#xA;       A.TRN_REF_NO,&#xA;       A.TRN_CODE,&#xA;       A.USER_ID || '' - '' || SU.USER_NAME TRANSACTIONMAKER,&#xA;      TRN_DESC||'' - ''|| (SELECT   fcubs147.ACPKS_STMT_NARRATION_CUSTOM.FN_GET_NARRATIVE( A.AC_ENTRY_SR_NO) from dual) NARRATION,&#xA;       A.INSTRUMENT_CODE INSTR_NO,&#xA;       NVL(A.RELATED_ACCOUNT, A.RELATED_REFERENCE) RELATED_ACCOUNT,&#xA;       DECODE(A.DRCR_IND, ''D'',DECODE(A.AC_CCY, ''TZS'', A.LCY_AMOUNT, A.FCY_AMOUNT), 0) DEBIT,&#xA;       DECODE(A.DRCR_IND,''C'',DECODE(A.AC_CCY, ''TZS'', A.LCY_AMOUNT, A.FCY_AMOUNT), 0) CREDIT,&#xA;       DECODE(A.DRCR_IND, ''D'',  -DECODE(A.AC_CCY, ''TZS'', A.LCY_AMOUNT, A.FCY_AMOUNT), &#xA;       DECODE(A.AC_CCY, ''TZS'', A.LCY_AMOUNT, A.FCY_AMOUNT)) MOVEMENT,&#xA;       DECODE(A.AUTH_STAT, ''A'', NULL, ''*'') AUTH_STAT,&#xA;       A.AC_BRANCH BRANCH_CODE,&#xA;       A.AC_CCY,&#xA;       SB.BRANCH_NAME&#xA;FROM FCUBS147.ACVW_ALL_AC_ENTRIES A&#xA;  LEFT JOIN FCUBS147.SMTB_USER SU&#xA;    ON SU.USER_ID = A.USER_ID&#xA;  LEFT JOIN FCUBS147.STTM_TRN_CODE TC&#xA;    ON TC.TRN_CODE = A.TRN_CODE&#xA;  LEFT JOIN FCUBS147.STZM_BRANCH SB&#xA;    ON SB.BRANCH_CODE = A.AC_BRANCH&#xA;CROSS JOIN PARAMS P&#xA; &#xA;WHERE A.AC_NO = P.GL_CODE&#xA;   AND A.AC_CCY = P.CURRENCY&#xA;   AND A.CUST_GL = ''G''&#xA;   AND A.TRN_DT BETWEEN P.P_FROM_DATE AND P.P_TO_DATE),&#xA; &#xA;CLOSING_BAL AS&#xA;(&#xA;    SELECT&#xA;        999999 ROWNUMBERKB,&#xA;        P.P_TO_DATE BOOKINGDATE,&#xA;        NULL TRN_REF_NO,&#xA;        NULL VALUEDATE,&#xA;        NULL TRN_CODE,&#xA;        ''SYSTEM'' TRANSACTIONMAKER,&#xA;        ''CLOSING BALANCE'' NARRATION,&#xA;        NULL REL_ACCT,&#xA;        0 DEBIT,&#xA;        0 CREDIT,&#xA;        NULL INSTR_NO,&#xA;        NVL(SUM(DECODE(H.DRCR_IND,''D'',-1,1)*DECODE(H.AC_CCY,''TZS'',H.LCY_AMOUNT,H.FCY_AMOUNT)),0) BALANCE,&#xA;        NULL  AUTHSATUS,&#xA;        NULL BRANCH_CODE,&#xA;        NULL BRANCH_NAME,&#xA;        NULL ADDRESS,&#xA;        NULL ACCOUNT_NO,&#xA;        NULL GL_DESC,&#xA;        NULL ACCOUNT_CCY,&#xA;        NULL P_FROM_DATE,&#xA;        NULL P_TO_DATE,&#xA;        NULL OWNER_ID&#xA;    FROM PARAMS P,&#xA;         FCUBS147.ACZB_HISTORY H&#xA;    WHERE H.AC_NO = P.GL_CODE&#xA;      AND H.AC_CCY = P.CURRENCY&#xA;      AND H.TRN_DT &lt;  (P.P_TO_DATE+1)&#xA;    GROUP BY&#xA;        P.P_TO_DATE&#xA;),&#xA; &#xA; &#xA;TXN_SD AS &#xA;(&#xA;SELECT&#xA;    A.ROW_NUM ROWNUMBERKB,&#xA;    A.BKG_DATE BOOKINGDATE,&#xA;    A.TRN_REF_NO,&#xA;    A.VALUE_DATE VALUEDATE,&#xA;    A.TRN_CODE,&#xA;    A.TRANSACTIONMAKER,&#xA;    A.NARRATION,&#xA;    A.RELATED_ACCOUNT REL_ACCT,&#xA;    A.DEBIT,&#xA;    A.CREDIT,&#xA;    A.INSTR_NO,&#xA;    SUM(A.MOVEMENT) OVER (PARTITION BY A.BRANCH_CODE ORDER BY A.ROW_NUM) BALANCE,&#xA;    A.AUTH_STAT AUTHSATUS,&#xA;    A.BRANCH_CODE,&#xA;    A.BRANCH_NAME,&#xA;    A.BRANCH_NAME ADDRESS,&#xA;    P.GL_CODE ACCOUNT_NO,&#xA;    GM.GL_DESC,&#xA;    AC_CCY ACCOUNT_CCY,&#xA;    P.P_FROM_DATE,&#xA;    P.P_TO_DATE,&#xA;    NULL OWNER_ID&#xA;&#xA;&#xA;FROM TXNS A&#xA;CROSS JOIN PARAMS P&#xA;LEFT JOIN FCUBS147.GLTM_GLMASTER GM&#xA;       ON GM.GL_CODE = P.GL_CODE ORDER BY  A.ROW_NUM&#xA;)&#xA; &#xA; &#xA;SELECT &#xA;    BOOKINGDATE,&#xA;    VALUEDATE,&#xA;    TRN_REF_NO, &#xA;    INSTR_NO,&#xA;    NARRATION,&#xA;    REL_ACCT,&#xA;    DEBIT,&#xA;    CREDIT,&#xA;    BALANCE&#xA;FROM &#xA;(&#xA;   SELECT * FROM OPENING_BAL&#xA;    UNION ALL&#xA;     SELECT * FROM TXN_SD&#xA;    UNION ALL&#xA;    SELECT * FROM CLOSING_BAL&#xA;) ORDER BY 1')&#xA; &quot;]" TimeoutMS="200000">
+                <ui:ExecuteQuery.Parameters>
+                  <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                </ui:ExecuteQuery.Parameters>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:ExecuteQuery>
+              <ui:LogMessage DisplayName="Log - query OK" sap:VirtualizedContainerService.HintSize="432.6666666666667,134.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_25" Level="Info" Message="[&quot;EXTRACTION | GL FETCH OK | rows=&quot; + If(dtCbsStatementResult Is Nothing, 0, dtCbsStatementResult.Rows.Count).ToString + &quot; | columns=&quot; + If(dtCbsStatementResult Is Nothing, 0, dtCbsStatementResult.Columns.Count).ToString + &quot; | elapsed=&quot; + (DateTime.Now - queryStart).TotalSeconds.ToString(&quot;0.0&quot;) + &quot;s&quot;]" />
+            </Sequence>
+          </TryCatch.Try>
+          <TryCatch.Catches>
+            <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+              <ActivityAction x:TypeArguments="s:Exception">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="466.6666666666667,371.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="432.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_4">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[cbsExtractedSuccess]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">["CBS FAILED"]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:LogMessage DisplayName="Log - query failed" sap:VirtualizedContainerService.HintSize="432.6666666666667,134.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;EXTRACTION | GL FETCH FAILED | process=&quot; + processName + &quot; | glCode=&quot; + glCode + &quot; | currency=&quot; + currency + &quot; | businessDate=&quot; + glFromDate + &quot;..&quot; + glToDate + &quot; | elapsed=&quot; + (DateTime.Now - queryStart).TotalSeconds.ToString(&quot;0.0&quot;) + &quot;s | type=&quot; + exception.GetType().ToString + &quot; | msg=&quot; + exception.Message + &quot; | inner=&quot; + If(exception.InnerException Is Nothing, &quot;none&quot;, exception.InnerException.Message) + Environment.NewLine + exception.ToString]" />
+                </Sequence>
+              </ActivityAction>
+            </Catch>
+          </TryCatch.Catches>
+          <TryCatch.Finally>
+            <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="466.6666666666667,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_17">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Sequence>
+          </TryCatch.Finally>
+        </TryCatch>
+        <If Condition="[dtCbsStatementResult Is Nothing OrElse dtCbsStatementResult.Rows.Count &lt;= 0]" sap:VirtualizedContainerService.HintSize="468.6666666666667,936" sap2010:WorkflowViewState.IdRef="If_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,568.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_9">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:InvokeCode ContinueOnError="{x:Null}" Code="dtCbsStatementResult = New DataTable(&quot;cbs_table&quot;)&#xA;&#xA;dtCbsStatementResult.Columns.Add(&quot;TRN_REF_NO&quot;)&#xA;dtCbsStatementResult.Columns.Add(&quot;AC_NO&quot;)&#xA;dtCbsStatementResult.Columns.Add(&quot;AC_BRANCH&quot;)&#xA;dtCbsStatementResult.Columns.Add(&quot;Event&quot;)&#xA;dtCbsStatementResult.Columns.Add(&quot;DRCR_IND&quot;)&#xA;dtCbsStatementResult.Columns.Add(&quot;LCY_AMOUNT&quot;)&#xA;dtCbsStatementResult.Columns.Add(&quot;TRN_DT&quot;)&#xA;dtCbsStatementResult.Columns.Add(&quot;USER_ID&quot;)&#xA;dtCbsStatementResult.Columns.Add(&quot;TERM_ID&quot;)&#xA;dtCbsStatementResult.Columns.Add(&quot;RRN&quot;)&#xA;dtCbsStatementResult.Columns.Add(&quot;PAN&quot;)&#xA;dtCbsStatementResult.Columns.Add(&quot;TXN_ACC&quot;)&#xA;dtCbsStatementResult.Columns.Add(&quot;AUTH_ID&quot;)&#xA;&#xA;dtCbsStatementResult.Rows.Add(&quot;No Records&quot;)" DisplayName="Invoke Code - Add Initial Columns" sap:VirtualizedContainerService.HintSize="416,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+                <ui:InvokeCode.Arguments>
+                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtCbsStatementResult">[dtCbsStatementResult]</InOutArgument>
+                </ui:InvokeCode.Arguments>
+              </ui:InvokeCode>
+              <ui:LogMessage DisplayName="Log - GL empty" sap:VirtualizedContainerService.HintSize="416,144" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Warn" Message="[&quot;EXTRACTION | GL REPORT EMPTY | glCode=&quot; + glCode + &quot; | currency=&quot; + currency + &quot; | businessDate=&quot; + glFromDate + &quot;..&quot; + glToDate + &quot; | placeholder row written | priorStatus=&quot; + cbsExtractedSuccess]" />
+              <Assign sap:VirtualizedContainerService.HintSize="416,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_5">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[cbsExtractedSuccess]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[If(cbsExtractedSuccess = "CBS FAILED", "CBS FAILED", "CBS PARTIAL")]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_10">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="416,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_6">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[cbsExtractedSuccess]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">["CBS SUCCESS"]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:LogMessage DisplayName="Log - GL data ok" sap2010:WorkflowViewState.IdRef="LogMessage_26" Level="Info" Message="[&quot;EXTRACTION | GL DATA OK | rows=&quot; + dtCbsStatementResult.Rows.Count.ToString + &quot; | status=CBS SUCCESS&quot;]" />
+            </Sequence>
+          </If.Else>
+        </If>
+        <ui:LogMessage DisplayName="Log - writing CSV" sap2010:WorkflowViewState.IdRef="LogMessage_27" Level="Info" Message="[&quot;EXTRACTION | CSV | writing &quot; + If(dtCbsStatementResult Is Nothing, 0, dtCbsStatementResult.Rows.Count).ToString + &quot; row(s) to &quot; + glFilePath]" />
+        <ui:WriteCsvFile AddHeaders="True" DataTable="[dtCbsStatementResult]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[glFilePath]" sap:VirtualizedContainerService.HintSize="468.6666666666667,182" sap2010:WorkflowViewState.IdRef="WriteCsvFile_1" ShouldQuote="True">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:WriteCsvFile>
+        <ui:LogMessage DisplayName="Log - CSV written" sap2010:WorkflowViewState.IdRef="LogMessage_28" Level="Info" Message="[&quot;EXTRACTION | CSV WRITTEN | path=&quot; + glFilePath + &quot; | exists=&quot; + System.IO.File.Exists(glFilePath).ToString + &quot; | bytes=&quot; + If(System.IO.File.Exists(glFilePath), New System.IO.FileInfo(glFilePath).Length, 0L).ToString]" />
+      </Sequence>
+      <Sequence DisplayName="Check File Availability" sap:VirtualizedContainerService.HintSize="502.6666666666667,48" sap2010:WorkflowViewState.IdRef="Sequence_11">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:LogMessage DisplayName="Log - file check" sap2010:WorkflowViewState.IdRef="LogMessage_29" Level="Info" Message="[&quot;EXTRACTION | FILE CHECK | stmtFile=&quot; + statementFilePath + &quot; | stmtExists=&quot; + System.IO.File.Exists(statementFilePath).ToString + &quot; | glFile=&quot; + glFilePath + &quot; | glExists=&quot; + System.IO.File.Exists(glFilePath).ToString + &quot; | cbsStatus=&quot; + cbsExtractedSuccess]" />
+        <If Condition="[not System.IO.File.Exists(statementFilePath)]" sap:VirtualizedContainerService.HintSize="488,866.6666666666666" sap2010:WorkflowViewState.IdRef="If_3">
+          <If.Then>
+            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="486,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_14">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="452,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_2">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[extractionState]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">["FAILED"]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:LogMessage DisplayName="Log - statement missing" sap2010:WorkflowViewState.IdRef="LogMessage_30" Level="Error" Message="[&quot;EXTRACTION | STATEMENT FILE MISSING | expected=&quot; + statementFilePath + &quot; | extractionState=FAILED&quot;]" />
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="486,508.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_15">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If Condition="[cbsExtractedSuccess.Equals(&quot;FAILED&quot;) or cbsExtractedSuccess.Equals(&quot;CBS FAILED&quot;)]" sap:VirtualizedContainerService.HintSize="452,448.6666666666667" sap2010:WorkflowViewState.IdRef="If_4">
+                <If.Then>
+                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_25">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[extractionState]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">["FAILED"]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:LogMessage DisplayName="Log - CBS failed" sap2010:WorkflowViewState.IdRef="LogMessage_31" Level="Error" Message="[&quot;EXTRACTION | CBS EXTRACTION FAILED | cbsStatus=&quot; + cbsExtractedSuccess + &quot; | glCode=&quot; + glCode + &quot; | extractionState=FAILED&quot;]" />
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap:VirtualizedContainerService.HintSize="416,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[extractionState]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">["READY"]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:LogMessage DisplayName="Log - ready" sap2010:WorkflowViewState.IdRef="LogMessage_32" Level="Info" Message="[&quot;EXTRACTION | READY | cbsStatus=&quot; + cbsExtractedSuccess + &quot; | glFile=&quot; + glFilePath + &quot; | stmtFile=&quot; + statementFilePath]" />
+                  </Sequence>
+                </If.Else>
+              </If>
+            </Sequence>
+          </If.Else>
+        </If>
+      </Sequence>
+      <ui:LogMessage DisplayName="Log - END banner" sap2010:WorkflowViewState.IdRef="LogMessage_33" Level="Info" Message="[&quot;=== EXTRACTION END | process=&quot; + processName + &quot; | glCode=&quot; + glCode + &quot; | extractionState=&quot; + extractionState + &quot; | cbsStatus=&quot; + cbsExtractedSuccess + &quot; | elapsed=&quot; + (DateTime.Now - runStart).TotalSeconds.ToString(&quot;0.0&quot;) + &quot;s ===&quot;]" />
+    </Sequence>
+  </Sequence>
+</Activity>

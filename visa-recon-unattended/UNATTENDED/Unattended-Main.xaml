@@ -1,0 +1,1003 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="MODE" Type="InArgument(x:String)" />
+    <x:Property Name="emailReceipients" Type="InArgument(x:String)" />
+    <x:Property Name="businessDate" Type="InArgument(x:String)" />
+    <x:Property Name="previousBusinessDate" Type="InArgument(x:String)" />
+    <x:Property Name="holdProcesses" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1112.8,3572</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>UiPath.Form.Activities</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>System.Collections.Specialized</x:String>
+      <x:String>UiPath.Web.Activities</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Activities.System.Compression.Zip</x:String>
+      <x:String>UiPath.Activities.System.Encode</x:String>
+      <x:String>UiPath.Activities.System.Compression.Workflow</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>netstandard</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Collections.Specialized</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Form.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="CONFIG BY PROCESS: AMOUNT COLUMN | MESSAGE CATEGORY&#xA;- VISA ATM Acquiring Clearing: DEBIT | EP745&#xA;- VISA ATM Issuer Intermediary: CREDIT | EP745&#xA;- VISA POS Acquiring Clearing: DEBIT | File&#xA;- VISA POS Issuer Intermediary: CREDIT | File&#xA;&#xA;" DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="658,9096.666666666666" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dtProcessedGl" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtProcessedReportStatement" />
+      <Variable x:TypeArguments="x:String" Name="outputJson" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtPreviousRealExceptions" />
+      <Variable x:TypeArguments="x:String" Name="fileDate" />
+      <Variable x:TypeArguments="x:String" Name="folderDate" />
+      <Variable x:TypeArguments="njl:JObject" Name="jsonFormData" />
+      <Variable x:TypeArguments="x:Int32" Name="counter" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtProcesses" />
+      <Variable x:TypeArguments="x:String" Name="glStatementPath" />
+      <Variable x:TypeArguments="x:String" Name="currencyCode" />
+      <Variable x:TypeArguments="x:String" Name="transactionsReportStatement" />
+      <Variable x:TypeArguments="x:String" Name="transactionsReportStatementLocal" />
+      <Variable x:TypeArguments="x:String" Name="reconResultsPath" />
+      <Variable x:TypeArguments="x:String" Name="amountColumn" />
+      <Variable x:TypeArguments="x:String" Name="processMsgCategory" />
+      <Variable x:TypeArguments="x:String" Name="startDate" />
+      <Variable x:TypeArguments="x:String" Name="previousReportPath" />
+      <Variable x:TypeArguments="x:String" Name="prevResolveNote" />
+      <Variable x:TypeArguments="x:String" Name="prevReportIssue" />
+      <Variable x:TypeArguments="x:String" Name="mailTo" />
+      <Variable x:TypeArguments="s:DateTime" Name="bd" />
+      <Variable x:TypeArguments="s:DateTime" Name="pbd" />
+      <Variable x:TypeArguments="si:FileInfo" Name="rawInput" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Assign sap:VirtualizedContainerService.HintSize="644.6666666666666,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_70">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:DateTime">[bd]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:DateTime">[If(String.IsNullOrWhiteSpace(businessDate), DateTime.Now.Date.AddDays(-1), DateTime.ParseExact(businessDate.Trim(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="644.6666666666666,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_71">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:DateTime">[pbd]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:DateTime">[If(String.IsNullOrWhiteSpace(previousBusinessDate), bd.AddDays(-1), DateTime.ParseExact(previousBusinessDate.Trim(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log - recon date" sap:VirtualizedContainerService.HintSize="644.6666666666666,144" sap2010:WorkflowViewState.IdRef="LogMessage_70" Level="Info" Message="[&quot;RECON | business date=&quot; + bd.ToString(&quot;dd MMM yyyy&quot;) + &quot; | previous=&quot; + pbd.ToString(&quot;dd MMM yyyy&quot;)]" />
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dtProcesses]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="644.6666666666666,120" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Tracker" WorkbookPath="Templates\process_tracker.xlsx" />
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtProcesses]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="644.6666666666666,8379.333333333334" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="process" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="610.6666666666666,8236.666666666666" sap2010:WorkflowViewState.IdRef="Sequence_9">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If Condition="[process(&quot;Date&quot;).ToString.Trim.Equals(bd.AddDays(1).ToString(&quot;dd/MMM/yyyy&quot;)) AndAlso System.IO.File.Exists(process(&quot;Statement Path&quot;).ToString) AndAlso Not (&quot;;&quot; + If(holdProcesses, &quot;&quot;) + &quot;;&quot;).Contains(&quot;;&quot; + process(&quot;Process Name&quot;).ToString.Trim + &quot;|&quot; + process(&quot;Currency&quot;).ToString.Trim + &quot;;&quot;)]" DisplayName="This business date" sap:VirtualizedContainerService.HintSize="576.6666666666666,8009.333333333333" sap2010:WorkflowViewState.IdRef="If_80">
+              <If.Then>
+                <Sequence DisplayName="Process this date" sap:VirtualizedContainerService.HintSize="574.6666666666666,7778.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_80">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="currentDate" />
+                    <Variable x:TypeArguments="x:String" Name="overrideRejectNote" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="540.6666666666666,286" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+                    <ui:MultipleAssign.AssignOperations>
+                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[glStatementPath]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[process("GL Path").ToString()]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[transactionsReportStatement]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[process("Statement Path").ToString()]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_15">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[currencyCode]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[process("Currency").ToString()]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[startDate]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[process("Date").ToString()]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap:VirtualizedContainerService.HintSize="334.4,24.799999999999997" sap2010:WorkflowViewState.IdRef="AssignOperation_27">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[fileDate]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[DateTime.Parse(startDate, CultureInfo.InvariantCulture).AddDays(-1).ToString("dd MMM yyyy")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_31">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[currentDate]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[bd.AddDays(1).ToString("dd-MM-yyyy")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                      </scg:List>
+                    </ui:MultipleAssign.AssignOperations>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:MultipleAssign>
+                  <If Condition="[System.IO.File.Exists(transactionsReportStatement)]" DisplayName="Stage statement file locally (avoid remote file locks)" sap:VirtualizedContainerService.HintSize="540.6666666666666,1084" sap2010:WorkflowViewState.IdRef="If_StageStatementLocal">
+                    <If.Then>
+                      <Sequence DisplayName="Copy remote statement to local staging" sap:VirtualizedContainerService.HintSize="450,853.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_StageStatementLocal">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_StageStatementLocalPath">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[transactionsReportStatementLocal]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["D:\VISA\_Incoming Staging\" + System.IO.Path.GetFileName(transactionsReportStatement)]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="416,114" sap2010:WorkflowViewState.IdRef="CreateDirectory_StageStatementLocal" Path="D:\VISA\_Incoming Staging\" />
+                        <ui:CopyFile ContinueOnError="{x:Null}" Destination="[transactionsReportStatementLocal]" DisplayName="Copy File - stage statement locally" sap:VirtualizedContainerService.HintSize="416,191.33333333333334" sap2010:WorkflowViewState.IdRef="CopyFile_StageStatementLocal" Overwrite="True" Path="[transactionsReportStatement]" />
+                        <ui:LogMessage DisplayName="Log - staged statement locally" sap:VirtualizedContainerService.HintSize="416,144" sap2010:WorkflowViewState.IdRef="LogMessage_StageStatementLocal" Level="Info" Message="[&quot;MAIN | staged statement locally | remote=&quot; + transactionsReportStatement + &quot; | local=&quot; + transactionsReportStatementLocal]" />
+                        <Assign sap:VirtualizedContainerService.HintSize="416,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_StageStatementLocalSwap">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[transactionsReportStatement]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[transactionsReportStatementLocal]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </If.Then>
+                  </If>
+                  <Switch x:TypeArguments="x:String" DisplayName="Switch - Process Specific Vars" Expression="[process(&quot;Process Name&quot;).ToString]" sap:VirtualizedContainerService.HintSize="540.6666666666666,4712.666666666667" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                    <Switch.Default>
+                      <Sequence DisplayName="Default" sap:VirtualizedContainerService.HintSize="486,25.333333333333332" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Sequence>
+                    </Switch.Default>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Sequence x:Key="visaAtmClearing" DisplayName="Body" sap:VirtualizedContainerService.HintSize="502.6666666666667,2802.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:String" Name="updatedSubject" />
+                        <Variable x:TypeArguments="x:String" Name="mailOverridePath" />
+                        <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="outlookMailMessages" />
+                        <Variable x:TypeArguments="snm:MailMessage" Name="matchedOverrideMessage" />
+                        <Variable x:TypeArguments="x:String" Name="overrideNote" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="468.6666666666667,255.33333333333334" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+                        <ui:MultipleAssign.AssignOperations>
+                          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_21">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[processMsgCategory]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">EP745</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[reconResultsPath]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">["C:\Users\"+Environment.UserName+"\Documents\AUTOMATED RECONS\Cards Recon\VISA\" + currentDate + "\VISA ATM Clearing - "+If(currencyCode="834","TZS",If(currencyCode="840","USD",currencyCode))+" - Recon Report "+fileDate+".xlsx"]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_23">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[amountColumn]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">DEBIT</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_33">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[previousReportPath]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">["C:\Users\"+Environment.UserName+"\Documents\AUTOMATED RECONS\Cards Recon\VISA\" + pbd.AddDays(1).ToString("dd-MM-yyyy") + "\VISA ATM Clearing - "+If(currencyCode="834","TZS",If(currencyCode="840","USD",currencyCode))+" - Recon Report "+pbd.ToString("dd MMM yyyy")+".xlsx"]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_90">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[mailTo]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">[If(String.IsNullOrWhiteSpace(emailReceipients), "Danieli.Paulo@nmbbank.co.tz", emailReceipients)]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                          </scg:List>
+                        </ui:MultipleAssign.AssignOperations>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:MultipleAssign>
+                      <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim ccy As String = If(currencyCode = &quot;834&quot;, &quot;TZS&quot;, If(currencyCode = &quot;840&quot;, &quot;USD&quot;, currencyCode))&#xA;Dim baseDir As String = &quot;C:\Users\&quot; + Environment.UserName + &quot;\Documents\AUTOMATED RECONS\Cards Recon\VISA\&quot;&#xA;Dim found As Boolean = False&#xA;Dim i As Integer = 0&#xA;While i &lt;= 10&#xA;    Dim c As DateTime = pbd.AddDays(-i)&#xA;    Dim cand As String = baseDir + c.AddDays(1).ToString(&quot;dd-MM-yyyy&quot;) + &quot;\&quot; + reportKind + &quot; - &quot; + ccy + &quot; - Recon Report &quot; + c.ToString(&quot;dd MMM yyyy&quot;) + &quot;.xlsx&quot;&#xA;    If System.IO.File.Exists(cand) Then&#xA;        previousReportPath = cand&#xA;        found = True&#xA;        prevResolveNote = &quot;resolved to &quot; + c.ToString(&quot;dd MMM yyyy&quot;) + &quot; (back &quot; + i.ToString() + &quot; day(s))&quot;&#xA;        Exit While&#xA;    End If&#xA;    i = i + 1&#xA;End While&#xA;If Not found Then prevResolveNote = &quot;no prior report within 10 days of &quot; + pbd.ToString(&quot;dd MMM yyyy&quot;)" DisplayName="Resolve previous report (walk back)" sap:VirtualizedContainerService.HintSize="468.6666666666667,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_70">
+                        <ui:InvokeCode.Arguments>
+                          <InArgument x:TypeArguments="s:DateTime" x:Key="pbd">[pbd]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="currencyCode">[currencyCode]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="reportKind">VISA ATM Clearing</InArgument>
+                          <InOutArgument x:TypeArguments="x:String" x:Key="previousReportPath">[previousReportPath]</InOutArgument>
+                          <OutArgument x:TypeArguments="x:String" x:Key="prevResolveNote">[prevResolveNote]</OutArgument>
+                        </ui:InvokeCode.Arguments>
+                      </ui:InvokeCode>
+                      <ui:LogMessage DisplayName="Log - previous report resolved" sap:VirtualizedContainerService.HintSize="468.6666666666667,144" sap2010:WorkflowViewState.IdRef="LogMessage_90" Level="Info" Message="[&quot;MAIN | previous report resolved | &quot; + prevResolveNote + &quot; | path=&quot; + previousReportPath]" />
+                      <Assign DisplayName="Assign - manual override target path" sap:VirtualizedContainerService.HintSize="468.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_MailOverrideTarget_ATM">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[mailOverridePath]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[System.IO.Path.Combine(System.IO.Path.GetDirectoryName(previousReportPath), "MANUAL OVERRIDE - " + System.IO.Path.GetFileName(previousReportPath))]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign DisplayName="Assign - expected updated-mail subject" sap:VirtualizedContainerService.HintSize="468.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_MailOverrideSubject_ATM">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[updatedSubject]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[If(currencyCode="834","TZS",If(currencyCode="840","USD",currencyCode)) + " VISAATMCLEARING UPDATED"]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <TryCatch DisplayName="Try Catch - manual override from mailbox" sap:VirtualizedContainerService.HintSize="468.6666666666667,820.6666666666666" sap2010:WorkflowViewState.IdRef="TryCatch_MailOverride_ATM">
+                        <TryCatch.Try>
+                          <Sequence DisplayName="Check inbox for manual override" sap:VirtualizedContainerService.HintSize="466.6666666666667,478.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_MailOverride_ATM">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:GetOutlookMailMessages Account="{x:Null}" Filter="{x:Null}" FilterByMessageIds="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Get Outlook Mail Messages - Inbox unread" GetAttachements="True" sap:VirtualizedContainerService.HintSize="432.6666666666667,57.333333333333336" sap2010:WorkflowViewState.IdRef="GetOutlookMailMessages_ATM" MailFolder="Inbox" MarkAsRead="False" Messages="[outlookMailMessages]" OnlyUnreadMessages="True" OrderByDate="NewestFirst" Top="50" />
+                            <ui:InvokeCode ContinueOnError="{x:Null}" Code="overrideNote = &quot;&quot;&#xA;overrideRejectNote = &quot;&quot;&#xA;matchedMessage = Nothing&#xA;Dim ws As New System.Text.RegularExpressions.Regex(&quot;\s+&quot;)&#xA;Dim wanted As String = ws.Replace(expectedSubject, &quot;&quot;).ToUpperInvariant()&#xA;Dim ccy As String = expectedSubject.Trim().Split(&quot; &quot;c)(0).ToUpperInvariant()&#xA;' A reply to the bot's own report email also counts: &quot;RE: VISA RECON &lt;previous report date&gt; - &lt;PROCESS NAME&gt; - &lt;CCY&gt;&quot;&#xA;Dim prevDate As DateTime = pbd&#xA;Dim dm As System.Text.RegularExpressions.Match = System.Text.RegularExpressions.Regex.Match(System.IO.Path.GetFileName(If(previousReportPath, &quot;&quot;)), &quot;Recon Report (\d{2} \w{3} \d{4})\.xlsx$&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase)&#xA;Dim parsedDate As DateTime&#xA;If dm.Success AndAlso DateTime.TryParseExact(dm.Groups(1).Value, &quot;dd MMM yyyy&quot;, System.Globalization.CultureInfo.CurrentCulture, System.Globalization.DateTimeStyles.None, parsedDate) Then&#xA;    prevDate = parsedDate&#xA;End If&#xA;Dim legacySubject As String = &quot;VISA RECON &quot; &amp; prevDate.ToString(&quot;dd MMM yyyy&quot;) &amp; &quot; - &quot; &amp; processName.ToUpper()&#xA;Dim replySubject As String = legacySubject &amp; &quot; - &quot; &amp; ccy&#xA;Dim replyWanted As String = ws.Replace(replySubject, &quot;&quot;).ToUpperInvariant()&#xA;Dim legacyWanted As String = ws.Replace(legacySubject, &quot;&quot;).ToUpperInvariant()&#xA;Dim replyPrefix As New System.Text.RegularExpressions.Regex(&quot;^\s*((RE|FW|FWD|AW|WG)\s*:\s*)*(RE|AW)\s*:&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase)&#xA;Dim ccyWord As New System.Text.RegularExpressions.Regex(&quot;\b&quot; &amp; System.Text.RegularExpressions.Regex.Escape(ccy) &amp; &quot;\b&quot;)&#xA;Dim anyCcyWord As New System.Text.RegularExpressions.Regex(&quot;\b(TZS|USD)\b&quot;)&#xA;' Only accept emails sent after the bot produced the report they correct, so a backlog of old unread emails is never replayed&#xA;Dim cutoff As DateTime = pbd.Date&#xA;If Not String.IsNullOrWhiteSpace(previousReportPath) AndAlso System.IO.File.Exists(previousReportPath) Then&#xA;    cutoff = System.IO.File.GetLastWriteTime(previousReportPath)&#xA;End If&#xA;Dim skipped As Integer = 0&#xA;Dim applied As String = &quot;&quot;&#xA;Dim rejections As New System.Collections.Generic.List(Of String)&#xA;If mailMessages IsNot Nothing Then&#xA;    For Each m As System.Net.Mail.MailMessage In mailMessages&#xA;        Dim rawSubj As String = If(m.Subject, &quot;&quot;)&#xA;        Dim subj As String = ws.Replace(rawSubj, &quot;&quot;).ToUpperInvariant()&#xA;        Dim isUpdated As Boolean = subj.Contains(wanted)&#xA;        Dim isReply As Boolean = (Not isUpdated) AndAlso replyPrefix.IsMatch(rawSubj) AndAlso subj.Contains(replyWanted)&#xA;        ' Reports sent before the currency was added to the subject: the reply only names the process&#xA;        Dim legacyAt As Integer = subj.IndexOf(legacyWanted)&#xA;        Dim isLegacyReply As Boolean = (Not isUpdated) AndAlso (Not isReply) AndAlso replyPrefix.IsMatch(rawSubj) AndAlso legacyAt &gt;= 0 AndAlso Not subj.Substring(legacyAt + legacyWanted.Length).StartsWith(&quot;-&quot;)&#xA;        If Not (isUpdated OrElse isReply OrElse isLegacyReply) Then&#xA;            Continue For&#xA;        End If&#xA;        Dim rawDate As String = If(m.Headers IsNot Nothing, m.Headers(&quot;Date&quot;), Nothing)&#xA;        Dim rcv As DateTime = DateTime.MinValue&#xA;        Dim hasDate As Boolean = Not String.IsNullOrWhiteSpace(rawDate) AndAlso (DateTime.TryParse(rawDate, rcv) OrElse DateTime.TryParse(rawDate, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, rcv))&#xA;        Dim sender As String = If(m.From IsNot Nothing, m.From.Address, &quot;unknown sender&quot;)&#xA;        Dim label As String = &quot;'&quot; &amp; rawSubj &amp; &quot;' from &quot; &amp; sender &amp; If(hasDate, &quot; received &quot; &amp; rcv.ToString(&quot;dd MMM yyyy HH:mm&quot;), &quot;&quot;)&#xA;        If hasDate AndAlso rcv &lt; cutoff Then&#xA;            skipped = skipped + 1&#xA;            ' An UPDATED subject carries no date, so old ones are just backlog; a dated reply was meant for this report&#xA;            If Not isUpdated Then&#xA;                rejections.Add(label &amp; &quot;: it arrived before the bot produced the report it replies to (&quot; &amp; cutoff.ToString(&quot;dd MMM yyyy HH:mm&quot;) &amp; &quot;), so it was made against an older version of that report&quot;)&#xA;            End If&#xA;            Continue For&#xA;        End If&#xA;        ' Recon Report .xlsx for this currency; never the Workings file or one named for another currency.&#xA;        ' An unlabelled or renamed file is fine when the subject names the currency (all but legacy replies).&#xA;        Dim att As System.Net.Mail.Attachment = Nothing&#xA;        Dim unlabelled As System.Net.Mail.Attachment = Nothing&#xA;        Dim xlsxCount As Integer = 0&#xA;        Dim workingsCount As Integer = 0&#xA;        Dim otherCcyName As String = &quot;&quot;&#xA;        If m.Attachments IsNot Nothing Then&#xA;            For Each a As System.Net.Mail.Attachment In m.Attachments&#xA;                Dim nm As String = If(a.Name, &quot;&quot;).ToUpperInvariant()&#xA;                If System.IO.Path.GetExtension(nm) = &quot;.XLSX&quot; Then&#xA;                    xlsxCount = xlsxCount + 1&#xA;                    If nm.Contains(&quot;WORKINGS&quot;) Then&#xA;                        workingsCount = workingsCount + 1&#xA;                    ElseIf ccyWord.IsMatch(nm) Then&#xA;                        att = a&#xA;                        Exit For&#xA;                    ElseIf anyCcyWord.IsMatch(nm) Then&#xA;                        If otherCcyName = &quot;&quot; Then&#xA;                            otherCcyName = a.Name&#xA;                        End If&#xA;                    ElseIf unlabelled Is Nothing Then&#xA;                        unlabelled = a&#xA;                    End If&#xA;                End If&#xA;            Next&#xA;        End If&#xA;        If att Is Nothing AndAlso Not isLegacyReply Then&#xA;            att = unlabelled&#xA;        End If&#xA;        If att Is Nothing Then&#xA;            Dim why As String&#xA;            If xlsxCount = 0 Then&#xA;                why = &quot;no .xlsx file was attached (Outlook's Reply removes the original attachments, so the corrected report has to be attached again)&quot;&#xA;            ElseIf otherCcyName &lt;&gt; &quot;&quot; Then&#xA;                why = &quot;the attached file '&quot; &amp; otherCcyName &amp; &quot;' is named for a different currency, not &quot; &amp; ccy&#xA;            ElseIf workingsCount = xlsxCount Then&#xA;                why = &quot;only the Workings file was attached, not the Recon Report&quot;&#xA;            Else&#xA;                why = &quot;it replies to an email sent before the currency was added to the subject, so the attached file name must contain &quot; &amp; ccy&#xA;            End If&#xA;            rejections.Add(label &amp; &quot;: &quot; &amp; why)&#xA;            Continue For&#xA;        End If&#xA;        Try&#xA;            Dim dir As String = System.IO.Path.GetDirectoryName(overridePath)&#xA;            If Not System.IO.Directory.Exists(dir) Then&#xA;                System.IO.Directory.CreateDirectory(dir)&#xA;            End If&#xA;            Using fs As New System.IO.FileStream(overridePath, System.IO.FileMode.Create, System.IO.FileAccess.Write)&#xA;                att.ContentStream.CopyTo(fs)&#xA;            End Using&#xA;            ' Same container check as Validate Previous Report: zip header plus end-of-central-directory record&#xA;            Dim bytes As Byte() = System.IO.File.ReadAllBytes(overridePath)&#xA;            Dim valid As Boolean = bytes.Length &gt;= 22 AndAlso bytes(0) = 80 AndAlso bytes(1) = 75&#xA;            If valid Then&#xA;                valid = False&#xA;                For i As Integer = bytes.Length - 22 To Math.Max(0, bytes.Length - 66000) Step -1&#xA;                    If bytes(i) = 80 AndAlso bytes(i + 1) = 75 AndAlso bytes(i + 2) = 5 AndAlso bytes(i + 3) = 6 Then&#xA;                        valid = True&#xA;                        Exit For&#xA;                    End If&#xA;                Next&#xA;            End If&#xA;            If Not valid Then&#xA;                System.IO.File.Delete(overridePath)&#xA;                rejections.Add(label &amp; &quot;: the attached file '&quot; &amp; att.Name &amp; &quot;' is not a valid Excel workbook (damaged, password-protected or saved in another format)&quot;)&#xA;                Continue For&#xA;            End If&#xA;            matchedMessage = m&#xA;            previousReportPath = overridePath&#xA;            applied = label &amp; &quot; (attachment '&quot; &amp; att.Name &amp; &quot;')&quot;&#xA;            Exit For&#xA;        Catch ex As Exception&#xA;            rejections.Add(label &amp; &quot;: the attached file '&quot; &amp; att.Name &amp; &quot;' could not be saved (&quot; &amp; ex.Message &amp; &quot;)&quot;)&#xA;        End Try&#xA;    Next&#xA;End If&#xA;Dim window As String = &quot;cutoff &quot; &amp; cutoff.ToString(&quot;dd MMM yyyy HH:mm&quot;) &amp; If(skipped &gt; 0, &quot;, skipped &quot; &amp; skipped.ToString() &amp; &quot; older matching email(s)&quot;, &quot;&quot;)&#xA;If matchedMessage IsNot Nothing Then&#xA;    overrideNote = &quot;MANUAL OVERRIDE applied from &quot; &amp; applied &amp; &quot; (&quot; &amp; window &amp; &quot;) -&gt; &quot; &amp; overridePath&#xA;Else&#xA;    overrideNote = &quot;no usable manual-override email for '&quot; &amp; expectedSubject &amp; &quot;' or a reply to '&quot; &amp; replySubject &amp; &quot;' (&quot; &amp; window &amp; &quot;) - using resolved previous report as-is&quot;&#xA;End If&#xA;If rejections.Count &gt; 0 Then&#xA;    overrideNote = overrideNote &amp; &quot; | REJECTED: &quot; &amp; String.Join(&quot; ; &quot;, rejections)&#xA;    Dim used As String = If(matchedMessage IsNot Nothing, &quot;The update &quot; &amp; applied &amp; &quot; was used instead.&quot;, &quot;The bot's own previous report (&quot; &amp; System.IO.Path.GetFileName(previousReportPath) &amp; &quot;) was used instead.&quot;)&#xA;    Dim items As String = &quot;&quot;&#xA;    For Each r As String In rejections&#xA;        items = items &amp; &quot;&lt;li&gt;&quot; &amp; System.Net.WebUtility.HtmlEncode(r) &amp; &quot;&lt;/li&gt;&quot;&#xA;    Next&#xA;    overrideRejectNote = &quot;The following manual update(s) for &quot; &amp; processName.ToUpper() &amp; &quot; &quot; &amp; ccy &amp; &quot; were rejected:&lt;ul&gt;&quot; &amp; items &amp; &quot;&lt;/ul&gt;&quot; &amp; System.Net.WebUtility.HtmlEncode(used)&#xA;End If" DisplayName="Match + save manual override attachment" sap:VirtualizedContainerService.HintSize="432.6666666666667,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_MailOverrideMatch_ATM">
+                              <ui:InvokeCode.Arguments>
+                                <InArgument x:TypeArguments="scg:List(snm:MailMessage)" x:Key="mailMessages">[outlookMailMessages]</InArgument>
+                                <InArgument x:TypeArguments="s:DateTime" x:Key="pbd">[pbd]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="processName">[process(&quot;Process Name&quot;).ToString]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="expectedSubject">[updatedSubject]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="overridePath">[mailOverridePath]</InArgument>
+                                <OutArgument x:TypeArguments="snm:MailMessage" x:Key="matchedMessage">[matchedOverrideMessage]</OutArgument>
+                                <InOutArgument x:TypeArguments="x:String" x:Key="previousReportPath">[previousReportPath]</InOutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="overrideNote">[overrideNote]</OutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="overrideRejectNote">[overrideRejectNote]</OutArgument>
+                              </ui:InvokeCode.Arguments>
+                            </ui:InvokeCode>
+                            <ui:LogMessage DisplayName="Log - manual override check" sap:VirtualizedContainerService.HintSize="432.6666666666667,144" sap2010:WorkflowViewState.IdRef="LogMessage_MailOverrideNote_ATM" Level="Info" Message="[&quot;MAIN | manual override check | &quot; + overrideNote]" />
+                            <If Condition="[matchedOverrideMessage IsNot Nothing]" DisplayName="If manual override applied" sap2010:WorkflowViewState.IdRef="If_MailOverrideApplied_ATM">
+                              <If.Then>
+                                <ui:MarkOutlookMailAsRead DisplayName="Mark override email as read" sap2010:WorkflowViewState.IdRef="MarkOutlookMailAsRead_ATM" MailMessage="[matchedOverrideMessage]" MarkAs="Read" />
+                              </If.Then>
+                            </If>
+                          </Sequence>
+                        </TryCatch.Try>
+                        <TryCatch.Catches>
+                          <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch_MailOverride_ATM">
+                            <ActivityAction x:TypeArguments="s:Exception">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="s:Exception" Name="mailOverrideException" />
+                              </ActivityAction.Argument>
+                              <ui:LogMessage DisplayName="Log - manual override check failed" sap:VirtualizedContainerService.HintSize="452,144" sap2010:WorkflowViewState.IdRef="LogMessage_MailOverrideFailed_ATM" Level="Warn" Message="[&quot;MAIN | manual override check FAILED (using resolved previous report as-is) | &quot; + mailOverrideException.Message]" />
+                            </ActivityAction>
+                          </Catch>
+                        </TryCatch.Catches>
+                      </TryCatch>
+                      <ui:InvokeCode ContinueOnError="{x:Null}" Code="prevReportIssue = &quot;&quot;&#xA;If String.IsNullOrWhiteSpace(previousReportPath) Then&#xA;    prevReportIssue = &quot;previousReportPath is empty&quot;&#xA;ElseIf Not System.IO.File.Exists(previousReportPath) Then&#xA;    prevReportIssue = &quot;file not found: &quot; &amp; previousReportPath&#xA;Else&#xA;    Dim fi As New System.IO.FileInfo(previousReportPath)&#xA;    If fi.Length = 0 Then&#xA;        prevReportIssue = &quot;file is 0 bytes&quot;&#xA;    ElseIf fi.Length &lt; 22 Then&#xA;        prevReportIssue = &quot;file too small to be a workbook (&quot; &amp; fi.Length.ToString() &amp; &quot; bytes)&quot;&#xA;    Else&#xA;        Try&#xA;            Using fs As New System.IO.FileStream(previousReportPath, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite)&#xA;                Dim sig(3) As Byte&#xA;                If fs.Read(sig, 0, 4) &lt; 4 OrElse sig(0) &lt;&gt; 80 OrElse sig(1) &lt;&gt; 75 Then&#xA;                    prevReportIssue = &quot;not a zip/.xlsx container (header &quot; &amp; BitConverter.ToString(sig) &amp; &quot;, &quot; &amp; fi.Length.ToString() &amp; &quot; bytes)&quot;&#xA;                Else&#xA;                    Dim tailLen As Integer = CInt(Math.Min(66000L, fi.Length))&#xA;                    Dim tail(tailLen - 1) As Byte&#xA;                    fs.Seek(CLng(-tailLen), System.IO.SeekOrigin.End)&#xA;                    Dim got As Integer = 0&#xA;                    While got &lt; tailLen&#xA;                        Dim r As Integer = fs.Read(tail, got, tailLen - got)&#xA;                        If r &lt;= 0 Then&#xA;                            Exit While&#xA;                        End If&#xA;                        got = got + r&#xA;                    End While&#xA;                    Dim found As Boolean = False&#xA;                    For i As Integer = got - 4 To 0 Step -1&#xA;                        If tail(i) = 80 AndAlso tail(i + 1) = 75 AndAlso tail(i + 2) = 5 AndAlso tail(i + 3) = 6 Then&#xA;                            found = True&#xA;                            Exit For&#xA;                        End If&#xA;                    Next&#xA;                    If Not found Then&#xA;                        prevReportIssue = &quot;zip is truncated - no end-of-central-directory record (&quot; &amp; fi.Length.ToString() &amp; &quot; bytes)&quot;&#xA;                    End If&#xA;                End If&#xA;            End Using&#xA;        Catch ioEx As Exception&#xA;            prevReportIssue = &quot;cannot read file (&quot; &amp; ioEx.Message &amp; &quot;)&quot;&#xA;        End Try&#xA;    End If&#xA;    If Not String.IsNullOrEmpty(prevReportIssue) Then&#xA;        prevReportIssue = prevReportIssue &amp; &quot;: &quot; &amp; previousReportPath&#xA;    End If&#xA;End If" DisplayName="Validate Previous Report" sap:VirtualizedContainerService.HintSize="452,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_60">
+                        <ui:InvokeCode.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="previousReportPath">[previousReportPath]</InArgument>
+                          <OutArgument x:TypeArguments="x:String" x:Key="prevReportIssue">[prevReportIssue]</OutArgument>
+                        </ui:InvokeCode.Arguments>
+                      </ui:InvokeCode>
+                      <If Condition="[Not String.IsNullOrEmpty(prevReportIssue)]" sap:VirtualizedContainerService.HintSize="452,774.6666666666666" sap2010:WorkflowViewState.IdRef="If_8">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If.Then>
+                          <Sequence sap2010:Annotation.AnnotationText="For first time usage mainly" DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,402" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Assign sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_7">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[previousReportPath]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">[System.IO.Path.GetFullPath("START_HISTORICAL\Historical - VISA ATM CLEARING "+currencyCode+".xlsx")]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:LogMessage DisplayName="Log - historical fallback" sap:VirtualizedContainerService.HintSize="416,134.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_60" Level="Warn" Message="[&quot;MAIN | previous report unusable (&quot; + prevReportIssue + &quot;) - falling back to historical baseline: &quot; + previousReportPath]" />
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,242" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:CopyFile ContinueOnError="{x:Null}" Destination="[&quot;START_HISTORICAL\Historical - VISA ATM CLEARING &quot; +currencyCode+&quot;.xlsx&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="416,182" sap2010:WorkflowViewState.IdRef="CopyFile_4" Overwrite="True" Path="[previousReportPath]" />
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                    <Sequence x:Key="visaPosClearing" DisplayName="Body" sap:VirtualizedContainerService.HintSize="486,1628.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:String" Name="updatedSubject" />
+                        <Variable x:TypeArguments="x:String" Name="mailOverridePath" />
+                        <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="outlookMailMessages" />
+                        <Variable x:TypeArguments="snm:MailMessage" Name="matchedOverrideMessage" />
+                        <Variable x:TypeArguments="x:String" Name="overrideNote" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="452,255.33333333333334" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
+                        <ui:MultipleAssign.AssignOperations>
+                          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_28">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[processMsgCategory]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">POS File</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_29">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[reconResultsPath]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">["C:\Users\"+Environment.UserName+"\Documents\AUTOMATED RECONS\Cards Recon\VISA\" + currentDate + "\VISA POS Clearing - "+If(currencyCode="834","TZS",If(currencyCode="840","USD",currencyCode))+" - Recon Report "+fileDate+".xlsx"]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_30">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[amountColumn]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">CREDIT</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_34">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[previousReportPath]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">["C:\Users\"+Environment.UserName+"\Documents\AUTOMATED RECONS\Cards Recon\VISA\" + pbd.AddDays(1).ToString("dd-MM-yyyy") + "\VISA POS Clearing - "+If(currencyCode="834","TZS",If(currencyCode="840","USD",currencyCode))+" - Recon Report "+pbd.ToString("dd MMM yyyy")+".xlsx"]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_91">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[mailTo]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">[If(String.IsNullOrWhiteSpace(emailReceipients), "Casuarina.Zacharia@nmbbank.co.tz", emailReceipients)]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                          </scg:List>
+                        </ui:MultipleAssign.AssignOperations>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:MultipleAssign>
+                      <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim ccy As String = If(currencyCode = &quot;834&quot;, &quot;TZS&quot;, If(currencyCode = &quot;840&quot;, &quot;USD&quot;, currencyCode))&#xA;Dim baseDir As String = &quot;C:\Users\&quot; + Environment.UserName + &quot;\Documents\AUTOMATED RECONS\Cards Recon\VISA\&quot;&#xA;Dim found As Boolean = False&#xA;Dim i As Integer = 0&#xA;While i &lt;= 10&#xA;    Dim c As DateTime = pbd.AddDays(-i)&#xA;    Dim cand As String = baseDir + c.AddDays(1).ToString(&quot;dd-MM-yyyy&quot;) + &quot;\&quot; + reportKind + &quot; - &quot; + ccy + &quot; - Recon Report &quot; + c.ToString(&quot;dd MMM yyyy&quot;) + &quot;.xlsx&quot;&#xA;    If System.IO.File.Exists(cand) Then&#xA;        previousReportPath = cand&#xA;        found = True&#xA;        prevResolveNote = &quot;resolved to &quot; + c.ToString(&quot;dd MMM yyyy&quot;) + &quot; (back &quot; + i.ToString() + &quot; day(s))&quot;&#xA;        Exit While&#xA;    End If&#xA;    i = i + 1&#xA;End While&#xA;If Not found Then prevResolveNote = &quot;no prior report within 10 days of &quot; + pbd.ToString(&quot;dd MMM yyyy&quot;)" DisplayName="Resolve previous report (walk back)" sap:VirtualizedContainerService.HintSize="452,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_71">
+                        <ui:InvokeCode.Arguments>
+                          <InArgument x:TypeArguments="s:DateTime" x:Key="pbd">[pbd]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="currencyCode">[currencyCode]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="reportKind">VISA POS Clearing</InArgument>
+                          <InOutArgument x:TypeArguments="x:String" x:Key="previousReportPath">[previousReportPath]</InOutArgument>
+                          <OutArgument x:TypeArguments="x:String" x:Key="prevResolveNote">[prevResolveNote]</OutArgument>
+                        </ui:InvokeCode.Arguments>
+                      </ui:InvokeCode>
+                      <ui:LogMessage DisplayName="Log - previous report resolved" sap:VirtualizedContainerService.HintSize="452,144" sap2010:WorkflowViewState.IdRef="LogMessage_91" Level="Info" Message="[&quot;MAIN | previous report resolved | &quot; + prevResolveNote + &quot; | path=&quot; + previousReportPath]" />
+                      <Assign DisplayName="Assign - manual override target path" sap2010:WorkflowViewState.IdRef="Assign_MailOverrideTarget_POS">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[mailOverridePath]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[System.IO.Path.Combine(System.IO.Path.GetDirectoryName(previousReportPath), "MANUAL OVERRIDE - " + System.IO.Path.GetFileName(previousReportPath))]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign DisplayName="Assign - expected updated-mail subject" sap2010:WorkflowViewState.IdRef="Assign_MailOverrideSubject_POS">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[updatedSubject]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[If(currencyCode="834","TZS",If(currencyCode="840","USD",currencyCode)) + " VISAPOSCLEARING UPDATED"]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <TryCatch DisplayName="Try Catch - manual override from mailbox" sap2010:WorkflowViewState.IdRef="TryCatch_MailOverride_POS">
+                        <TryCatch.Try>
+                          <Sequence DisplayName="Check inbox for manual override" sap2010:WorkflowViewState.IdRef="Sequence_MailOverride_POS">
+                            <ui:GetOutlookMailMessages Account="{x:Null}" Filter="{x:Null}" FilterByMessageIds="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Get Outlook Mail Messages - Inbox unread" GetAttachements="True" sap2010:WorkflowViewState.IdRef="GetOutlookMailMessages_POS" MailFolder="Inbox" MarkAsRead="False" Messages="[outlookMailMessages]" OnlyUnreadMessages="True" OrderByDate="NewestFirst" Top="50" />
+                            <ui:InvokeCode ContinueOnError="{x:Null}" Code="overrideNote = &quot;&quot;&#xA;overrideRejectNote = &quot;&quot;&#xA;matchedMessage = Nothing&#xA;Dim ws As New System.Text.RegularExpressions.Regex(&quot;\s+&quot;)&#xA;Dim wanted As String = ws.Replace(expectedSubject, &quot;&quot;).ToUpperInvariant()&#xA;Dim ccy As String = expectedSubject.Trim().Split(&quot; &quot;c)(0).ToUpperInvariant()&#xA;' A reply to the bot's own report email also counts: &quot;RE: VISA RECON &lt;previous report date&gt; - &lt;PROCESS NAME&gt; - &lt;CCY&gt;&quot;&#xA;Dim prevDate As DateTime = pbd&#xA;Dim dm As System.Text.RegularExpressions.Match = System.Text.RegularExpressions.Regex.Match(System.IO.Path.GetFileName(If(previousReportPath, &quot;&quot;)), &quot;Recon Report (\d{2} \w{3} \d{4})\.xlsx$&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase)&#xA;Dim parsedDate As DateTime&#xA;If dm.Success AndAlso DateTime.TryParseExact(dm.Groups(1).Value, &quot;dd MMM yyyy&quot;, System.Globalization.CultureInfo.CurrentCulture, System.Globalization.DateTimeStyles.None, parsedDate) Then&#xA;    prevDate = parsedDate&#xA;End If&#xA;Dim legacySubject As String = &quot;VISA RECON &quot; &amp; prevDate.ToString(&quot;dd MMM yyyy&quot;) &amp; &quot; - &quot; &amp; processName.ToUpper()&#xA;Dim replySubject As String = legacySubject &amp; &quot; - &quot; &amp; ccy&#xA;Dim replyWanted As String = ws.Replace(replySubject, &quot;&quot;).ToUpperInvariant()&#xA;Dim legacyWanted As String = ws.Replace(legacySubject, &quot;&quot;).ToUpperInvariant()&#xA;Dim replyPrefix As New System.Text.RegularExpressions.Regex(&quot;^\s*((RE|FW|FWD|AW|WG)\s*:\s*)*(RE|AW)\s*:&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase)&#xA;Dim ccyWord As New System.Text.RegularExpressions.Regex(&quot;\b&quot; &amp; System.Text.RegularExpressions.Regex.Escape(ccy) &amp; &quot;\b&quot;)&#xA;Dim anyCcyWord As New System.Text.RegularExpressions.Regex(&quot;\b(TZS|USD)\b&quot;)&#xA;' Only accept emails sent after the bot produced the report they correct, so a backlog of old unread emails is never replayed&#xA;Dim cutoff As DateTime = pbd.Date&#xA;If Not String.IsNullOrWhiteSpace(previousReportPath) AndAlso System.IO.File.Exists(previousReportPath) Then&#xA;    cutoff = System.IO.File.GetLastWriteTime(previousReportPath)&#xA;End If&#xA;Dim skipped As Integer = 0&#xA;Dim applied As String = &quot;&quot;&#xA;Dim rejections As New System.Collections.Generic.List(Of String)&#xA;If mailMessages IsNot Nothing Then&#xA;    For Each m As System.Net.Mail.MailMessage In mailMessages&#xA;        Dim rawSubj As String = If(m.Subject, &quot;&quot;)&#xA;        Dim subj As String = ws.Replace(rawSubj, &quot;&quot;).ToUpperInvariant()&#xA;        Dim isUpdated As Boolean = subj.Contains(wanted)&#xA;        Dim isReply As Boolean = (Not isUpdated) AndAlso replyPrefix.IsMatch(rawSubj) AndAlso subj.Contains(replyWanted)&#xA;        ' Reports sent before the currency was added to the subject: the reply only names the process&#xA;        Dim legacyAt As Integer = subj.IndexOf(legacyWanted)&#xA;        Dim isLegacyReply As Boolean = (Not isUpdated) AndAlso (Not isReply) AndAlso replyPrefix.IsMatch(rawSubj) AndAlso legacyAt &gt;= 0 AndAlso Not subj.Substring(legacyAt + legacyWanted.Length).StartsWith(&quot;-&quot;)&#xA;        If Not (isUpdated OrElse isReply OrElse isLegacyReply) Then&#xA;            Continue For&#xA;        End If&#xA;        Dim rawDate As String = If(m.Headers IsNot Nothing, m.Headers(&quot;Date&quot;), Nothing)&#xA;        Dim rcv As DateTime = DateTime.MinValue&#xA;        Dim hasDate As Boolean = Not String.IsNullOrWhiteSpace(rawDate) AndAlso (DateTime.TryParse(rawDate, rcv) OrElse DateTime.TryParse(rawDate, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, rcv))&#xA;        Dim sender As String = If(m.From IsNot Nothing, m.From.Address, &quot;unknown sender&quot;)&#xA;        Dim label As String = &quot;'&quot; &amp; rawSubj &amp; &quot;' from &quot; &amp; sender &amp; If(hasDate, &quot; received &quot; &amp; rcv.ToString(&quot;dd MMM yyyy HH:mm&quot;), &quot;&quot;)&#xA;        If hasDate AndAlso rcv &lt; cutoff Then&#xA;            skipped = skipped + 1&#xA;            ' An UPDATED subject carries no date, so old ones are just backlog; a dated reply was meant for this report&#xA;            If Not isUpdated Then&#xA;                rejections.Add(label &amp; &quot;: it arrived before the bot produced the report it replies to (&quot; &amp; cutoff.ToString(&quot;dd MMM yyyy HH:mm&quot;) &amp; &quot;), so it was made against an older version of that report&quot;)&#xA;            End If&#xA;            Continue For&#xA;        End If&#xA;        ' Recon Report .xlsx for this currency; never the Workings file or one named for another currency.&#xA;        ' An unlabelled or renamed file is fine when the subject names the currency (all but legacy replies).&#xA;        Dim att As System.Net.Mail.Attachment = Nothing&#xA;        Dim unlabelled As System.Net.Mail.Attachment = Nothing&#xA;        Dim xlsxCount As Integer = 0&#xA;        Dim workingsCount As Integer = 0&#xA;        Dim otherCcyName As String = &quot;&quot;&#xA;        If m.Attachments IsNot Nothing Then&#xA;            For Each a As System.Net.Mail.Attachment In m.Attachments&#xA;                Dim nm As String = If(a.Name, &quot;&quot;).ToUpperInvariant()&#xA;                If System.IO.Path.GetExtension(nm) = &quot;.XLSX&quot; Then&#xA;                    xlsxCount = xlsxCount + 1&#xA;                    If nm.Contains(&quot;WORKINGS&quot;) Then&#xA;                        workingsCount = workingsCount + 1&#xA;                    ElseIf ccyWord.IsMatch(nm) Then&#xA;                        att = a&#xA;                        Exit For&#xA;                    ElseIf anyCcyWord.IsMatch(nm) Then&#xA;                        If otherCcyName = &quot;&quot; Then&#xA;                            otherCcyName = a.Name&#xA;                        End If&#xA;                    ElseIf unlabelled Is Nothing Then&#xA;                        unlabelled = a&#xA;                    End If&#xA;                End If&#xA;            Next&#xA;        End If&#xA;        If att Is Nothing AndAlso Not isLegacyReply Then&#xA;            att = unlabelled&#xA;        End If&#xA;        If att Is Nothing Then&#xA;            Dim why As String&#xA;            If xlsxCount = 0 Then&#xA;                why = &quot;no .xlsx file was attached (Outlook's Reply removes the original attachments, so the corrected report has to be attached again)&quot;&#xA;            ElseIf otherCcyName &lt;&gt; &quot;&quot; Then&#xA;                why = &quot;the attached file '&quot; &amp; otherCcyName &amp; &quot;' is named for a different currency, not &quot; &amp; ccy&#xA;            ElseIf workingsCount = xlsxCount Then&#xA;                why = &quot;only the Workings file was attached, not the Recon Report&quot;&#xA;            Else&#xA;                why = &quot;it replies to an email sent before the currency was added to the subject, so the attached file name must contain &quot; &amp; ccy&#xA;            End If&#xA;            rejections.Add(label &amp; &quot;: &quot; &amp; why)&#xA;            Continue For&#xA;        End If&#xA;        Try&#xA;            Dim dir As String = System.IO.Path.GetDirectoryName(overridePath)&#xA;            If Not System.IO.Directory.Exists(dir) Then&#xA;                System.IO.Directory.CreateDirectory(dir)&#xA;            End If&#xA;            Using fs As New System.IO.FileStream(overridePath, System.IO.FileMode.Create, System.IO.FileAccess.Write)&#xA;                att.ContentStream.CopyTo(fs)&#xA;            End Using&#xA;            ' Same container check as Validate Previous Report: zip header plus end-of-central-directory record&#xA;            Dim bytes As Byte() = System.IO.File.ReadAllBytes(overridePath)&#xA;            Dim valid As Boolean = bytes.Length &gt;= 22 AndAlso bytes(0) = 80 AndAlso bytes(1) = 75&#xA;            If valid Then&#xA;                valid = False&#xA;                For i As Integer = bytes.Length - 22 To Math.Max(0, bytes.Length - 66000) Step -1&#xA;                    If bytes(i) = 80 AndAlso bytes(i + 1) = 75 AndAlso bytes(i + 2) = 5 AndAlso bytes(i + 3) = 6 Then&#xA;                        valid = True&#xA;                        Exit For&#xA;                    End If&#xA;                Next&#xA;            End If&#xA;            If Not valid Then&#xA;                System.IO.File.Delete(overridePath)&#xA;                rejections.Add(label &amp; &quot;: the attached file '&quot; &amp; att.Name &amp; &quot;' is not a valid Excel workbook (damaged, password-protected or saved in another format)&quot;)&#xA;                Continue For&#xA;            End If&#xA;            matchedMessage = m&#xA;            previousReportPath = overridePath&#xA;            applied = label &amp; &quot; (attachment '&quot; &amp; att.Name &amp; &quot;')&quot;&#xA;            Exit For&#xA;        Catch ex As Exception&#xA;            rejections.Add(label &amp; &quot;: the attached file '&quot; &amp; att.Name &amp; &quot;' could not be saved (&quot; &amp; ex.Message &amp; &quot;)&quot;)&#xA;        End Try&#xA;    Next&#xA;End If&#xA;Dim window As String = &quot;cutoff &quot; &amp; cutoff.ToString(&quot;dd MMM yyyy HH:mm&quot;) &amp; If(skipped &gt; 0, &quot;, skipped &quot; &amp; skipped.ToString() &amp; &quot; older matching email(s)&quot;, &quot;&quot;)&#xA;If matchedMessage IsNot Nothing Then&#xA;    overrideNote = &quot;MANUAL OVERRIDE applied from &quot; &amp; applied &amp; &quot; (&quot; &amp; window &amp; &quot;) -&gt; &quot; &amp; overridePath&#xA;Else&#xA;    overrideNote = &quot;no usable manual-override email for '&quot; &amp; expectedSubject &amp; &quot;' or a reply to '&quot; &amp; replySubject &amp; &quot;' (&quot; &amp; window &amp; &quot;) - using resolved previous report as-is&quot;&#xA;End If&#xA;If rejections.Count &gt; 0 Then&#xA;    overrideNote = overrideNote &amp; &quot; | REJECTED: &quot; &amp; String.Join(&quot; ; &quot;, rejections)&#xA;    Dim used As String = If(matchedMessage IsNot Nothing, &quot;The update &quot; &amp; applied &amp; &quot; was used instead.&quot;, &quot;The bot's own previous report (&quot; &amp; System.IO.Path.GetFileName(previousReportPath) &amp; &quot;) was used instead.&quot;)&#xA;    Dim items As String = &quot;&quot;&#xA;    For Each r As String In rejections&#xA;        items = items &amp; &quot;&lt;li&gt;&quot; &amp; System.Net.WebUtility.HtmlEncode(r) &amp; &quot;&lt;/li&gt;&quot;&#xA;    Next&#xA;    overrideRejectNote = &quot;The following manual update(s) for &quot; &amp; processName.ToUpper() &amp; &quot; &quot; &amp; ccy &amp; &quot; were rejected:&lt;ul&gt;&quot; &amp; items &amp; &quot;&lt;/ul&gt;&quot; &amp; System.Net.WebUtility.HtmlEncode(used)&#xA;End If" DisplayName="Match + save manual override attachment" sap2010:WorkflowViewState.IdRef="InvokeCode_MailOverrideMatch_POS">
+                              <ui:InvokeCode.Arguments>
+                                <InArgument x:TypeArguments="scg:List(snm:MailMessage)" x:Key="mailMessages">[outlookMailMessages]</InArgument>
+                                <InArgument x:TypeArguments="s:DateTime" x:Key="pbd">[pbd]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="processName">[process(&quot;Process Name&quot;).ToString]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="expectedSubject">[updatedSubject]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="overridePath">[mailOverridePath]</InArgument>
+                                <OutArgument x:TypeArguments="snm:MailMessage" x:Key="matchedMessage">[matchedOverrideMessage]</OutArgument>
+                                <InOutArgument x:TypeArguments="x:String" x:Key="previousReportPath">[previousReportPath]</InOutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="overrideNote">[overrideNote]</OutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="overrideRejectNote">[overrideRejectNote]</OutArgument>
+                              </ui:InvokeCode.Arguments>
+                            </ui:InvokeCode>
+                            <ui:LogMessage DisplayName="Log - manual override check" sap:VirtualizedContainerService.HintSize="452,144" sap2010:WorkflowViewState.IdRef="LogMessage_MailOverrideNote_POS" Level="Info" Message="[&quot;MAIN | manual override check | &quot; + overrideNote]" />
+                            <If Condition="[matchedOverrideMessage IsNot Nothing]" DisplayName="If manual override applied" sap2010:WorkflowViewState.IdRef="If_MailOverrideApplied_POS">
+                              <If.Then>
+                                <ui:MarkOutlookMailAsRead DisplayName="Mark override email as read" sap2010:WorkflowViewState.IdRef="MarkOutlookMailAsRead_POS" MailMessage="[matchedOverrideMessage]" MarkAs="Read" />
+                              </If.Then>
+                            </If>
+                          </Sequence>
+                        </TryCatch.Try>
+                        <TryCatch.Catches>
+                          <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch_MailOverride_POS">
+                            <ActivityAction x:TypeArguments="s:Exception">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="s:Exception" Name="mailOverrideException" />
+                              </ActivityAction.Argument>
+                              <ui:LogMessage DisplayName="Log - manual override check failed" sap:VirtualizedContainerService.HintSize="452,144" sap2010:WorkflowViewState.IdRef="LogMessage_MailOverrideFailed_POS" Level="Warn" Message="[&quot;MAIN | manual override check FAILED (using resolved previous report as-is) | &quot; + mailOverrideException.Message]" />
+                            </ActivityAction>
+                          </Catch>
+                        </TryCatch.Catches>
+                      </TryCatch>
+                      <ui:InvokeCode ContinueOnError="{x:Null}" Code="prevReportIssue = &quot;&quot;&#xA;If String.IsNullOrWhiteSpace(previousReportPath) Then&#xA;    prevReportIssue = &quot;previousReportPath is empty&quot;&#xA;ElseIf Not System.IO.File.Exists(previousReportPath) Then&#xA;    prevReportIssue = &quot;file not found: &quot; &amp; previousReportPath&#xA;Else&#xA;    Dim fi As New System.IO.FileInfo(previousReportPath)&#xA;    If fi.Length = 0 Then&#xA;        prevReportIssue = &quot;file is 0 bytes&quot;&#xA;    ElseIf fi.Length &lt; 22 Then&#xA;        prevReportIssue = &quot;file too small to be a workbook (&quot; &amp; fi.Length.ToString() &amp; &quot; bytes)&quot;&#xA;    Else&#xA;        Try&#xA;            Using fs As New System.IO.FileStream(previousReportPath, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite)&#xA;                Dim sig(3) As Byte&#xA;                If fs.Read(sig, 0, 4) &lt; 4 OrElse sig(0) &lt;&gt; 80 OrElse sig(1) &lt;&gt; 75 Then&#xA;                    prevReportIssue = &quot;not a zip/.xlsx container (header &quot; &amp; BitConverter.ToString(sig) &amp; &quot;, &quot; &amp; fi.Length.ToString() &amp; &quot; bytes)&quot;&#xA;                Else&#xA;                    Dim tailLen As Integer = CInt(Math.Min(66000L, fi.Length))&#xA;                    Dim tail(tailLen - 1) As Byte&#xA;                    fs.Seek(CLng(-tailLen), System.IO.SeekOrigin.End)&#xA;                    Dim got As Integer = 0&#xA;                    While got &lt; tailLen&#xA;                        Dim r As Integer = fs.Read(tail, got, tailLen - got)&#xA;                        If r &lt;= 0 Then&#xA;                            Exit While&#xA;                        End If&#xA;                        got = got + r&#xA;                    End While&#xA;                    Dim found As Boolean = False&#xA;                    For i As Integer = got - 4 To 0 Step -1&#xA;                        If tail(i) = 80 AndAlso tail(i + 1) = 75 AndAlso tail(i + 2) = 5 AndAlso tail(i + 3) = 6 Then&#xA;                            found = True&#xA;                            Exit For&#xA;                        End If&#xA;                    Next&#xA;                    If Not found Then&#xA;                        prevReportIssue = &quot;zip is truncated - no end-of-central-directory record (&quot; &amp; fi.Length.ToString() &amp; &quot; bytes)&quot;&#xA;                    End If&#xA;                End If&#xA;            End Using&#xA;        Catch ioEx As Exception&#xA;            prevReportIssue = &quot;cannot read file (&quot; &amp; ioEx.Message &amp; &quot;)&quot;&#xA;        End Try&#xA;    End If&#xA;    If Not String.IsNullOrEmpty(prevReportIssue) Then&#xA;        prevReportIssue = prevReportIssue &amp; &quot;: &quot; &amp; previousReportPath&#xA;    End If&#xA;End If" DisplayName="Validate Previous Report" sap:VirtualizedContainerService.HintSize="452,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_61">
+                        <ui:InvokeCode.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="previousReportPath">[previousReportPath]</InArgument>
+                          <OutArgument x:TypeArguments="x:String" x:Key="prevReportIssue">[prevReportIssue]</OutArgument>
+                        </ui:InvokeCode.Arguments>
+                      </ui:InvokeCode>
+                      <If Condition="[Not String.IsNullOrEmpty(prevReportIssue)]" sap:VirtualizedContainerService.HintSize="452,774.6666666666666" sap2010:WorkflowViewState.IdRef="If_6">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If.Then>
+                          <Sequence sap2010:Annotation.AnnotationText="For first time usage mainly" DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,402" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Assign sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_6">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[previousReportPath]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">[System.IO.Path.GetFullPath("START_HISTORICAL\Historical - VISA POS CLEARING "+currencyCode+".xlsx")]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:LogMessage DisplayName="Log - historical fallback" sap:VirtualizedContainerService.HintSize="416,134.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_61" Level="Warn" Message="[&quot;MAIN | previous report unusable (&quot; + prevReportIssue + &quot;) - falling back to historical baseline: &quot; + previousReportPath]" />
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,242" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:CopyFile ContinueOnError="{x:Null}" Destination="[&quot;START_HISTORICAL\Historical - VISA POS CLEARING &quot; +currencyCode+&quot;.xlsx&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="416,182" sap2010:WorkflowViewState.IdRef="CopyFile_3" Overwrite="True" Path="[previousReportPath]" />
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </Switch>
+                  <If Condition="[not process(&quot;Process Status&quot;).ToString.Equals(&quot;COMPLETE&quot;)]" sap:VirtualizedContainerService.HintSize="540.6666666666666,57.333333333333336" sap2010:WorkflowViewState.IdRef="If_2">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="556,2638.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                        <Sequence.Variables>
+                          <Variable x:TypeArguments="x:String" Name="currentDate" />
+                          <Variable x:TypeArguments="x:String" Name="workingsResetNote" />
+                        </Sequence.Variables>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Sequence sap:VirtualizedContainerService.HintSize="522,2578.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="488,114" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[System.IO.Path.GetDirectoryName(reconResultsPath)]" />
+                          <If Condition="[amountColumn=&quot;CREDIT&quot;]" sap:VirtualizedContainerService.HintSize="488,624" sap2010:WorkflowViewState.IdRef="If_3">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If.Then>
+                              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,242" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:CopyFile ContinueOnError="{x:Null}" Destination="[reconResultsPath]" DisplayName="Copy File CREDIT Template" sap:VirtualizedContainerService.HintSize="416,182" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="Templates\recon report_template_cr.xlsx" />
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,242" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:CopyFile ContinueOnError="{x:Null}" Destination="[reconResultsPath]" DisplayName="Copy File DEBIT Template" sap:VirtualizedContainerService.HintSize="416,182" sap2010:WorkflowViewState.IdRef="CopyFile_2" Overwrite="True" Path="Templates\recon report_template_dr.xlsx" />
+                              </Sequence>
+                            </If.Else>
+                          </If>
+                          <ui:InvokeCode ContinueOnError="{x:Null}" Code="' A rerun must start from an empty Workings file: WriteRange does not clear the rows below what it writes,&#xA;' so rows left by an earlier run would be read back into the Report and counted twice.&#xA;Dim workingsPath As String = reconResultsPath.Replace(&quot;Recon Report&quot;, &quot;Workings&quot;)&#xA;If Not System.IO.File.Exists(workingsPath) Then&#xA;    workingsResetNote = &quot;no earlier Workings file | path=&quot; + workingsPath&#xA;Else&#xA;    Try&#xA;        System.IO.File.Delete(workingsPath)&#xA;        workingsResetNote = &quot;deleted Workings file left by an earlier run | path=&quot; + workingsPath&#xA;    Catch ex As Exception&#xA;        workingsResetNote = &quot;could not delete earlier Workings file (&quot; + ex.Message + &quot;) | path=&quot; + workingsPath&#xA;    End Try&#xA;End If" DisplayName="Reset Workings file (rerun safety)" sap:VirtualizedContainerService.HintSize="488,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_ResetWorkings">
+                            <ui:InvokeCode.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="reconResultsPath">[reconResultsPath]</InArgument>
+                              <OutArgument x:TypeArguments="x:String" x:Key="workingsResetNote">[workingsResetNote]</OutArgument>
+                            </ui:InvokeCode.Arguments>
+                          </ui:InvokeCode>
+                          <ui:LogMessage DisplayName="Log - Workings reset" sap:VirtualizedContainerService.HintSize="488,144" sap2010:WorkflowViewState.IdRef="LogMessage_ResetWorkings" Level="Info" Message="[&quot;RECON | WORKINGS RESET | &quot; + workingsResetNote]" />
+                          <ui:WriteCell Cell="H6" DisplayName="Write Cell Workbook" sap:VirtualizedContainerService.HintSize="488,148" sap2010:WorkflowViewState.IdRef="WriteCell_1" SheetName="Report" Text="[fileDate]" WorkbookPath="[reconResultsPath]" />
+                          <ui:LogMessage DisplayName="Log - previous report in use" sap:VirtualizedContainerService.HintSize="488,144" sap2010:WorkflowViewState.IdRef="LogMessage_72" Level="Info" Message="[&quot;RECON | PREVIOUS REPORT | &quot; + If(String.IsNullOrEmpty(prevReportIssue), &quot;primary (previous business day)&quot;, &quot;HISTORICAL FALLBACK because &quot; + prevReportIssue) + &quot; | path=&quot; + previousReportPath + &quot; | exists=&quot; + System.IO.File.Exists(previousReportPath).ToString + &quot; | bytes=&quot; + If(System.IO.File.Exists(previousReportPath), New System.IO.FileInfo(previousReportPath).Length, 0L).ToString + &quot; | businessDate=&quot; + bd.ToString(&quot;yyyy-MM-dd&quot;) + &quot; | previousBusinessDate=&quot; + pbd.ToString(&quot;yyyy-MM-dd&quot;) + &quot; | process=&quot; + process(&quot;Process Name&quot;).ToString + &quot; &quot; + currencyCode]" />
+                          <TryCatch DisplayName="Recon steps guard" sap:VirtualizedContainerService.HintSize="488,1466" sap2010:WorkflowViewState.IdRef="TryCatch_50">
+                            <TryCatch.Try>
+                              <Sequence DisplayName="Recon steps" sap:VirtualizedContainerService.HintSize="486,1094.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_50">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="GL-prepation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="452,147.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" Level="Trace" LogEntry="WithArguments" LogExit="WithArguments" UnSafe="False" WorkflowFileName="GL-prepation.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="glStatementPath">[glStatementPath]</InArgument>
+                                    <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedGl">[dtProcessedGl]</OutArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="reconResultsPath">[reconResultsPath]</InArgument>
+                                    <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtPreviousRealExceptions">[dtPreviousRealExceptions]</OutArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="previousReportPath">[previousReportPath]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="startDate">[startDate]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="amountColumn">[amountColumn]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="MODE">[MODE]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </ui:InvokeWorkflowFile>
+                                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Statement-preparation - Invoke Workflow File (Statement-preparation.xaml)" sap:VirtualizedContainerService.HintSize="452,147.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" Level="Trace" LogEntry="WithArguments" LogExit="WithArguments" UnSafe="False" WorkflowFileName="Statement-preparation.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="transactionsReportStatement">[transactionsReportStatement]</InArgument>
+                                    <OutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedReportStatement">[dtProcessedReportStatement]</OutArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="reconResultsPath">[reconResultsPath]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="currencyCode">[currencyCode]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="processMsgCategory">[processMsgCategory]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Matching - Invoke Workflow File (Matching.xaml)" sap:VirtualizedContainerService.HintSize="452,147.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Matching.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="reconResultsPath">[reconResultsPath]</InArgument>
+                                    <InArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedGl">[dtProcessedGl]</InArgument>
+                                    <InArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessedReportStatement">[dtProcessedReportStatement]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="amountColumn">[amountColumn]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="processMsgCategory">[processMsgCategory]</InArgument>
+                                    <InArgument x:TypeArguments="sd:DataTable" x:Key="dtPreviousRealExceptions">[dtPreviousRealExceptions]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="fileDate">[fileDate]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="currencyCode">[currencyCode]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                                <If Condition="[System.IO.File.Exists(reconResultsPath)]" DisplayName="Mark complete" sap:VirtualizedContainerService.HintSize="452,592.6666666666666" sap2010:WorkflowViewState.IdRef="If_81">
+                                  <If.Then>
+                                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,371.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_81">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <Assign sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_80">
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="x:Object">[process("Process Status")]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="x:Object">["COMPLETE"]</InArgument>
+                                        </Assign.Value>
+                                      </Assign>
+                                      <ui:LogMessage DisplayName="Log - marked complete" sap:VirtualizedContainerService.HintSize="416,134.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_80" Level="Info" Message="[&quot;RECON | COMPLETE | &quot; + process(&quot;Process Name&quot;).ToString + &quot; &quot; + currencyCode + &quot; | businessDate=&quot; + bd.ToString(&quot;yyyy-MM-dd&quot;) + &quot; | report=&quot; + reconResultsPath]" />
+                                    </Sequence>
+                                  </If.Then>
+                                  <If.Else>
+                                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_84">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </Sequence>
+                                  </If.Else>
+                                </If>
+                              </Sequence>
+                            </TryCatch.Try>
+                            <TryCatch.Catches>
+                              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="440,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_50">
+                                <ActivityAction x:TypeArguments="s:Exception">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                  </ActivityAction.Argument>
+                                  <ui:LogMessage DisplayName="Log - recon step failed" sap:VirtualizedContainerService.HintSize="486,112" sap2010:WorkflowViewState.IdRef="LogMessage_50" Level="Error" Message="[&quot;RECON | FAILED - skipping | &quot; + process(&quot;Process Name&quot;).ToString + &quot; &quot; + currencyCode + &quot; | businessDate=&quot; + bd.ToString(&quot;yyyy-MM-dd&quot;) + &quot; | &quot; + exception.Message]" />
+                                </ActivityAction>
+                              </Catch>
+                            </TryCatch.Catches>
+                            <TryCatch.Finally>
+                              <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="486,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_86">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </Sequence>
+                            </TryCatch.Finally>
+                          </TryCatch>
+                        </Sequence>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="520,194.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:LogMessage DisplayName="Log - already complete" sap:VirtualizedContainerService.HintSize="486,134.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_81" Level="Info" Message="[&quot;RECON | ALREADY COMPLETE - skipping the work, resending the result | &quot; + process(&quot;Process Name&quot;).ToString + &quot; &quot; + currencyCode + &quot; | businessDate=&quot; + bd.ToString(&quot;yyyy-MM-dd&quot;)]" />
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <If Condition="[System.IO.File.Exists(reconResultsPath)]" DisplayName="Send results" sap:VirtualizedContainerService.HintSize="540.6666666666666,1440" sap2010:WorkflowViewState.IdRef="If_82">
+                    <If.Then>
+                      <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="538.6666666666666,1105.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_82">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="504.6666666666667,1045.3333333333333" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                          <TryCatch.Try>
+                            <ui:SendMail Bcc="{x:Null}" Email="{x:Null}" MailMessage="{x:Null}" Password="{x:Null}" ReplyTo="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" UseOAuth="{x:Null}" sap2010:Annotation.AnnotationText="" Body="[&quot;Please find attached reconciliation results for &quot;+process(&quot;Process Name&quot;).ToString.ToUpper()+&quot; &lt;b&gt;business date &quot;+bd.ToString(&quot;dd MMM yyyy&quot;)+&quot;&lt;/b&gt;.&quot; + If(String.IsNullOrEmpty(overrideRejectNote), &quot;&quot;, &quot;&lt;br/&gt;&lt;br/&gt;&lt;b style='color:#b00020'&gt;Manual update rejected&lt;/b&gt;&lt;br/&gt;&quot; + overrideRejectNote)]" Cc="emmanuel.charles@nmbtz.com;marysalome.mngerere@nmbtz.com;kelvinch@nmbtz.com" DisplayName="Send SMTP Mail Message" EnableSSL="True" From="robot@nmbtz.com" sap:VirtualizedContainerService.HintSize="502.6666666666667,181.33333333333334" sap2010:WorkflowViewState.IdRef="SendMail_1" IgnoreCRL="False" IsBodyHtml="True" Name="Robot Notification" Port="25" SecureConnection="None" Server="exchangelb.nmbtz.com" Subject="[&quot;VISA RECON &quot; + bd.ToString(&quot;dd MMM yyyy&quot;) + &quot; - &quot; + process(&quot;Process Name&quot;).ToString.ToUpper() + &quot; - &quot; + If(currencyCode=&quot;834&quot;,&quot;TZS&quot;,If(currencyCode=&quot;840&quot;,&quot;USD&quot;,currencyCode))]" To="[mailTo]">
+                              <ui:SendMail.Files>
+                                <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                                  <InArgument x:TypeArguments="x:String">[reconResultsPath]</InArgument>
+                                  <InArgument x:TypeArguments="x:String">[reconResultsPath.replace("Recon Report","Workings")]</InArgument>
+                                </scg:List>
+                              </ui:SendMail.Files>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:SendMail>
+                          </TryCatch.Try>
+                          <TryCatch.Catches>
+                            <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                              <ActivityAction x:TypeArguments="s:Exception">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                </ActivityAction.Argument>
+                                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="502.6666666666667,582.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="468.6666666666667,522.6666666666666" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <TryCatch.Try>
+                                      <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;Please find attached reconciliation results for &quot;+process(&quot;Process Name&quot;).ToString.ToUpper()+&quot; &lt;b&gt;business date &quot;+bd.ToString(&quot;dd MMM yyyy&quot;)+&quot;&lt;/b&gt;.&quot; + If(String.IsNullOrEmpty(overrideRejectNote), &quot;&quot;, &quot;&lt;br/&gt;&lt;br/&gt;&lt;b style='color:#b00020'&gt;Manual update rejected&lt;/b&gt;&lt;br/&gt;&quot; + overrideRejectNote)]" Cc="emmanuel.charles@nmbtz.com;marysalome.mngerere@nmbtz.com;kelvinch@nmbtz.com" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="466.6666666666667,150.66666666666666" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" Importance="Normal" IsBodyHtml="True" IsDraft="False" Sensitivity="Normal" Subject="[&quot;VISA RECON &quot; + bd.ToString(&quot;dd MMM yyyy&quot;) + &quot; - &quot; + process(&quot;Process Name&quot;).ToString.ToUpper() + &quot; - &quot; + If(currencyCode=&quot;834&quot;,&quot;TZS&quot;,If(currencyCode=&quot;840&quot;,&quot;USD&quot;,currencyCode))]" To="[mailTo]">
+                                        <ui:SendOutlookMail.Files>
+                                          <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                                            <InArgument x:TypeArguments="x:String">[reconResultsPath]</InArgument>
+                                            <InArgument x:TypeArguments="x:String">[reconResultsPath.replace("Recon Report","Workings")]</InArgument>
+                                          </scg:List>
+                                        </ui:SendOutlookMail.Files>
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:SendOutlookMail>
+                                    </TryCatch.Try>
+                                    <TryCatch.Catches>
+                                      <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                                        <ActivityAction x:TypeArguments="s:Exception">
+                                          <ActivityAction.Argument>
+                                            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                          </ActivityAction.Argument>
+                                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="466.6666666666667,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                          </Sequence>
+                                        </ActivityAction>
+                                      </Catch>
+                                    </TryCatch.Catches>
+                                    <TryCatch.Finally>
+                                      <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="466.6666666666667,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </Sequence>
+                                    </TryCatch.Finally>
+                                  </TryCatch>
+                                </Sequence>
+                              </ActivityAction>
+                            </Catch>
+                          </TryCatch.Catches>
+                          <TryCatch.Finally>
+                            <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="502.6666666666667,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </Sequence>
+                          </TryCatch.Finally>
+                        </TryCatch>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="538.6666666666666,194.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_83">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:LogMessage DisplayName="Log - nothing to send" sap:VirtualizedContainerService.HintSize="504.6666666666667,134.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_82" Level="Warn" Message="[&quot;RECON | NOTHING TO SEND - no recon report at &quot; + reconResultsPath + &quot; | &quot; + process(&quot;Process Name&quot;).ToString + &quot; &quot; + currencyCode]" />
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtProcesses]" DisplayName="Write Range Workbook - save tracker" sap:VirtualizedContainerService.HintSize="540.6666666666666,138.66666666666666" sap2010:WorkflowViewState.IdRef="WriteRange_80" SheetName="Tracker" WorkbookPath="Templates\process_tracker.xlsx" />
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="574.6666666666666,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_85">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If Condition="[process(&quot;Date&quot;).ToString.Trim.Equals(bd.AddDays(1).ToString(&quot;dd/MMM/yyyy&quot;)) AndAlso Not System.IO.File.Exists(process(&quot;Statement Path&quot;).ToString)]" DisplayName="Today but statement missing?" sap2010:WorkflowViewState.IdRef="If_StatementMissingMain">
+                    <If.Then>
+                      <ui:LogMessage DisplayName="Log - not run, statement missing" sap2010:WorkflowViewState.IdRef="LogMessage_StatementMissingMain" Level="Warn" Message="[&quot;RECON | NOT RUN - statement file not found | &quot; + process(&quot;Process Name&quot;).ToString + &quot; &quot; + process(&quot;Currency&quot;).ToString + &quot; | businessDate=&quot; + bd.ToString(&quot;yyyy-MM-dd&quot;) + &quot; | path=&quot; + process(&quot;Statement Path&quot;).ToString]" />
+                    </If.Then>
+                  </If>
+                </Sequence>
+              </If.Else>
+            </If>
+            <Assign sap:VirtualizedContainerService.HintSize="576.6666666666666,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_4">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[counter]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[counter+1]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ForEachRow>
+  </Sequence>
+</Activity>

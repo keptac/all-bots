@@ -1,0 +1,6 @@
+{
+  "Name": "mastercard-recon",
+  "ProjectType": "Process",
+  "Description": "Reconciles all mastercard transactions",
+  "MainFile": "Entry.xaml"
+}

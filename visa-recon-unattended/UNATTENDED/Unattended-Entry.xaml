@@ -1,0 +1,383 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="File_Search" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="emailReceipients" Type="InArgument(x:String)" />
+    <x:Property Name="MODE" Type="InArgument(x:String)" />
+    <x:Property Name="businessDate" Type="InArgument(x:String)" />
+    <x:Property Name="previousBusinessDate" Type="InArgument(x:String)" />
+    <x:Property Name="holdProcesses" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>File_Search_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="File_Search" sap:VirtualizedContainerService.HintSize="658,4829.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dtTempProcessTracker" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtProcessTracker" />
+      <Variable x:TypeArguments="x:String" Name="statementsRemotePath" />
+      <Variable x:TypeArguments="x:String" Name="ep745FilePath" />
+      <Variable x:TypeArguments="x:String" Name="outgoingFilePath" />
+      <Variable x:TypeArguments="s:DateTime" Name="bd" />
+      <Variable x:TypeArguments="s:DateTime" Name="pbd" />
+      <Variable x:TypeArguments="x:String" Name="glFromStamp" />
+      <Variable x:TypeArguments="x:String" Name="glSpanNote" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Assign sap:VirtualizedContainerService.HintSize="536.6666666666666,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_60">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:DateTime">[bd]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:DateTime">[If(String.IsNullOrWhiteSpace(businessDate), DateTime.Now.Date.AddDays(-1), DateTime.ParseExact(businessDate.Trim(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="536.6666666666666,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_61">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:DateTime">[pbd]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:DateTime">[If(String.IsNullOrWhiteSpace(previousBusinessDate), bd.AddDays(-1), DateTime.ParseExact(previousBusinessDate.Trim(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log - business date" sap:VirtualizedContainerService.HintSize="536.6666666666666,144" sap2010:WorkflowViewState.IdRef="LogMessage_60" Level="Info" Message="[&quot;ENTRY | business date=&quot; + bd.ToString(&quot;yyyy-MM-dd&quot;) + &quot; | previous=&quot; + pbd.ToString(&quot;yyyy-MM-dd&quot;) + &quot; | mode=&quot; + MODE]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="536.6666666666666,144" sap2010:WorkflowViewState.IdRef="LogMessage_63" Level="Warn" Message="[&quot;\\10.200.241.79\c404559\REPORTS\INCOMING\d&quot; + bd.AddDays(1).ToString(&quot;yyMMdd&quot;) + &quot;_r1_*_prod&quot;]" />
+    <ui:BuildDataTable DataTable="[dtTempProcessTracker]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="536.6666666666666,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Process_x0020_Name&quot; msdata:Caption=&quot;&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Date&quot; msdata:Caption=&quot;&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;File_x0020_Status&quot; msdata:Caption=&quot;&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;50&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Process_x0020_Status&quot; msdata:Caption=&quot;&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Currency&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;GL_x0020_Code&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;GL_x0020_Path&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Statement_x0020_Path&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+    <Sequence sap2010:Annotation.AnnotationText="D Drive folders" DisplayName="Create Folders" sap:VirtualizedContainerService.HintSize="536.6666666666666,1294" sap2010:WorkflowViewState.IdRef="Sequence_8">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="416,114" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="D:\VISA\POS CLEARING\GL Statements\" />
+      <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="416,114" sap2010:WorkflowViewState.IdRef="CreateDirectory_2" Path="D:\VISA\ATM INTERMEDIARY\GL Statements\" />
+      <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="416,114" sap2010:WorkflowViewState.IdRef="CreateDirectory_3" Path="D:\VISA\ATM CLEARING\GL Statements\" />
+      <Assign sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_4">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[outgoingFilePath]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">["\\10.200.241.87\data\OUTGOING\reports\visa\" + bd.AddDays(1).ToString("yyyy-MM") + "\"+ bd.AddDays(1).ToString("dd").ToUpper()+"\visa_acq_outgoing_" + bd.AddDays(1).ToString("yyyy-MM-dd") + ".csv"]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_3">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[ep745FilePath]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String" xml:space="preserve">[Path.Combine(
+  Directory.GetDirectories("\\10.200.241.79\c404559\REPORTS\INCOMING", "d" + bd.AddDays(1).ToString("yyMMdd") + "_r1_*_prod").DefaultIfEmpty("\\10.200.241.79\c404559\REPORTS\INCOMING\d" + bd.AddDays(1).ToString("yyMMdd") + "_r1_MISSING_prod").First(),
+  "EP745.txt"
+)]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:LogMessage DisplayName="Log - resolved sources" sap:VirtualizedContainerService.HintSize="416,144" sap2010:WorkflowViewState.IdRef="LogMessage_62" Level="Info" Message="[&quot;ENTRY | sources | businessDate=&quot; + bd.ToString(&quot;yyyy-MM-dd&quot;) + &quot; | delivery=&quot; + bd.AddDays(1).ToString(&quot;yyyy-MM-dd&quot;) + &quot; | POS=&quot; + outgoingFilePath + &quot; exists=&quot; + System.IO.File.Exists(outgoingFilePath).ToString + &quot; | ATM=&quot; + ep745FilePath + &quot; exists=&quot; + System.IO.File.Exists(ep745FilePath).ToString]" />
+      <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim misses As Integer = 0&#xA;Dim k As Integer = 1&#xA;Dim found As Boolean = False&#xA;Dim probe As String = &quot;&quot;&#xA;Dim reconRoot As String = &quot;C:\Users\&quot; &amp; Environment.UserName &amp; &quot;\Documents\AUTOMATED RECONS\Cards Recon\VISA\&quot;&#xA;While k &lt;= 6&#xA;    Dim fd As DateTime = bd.AddDays(1 - k)&#xA;    ' Iteration k asks whether business date bd-k was reconciled. Its outgoing file is&#xA;    ' the one dated fd, and its recon report sits in the folder dated fd under the name&#xA;    ' &quot;... Recon Report &lt;fd-1&gt;.xlsx&quot;.&#xA;    Dim p As String = &quot;\\nmbplcfshare\CrossDept\Card_settlement\Outgoing reports\&quot; &amp; fd.ToString(&quot;yyyy&quot;) &amp; &quot;\&quot; &amp; fd.ToString(&quot;MMMM&quot;).ToUpper() &amp; &quot;\VISA\visa_acq_outgoing_&quot; &amp; fd.ToString(&quot;yyyy-MM-dd&quot;) &amp; &quot;.csv&quot;&#xA;    ' The outgoing CSV is archived off the share after a while, so its absence is not&#xA;    ' proof the day was skipped. A recon report for that business date IS proof it was&#xA;    ' not. Without this second witness a tidied-up share rolls the GL window back over&#xA;    ' days the previous report already carries as outstanding, and those entries get&#xA;    ' pulled twice - the 10 Sep 2026 run was out by 275,111,500 for exactly that reason.&#xA;    Dim reconDir As String = reconRoot &amp; fd.ToString(&quot;dd-MM-yyyy&quot;)&#xA;    Dim reconDone As Boolean = False&#xA;    Try&#xA;        If System.IO.Directory.Exists(reconDir) Then&#xA;            reconDone = System.IO.Directory.GetFiles(reconDir, &quot;*Recon Report &quot; &amp; fd.AddDays(-1).ToString(&quot;dd MMM yyyy&quot;) &amp; &quot;.xlsx&quot;).Length &gt; 0&#xA;        End If&#xA;    Catch ioEx As Exception&#xA;        reconDone = False&#xA;    End Try&#xA;    If System.IO.File.Exists(p) OrElse reconDone Then&#xA;        found = True&#xA;        Exit While&#xA;    End If&#xA;    probe = probe &amp; fd.ToString(&quot;yyyy-MM-dd&quot;) &amp; &quot; missing; &quot;&#xA;    misses = misses + 1&#xA;    k = k + 1&#xA;End While&#xA;If Not found Then misses = 0&#xA;glFromStamp = bd.AddDays(-misses).ToString(&quot;yyyyMMdd&quot;)&#xA;glSpanNote = &quot;misses=&quot; &amp; misses.ToString() &amp; &quot; anchorFound=&quot; &amp; found.ToString() &amp; &quot; | &quot; &amp; probe" DisplayName="Compute GL from-date (roll in skipped days)" sap:VirtualizedContainerService.HintSize="416,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_30">
+        <ui:InvokeCode.Arguments>
+          <InArgument x:TypeArguments="s:DateTime" x:Key="bd">[bd]</InArgument>
+          <OutArgument x:TypeArguments="x:String" x:Key="glFromStamp">[glFromStamp]</OutArgument>
+          <OutArgument x:TypeArguments="x:String" x:Key="glSpanNote">[glSpanNote]</OutArgument>
+        </ui:InvokeCode.Arguments>
+      </ui:InvokeCode>
+      <ui:LogMessage DisplayName="Log - GL date span" sap:VirtualizedContainerService.HintSize="416,134.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_30" Level="Info" Message="[&quot;ENTRY | GL query span | from=&quot; + glFromStamp + &quot; to=&quot; + bd.ToString(&quot;yyyyMMdd&quot;) + &quot; | days=&quot; + (bd.Subtract(DateTime.ParseExact(glFromStamp, &quot;yyyyMMdd&quot;, System.Globalization.CultureInfo.InvariantCulture)).Days + 1).ToString + &quot; | &quot; + glSpanNote]" />
+    </Sequence>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim sourceList As List(Of Object()) = New List(Of Object()) From {&#xA; New Object() {&quot;visaPosClearing&quot;, trackerDate, &quot;PENDING&quot;, &quot;PENDING&quot;, &quot;840&quot;,&quot;122020011&quot;, &quot;D:\VISA\POS CLEARING\GL Statements\USD GL Statement_&quot;+glStamp+&quot;.csv&quot;, outgoingFilePath},&#xA; New Object() {&quot;visaPosClearing&quot;, trackerDate, &quot;PENDING&quot;, &quot;PENDING&quot;, &quot;834&quot;,&quot;122020011&quot;, &quot;D:\VISA\POS CLEARING\GL Statements\TZS GL Statement_&quot;+glStamp+&quot;.csv&quot;, outgoingFilePath},&#xA;  New Object() {&quot;visaAtmClearing&quot;, trackerDate, &quot;PENDING&quot;, &quot;PENDING&quot;, &quot;TZS&quot;, &quot;122020002&quot;,&quot;D:\VISA\ATM CLEARING\GL Statements\TZS GL Statement_&quot;+glStamp+&quot;.csv&quot;, ep745FilePath}&#xA; }&#xA;&#xA;&#xA;&#x9;    &#xA;' Copy the ByRef argument into a local (ByVal) variable first&#xA;Dim dtLocal As DataTable = dtTempProcessTracker&#xA;&#xA;dtLocal = dtLocal.AsEnumerable().Concat(&#xA;    sourceList.Select(Function(item)&#xA;        Dim newRow As DataRow = dtLocal.NewRow()&#xA;        newRow(&quot;Process Name&quot;) = item(0)&#xA;        newRow(&quot;Date&quot;) = item(1)&#xA;        newRow(&quot;File Status&quot;) = item(2)&#xA;        newRow(&quot;Process Status&quot;) = item(3)&#xA;        newRow(&quot;Currency&quot;) = item(4)&#xA;&#x9;&#x9;newRow(&quot;GL Code&quot;) = item(5)&#xA;        newRow(&quot;GL Path&quot;) = item(6)&#xA;        newRow(&quot;Statement Path&quot;) = item(7)&#xA;        Return newRow&#xA;    End Function)&#xA;).CopyToDataTable()&#xA;&#xA;' Assign the result back to the ByRef argument&#xA;dtTempProcessTracker = dtLocal" DisplayName="Invoke Code - Add processes to run" sap:VirtualizedContainerService.HintSize="536.6666666666666,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtTempProcessTracker">[dtTempProcessTracker]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="statementsRemotePath">[statementsRemotePath]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="ep745FilePath">[ep745FilePath]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="outgoingFilePath">[outgoingFilePath]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="trackerDate">[bd.AddDays(1).ToString("dd/MMM/yyyy")]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="glStamp">[bd.ToString("dd_MM_yyyy")]</InArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dtProcessTracker]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="536.6666666666666,120" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Tracker" WorkbookPath="Templates\process_tracker.xlsx" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim ci = System.Globalization.CultureInfo.InvariantCulture&#xA;Dim tDate As Date = Date.ParseExact(trackerDate, &quot;dd/MMM/yyyy&quot;, ci)&#xA;&#xA;If dtProcessTracker Is Nothing OrElse dtProcessTracker.Columns.Count = 0 Then&#xA;    dtProcessTracker = dtTempProcessTracker.Copy()&#xA;Else&#xA;    ' a new month starts the tracker over&#xA;    Dim doomed As New List(Of System.Data.DataRow)&#xA;    For Each r As System.Data.DataRow In dtProcessTracker.Rows&#xA;        Dim rd As Date&#xA;        If Date.TryParseExact(r(&quot;Date&quot;).ToString().Trim(), &quot;dd/MMM/yyyy&quot;, ci, System.Globalization.DateTimeStyles.None, rd) Then&#xA;            If rd.Year &lt;&gt; tDate.Year OrElse rd.Month &lt;&gt; tDate.Month Then&#xA;                doomed.Add(r)&#xA;            End If&#xA;        Else&#xA;            doomed.Add(r)&#xA;        End If&#xA;    Next&#xA;    For Each r As System.Data.DataRow In doomed&#xA;        dtProcessTracker.Rows.Remove(r)&#xA;    Next&#xA;&#xA;    ' add this date's rows only if they are not already there&#xA;    Dim alreadyHere As Integer = 0&#xA;    For Each r As System.Data.DataRow In dtProcessTracker.Rows&#xA;        If r(&quot;Date&quot;).ToString().Trim() = trackerDate Then&#xA;            alreadyHere = alreadyHere + 1&#xA;        End If&#xA;    Next&#xA;    If alreadyHere = 0 Then&#xA;        For Each src As System.Data.DataRow In dtTempProcessTracker.Rows&#xA;            Dim nr As System.Data.DataRow = dtProcessTracker.NewRow()&#xA;            For Each c As System.Data.DataColumn In dtTempProcessTracker.Columns&#xA;                If dtProcessTracker.Columns.Contains(c.ColumnName) Then&#xA;                    nr(c.ColumnName) = src(c.ColumnName)&#xA;                End If&#xA;            Next&#xA;            dtProcessTracker.Rows.Add(nr)&#xA;        Next&#xA;    End If&#xA;End If" DisplayName="Tracker - month reset and ensure rows" sap:VirtualizedContainerService.HintSize="536.6666666666666,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_70">
+      <ui:InvokeCode.Arguments>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtProcessTracker">[dtProcessTracker]</InOutArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="dtTempProcessTracker">[dtTempProcessTracker]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="trackerDate">[bd.AddDays(1).ToString("dd/MMM/yyyy")]</InArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <If Condition="[dtProcessTracker.Rows.Count=0]" sap:VirtualizedContainerService.HintSize="536.6666666666666,540.6666666666666" sap2010:WorkflowViewState.IdRef="If_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,375.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="sd:DataTable">[dtProcessTracker]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="sd:DataTable">[dtTempProcessTracker]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtProcessTracker]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="416,138.66666666666666" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Tracker" WorkbookPath="Templates\process_tracker.xlsx" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,25.333333333333332" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtProcessTracker]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="536.6666666666666,1438" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="currentProcess" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="502.6666666666667,1286" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="extractionState" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch DisplayName="Per-process guard" sap:VirtualizedContainerService.HintSize="468.6666666666667,1058.6666666666667" sap2010:WorkflowViewState.IdRef="TryCatch_20">
+              <TryCatch.Try>
+                <If Condition="[currentProcess(&quot;Date&quot;).ToString.Trim.Equals(bd.AddDays(1).ToString(&quot;dd/MMM/yyyy&quot;)) AndAlso (currentProcess(&quot;File Status&quot;).ToString.Equals(&quot;PENDING&quot;) OrElse currentProcess(&quot;File Status&quot;).ToString.Equals(&quot;FILE NOT FOUND&quot;) OrElse String.IsNullOrEmpty(currentProcess(&quot;File Status&quot;).ToString)) AndAlso Not (&quot;;&quot; + If(holdProcesses, &quot;&quot;) + &quot;;&quot;).Contains(&quot;;&quot; + currentProcess(&quot;Process Name&quot;).ToString.Trim + &quot;|&quot; + currentProcess(&quot;Currency&quot;).ToString.Trim + &quot;;&quot;)]" sap:VirtualizedContainerService.HintSize="466.6666666666667,396.6666666666667" sap2010:WorkflowViewState.IdRef="If_2">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If.Then>
+                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,198" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If Condition="[System.IO.File.Exists(currentProcess(&quot;Statement Path&quot;).ToString)]" DisplayName="Statement file present?" sap:VirtualizedContainerService.HintSize="416,400" sap2010:WorkflowViewState.IdRef="If_StatementPresent">
+                        <If.Then>
+                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Unattended-Extraction-Stub.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="416,138" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="UNATTENDED\Unattended-Extraction-Stub.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <OutArgument x:TypeArguments="x:String" x:Key="extractionState">[extractionState]</OutArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="currency">[currentProcess("Currency").ToString]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="statementFilePath">[currentProcess("Statement Path").ToString]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="glFilePath">[currentProcess("GL Path").ToString]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="glCode">[currentProcess("GL Code").ToString]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="processName">[currentProcess("Process Name").ToString]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="glFromDate">[glFromStamp]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="glToDate">[bd.ToString("yyyyMMdd")]</InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                          </ui:InvokeWorkflowFile>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="Statement missing - do not run" sap2010:WorkflowViewState.IdRef="Sequence_StatementMissing">
+                            <Assign sap2010:WorkflowViewState.IdRef="Assign_StatementMissing">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[extractionState]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">FILE NOT FOUND</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:LogMessage DisplayName="Log - statement missing" sap2010:WorkflowViewState.IdRef="LogMessage_StatementMissing" Level="Warn" Message="[&quot;ENTRY | NOT RUN - statement file not found | &quot; + currentProcess(&quot;Process Name&quot;).ToString + &quot; | ccy=&quot; + currentProcess(&quot;Currency&quot;).ToString + &quot; | path=&quot; + currentProcess(&quot;Statement Path&quot;).ToString]" />
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Sequence>
+                  </If.Else>
+                </If>
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="440,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_20">
+                  <ActivityAction x:TypeArguments="s:Exception">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Note and skip" sap:VirtualizedContainerService.HintSize="466.6666666666667,371.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="432.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_20">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[extractionState]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">["SKIPPED: " + exception.Message.Substring(0, Math.Min(180, exception.Message.Length))]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:LogMessage DisplayName="Log - process skipped" sap:VirtualizedContainerService.HintSize="432.6666666666667,134.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Error" Message="[&quot;ENTRY | SKIPPED process &quot; + currentProcess(&quot;Process Name&quot;).ToString + &quot; | ccy=&quot; + currentProcess(&quot;Currency&quot;).ToString + &quot; | date=&quot; + currentProcess(&quot;Date&quot;).ToString + &quot; | &quot; + exception.Message]" />
+                    </Sequence>
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+            </TryCatch>
+            <Assign sap:VirtualizedContainerService.HintSize="468.6666666666667,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Object">[dtProcessTracker(dtProcessTracker.Rows.IndexOf(currentProcess))("File Status")]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Object">[extractionState]</InArgument>
+              </Assign.Value>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Assign>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ForEachRow>
+    <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtProcessTracker]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="536.6666666666666,148" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Tracker" WorkbookPath="Templates\process_tracker.xlsx" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Unattended-Main.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="536.6666666666666,138" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="UNATTENDED\Unattended-Main.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="MODE">[MODE]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="emailReceipients">[emailReceipients]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="businessDate">[bd.ToString("yyyy-MM-dd")]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="previousBusinessDate">[pbd.ToString("yyyy-MM-dd")]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="holdProcesses">[holdProcesses]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+  </Sequence>
+</Activity>

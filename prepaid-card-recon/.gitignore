@@ -1,0 +1,36 @@
+# UiPath project local settings
+.local/
+
+# UiPath logs and output
+*.log
+*.tmp
+*.screenshots
+
+# UiPath execution folders (created during debugging/testing)
+Output/
+TestResults/
+
+# Excel/temporary files
+*.xlsx~
+~$*.xlsx
+~$*.xlsm
+
+# Windows hidden/system files
+Thumbs.db
+Desktop.ini
+
+# IDE/editor specific (optional)
+.vscode/
+.idea/
+
+# Mac system files (if using Mac to edit files)
+.DS_Store
+
+################################################################################
+# Added by UiPath Studio
+# Prevent caching and local artifacts from being committed
+################################################################################
+.local
+################################################################################
+# End of UiPath Studio common ignores
+################################################################################

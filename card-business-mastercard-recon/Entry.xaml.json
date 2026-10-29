@@ -1,0 +1,45 @@
+{
+  "DisplayName": "Entry",
+  "Tooltip": null,
+  "HelpLink": null,
+  "Color": null,
+  "OriginalIconFileName": null,
+  "Arguments": [
+    {
+      "Name": "MODE",
+      "DisplayName": "MODE",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "ATTENDED",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "BASE_FOLDER",
+      "DisplayName": "BASE_FOLDER",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "\\\\10.200.241.83\\c$\\MCONLINE\\MFE\\DOWNLOAD\\0073370\\",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "CLOSING_BALANCE_DATE_COLUMN",
+      "DisplayName": "CLOSING_BALANCE_DATE_COLUMN",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "VALUE_DATE",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    }
+  ]
+}
